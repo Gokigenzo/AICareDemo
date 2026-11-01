@@ -1,0 +1,57 @@
+/* V3: reference-inspired charcoal dashboard with soft mint highlights. */
+:root { color-scheme:dark; --primary:#b9f4e5; --primary-hover:#92dfcd; --primary-bg:#30483f; --navy:#edf7f3; --text:#dce7e2; --muted:#a8b8b2; --border:#3a4440; --bg:#141817; --card-bg:#242827; --indigo:#9bd9e8; }
+body { background:#141817; color:#dce7e2; }
+header { background:#191d1c; border-color:#38413e; }
+.brand-icon { background:#b9f4e5; color:#152b25; border-radius:16px; }
+.brand-title,.card-title,.card h2,.sidebar-title { color:#edf7f3; }
+.brand-sub,.card-sub,.metric-sub,.user-info,.card-header-bar p { color:#a8b8b2; }
+.portal-caregiver::before,.portal-admin::before { background:#202423; border-color:#38413e; border-radius:0 22px 22px 0; }
+.portal-caregiver .tabs-nav .tab-btn,.portal-admin .main-tab-btn { color:#becbc6; border-radius:14px; }
+.portal-caregiver .tabs-nav .tab-btn.active,.portal-admin .main-tab-btn.active { background:#b9f4e5; color:#152b25; }
+.card,.chart-card,.chat-card,.metric-card,.metric-box,.sidebar-patients { background:#242827; border:1px solid #38413e; border-radius:22px; box-shadow:0 8px 24px #00000018; }
+.metric-card,.metric-box { min-height:140px; }
+.metric-value { color:#edf7f3; font-weight:500; font-size:34px; letter-spacing:-1px; }
+.metric-label { color:#becbc6; }
+.metric-card:nth-child(2),.metric-box:nth-child(2) { background:#b9f4e5; border-color:#b9f4e5; }
+.metric-card:nth-child(2) :is(.metric-value,.metric-label,.metric-sub),.metric-box:nth-child(2) :is(.metric-value,.metric-label,.metric-sub) { color:#152b25; }
+.metric-icon-box { background:#30483f !important; color:#b9f4e5 !important; }
+.btn-primary,.btn-submit { background:#b9f4e5; color:#152b25; border-color:#b9f4e5; border-radius:999px; }
+.btn-primary:hover,.btn-submit:hover { background:#92dfcd; color:#152b25; }
+.btn-secondary,.btn-copy,.btn-logout { background:#303936; color:#edf7f3; border-color:#53635c; border-radius:999px; }
+input,select,textarea,.form-control,.filter-select,.search-input-box,.select-patient { background:#1b1f1e; color:#edf7f3; border-color:#53635c; border-radius:12px; }
+input::placeholder,textarea::placeholder { color:#a8b8b2; }
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible { outline:2px solid #b9f4e5; outline-offset:3px; }
+thead th { background:#1b1f1e; color:#becbc6; border-color:#38413e; }
+tbody td { border-color:#38413e; }
+tbody tr:hover { background:#303936; }
+.tabs-nav { background:#202423; }
+.tab-btn { color:#becbc6; }
+.tab-btn.active { background:#b9f4e5; color:#152b25; }
+.summary-chip,.chat-card-header { background:#303936; color:#edf7f3; }
+.portal-clinician .sidebar-patients { background:#202423; }
+.portal-clinician .patient-item.active { background:#30483f; border-color:#b9f4e5; }
+.login-page { background:#141817; }
+.login-shell { background:#1b1f1e; border:1px solid #38413e; border-radius:26px; padding:16px; }
+.login-page .brand-title,.login-page label { color:#edf7f3; }
+.login-page .brand-icon { background:#b9f4e5; color:#152b25; }
+.login-page input { background:#242827; color:#edf7f3; border-color:#53635c; border-radius:12px; }
+.login-page .btn-submit { background:#b9f4e5; color:#152b25; border-color:#b9f4e5; }
+.login-page .role-toggle { background:#303936; border-color:#53635c; }
+.login-page .role-toggle-btn.active { background:#b9f4e5; color:#152b25; }
+.login-visual { background:radial-gradient(ellipse at 85% 15%,#3d5b50,#202b26 65%); border-radius:20px; }
+.login-visual h2 { color:#e8fff5; }
+.login-visual p,.login-visual .visual-brand { color:#b9d6c9; }
+.preview-screen,.preview-rail { background:#191d1c; color:#dce7e2; }
+.preview-main h3,.preview-rail b { color:#b9f4e5; }
+.preview-tiles span,.preview-chart { background:#303936; color:#edf7f3; }
+.preview-tiles span:nth-child(2) { background:#b9f4e5; color:#152b25; }
+.preview-lines { background:repeating-linear-gradient(to bottom,#53635c 0px,#53635c 1px,#242827 1px,#242827 33px); }
+@media(max-width:900px) { .portal-caregiver .tabs-nav,.portal-admin .tabs-nav-container { background:#202423; border-radius:14px; } .login-shell { padding:8px; } }
+.login-shell { grid-template-columns:minmax(0,1fr) minmax(0,1fr); min-width:0; }
+.login-page .login-card { min-width:0; }
+@media(max-width:900px) {
+  .login-shell { grid-template-columns:minmax(0,1fr); }
+  .login-page .login-card { padding:24px 16px; }
+  .login-page .role-toggle-btn { min-width:0; font-size:11px; gap:3px; padding:10px 3px; }
+  .login-page .role-caption,.login-page .form-group { overflow-wrap:anywhere; }
+}

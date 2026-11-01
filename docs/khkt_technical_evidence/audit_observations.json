@@ -1,0 +1,33 @@
+{
+  "audit_date": "2026-10-09",
+  "repository": "AI_Rehabilitation_Safety_Assistant",
+  "git_history": [
+    "ebcdcbb 2026-09-30 docs: update comprehensive README for AI Rehabilitation & Safety Assistant",
+    "c6aafea 2026-09-30 feat: AI Rehabilitation & Safety Assistant v3.0 Final MVP"
+  ],
+  "model_artifacts": [
+    {
+      "path": "modules/emotion/models/expression_net.pth",
+      "exists": true,
+      "bytes": 71785
+    },
+    {
+      "path": "modules/emotion/data/expression_landmarks.csv",
+      "exists": false,
+      "bytes": null
+    },
+    {
+      "path": "modules/emotion/results/metrics.json",
+      "exists": false,
+      "bytes": null
+    },
+    {
+      "path": "data/models/faster-whisper-small/model.bin",
+      "exists": true,
+      "bytes": 483546902
+    }
+  ],
+  "rules_read": ".agents/rules/codebase-memory.md",
+  "graph_mcp_available": false,
+  "method": "stat only; no model deserialization, database open, audio capture or external calls"
+}

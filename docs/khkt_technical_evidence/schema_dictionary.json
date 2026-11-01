@@ -1,0 +1,3297 @@
+[
+  {
+    "table": "schema_migrations",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line_range": [
+      7,
+      10
+    ],
+    "columns": [
+      {
+        "name": "version",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "applied_at",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      }
+    ],
+    "primary_key": [
+      "version"
+    ],
+    "foreign_keys": [],
+    "unique_constraints": [],
+    "ddl": "CREATE TABLE IF NOT EXISTS schema_migrations (\n    version VARCHAR(64) PRIMARY KEY,\n    applied_at TEXT NOT NULL\n);"
+  },
+  {
+    "table": "users",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line_range": [
+      13,
+      22
+    ],
+    "columns": [
+      {
+        "name": "user_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "email",
+        "type": "VARCHAR(128)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "phone",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "full_name",
+        "type": "VARCHAR(128)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "password_hash",
+        "type": "VARCHAR(128)",
+        "constraints": "DEFAULT ''"
+      },
+      {
+        "name": "role",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL DEFAULT 'caregiver' CHECK(role IN ('admin', 'clinician', 'caregiver', 'patient'))"
+      },
+      {
+        "name": "is_active",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 1 CHECK(is_active IN (0, 1))"
+      },
+      {
+        "name": "created_at",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      }
+    ],
+    "primary_key": [
+      "user_id"
+    ],
+    "foreign_keys": [],
+    "unique_constraints": [],
+    "ddl": "CREATE TABLE IF NOT EXISTS users (\n    user_id VARCHAR(64) PRIMARY KEY,\n    email VARCHAR(128) NOT NULL,\n    phone VARCHAR(32) NOT NULL,\n    full_name VARCHAR(128) NOT NULL,\n    password_hash VARCHAR(128) DEFAULT '',\n    role VARCHAR(32) NOT NULL DEFAULT 'caregiver' CHECK(role IN ('admin', 'clinician', 'caregiver', 'patient')),\n    is_active INTEGER NOT NULL DEFAULT 1 CHECK(is_active IN (0, 1)),\n    created_at TEXT NOT NULL\n);"
+  },
+  {
+    "table": "patients",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line_range": [
+      25,
+      35
+    ],
+    "columns": [
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "user_id",
+        "type": "VARCHAR(64)",
+        "constraints": "UNIQUE"
+      },
+      {
+        "name": "full_name",
+        "type": "VARCHAR(128)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "date_of_birth",
+        "type": "TEXT",
+        "constraints": ""
+      },
+      {
+        "name": "gender",
+        "type": "VARCHAR(16)",
+        "constraints": "NOT NULL DEFAULT 'Nam'"
+      },
+      {
+        "name": "timezone",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL DEFAULT 'Asia/Ho_Chi_Minh'"
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL DEFAULT 'ACTIVE' CHECK(status IN ('ACTIVE', 'INACTIVE', 'SUSPENDED'))"
+      },
+      {
+        "name": "notes",
+        "type": "TEXT",
+        "constraints": "DEFAULT ''"
+      }
+    ],
+    "primary_key": [
+      "patient_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "user_id",
+        "target": "users",
+        "target_columns": "user_id",
+        "on_delete": "SET NULL"
+      }
+    ],
+    "unique_constraints": [
+      "user_id"
+    ],
+    "ddl": "CREATE TABLE IF NOT EXISTS patients (\n    patient_id VARCHAR(64) PRIMARY KEY,\n    user_id VARCHAR(64) UNIQUE,\n    full_name VARCHAR(128) NOT NULL,\n    date_of_birth TEXT,\n    gender VARCHAR(16) NOT NULL DEFAULT 'Nam',\n    timezone VARCHAR(64) NOT NULL DEFAULT 'Asia/Ho_Chi_Minh',\n    status VARCHAR(32) NOT NULL DEFAULT 'ACTIVE' CHECK(status IN ('ACTIVE', 'INACTIVE', 'SUSPENDED')),\n    notes TEXT DEFAULT '',\n    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE SET NULL\n);"
+  },
+  {
+    "table": "legacy_patient_map",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line_range": [
+      38,
+      43
+    ],
+    "columns": [
+      {
+        "name": "legacy_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "source_system",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      }
+    ],
+    "primary_key": [
+      "legacy_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "patient_id",
+        "target": "patients",
+        "target_columns": "patient_id",
+        "on_delete": "CASCADE"
+      }
+    ],
+    "unique_constraints": [],
+    "ddl": "CREATE TABLE IF NOT EXISTS legacy_patient_map (\n    legacy_id VARCHAR(64) PRIMARY KEY,\n    source_system VARCHAR(64) NOT NULL, -- 'camera_face', 'health_module', 'cognitive_module', 'local_json'\n    patient_id VARCHAR(64) NOT NULL,\n    FOREIGN KEY (patient_id) REFERENCES patients(patient_id) ON DELETE CASCADE\n);"
+  },
+  {
+    "table": "caregivers",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line_range": [
+      46,
+      53
+    ],
+    "columns": [
+      {
+        "name": "caregiver_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "user_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL UNIQUE"
+      },
+      {
+        "name": "email_verified",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 1 CHECK(email_verified IN (0, 1))"
+      },
+      {
+        "name": "phone_verified",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 1 CHECK(phone_verified IN (0, 1))"
+      },
+      {
+        "name": "relationship_desc",
+        "type": "VARCHAR(64)",
+        "constraints": "DEFAULT 'Người thân'"
+      }
+    ],
+    "primary_key": [
+      "caregiver_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "user_id",
+        "target": "users",
+        "target_columns": "user_id",
+        "on_delete": "RESTRICT"
+      }
+    ],
+    "unique_constraints": [
+      "user_id"
+    ],
+    "ddl": "CREATE TABLE IF NOT EXISTS caregivers (\n    caregiver_id VARCHAR(64) PRIMARY KEY,\n    user_id VARCHAR(64) NOT NULL UNIQUE,\n    email_verified INTEGER NOT NULL DEFAULT 1 CHECK(email_verified IN (0, 1)),\n    phone_verified INTEGER NOT NULL DEFAULT 1 CHECK(phone_verified IN (0, 1)),\n    relationship_desc VARCHAR(64) DEFAULT 'Người thân',\n    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE RESTRICT\n);"
+  },
+  {
+    "table": "clinicians",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line_range": [
+      56,
+      65
+    ],
+    "columns": [
+      {
+        "name": "clinician_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "user_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL UNIQUE"
+      },
+      {
+        "name": "workplace",
+        "type": "VARCHAR(128)",
+        "constraints": "NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "specialty",
+        "type": "VARCHAR(128)",
+        "constraints": "NOT NULL DEFAULT 'Lão khoa'"
+      },
+      {
+        "name": "license_number",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "is_verified",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 1 CHECK(is_verified IN (0, 1))"
+      },
+      {
+        "name": "is_simulation",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 1 CHECK(is_simulation IN (0, 1))"
+      }
+    ],
+    "primary_key": [
+      "clinician_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "user_id",
+        "target": "users",
+        "target_columns": "user_id",
+        "on_delete": "RESTRICT"
+      }
+    ],
+    "unique_constraints": [
+      "user_id"
+    ],
+    "ddl": "CREATE TABLE IF NOT EXISTS clinicians (\n    clinician_id VARCHAR(64) PRIMARY KEY,\n    user_id VARCHAR(64) NOT NULL UNIQUE,\n    workplace VARCHAR(128) NOT NULL DEFAULT '',\n    specialty VARCHAR(128) NOT NULL DEFAULT 'Lão khoa',\n    license_number VARCHAR(64) NOT NULL DEFAULT '',\n    is_verified INTEGER NOT NULL DEFAULT 1 CHECK(is_verified IN (0, 1)),\n    is_simulation INTEGER NOT NULL DEFAULT 1 CHECK(is_simulation IN (0, 1)), -- 1 = Tài khoản mô phỏng (demo)\n    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE RESTRICT\n);"
+  },
+  {
+    "table": "patient_caregivers",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line_range": [
+      68,
+      84
+    ],
+    "columns": [
+      {
+        "name": "patient_caregiver_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "caregiver_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "relationship_type",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL DEFAULT 'Người thân'"
+      },
+      {
+        "name": "is_primary",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 1 CHECK(is_primary IN (0, 1))"
+      },
+      {
+        "name": "notification_priority",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 1"
+      },
+      {
+        "name": "can_edit_schedule",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 1 CHECK(can_edit_schedule IN (0, 1))"
+      },
+      {
+        "name": "can_view_health",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 1 CHECK(can_view_health IN (0, 1))"
+      },
+      {
+        "name": "consent_status",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL DEFAULT 'GRANTED' CHECK(consent_status IN ('GRANTED', 'REVOKED', 'PENDING'))"
+      },
+      {
+        "name": "valid_from",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "valid_to",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "is_active",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 1 CHECK(is_active IN (0, 1))"
+      }
+    ],
+    "primary_key": [
+      "patient_caregiver_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "patient_id",
+        "target": "patients",
+        "target_columns": "patient_id",
+        "on_delete": "RESTRICT"
+      },
+      {
+        "columns": "caregiver_id",
+        "target": "caregivers",
+        "target_columns": "caregiver_id",
+        "on_delete": "RESTRICT"
+      }
+    ],
+    "unique_constraints": [
+      "patient_id, caregiver_id"
+    ],
+    "ddl": "CREATE TABLE IF NOT EXISTS patient_caregivers (\n    patient_caregiver_id VARCHAR(64) PRIMARY KEY,\n    patient_id VARCHAR(64) NOT NULL,\n    caregiver_id VARCHAR(64) NOT NULL,\n    relationship_type VARCHAR(64) NOT NULL DEFAULT 'Người thân',\n    is_primary INTEGER NOT NULL DEFAULT 1 CHECK(is_primary IN (0, 1)),\n    notification_priority INTEGER NOT NULL DEFAULT 1,\n    can_edit_schedule INTEGER NOT NULL DEFAULT 1 CHECK(can_edit_schedule IN (0, 1)),\n    can_view_health INTEGER NOT NULL DEFAULT 1 CHECK(can_view_health IN (0, 1)),\n    consent_status VARCHAR(32) NOT NULL DEFAULT 'GRANTED' CHECK(consent_status IN ('GRANTED', 'REVOKED', 'PENDING')),\n    valid_from TEXT NOT NULL,\n    valid_to TEXT NOT NULL,\n    is_active INTEGER NOT NULL DEFAULT 1 CHECK(is_active IN (0, 1)),\n    FOREIGN KEY (patient_id) REFERENCES patients(patient_id) ON DELETE RESTRICT,\n    FOREIGN KEY (caregiver_id) REFERENCES caregivers(caregiver_id) ON DELETE RESTRICT,\n    UNIQUE(patient_id, caregiver_id)\n);"
+  },
+  {
+    "table": "care_team",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line_range": [
+      87,
+      99
+    ],
+    "columns": [
+      {
+        "name": "care_team_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "clinician_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "role_description",
+        "type": "VARCHAR(128)",
+        "constraints": "NOT NULL DEFAULT 'Bác sĩ phụ trách'"
+      },
+      {
+        "name": "valid_from",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "valid_to",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "consent_status",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL DEFAULT 'GRANTED' CHECK(consent_status IN ('GRANTED', 'REVOKED', 'EXPIRED'))"
+      },
+      {
+        "name": "is_active",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 1 CHECK(is_active IN (0, 1))"
+      }
+    ],
+    "primary_key": [
+      "care_team_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "patient_id",
+        "target": "patients",
+        "target_columns": "patient_id",
+        "on_delete": "RESTRICT"
+      },
+      {
+        "columns": "clinician_id",
+        "target": "clinicians",
+        "target_columns": "clinician_id",
+        "on_delete": "RESTRICT"
+      }
+    ],
+    "unique_constraints": [
+      "patient_id, clinician_id"
+    ],
+    "ddl": "CREATE TABLE IF NOT EXISTS care_team (\n    care_team_id VARCHAR(64) PRIMARY KEY,\n    patient_id VARCHAR(64) NOT NULL,\n    clinician_id VARCHAR(64) NOT NULL,\n    role_description VARCHAR(128) NOT NULL DEFAULT 'Bác sĩ phụ trách',\n    valid_from TEXT NOT NULL,\n    valid_to TEXT NOT NULL,\n    consent_status VARCHAR(32) NOT NULL DEFAULT 'GRANTED' CHECK(consent_status IN ('GRANTED', 'REVOKED', 'EXPIRED')),\n    is_active INTEGER NOT NULL DEFAULT 1 CHECK(is_active IN (0, 1)),\n    FOREIGN KEY (patient_id) REFERENCES patients(patient_id) ON DELETE RESTRICT,\n    FOREIGN KEY (clinician_id) REFERENCES clinicians(clinician_id) ON DELETE RESTRICT,\n    UNIQUE(patient_id, clinician_id)\n);"
+  },
+  {
+    "table": "medications",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line_range": [
+      102,
+      111
+    ],
+    "columns": [
+      {
+        "name": "medication_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "brand_name",
+        "type": "VARCHAR(128)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "generic_name",
+        "type": "VARCHAR(128)",
+        "constraints": "DEFAULT ''"
+      },
+      {
+        "name": "product_strength",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "strength_unit",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL DEFAULT 'mg'"
+      },
+      {
+        "name": "dosage_form",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL DEFAULT 'Viên nén'"
+      },
+      {
+        "name": "image_path",
+        "type": "TEXT",
+        "constraints": "DEFAULT ''"
+      },
+      {
+        "name": "safety_notes",
+        "type": "TEXT",
+        "constraints": "DEFAULT ''"
+      }
+    ],
+    "primary_key": [
+      "medication_id"
+    ],
+    "foreign_keys": [],
+    "unique_constraints": [],
+    "ddl": "CREATE TABLE IF NOT EXISTS medications (\n    medication_id VARCHAR(64) PRIMARY KEY,\n    brand_name VARCHAR(128) NOT NULL,\n    generic_name VARCHAR(128) DEFAULT '',\n    product_strength VARCHAR(64) NOT NULL,\n    strength_unit VARCHAR(32) NOT NULL DEFAULT 'mg',\n    dosage_form VARCHAR(64) NOT NULL DEFAULT 'Viên nén',\n    image_path TEXT DEFAULT '',\n    safety_notes TEXT DEFAULT ''\n);"
+  },
+  {
+    "table": "prescriptions",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line_range": [
+      114,
+      130
+    ],
+    "columns": [
+      {
+        "name": "prescription_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "entered_by_user_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "prescription_code",
+        "type": "VARCHAR(64)",
+        "constraints": "DEFAULT ''"
+      },
+      {
+        "name": "prescribed_date",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "prescriber_clinician_id",
+        "type": "VARCHAR(64)",
+        "constraints": ""
+      },
+      {
+        "name": "source",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL DEFAULT 'caregiver_transcribed' CHECK(source IN ('clinician_entered', 'uploaded_document', 'caregiver_transcribed'))"
+      },
+      {
+        "name": "document_url",
+        "type": "TEXT",
+        "constraints": "DEFAULT ''"
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL DEFAULT 'ACTIVE' CHECK(status IN ('ACTIVE', 'SUPERSEDED', 'CANCELLED', 'EXPIRED'))"
+      },
+      {
+        "name": "version",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 1"
+      },
+      {
+        "name": "valid_from",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "valid_to",
+        "type": "TEXT",
+        "constraints": ""
+      }
+    ],
+    "primary_key": [
+      "prescription_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "patient_id",
+        "target": "patients",
+        "target_columns": "patient_id",
+        "on_delete": "RESTRICT"
+      },
+      {
+        "columns": "entered_by_user_id",
+        "target": "users",
+        "target_columns": "user_id",
+        "on_delete": "RESTRICT"
+      },
+      {
+        "columns": "prescriber_clinician_id",
+        "target": "clinicians",
+        "target_columns": "clinician_id",
+        "on_delete": "RESTRICT"
+      }
+    ],
+    "unique_constraints": [],
+    "ddl": "CREATE TABLE IF NOT EXISTS prescriptions (\n    prescription_id VARCHAR(64) PRIMARY KEY,\n    patient_id VARCHAR(64) NOT NULL,\n    entered_by_user_id VARCHAR(64) NOT NULL,\n    prescription_code VARCHAR(64) DEFAULT '',\n    prescribed_date TEXT NOT NULL,\n    prescriber_clinician_id VARCHAR(64),\n    source VARCHAR(64) NOT NULL DEFAULT 'caregiver_transcribed' CHECK(source IN ('clinician_entered', 'uploaded_document', 'caregiver_transcribed')),\n    document_url TEXT DEFAULT '',\n    status VARCHAR(32) NOT NULL DEFAULT 'ACTIVE' CHECK(status IN ('ACTIVE', 'SUPERSEDED', 'CANCELLED', 'EXPIRED')),\n    version INTEGER NOT NULL DEFAULT 1,\n    valid_from TEXT NOT NULL,\n    valid_to TEXT,\n    FOREIGN KEY (patient_id) REFERENCES patients(patient_id) ON DELETE RESTRICT,\n    FOREIGN KEY (entered_by_user_id) REFERENCES users(user_id) ON DELETE RESTRICT,\n    FOREIGN KEY (prescriber_clinician_id) REFERENCES clinicians(clinician_id) ON DELETE RESTRICT\n);"
+  },
+  {
+    "table": "prescription_items",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line_range": [
+      133,
+      147
+    ],
+    "columns": [
+      {
+        "name": "prescription_item_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "prescription_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "medication_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "dose_amount",
+        "type": "REAL",
+        "constraints": "NOT NULL CHECK(dose_amount > 0)"
+      },
+      {
+        "name": "dose_unit",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL DEFAULT 'viên'"
+      },
+      {
+        "name": "route_of_administration",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL DEFAULT 'Đường uống'"
+      },
+      {
+        "name": "frequency_description",
+        "type": "VARCHAR(128)",
+        "constraints": "DEFAULT 'Hàng ngày'"
+      },
+      {
+        "name": "original_instructions",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "start_date",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "end_date",
+        "type": "TEXT",
+        "constraints": ""
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL DEFAULT 'ACTIVE' CHECK(status IN ('ACTIVE', 'STOPPED', 'COMPLETED'))"
+      }
+    ],
+    "primary_key": [
+      "prescription_item_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "prescription_id",
+        "target": "prescriptions",
+        "target_columns": "prescription_id",
+        "on_delete": "RESTRICT"
+      },
+      {
+        "columns": "medication_id",
+        "target": "medications",
+        "target_columns": "medication_id",
+        "on_delete": "RESTRICT"
+      }
+    ],
+    "unique_constraints": [],
+    "ddl": "CREATE TABLE IF NOT EXISTS prescription_items (\n    prescription_item_id VARCHAR(64) PRIMARY KEY,\n    prescription_id VARCHAR(64) NOT NULL,\n    medication_id VARCHAR(64) NOT NULL,\n    dose_amount REAL NOT NULL CHECK(dose_amount > 0),\n    dose_unit VARCHAR(32) NOT NULL DEFAULT 'viên',\n    route_of_administration VARCHAR(64) NOT NULL DEFAULT 'Đường uống',\n    frequency_description VARCHAR(128) DEFAULT 'Hàng ngày',\n    original_instructions TEXT NOT NULL,\n    start_date TEXT NOT NULL,\n    end_date TEXT,\n    status VARCHAR(32) NOT NULL DEFAULT 'ACTIVE' CHECK(status IN ('ACTIVE', 'STOPPED', 'COMPLETED')),\n    FOREIGN KEY (prescription_id) REFERENCES prescriptions(prescription_id) ON DELETE RESTRICT,\n    FOREIGN KEY (medication_id) REFERENCES medications(medication_id) ON DELETE RESTRICT\n);"
+  },
+  {
+    "table": "medication_schedules",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line_range": [
+      150,
+      165
+    ],
+    "columns": [
+      {
+        "name": "schedule_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "prescription_item_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "revision",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 1"
+      },
+      {
+        "name": "timezone",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL DEFAULT 'Asia/Ho_Chi_Minh'"
+      },
+      {
+        "name": "local_times",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "days_of_week",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "reminder_delay_minutes",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 10 CHECK(reminder_delay_minutes >= 1)"
+      },
+      {
+        "name": "grace_period_minutes",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 60 CHECK(grace_period_minutes >= 1)"
+      },
+      {
+        "name": "caregiver_alert_enabled",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 1 CHECK(caregiver_alert_enabled IN (0, 1))"
+      },
+      {
+        "name": "is_active",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 1 CHECK(is_active IN (0, 1))"
+      },
+      {
+        "name": "effective_from",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "effective_to",
+        "type": "TEXT",
+        "constraints": ""
+      }
+    ],
+    "primary_key": [
+      "schedule_id",
+      "revision"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "prescription_item_id",
+        "target": "prescription_items",
+        "target_columns": "prescription_item_id",
+        "on_delete": "RESTRICT"
+      }
+    ],
+    "unique_constraints": [],
+    "ddl": "CREATE TABLE IF NOT EXISTS medication_schedules (\n    schedule_id VARCHAR(64) NOT NULL,\n    prescription_item_id VARCHAR(64) NOT NULL,\n    revision INTEGER NOT NULL DEFAULT 1,\n    timezone VARCHAR(64) NOT NULL DEFAULT 'Asia/Ho_Chi_Minh',\n    local_times TEXT NOT NULL,             -- JSON mảng các mốc giờ, vd: '[\"08:00\", \"20:00\"]'\n    days_of_week TEXT NOT NULL,            -- JSON mảng ngày trong tuần, vd: '[0,1,2,3,4,5,6]'\n    reminder_delay_minutes INTEGER NOT NULL DEFAULT 10 CHECK(reminder_delay_minutes >= 1),\n    grace_period_minutes INTEGER NOT NULL DEFAULT 60 CHECK(grace_period_minutes >= 1),\n    caregiver_alert_enabled INTEGER NOT NULL DEFAULT 1 CHECK(caregiver_alert_enabled IN (0, 1)),\n    is_active INTEGER NOT NULL DEFAULT 1 CHECK(is_active IN (0, 1)),\n    effective_from TEXT NOT NULL,\n    effective_to TEXT,\n    PRIMARY KEY (schedule_id, revision),\n    FOREIGN KEY (prescription_item_id) REFERENCES prescription_items(prescription_item_id) ON DELETE RESTRICT\n);"
+  },
+  {
+    "table": "dose_occurrences",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line_range": [
+      168,
+      190
+    ],
+    "columns": [
+      {
+        "name": "occurrence_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "schedule_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "revision",
+        "type": "INTEGER",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "scheduled_at_utc",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "local_scheduled_time",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "grace_deadline_utc",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "state",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL DEFAULT 'PENDING' CHECK(state IN ("
+      },
+      {
+        "name": "medication_name_snapshot",
+        "type": "VARCHAR(128)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "dose_snapshot",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "instructions_snapshot",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "image_snapshot",
+        "type": "TEXT",
+        "constraints": "DEFAULT ''"
+      },
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "snooze_count",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 0"
+      },
+      {
+        "name": "snoozed_until_utc",
+        "type": "TEXT",
+        "constraints": ""
+      },
+      {
+        "name": "action_taken_at_utc",
+        "type": "TEXT",
+        "constraints": ""
+      },
+      {
+        "name": "action_actor",
+        "type": "VARCHAR(64)",
+        "constraints": ""
+      },
+      {
+        "name": "action_notes",
+        "type": "TEXT",
+        "constraints": ""
+      }
+    ],
+    "primary_key": [
+      "occurrence_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "patient_id",
+        "target": "patients",
+        "target_columns": "patient_id",
+        "on_delete": "RESTRICT"
+      }
+    ],
+    "unique_constraints": [
+      "schedule_id, revision, scheduled_at_utc"
+    ],
+    "ddl": "CREATE TABLE IF NOT EXISTS dose_occurrences (\n    occurrence_id VARCHAR(64) PRIMARY KEY,\n    schedule_id VARCHAR(64) NOT NULL,\n    revision INTEGER NOT NULL,\n    scheduled_at_utc TEXT NOT NULL,\n    local_scheduled_time TEXT NOT NULL,\n    grace_deadline_utc TEXT NOT NULL,\n    state VARCHAR(32) NOT NULL DEFAULT 'PENDING' CHECK(state IN (\n        'PENDING', 'REMINDING', 'SNOOZED', 'CONFIRMED', 'SKIPPED', 'OVERDUE', 'MISSED', 'CANCELLED'\n    )),\n    medication_name_snapshot VARCHAR(128) NOT NULL,\n    dose_snapshot VARCHAR(64) NOT NULL,\n    instructions_snapshot TEXT NOT NULL,\n    image_snapshot TEXT DEFAULT '',\n    patient_id VARCHAR(64) NOT NULL,\n    snooze_count INTEGER NOT NULL DEFAULT 0,\n    snoozed_until_utc TEXT,\n    action_taken_at_utc TEXT,\n    action_actor VARCHAR(64),\n    action_notes TEXT,\n    FOREIGN KEY (patient_id) REFERENCES patients(patient_id) ON DELETE RESTRICT,\n    UNIQUE(schedule_id, revision, scheduled_at_utc)\n);"
+  },
+  {
+    "table": "dose_events",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line_range": [
+      193,
+      206
+    ],
+    "columns": [
+      {
+        "name": "event_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "occurrence_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "event_type",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL CHECK(event_type IN ("
+      },
+      {
+        "name": "actor_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "actor_role",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL DEFAULT 'patient'"
+      },
+      {
+        "name": "timestamp_utc",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "idempotency_key",
+        "type": "VARCHAR(128)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "metadata",
+        "type": "TEXT",
+        "constraints": "DEFAULT '{}'"
+      }
+    ],
+    "primary_key": [
+      "event_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "occurrence_id",
+        "target": "dose_occurrences",
+        "target_columns": "occurrence_id",
+        "on_delete": "RESTRICT"
+      }
+    ],
+    "unique_constraints": [],
+    "ddl": "CREATE TABLE IF NOT EXISTS dose_events (\n    event_id VARCHAR(64) PRIMARY KEY,\n    occurrence_id VARCHAR(64) NOT NULL,\n    event_type VARCHAR(32) NOT NULL CHECK(event_type IN (\n        'reminded', 'snoozed', 'self_reported_taken', 'caregiver_reported_taken',\n        'help_requested', 'overdue_unconfirmed', 'resolved'\n    )),\n    actor_id VARCHAR(64) NOT NULL,\n    actor_role VARCHAR(32) NOT NULL DEFAULT 'patient',\n    timestamp_utc TEXT NOT NULL,\n    idempotency_key VARCHAR(128) NOT NULL,\n    metadata TEXT DEFAULT '{}',\n    FOREIGN KEY (occurrence_id) REFERENCES dose_occurrences(occurrence_id) ON DELETE RESTRICT\n);"
+  },
+  {
+    "table": "alerts",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line_range": [
+      209,
+      222
+    ],
+    "columns": [
+      {
+        "name": "alert_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "occurrence_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "alert_type",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL CHECK(alert_type IN ('OVERDUE', 'HELP_REQUESTED'))"
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL DEFAULT 'NEW' CHECK(status IN ('NEW', 'DISPATCHED', 'ACKNOWLEDGED', 'RESOLVED'))"
+      },
+      {
+        "name": "created_at_utc",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "resolved_at_utc",
+        "type": "TEXT",
+        "constraints": ""
+      },
+      {
+        "name": "resolved_by",
+        "type": "VARCHAR(64)",
+        "constraints": ""
+      },
+      {
+        "name": "resolution_notes",
+        "type": "TEXT",
+        "constraints": ""
+      }
+    ],
+    "primary_key": [
+      "alert_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "occurrence_id",
+        "target": "dose_occurrences",
+        "target_columns": "occurrence_id",
+        "on_delete": "RESTRICT"
+      },
+      {
+        "columns": "patient_id",
+        "target": "patients",
+        "target_columns": "patient_id",
+        "on_delete": "RESTRICT"
+      }
+    ],
+    "unique_constraints": [
+      "occurrence_id, alert_type"
+    ],
+    "ddl": "CREATE TABLE IF NOT EXISTS alerts (\n    alert_id VARCHAR(64) PRIMARY KEY,\n    occurrence_id VARCHAR(64) NOT NULL,\n    patient_id VARCHAR(64) NOT NULL,\n    alert_type VARCHAR(32) NOT NULL CHECK(alert_type IN ('OVERDUE', 'HELP_REQUESTED')),\n    status VARCHAR(32) NOT NULL DEFAULT 'NEW' CHECK(status IN ('NEW', 'DISPATCHED', 'ACKNOWLEDGED', 'RESOLVED')),\n    created_at_utc TEXT NOT NULL,\n    resolved_at_utc TEXT,\n    resolved_by VARCHAR(64),\n    resolution_notes TEXT,\n    FOREIGN KEY (occurrence_id) REFERENCES dose_occurrences(occurrence_id) ON DELETE RESTRICT,\n    FOREIGN KEY (patient_id) REFERENCES patients(patient_id) ON DELETE RESTRICT,\n    UNIQUE(occurrence_id, alert_type)\n);"
+  },
+  {
+    "table": "notification_deliveries",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line_range": [
+      225,
+      239
+    ],
+    "columns": [
+      {
+        "name": "delivery_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "alert_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "caregiver_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "channel",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL DEFAULT 'EMAIL' CHECK(channel IN ('EMAIL', 'SMS', 'IN_APP'))"
+      },
+      {
+        "name": "recipient_snapshot",
+        "type": "VARCHAR(128)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL DEFAULT 'QUEUED' CHECK(status IN ('QUEUED', 'SENT', 'DELIVERED', 'FAILED', 'ACKNOWLEDGED'))"
+      },
+      {
+        "name": "attempt_count",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 0"
+      },
+      {
+        "name": "last_attempt_at_utc",
+        "type": "TEXT",
+        "constraints": ""
+      },
+      {
+        "name": "error_message",
+        "type": "TEXT",
+        "constraints": "DEFAULT ''"
+      },
+      {
+        "name": "idempotency_key",
+        "type": "VARCHAR(128)",
+        "constraints": "NOT NULL"
+      }
+    ],
+    "primary_key": [
+      "delivery_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "alert_id",
+        "target": "alerts",
+        "target_columns": "alert_id",
+        "on_delete": "RESTRICT"
+      },
+      {
+        "columns": "caregiver_id",
+        "target": "caregivers",
+        "target_columns": "caregiver_id",
+        "on_delete": "RESTRICT"
+      }
+    ],
+    "unique_constraints": [
+      "alert_id, caregiver_id, channel"
+    ],
+    "ddl": "CREATE TABLE IF NOT EXISTS notification_deliveries (\n    delivery_id VARCHAR(64) PRIMARY KEY,\n    alert_id VARCHAR(64) NOT NULL,\n    caregiver_id VARCHAR(64) NOT NULL,\n    channel VARCHAR(32) NOT NULL DEFAULT 'EMAIL' CHECK(channel IN ('EMAIL', 'SMS', 'IN_APP')),\n    recipient_snapshot VARCHAR(128) NOT NULL,\n    status VARCHAR(32) NOT NULL DEFAULT 'QUEUED' CHECK(status IN ('QUEUED', 'SENT', 'DELIVERED', 'FAILED', 'ACKNOWLEDGED')),\n    attempt_count INTEGER NOT NULL DEFAULT 0,\n    last_attempt_at_utc TEXT,\n    error_message TEXT DEFAULT '',\n    idempotency_key VARCHAR(128) NOT NULL,\n    FOREIGN KEY (alert_id) REFERENCES alerts(alert_id) ON DELETE RESTRICT,\n    FOREIGN KEY (caregiver_id) REFERENCES caregivers(caregiver_id) ON DELETE RESTRICT,\n    UNIQUE(alert_id, caregiver_id, channel)\n);"
+  },
+  {
+    "table": "observation_types",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line_range": [
+      242,
+      250
+    ],
+    "columns": [
+      {
+        "name": "observation_type_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "code",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL UNIQUE"
+      },
+      {
+        "name": "name",
+        "type": "VARCHAR(128)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "standard_unit",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "min_plausible_value",
+        "type": "REAL",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "max_plausible_value",
+        "type": "REAL",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "category",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL DEFAULT 'vitals'"
+      }
+    ],
+    "primary_key": [
+      "observation_type_id"
+    ],
+    "foreign_keys": [],
+    "unique_constraints": [
+      "code"
+    ],
+    "ddl": "CREATE TABLE IF NOT EXISTS observation_types (\n    observation_type_id VARCHAR(64) PRIMARY KEY,\n    code VARCHAR(32) NOT NULL UNIQUE,\n    name VARCHAR(128) NOT NULL,\n    standard_unit VARCHAR(32) NOT NULL,\n    min_plausible_value REAL NOT NULL,\n    max_plausible_value REAL NOT NULL,\n    category VARCHAR(32) NOT NULL DEFAULT 'vitals'\n);"
+  },
+  {
+    "table": "measurement_groups",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line_range": [
+      253,
+      266
+    ],
+    "columns": [
+      {
+        "name": "group_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "measured_at",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "recorded_at",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "entered_by_user_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "source_type",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL CHECK(source_type IN ('manual_patient', 'manual_caregiver', 'device_import'))"
+      },
+      {
+        "name": "device_label",
+        "type": "VARCHAR(128)",
+        "constraints": "NOT NULL DEFAULT 'Người dùng nhập'"
+      },
+      {
+        "name": "context",
+        "type": "TEXT",
+        "constraints": "DEFAULT ''"
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL DEFAULT 'active' CHECK(status IN ('active', 'corrected', 'entered_in_error'))"
+      },
+      {
+        "name": "client_request_id",
+        "type": "VARCHAR(128)",
+        "constraints": "NOT NULL UNIQUE"
+      }
+    ],
+    "primary_key": [
+      "group_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "patient_id",
+        "target": "patients",
+        "target_columns": "patient_id",
+        "on_delete": "RESTRICT"
+      },
+      {
+        "columns": "entered_by_user_id",
+        "target": "users",
+        "target_columns": "user_id",
+        "on_delete": "RESTRICT"
+      }
+    ],
+    "unique_constraints": [
+      "client_request_id"
+    ],
+    "ddl": "CREATE TABLE IF NOT EXISTS measurement_groups (\n    group_id VARCHAR(64) PRIMARY KEY,\n    patient_id VARCHAR(64) NOT NULL,\n    measured_at TEXT NOT NULL,\n    recorded_at TEXT NOT NULL,\n    entered_by_user_id VARCHAR(64) NOT NULL,\n    source_type VARCHAR(32) NOT NULL CHECK(source_type IN ('manual_patient', 'manual_caregiver', 'device_import')),\n    device_label VARCHAR(128) NOT NULL DEFAULT 'Người dùng nhập',\n    context TEXT DEFAULT '',\n    status VARCHAR(32) NOT NULL DEFAULT 'active' CHECK(status IN ('active', 'corrected', 'entered_in_error')),\n    client_request_id VARCHAR(128) NOT NULL UNIQUE,\n    FOREIGN KEY (patient_id) REFERENCES patients(patient_id) ON DELETE RESTRICT,\n    FOREIGN KEY (entered_by_user_id) REFERENCES users(user_id) ON DELETE RESTRICT\n);"
+  },
+  {
+    "table": "health_observations",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line_range": [
+      269,
+      284
+    ],
+    "columns": [
+      {
+        "name": "observation_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "group_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "observation_type_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "value_numeric",
+        "type": "REAL",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "unit_code",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL DEFAULT 'active' CHECK(status IN ('active', 'corrected', 'entered_in_error'))"
+      },
+      {
+        "name": "corrects_observation_id",
+        "type": "VARCHAR(64)",
+        "constraints": ""
+      },
+      {
+        "name": "notes",
+        "type": "TEXT",
+        "constraints": "DEFAULT ''"
+      }
+    ],
+    "primary_key": [
+      "observation_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "group_id",
+        "target": "measurement_groups",
+        "target_columns": "group_id",
+        "on_delete": "CASCADE"
+      },
+      {
+        "columns": "patient_id",
+        "target": "patients",
+        "target_columns": "patient_id",
+        "on_delete": "RESTRICT"
+      },
+      {
+        "columns": "observation_type_id",
+        "target": "observation_types",
+        "target_columns": "observation_type_id",
+        "on_delete": "RESTRICT"
+      },
+      {
+        "columns": "corrects_observation_id",
+        "target": "health_observations",
+        "target_columns": "observation_id",
+        "on_delete": "SET NULL"
+      }
+    ],
+    "unique_constraints": [
+      "group_id, observation_type_id"
+    ],
+    "ddl": "CREATE TABLE IF NOT EXISTS health_observations (\n    observation_id VARCHAR(64) PRIMARY KEY,\n    group_id VARCHAR(64) NOT NULL,\n    patient_id VARCHAR(64) NOT NULL,\n    observation_type_id VARCHAR(64) NOT NULL,\n    value_numeric REAL NOT NULL,\n    unit_code VARCHAR(32) NOT NULL,\n    status VARCHAR(32) NOT NULL DEFAULT 'active' CHECK(status IN ('active', 'corrected', 'entered_in_error')),\n    corrects_observation_id VARCHAR(64),\n    notes TEXT DEFAULT '',\n    FOREIGN KEY (group_id) REFERENCES measurement_groups(group_id) ON DELETE CASCADE,\n    FOREIGN KEY (patient_id) REFERENCES patients(patient_id) ON DELETE RESTRICT,\n    FOREIGN KEY (observation_type_id) REFERENCES observation_types(observation_type_id) ON DELETE RESTRICT,\n    FOREIGN KEY (corrects_observation_id) REFERENCES health_observations(observation_id) ON DELETE SET NULL,\n    UNIQUE(group_id, observation_type_id)\n);"
+  },
+  {
+    "table": "symptom_entries",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line_range": [
+      287,
+      297
+    ],
+    "columns": [
+      {
+        "name": "symptom_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "reported_by_user_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "reported_at",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "text",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "discomfort_level",
+        "type": "INTEGER",
+        "constraints": "DEFAULT 1 CHECK(discomfort_level BETWEEN 1 AND 5)"
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL DEFAULT 'active' CHECK(status IN ('active', 'retracted'))"
+      }
+    ],
+    "primary_key": [
+      "symptom_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "patient_id",
+        "target": "patients",
+        "target_columns": "patient_id",
+        "on_delete": "RESTRICT"
+      },
+      {
+        "columns": "reported_by_user_id",
+        "target": "users",
+        "target_columns": "user_id",
+        "on_delete": "RESTRICT"
+      }
+    ],
+    "unique_constraints": [],
+    "ddl": "CREATE TABLE IF NOT EXISTS symptom_entries (\n    symptom_id VARCHAR(64) PRIMARY KEY,\n    patient_id VARCHAR(64) NOT NULL,\n    reported_by_user_id VARCHAR(64) NOT NULL,\n    reported_at TEXT NOT NULL,\n    text TEXT NOT NULL,\n    discomfort_level INTEGER DEFAULT 1 CHECK(discomfort_level BETWEEN 1 AND 5),\n    status VARCHAR(32) NOT NULL DEFAULT 'active' CHECK(status IN ('active', 'retracted')),\n    FOREIGN KEY (patient_id) REFERENCES patients(patient_id) ON DELETE RESTRICT,\n    FOREIGN KEY (reported_by_user_id) REFERENCES users(user_id) ON DELETE RESTRICT\n);"
+  },
+  {
+    "table": "clinician_reviews",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line_range": [
+      300,
+      311
+    ],
+    "columns": [
+      {
+        "name": "review_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "clinician_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "reviewed_at",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "period_start",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "period_end",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL DEFAULT 'CONFIRMED' CHECK(status IN ('CONFIRMED', 'CANCELLED'))"
+      },
+      {
+        "name": "notes",
+        "type": "TEXT",
+        "constraints": "DEFAULT ''"
+      }
+    ],
+    "primary_key": [
+      "review_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "clinician_id",
+        "target": "clinicians",
+        "target_columns": "clinician_id",
+        "on_delete": "RESTRICT"
+      },
+      {
+        "columns": "patient_id",
+        "target": "patients",
+        "target_columns": "patient_id",
+        "on_delete": "RESTRICT"
+      }
+    ],
+    "unique_constraints": [],
+    "ddl": "CREATE TABLE IF NOT EXISTS clinician_reviews (\n    review_id VARCHAR(64) PRIMARY KEY,\n    clinician_id VARCHAR(64) NOT NULL,\n    patient_id VARCHAR(64) NOT NULL,\n    reviewed_at TEXT NOT NULL,\n    period_start TEXT NOT NULL,\n    period_end TEXT NOT NULL,\n    status VARCHAR(32) NOT NULL DEFAULT 'CONFIRMED' CHECK(status IN ('CONFIRMED', 'CANCELLED')),\n    notes TEXT DEFAULT '',\n    FOREIGN KEY (clinician_id) REFERENCES clinicians(clinician_id) ON DELETE RESTRICT,\n    FOREIGN KEY (patient_id) REFERENCES patients(patient_id) ON DELETE RESTRICT\n);"
+  },
+  {
+    "table": "clinical_messages",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line_range": [
+      314,
+      328
+    ],
+    "columns": [
+      {
+        "name": "message_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "clinician_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "review_id",
+        "type": "VARCHAR(64)",
+        "constraints": ""
+      },
+      {
+        "name": "observation_id",
+        "type": "VARCHAR(64)",
+        "constraints": ""
+      },
+      {
+        "name": "body",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "visibility",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL DEFAULT 'PATIENT_AND_CAREGIVERS' CHECK(visibility IN ('PATIENT_AND_CAREGIVERS', 'PATIENT_ONLY', 'CLINICIAN_ONLY'))"
+      },
+      {
+        "name": "created_at",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL DEFAULT 'sent' CHECK(status IN ('sent', 'delivered', 'read'))"
+      }
+    ],
+    "primary_key": [
+      "message_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "patient_id",
+        "target": "patients",
+        "target_columns": "patient_id",
+        "on_delete": "RESTRICT"
+      },
+      {
+        "columns": "clinician_id",
+        "target": "clinicians",
+        "target_columns": "clinician_id",
+        "on_delete": "RESTRICT"
+      },
+      {
+        "columns": "review_id",
+        "target": "clinician_reviews",
+        "target_columns": "review_id",
+        "on_delete": "SET NULL"
+      },
+      {
+        "columns": "observation_id",
+        "target": "health_observations",
+        "target_columns": "observation_id",
+        "on_delete": "SET NULL"
+      }
+    ],
+    "unique_constraints": [],
+    "ddl": "CREATE TABLE IF NOT EXISTS clinical_messages (\n    message_id VARCHAR(64) PRIMARY KEY,\n    patient_id VARCHAR(64) NOT NULL,\n    clinician_id VARCHAR(64) NOT NULL,\n    review_id VARCHAR(64),\n    observation_id VARCHAR(64),\n    body TEXT NOT NULL,\n    visibility VARCHAR(32) NOT NULL DEFAULT 'PATIENT_AND_CAREGIVERS' CHECK(visibility IN ('PATIENT_AND_CAREGIVERS', 'PATIENT_ONLY', 'CLINICIAN_ONLY')),\n    created_at TEXT NOT NULL,\n    status VARCHAR(32) NOT NULL DEFAULT 'sent' CHECK(status IN ('sent', 'delivered', 'read')),\n    FOREIGN KEY (patient_id) REFERENCES patients(patient_id) ON DELETE RESTRICT,\n    FOREIGN KEY (clinician_id) REFERENCES clinicians(clinician_id) ON DELETE RESTRICT,\n    FOREIGN KEY (review_id) REFERENCES clinician_reviews(review_id) ON DELETE SET NULL,\n    FOREIGN KEY (observation_id) REFERENCES health_observations(observation_id) ON DELETE SET NULL\n);"
+  },
+  {
+    "table": "message_receipts",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line_range": [
+      331,
+      339
+    ],
+    "columns": [
+      {
+        "name": "receipt_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "message_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "user_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "read_at",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      }
+    ],
+    "primary_key": [
+      "receipt_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "message_id",
+        "target": "clinical_messages",
+        "target_columns": "message_id",
+        "on_delete": "CASCADE"
+      },
+      {
+        "columns": "user_id",
+        "target": "users",
+        "target_columns": "user_id",
+        "on_delete": "RESTRICT"
+      }
+    ],
+    "unique_constraints": [
+      "message_id, user_id"
+    ],
+    "ddl": "CREATE TABLE IF NOT EXISTS message_receipts (\n    receipt_id VARCHAR(64) PRIMARY KEY,\n    message_id VARCHAR(64) NOT NULL,\n    user_id VARCHAR(64) NOT NULL,\n    read_at TEXT NOT NULL,\n    FOREIGN KEY (message_id) REFERENCES clinical_messages(message_id) ON DELETE CASCADE,\n    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE RESTRICT,\n    UNIQUE(message_id, user_id)\n);"
+  },
+  {
+    "table": "monitoring_plans",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line_range": [
+      342,
+      355
+    ],
+    "columns": [
+      {
+        "name": "plan_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "clinician_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "observation_type_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "frequency_rule",
+        "type": "VARCHAR(128)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "valid_from",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "valid_to",
+        "type": "TEXT",
+        "constraints": ""
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL DEFAULT 'ACTIVE'"
+      },
+      {
+        "name": "version",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 1"
+      }
+    ],
+    "primary_key": [
+      "plan_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "patient_id",
+        "target": "patients",
+        "target_columns": "patient_id",
+        "on_delete": "RESTRICT"
+      },
+      {
+        "columns": "clinician_id",
+        "target": "clinicians",
+        "target_columns": "clinician_id",
+        "on_delete": "RESTRICT"
+      },
+      {
+        "columns": "observation_type_id",
+        "target": "observation_types",
+        "target_columns": "observation_type_id",
+        "on_delete": "RESTRICT"
+      }
+    ],
+    "unique_constraints": [],
+    "ddl": "CREATE TABLE IF NOT EXISTS monitoring_plans (\n    plan_id VARCHAR(64) PRIMARY KEY,\n    patient_id VARCHAR(64) NOT NULL,\n    clinician_id VARCHAR(64) NOT NULL,\n    observation_type_id VARCHAR(64) NOT NULL,\n    frequency_rule VARCHAR(128) NOT NULL,\n    valid_from TEXT NOT NULL,\n    valid_to TEXT,\n    status VARCHAR(32) NOT NULL DEFAULT 'ACTIVE',\n    version INTEGER NOT NULL DEFAULT 1,\n    FOREIGN KEY (patient_id) REFERENCES patients(patient_id) ON DELETE RESTRICT,\n    FOREIGN KEY (clinician_id) REFERENCES clinicians(clinician_id) ON DELETE RESTRICT,\n    FOREIGN KEY (observation_type_id) REFERENCES observation_types(observation_type_id) ON DELETE RESTRICT\n);"
+  },
+  {
+    "table": "patient_thresholds",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line_range": [
+      357,
+      368
+    ],
+    "columns": [
+      {
+        "name": "threshold_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "plan_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "min_value",
+        "type": "REAL",
+        "constraints": ""
+      },
+      {
+        "name": "max_value",
+        "type": "REAL",
+        "constraints": ""
+      },
+      {
+        "name": "unit_code",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "severity",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL DEFAULT 'INFO'"
+      },
+      {
+        "name": "valid_from",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "valid_to",
+        "type": "TEXT",
+        "constraints": ""
+      },
+      {
+        "name": "version",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 1"
+      }
+    ],
+    "primary_key": [
+      "threshold_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "plan_id",
+        "target": "monitoring_plans",
+        "target_columns": "plan_id",
+        "on_delete": "CASCADE"
+      }
+    ],
+    "unique_constraints": [],
+    "ddl": "CREATE TABLE IF NOT EXISTS patient_thresholds (\n    threshold_id VARCHAR(64) PRIMARY KEY,\n    plan_id VARCHAR(64) NOT NULL,\n    min_value REAL,\n    max_value REAL,\n    unit_code VARCHAR(32) NOT NULL,\n    severity VARCHAR(32) NOT NULL DEFAULT 'INFO',\n    valid_from TEXT NOT NULL,\n    valid_to TEXT,\n    version INTEGER NOT NULL DEFAULT 1,\n    FOREIGN KEY (plan_id) REFERENCES monitoring_plans(plan_id) ON DELETE CASCADE\n);"
+  },
+  {
+    "table": "game_types",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line_range": [
+      371,
+      378
+    ],
+    "columns": [
+      {
+        "name": "game_type_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "code",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL UNIQUE"
+      },
+      {
+        "name": "name",
+        "type": "VARCHAR(128)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "description",
+        "type": "TEXT",
+        "constraints": ""
+      },
+      {
+        "name": "rules_version",
+        "type": "VARCHAR(16)",
+        "constraints": "NOT NULL DEFAULT 'v1.0'"
+      },
+      {
+        "name": "is_active",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 1 CHECK(is_active IN (0, 1))"
+      }
+    ],
+    "primary_key": [
+      "game_type_id"
+    ],
+    "foreign_keys": [],
+    "unique_constraints": [
+      "code"
+    ],
+    "ddl": "CREATE TABLE IF NOT EXISTS game_types (\n    game_type_id VARCHAR(64) PRIMARY KEY,\n    code VARCHAR(32) NOT NULL UNIQUE,\n    name VARCHAR(128) NOT NULL,\n    description TEXT,\n    rules_version VARCHAR(16) NOT NULL DEFAULT 'v1.0',\n    is_active INTEGER NOT NULL DEFAULT 1 CHECK(is_active IN (0, 1))\n);"
+  },
+  {
+    "table": "content_packs",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line_range": [
+      380,
+      389
+    ],
+    "columns": [
+      {
+        "name": "pack_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "game_type_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL REFERENCES game_types(game_type_id)"
+      },
+      {
+        "name": "title",
+        "type": "VARCHAR(128)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "theme",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "assets_manifest",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "license",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL DEFAULT 'CC0-1.0'"
+      },
+      {
+        "name": "locale",
+        "type": "VARCHAR(16)",
+        "constraints": "NOT NULL DEFAULT 'vi-VN'"
+      },
+      {
+        "name": "version",
+        "type": "VARCHAR(16)",
+        "constraints": "NOT NULL DEFAULT '1.0'"
+      }
+    ],
+    "primary_key": [
+      "pack_id"
+    ],
+    "foreign_keys": [],
+    "unique_constraints": [],
+    "ddl": "CREATE TABLE IF NOT EXISTS content_packs (\n    pack_id VARCHAR(64) PRIMARY KEY,\n    game_type_id VARCHAR(64) NOT NULL REFERENCES game_types(game_type_id),\n    title VARCHAR(128) NOT NULL,\n    theme VARCHAR(64) NOT NULL,\n    assets_manifest TEXT NOT NULL,\n    license VARCHAR(64) NOT NULL DEFAULT 'CC0-1.0',\n    locale VARCHAR(16) NOT NULL DEFAULT 'vi-VN',\n    version VARCHAR(16) NOT NULL DEFAULT '1.0'\n);"
+  },
+  {
+    "table": "game_sessions",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line_range": [
+      391,
+      406
+    ],
+    "columns": [
+      {
+        "name": "session_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL REFERENCES patients(patient_id) ON DELETE CASCADE"
+      },
+      {
+        "name": "game_type_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL REFERENCES game_types(game_type_id)"
+      },
+      {
+        "name": "pack_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL REFERENCES content_packs(pack_id)"
+      },
+      {
+        "name": "difficulty",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL CHECK(difficulty IN ('easy', 'medium', 'hard', 'expert'))"
+      },
+      {
+        "name": "seed",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 42"
+      },
+      {
+        "name": "started_at",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "ended_at",
+        "type": "TEXT",
+        "constraints": ""
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL CHECK(status IN ('in_progress', 'completed', 'abandoned', 'paused'))"
+      },
+      {
+        "name": "active_seconds",
+        "type": "REAL",
+        "constraints": "NOT NULL DEFAULT 0.0"
+      },
+      {
+        "name": "help_count",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 0"
+      },
+      {
+        "name": "rules_version",
+        "type": "VARCHAR(16)",
+        "constraints": "NOT NULL DEFAULT 'v1.0'"
+      },
+      {
+        "name": "client_request_id",
+        "type": "VARCHAR(64)",
+        "constraints": "UNIQUE"
+      },
+      {
+        "name": "notes",
+        "type": "TEXT",
+        "constraints": "DEFAULT ''"
+      }
+    ],
+    "primary_key": [
+      "session_id"
+    ],
+    "foreign_keys": [],
+    "unique_constraints": [
+      "client_request_id"
+    ],
+    "ddl": "CREATE TABLE IF NOT EXISTS game_sessions (\n    session_id VARCHAR(64) PRIMARY KEY,\n    patient_id VARCHAR(64) NOT NULL REFERENCES patients(patient_id) ON DELETE CASCADE,\n    game_type_id VARCHAR(64) NOT NULL REFERENCES game_types(game_type_id),\n    pack_id VARCHAR(64) NOT NULL REFERENCES content_packs(pack_id),\n    difficulty VARCHAR(32) NOT NULL CHECK(difficulty IN ('easy', 'medium', 'hard', 'expert')),\n    seed INTEGER NOT NULL DEFAULT 42,\n    started_at TEXT NOT NULL,\n    ended_at TEXT,\n    status VARCHAR(32) NOT NULL CHECK(status IN ('in_progress', 'completed', 'abandoned', 'paused')),\n    active_seconds REAL NOT NULL DEFAULT 0.0,\n    help_count INTEGER NOT NULL DEFAULT 0,\n    rules_version VARCHAR(16) NOT NULL DEFAULT 'v1.0',\n    client_request_id VARCHAR(64) UNIQUE,\n    notes TEXT DEFAULT ''\n);"
+  },
+  {
+    "table": "game_results",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line_range": [
+      408,
+      417
+    ],
+    "columns": [
+      {
+        "name": "session_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY REFERENCES game_sessions(session_id) ON DELETE CASCADE"
+      },
+      {
+        "name": "attempts",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 0"
+      },
+      {
+        "name": "correct_count",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 0"
+      },
+      {
+        "name": "total_tasks",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 0"
+      },
+      {
+        "name": "accuracy_percent",
+        "type": "REAL",
+        "constraints": "NOT NULL DEFAULT 0.0"
+      },
+      {
+        "name": "user_feedback",
+        "type": "VARCHAR(32)",
+        "constraints": "DEFAULT ''"
+      },
+      {
+        "name": "enjoyment",
+        "type": "VARCHAR(32)",
+        "constraints": "DEFAULT ''"
+      },
+      {
+        "name": "metrics_json",
+        "type": "TEXT",
+        "constraints": "DEFAULT '{}'"
+      }
+    ],
+    "primary_key": [
+      "session_id"
+    ],
+    "foreign_keys": [],
+    "unique_constraints": [],
+    "ddl": "CREATE TABLE IF NOT EXISTS game_results (\n    session_id VARCHAR(64) PRIMARY KEY REFERENCES game_sessions(session_id) ON DELETE CASCADE,\n    attempts INTEGER NOT NULL DEFAULT 0,\n    correct_count INTEGER NOT NULL DEFAULT 0,\n    total_tasks INTEGER NOT NULL DEFAULT 0,\n    accuracy_percent REAL NOT NULL DEFAULT 0.0,\n    user_feedback VARCHAR(32) DEFAULT '',\n    enjoyment VARCHAR(32) DEFAULT '',\n    metrics_json TEXT DEFAULT '{}'\n);"
+  },
+  {
+    "table": "mood_checkins",
+    "source_path": "database/migrations/002_rehab_and_audit.sql",
+    "line_range": [
+      8,
+      16
+    ],
+    "columns": [
+      {
+        "name": "checkin_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "self_rating",
+        "type": "INTEGER",
+        "constraints": "NOT NULL CHECK(self_rating BETWEEN 1 AND 5)"
+      },
+      {
+        "name": "note",
+        "type": "TEXT",
+        "constraints": "DEFAULT ''"
+      },
+      {
+        "name": "recorded_at",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "recorded_by",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      }
+    ],
+    "primary_key": [
+      "checkin_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "patient_id",
+        "target": "patients",
+        "target_columns": "patient_id",
+        "on_delete": "RESTRICT"
+      }
+    ],
+    "unique_constraints": [],
+    "ddl": "CREATE TABLE IF NOT EXISTS mood_checkins (\n    checkin_id VARCHAR(64) PRIMARY KEY,\n    patient_id VARCHAR(64) NOT NULL,\n    self_rating INTEGER NOT NULL CHECK(self_rating BETWEEN 1 AND 5), -- 1: Rất buồn, 3: Bình thường, 5: Rất vui\n    note TEXT DEFAULT '',\n    recorded_at TEXT NOT NULL,\n    recorded_by VARCHAR(64) NOT NULL,\n    FOREIGN KEY (patient_id) REFERENCES patients(patient_id) ON DELETE RESTRICT\n);"
+  },
+  {
+    "table": "emotion_inferences",
+    "source_path": "database/migrations/002_rehab_and_audit.sql",
+    "line_range": [
+      19,
+      29
+    ],
+    "columns": [
+      {
+        "name": "inference_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "model_version",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL DEFAULT 'ExpressionNet-v1.0'"
+      },
+      {
+        "name": "label",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "confidence",
+        "type": "REAL",
+        "constraints": "NOT NULL CHECK(confidence BETWEEN 0.0 AND 1.0)"
+      },
+      {
+        "name": "observed_at",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "consent_id",
+        "type": "VARCHAR(64)",
+        "constraints": ""
+      },
+      {
+        "name": "is_consent_active",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 1 CHECK(is_consent_active IN (0, 1))"
+      }
+    ],
+    "primary_key": [
+      "inference_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "patient_id",
+        "target": "patients",
+        "target_columns": "patient_id",
+        "on_delete": "RESTRICT"
+      }
+    ],
+    "unique_constraints": [],
+    "ddl": "CREATE TABLE IF NOT EXISTS emotion_inferences (\n    inference_id VARCHAR(64) PRIMARY KEY,\n    patient_id VARCHAR(64) NOT NULL,\n    model_version VARCHAR(64) NOT NULL DEFAULT 'ExpressionNet-v1.0',\n    label VARCHAR(32) NOT NULL, -- 'Bình thường', 'Vui vẻ', 'Buồn bã'\n    confidence REAL NOT NULL CHECK(confidence BETWEEN 0.0 AND 1.0),\n    observed_at TEXT NOT NULL,\n    consent_id VARCHAR(64),\n    is_consent_active INTEGER NOT NULL DEFAULT 1 CHECK(is_consent_active IN (0, 1)),\n    FOREIGN KEY (patient_id) REFERENCES patients(patient_id) ON DELETE RESTRICT\n);"
+  },
+  {
+    "table": "rehab_plans",
+    "source_path": "database/migrations/002_rehab_and_audit.sql",
+    "line_range": [
+      32,
+      45
+    ],
+    "columns": [
+      {
+        "name": "plan_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "exercise_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "exercise_name",
+        "type": "VARCHAR(128)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "target_count",
+        "type": "INTEGER",
+        "constraints": "NOT NULL CHECK(target_count > 0)"
+      },
+      {
+        "name": "local_reminder_time",
+        "type": "VARCHAR(16)",
+        "constraints": "NOT NULL DEFAULT '16:00'"
+      },
+      {
+        "name": "timezone",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL DEFAULT 'Asia/Ho_Chi_Minh'"
+      },
+      {
+        "name": "version",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 1"
+      },
+      {
+        "name": "is_active",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 1 CHECK(is_active IN (0, 1))"
+      },
+      {
+        "name": "effective_from",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "effective_to",
+        "type": "TEXT",
+        "constraints": ""
+      }
+    ],
+    "primary_key": [
+      "plan_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "patient_id",
+        "target": "patients",
+        "target_columns": "patient_id",
+        "on_delete": "RESTRICT"
+      }
+    ],
+    "unique_constraints": [],
+    "ddl": "CREATE TABLE IF NOT EXISTS rehab_plans (\n    plan_id VARCHAR(64) PRIMARY KEY,\n    patient_id VARCHAR(64) NOT NULL,\n    exercise_id VARCHAR(64) NOT NULL, -- 'arm_raise', 'sit_to_stand', 'marching'\n    exercise_name VARCHAR(128) NOT NULL,\n    target_count INTEGER NOT NULL CHECK(target_count > 0),\n    local_reminder_time VARCHAR(16) NOT NULL DEFAULT '16:00',\n    timezone VARCHAR(64) NOT NULL DEFAULT 'Asia/Ho_Chi_Minh',\n    version INTEGER NOT NULL DEFAULT 1,\n    is_active INTEGER NOT NULL DEFAULT 1 CHECK(is_active IN (0, 1)),\n    effective_from TEXT NOT NULL,\n    effective_to TEXT,\n    FOREIGN KEY (patient_id) REFERENCES patients(patient_id) ON DELETE RESTRICT\n);"
+  },
+  {
+    "table": "rehab_sessions",
+    "source_path": "database/migrations/002_rehab_and_audit.sql",
+    "line_range": [
+      48,
+      67
+    ],
+    "columns": [
+      {
+        "name": "session_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "plan_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "plan_version",
+        "type": "INTEGER",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "local_date",
+        "type": "VARCHAR(16)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "started_at",
+        "type": "TEXT",
+        "constraints": ""
+      },
+      {
+        "name": "ended_at",
+        "type": "TEXT",
+        "constraints": ""
+      },
+      {
+        "name": "target_count_snapshot",
+        "type": "INTEGER",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "verified_count",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 0"
+      },
+      {
+        "name": "completion_source",
+        "type": "VARCHAR(64)",
+        "constraints": "DEFAULT 'camera'"
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL DEFAULT 'pending' CHECK(status IN ("
+      },
+      {
+        "name": "algorithm_version",
+        "type": "VARCHAR(64)",
+        "constraints": "DEFAULT 'MediaPipe-Pose-FSM-v1.0'"
+      },
+      {
+        "name": "notes",
+        "type": "TEXT",
+        "constraints": "DEFAULT ''"
+      }
+    ],
+    "primary_key": [
+      "session_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "patient_id",
+        "target": "patients",
+        "target_columns": "patient_id",
+        "on_delete": "RESTRICT"
+      },
+      {
+        "columns": "plan_id",
+        "target": "rehab_plans",
+        "target_columns": "plan_id",
+        "on_delete": "RESTRICT"
+      }
+    ],
+    "unique_constraints": [
+      "patient_id, plan_id, local_date"
+    ],
+    "ddl": "CREATE TABLE IF NOT EXISTS rehab_sessions (\n    session_id VARCHAR(64) PRIMARY KEY,\n    patient_id VARCHAR(64) NOT NULL,\n    plan_id VARCHAR(64) NOT NULL,\n    plan_version INTEGER NOT NULL,\n    local_date VARCHAR(16) NOT NULL, -- 'YYYY-MM-DD'\n    started_at TEXT,\n    ended_at TEXT,\n    target_count_snapshot INTEGER NOT NULL, -- Khóa chỉ tiêu lúc bắt đầu phiên\n    verified_count INTEGER NOT NULL DEFAULT 0,\n    completion_source VARCHAR(64) DEFAULT 'camera', -- 'camera', 'manual_reviewed'\n    status VARCHAR(32) NOT NULL DEFAULT 'pending' CHECK(status IN (\n        'pending', 'reminded', 'in_progress', 'camera_verified_completed', 'incomplete', 'verification_unavailable', 'manual_reviewed'\n    )),\n    algorithm_version VARCHAR(64) DEFAULT 'MediaPipe-Pose-FSM-v1.0',\n    notes TEXT DEFAULT '',\n    FOREIGN KEY (patient_id) REFERENCES patients(patient_id) ON DELETE RESTRICT,\n    FOREIGN KEY (plan_id) REFERENCES rehab_plans(plan_id) ON DELETE RESTRICT,\n    UNIQUE(patient_id, plan_id, local_date)\n);"
+  },
+  {
+    "table": "rehab_events",
+    "source_path": "database/migrations/002_rehab_and_audit.sql",
+    "line_range": [
+      70,
+      82
+    ],
+    "columns": [
+      {
+        "name": "event_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "session_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "exercise_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "rep_number",
+        "type": "INTEGER",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "score",
+        "type": "REAL",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "timestamp_utc",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "idempotency_key",
+        "type": "VARCHAR(128)",
+        "constraints": "NOT NULL UNIQUE"
+      },
+      {
+        "name": "metadata",
+        "type": "TEXT",
+        "constraints": "DEFAULT '{}'"
+      }
+    ],
+    "primary_key": [
+      "event_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "session_id",
+        "target": "rehab_sessions",
+        "target_columns": "session_id",
+        "on_delete": "CASCADE"
+      },
+      {
+        "columns": "patient_id",
+        "target": "patients",
+        "target_columns": "patient_id",
+        "on_delete": "RESTRICT"
+      }
+    ],
+    "unique_constraints": [
+      "idempotency_key"
+    ],
+    "ddl": "CREATE TABLE IF NOT EXISTS rehab_events (\n    event_id VARCHAR(64) PRIMARY KEY,\n    session_id VARCHAR(64) NOT NULL,\n    patient_id VARCHAR(64) NOT NULL,\n    exercise_id VARCHAR(64) NOT NULL,\n    rep_number INTEGER NOT NULL,\n    score REAL NOT NULL,\n    timestamp_utc TEXT NOT NULL,\n    idempotency_key VARCHAR(128) NOT NULL UNIQUE, -- Chống gửi lặp cùng 1 rep\n    metadata TEXT DEFAULT '{}',\n    FOREIGN KEY (session_id) REFERENCES rehab_sessions(session_id) ON DELETE CASCADE,\n    FOREIGN KEY (patient_id) REFERENCES patients(patient_id) ON DELETE RESTRICT\n);"
+  },
+  {
+    "table": "caregiver_reports",
+    "source_path": "database/migrations/002_rehab_and_audit.sql",
+    "line_range": [
+      85,
+      97
+    ],
+    "columns": [
+      {
+        "name": "report_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "caregiver_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "description",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "observed_at",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "severity",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL DEFAULT 'NORMAL' CHECK(severity IN ('LOW', 'NORMAL', 'URGENT'))"
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL DEFAULT 'NEW' CHECK(status IN ('NEW', 'VIEWED', 'ADDITIONAL_INFO', 'RESPONDED', 'CLOSED'))"
+      },
+      {
+        "name": "attachments",
+        "type": "TEXT",
+        "constraints": "DEFAULT '[]'"
+      },
+      {
+        "name": "created_at",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      }
+    ],
+    "primary_key": [
+      "report_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "patient_id",
+        "target": "patients",
+        "target_columns": "patient_id",
+        "on_delete": "RESTRICT"
+      },
+      {
+        "columns": "caregiver_id",
+        "target": "caregivers",
+        "target_columns": "caregiver_id",
+        "on_delete": "RESTRICT"
+      }
+    ],
+    "unique_constraints": [],
+    "ddl": "CREATE TABLE IF NOT EXISTS caregiver_reports (\n    report_id VARCHAR(64) PRIMARY KEY,\n    patient_id VARCHAR(64) NOT NULL,\n    caregiver_id VARCHAR(64) NOT NULL,\n    description TEXT NOT NULL,\n    observed_at TEXT NOT NULL,\n    severity VARCHAR(32) NOT NULL DEFAULT 'NORMAL' CHECK(severity IN ('LOW', 'NORMAL', 'URGENT')),\n    status VARCHAR(32) NOT NULL DEFAULT 'NEW' CHECK(status IN ('NEW', 'VIEWED', 'ADDITIONAL_INFO', 'RESPONDED', 'CLOSED')),\n    attachments TEXT DEFAULT '[]', -- JSON danh sách đường dẫn file/ảnh\n    created_at TEXT NOT NULL,\n    FOREIGN KEY (patient_id) REFERENCES patients(patient_id) ON DELETE RESTRICT,\n    FOREIGN KEY (caregiver_id) REFERENCES caregivers(caregiver_id) ON DELETE RESTRICT\n);"
+  },
+  {
+    "table": "report_messages",
+    "source_path": "database/migrations/002_rehab_and_audit.sql",
+    "line_range": [
+      100,
+      109
+    ],
+    "columns": [
+      {
+        "name": "message_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "report_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "sender_user_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "body",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "created_at",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL DEFAULT 'sent' CHECK(status IN ('sent', 'delivered', 'read'))"
+      }
+    ],
+    "primary_key": [
+      "message_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "report_id",
+        "target": "caregiver_reports",
+        "target_columns": "report_id",
+        "on_delete": "CASCADE"
+      },
+      {
+        "columns": "sender_user_id",
+        "target": "users",
+        "target_columns": "user_id",
+        "on_delete": "RESTRICT"
+      }
+    ],
+    "unique_constraints": [],
+    "ddl": "CREATE TABLE IF NOT EXISTS report_messages (\n    message_id VARCHAR(64) PRIMARY KEY,\n    report_id VARCHAR(64) NOT NULL,\n    sender_user_id VARCHAR(64) NOT NULL,\n    body TEXT NOT NULL,\n    created_at TEXT NOT NULL,\n    status VARCHAR(32) NOT NULL DEFAULT 'sent' CHECK(status IN ('sent', 'delivered', 'read')),\n    FOREIGN KEY (report_id) REFERENCES caregiver_reports(report_id) ON DELETE CASCADE,\n    FOREIGN KEY (sender_user_id) REFERENCES users(user_id) ON DELETE RESTRICT\n);"
+  },
+  {
+    "table": "care_recommendations",
+    "source_path": "database/migrations/002_rehab_and_audit.sql",
+    "line_range": [
+      112,
+      127
+    ],
+    "columns": [
+      {
+        "name": "recommendation_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "clinician_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "category",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL CHECK(category IN ('nutrition', 'exercise', 'mental', 'general'))"
+      },
+      {
+        "name": "title",
+        "type": "VARCHAR(128)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "content",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "version",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 1"
+      },
+      {
+        "name": "valid_from",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "valid_to",
+        "type": "TEXT",
+        "constraints": ""
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL DEFAULT 'ACTIVE' CHECK(status IN ('ACTIVE', 'SUPERSEDED', 'REVOKED'))"
+      },
+      {
+        "name": "is_simulation",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 1 CHECK(is_simulation IN (0, 1))"
+      },
+      {
+        "name": "created_at",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      }
+    ],
+    "primary_key": [
+      "recommendation_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "patient_id",
+        "target": "patients",
+        "target_columns": "patient_id",
+        "on_delete": "RESTRICT"
+      },
+      {
+        "columns": "clinician_id",
+        "target": "clinicians",
+        "target_columns": "clinician_id",
+        "on_delete": "RESTRICT"
+      }
+    ],
+    "unique_constraints": [],
+    "ddl": "CREATE TABLE IF NOT EXISTS care_recommendations (\n    recommendation_id VARCHAR(64) PRIMARY KEY,\n    patient_id VARCHAR(64) NOT NULL,\n    clinician_id VARCHAR(64) NOT NULL,\n    category VARCHAR(64) NOT NULL CHECK(category IN ('nutrition', 'exercise', 'mental', 'general')),\n    title VARCHAR(128) NOT NULL,\n    content TEXT NOT NULL,\n    version INTEGER NOT NULL DEFAULT 1,\n    valid_from TEXT NOT NULL,\n    valid_to TEXT,\n    status VARCHAR(32) NOT NULL DEFAULT 'ACTIVE' CHECK(status IN ('ACTIVE', 'SUPERSEDED', 'REVOKED')),\n    is_simulation INTEGER NOT NULL DEFAULT 1 CHECK(is_simulation IN (0, 1)),\n    created_at TEXT NOT NULL,\n    FOREIGN KEY (patient_id) REFERENCES patients(patient_id) ON DELETE RESTRICT,\n    FOREIGN KEY (clinician_id) REFERENCES clinicians(clinician_id) ON DELETE RESTRICT\n);"
+  },
+  {
+    "table": "recommendation_receipts",
+    "source_path": "database/migrations/002_rehab_and_audit.sql",
+    "line_range": [
+      130,
+      138
+    ],
+    "columns": [
+      {
+        "name": "receipt_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "recommendation_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "user_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "read_at",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      }
+    ],
+    "primary_key": [
+      "receipt_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "recommendation_id",
+        "target": "care_recommendations",
+        "target_columns": "recommendation_id",
+        "on_delete": "CASCADE"
+      },
+      {
+        "columns": "user_id",
+        "target": "users",
+        "target_columns": "user_id",
+        "on_delete": "RESTRICT"
+      }
+    ],
+    "unique_constraints": [
+      "recommendation_id, user_id"
+    ],
+    "ddl": "CREATE TABLE IF NOT EXISTS recommendation_receipts (\n    receipt_id VARCHAR(64) PRIMARY KEY,\n    recommendation_id VARCHAR(64) NOT NULL,\n    user_id VARCHAR(64) NOT NULL,\n    read_at TEXT NOT NULL,\n    FOREIGN KEY (recommendation_id) REFERENCES care_recommendations(recommendation_id) ON DELETE CASCADE,\n    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE RESTRICT,\n    UNIQUE(recommendation_id, user_id)\n);"
+  },
+  {
+    "table": "emergency_contacts",
+    "source_path": "database/migrations/002_rehab_and_audit.sql",
+    "line_range": [
+      141,
+      154
+    ],
+    "columns": [
+      {
+        "name": "contact_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "contact_type",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL CHECK(contact_type IN ('clinician_on_duty', 'local_emergency', 'caregiver_primary'))"
+      },
+      {
+        "name": "contact_name",
+        "type": "VARCHAR(128)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "phone",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "on_duty_start",
+        "type": "VARCHAR(8)",
+        "constraints": "DEFAULT '08:00'"
+      },
+      {
+        "name": "on_duty_end",
+        "type": "VARCHAR(8)",
+        "constraints": "DEFAULT '17:00'"
+      },
+      {
+        "name": "is_verified",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 0 CHECK(is_verified IN (0, 1))"
+      },
+      {
+        "name": "is_active",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 1 CHECK(is_active IN (0, 1))"
+      },
+      {
+        "name": "priority",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 1"
+      },
+      {
+        "name": "notes",
+        "type": "TEXT",
+        "constraints": "DEFAULT ''"
+      }
+    ],
+    "primary_key": [
+      "contact_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "patient_id",
+        "target": "patients",
+        "target_columns": "patient_id",
+        "on_delete": "RESTRICT"
+      }
+    ],
+    "unique_constraints": [],
+    "ddl": "CREATE TABLE IF NOT EXISTS emergency_contacts (\n    contact_id VARCHAR(64) PRIMARY KEY,\n    patient_id VARCHAR(64) NOT NULL,\n    contact_type VARCHAR(32) NOT NULL CHECK(contact_type IN ('clinician_on_duty', 'local_emergency', 'caregiver_primary')),\n    contact_name VARCHAR(128) NOT NULL,\n    phone VARCHAR(32) NOT NULL,\n    on_duty_start VARCHAR(8) DEFAULT '08:00', -- 'HH:MM'\n    on_duty_end VARCHAR(8) DEFAULT '17:00',   -- 'HH:MM'\n    is_verified INTEGER NOT NULL DEFAULT 0 CHECK(is_verified IN (0, 1)), -- 0: số demo/chưa xác nhận, 1: số thật\n    is_active INTEGER NOT NULL DEFAULT 1 CHECK(is_active IN (0, 1)),\n    priority INTEGER NOT NULL DEFAULT 1,\n    notes TEXT DEFAULT '',\n    FOREIGN KEY (patient_id) REFERENCES patients(patient_id) ON DELETE RESTRICT\n);"
+  },
+  {
+    "table": "emergency_contact_events",
+    "source_path": "database/migrations/002_rehab_and_audit.sql",
+    "line_range": [
+      157,
+      169
+    ],
+    "columns": [
+      {
+        "name": "event_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "initiator_user_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "contact_id",
+        "type": "VARCHAR(64)",
+        "constraints": ""
+      },
+      {
+        "name": "phone_snapshot",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "on_duty_status",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL CHECK(on_duty_status IN ('ON_DUTY', 'OFF_DUTY'))"
+      },
+      {
+        "name": "channel",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL DEFAULT 'TEL_PROMPT'"
+      },
+      {
+        "name": "user_reported_status",
+        "type": "VARCHAR(64)",
+        "constraints": "DEFAULT 'dial_initiated'"
+      },
+      {
+        "name": "timestamp_utc",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      }
+    ],
+    "primary_key": [
+      "event_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "patient_id",
+        "target": "patients",
+        "target_columns": "patient_id",
+        "on_delete": "RESTRICT"
+      },
+      {
+        "columns": "initiator_user_id",
+        "target": "users",
+        "target_columns": "user_id",
+        "on_delete": "RESTRICT"
+      }
+    ],
+    "unique_constraints": [],
+    "ddl": "CREATE TABLE IF NOT EXISTS emergency_contact_events (\n    event_id VARCHAR(64) PRIMARY KEY,\n    patient_id VARCHAR(64) NOT NULL,\n    initiator_user_id VARCHAR(64) NOT NULL,\n    contact_id VARCHAR(64),\n    phone_snapshot VARCHAR(32) NOT NULL,\n    on_duty_status VARCHAR(32) NOT NULL CHECK(on_duty_status IN ('ON_DUTY', 'OFF_DUTY')),\n    channel VARCHAR(32) NOT NULL DEFAULT 'TEL_PROMPT',\n    user_reported_status VARCHAR(64) DEFAULT 'dial_initiated',\n    timestamp_utc TEXT NOT NULL,\n    FOREIGN KEY (patient_id) REFERENCES patients(patient_id) ON DELETE RESTRICT,\n    FOREIGN KEY (initiator_user_id) REFERENCES users(user_id) ON DELETE RESTRICT\n);"
+  },
+  {
+    "table": "audit_events",
+    "source_path": "database/migrations/002_rehab_and_audit.sql",
+    "line_range": [
+      172,
+      182
+    ],
+    "columns": [
+      {
+        "name": "audit_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "user_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "action",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "entity_type",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "entity_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "details",
+        "type": "TEXT",
+        "constraints": "DEFAULT '{}'"
+      },
+      {
+        "name": "ip_address",
+        "type": "VARCHAR(45)",
+        "constraints": "DEFAULT '127.0.0.1'"
+      },
+      {
+        "name": "timestamp_utc",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      }
+    ],
+    "primary_key": [
+      "audit_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "user_id",
+        "target": "users",
+        "target_columns": "user_id",
+        "on_delete": "RESTRICT"
+      }
+    ],
+    "unique_constraints": [],
+    "ddl": "CREATE TABLE IF NOT EXISTS audit_events (\n    audit_id VARCHAR(64) PRIMARY KEY,\n    user_id VARCHAR(64) NOT NULL,\n    action VARCHAR(64) NOT NULL, -- 'READ_RECORDS', 'REVISE_PRESCRIPTION', 'ACK_ALERT', 'POST_RECOMMENDATION', 'SUBMIT_REPORT'\n    entity_type VARCHAR(64) NOT NULL,\n    entity_id VARCHAR(64) NOT NULL,\n    details TEXT DEFAULT '{}',\n    ip_address VARCHAR(45) DEFAULT '127.0.0.1',\n    timestamp_utc TEXT NOT NULL,\n    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE RESTRICT\n);"
+  },
+  {
+    "table": "outbox_events",
+    "source_path": "database/migrations/003_outbox_and_sync.sql",
+    "line_range": [
+      8,
+      23
+    ],
+    "columns": [
+      {
+        "name": "event_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "event_type",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "aggregate_type",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "aggregate_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "aggregate_version",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 1"
+      },
+      {
+        "name": "occurred_at",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "actor_id",
+        "type": "VARCHAR(64)",
+        "constraints": ""
+      },
+      {
+        "name": "source",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL DEFAULT 'elder_app'"
+      },
+      {
+        "name": "payload_minimal",
+        "type": "TEXT",
+        "constraints": "NOT NULL DEFAULT '{}'"
+      },
+      {
+        "name": "processed_at",
+        "type": "TEXT",
+        "constraints": ""
+      },
+      {
+        "name": "attempts",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 0"
+      },
+      {
+        "name": "last_error",
+        "type": "TEXT",
+        "constraints": ""
+      }
+    ],
+    "primary_key": [
+      "event_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "patient_id",
+        "target": "patients",
+        "target_columns": "patient_id",
+        "on_delete": "RESTRICT"
+      }
+    ],
+    "unique_constraints": [],
+    "ddl": "CREATE TABLE IF NOT EXISTS outbox_events (\n    event_id VARCHAR(64) PRIMARY KEY,\n    patient_id VARCHAR(64) NOT NULL,\n    event_type VARCHAR(64) NOT NULL,            -- e.g. 'medication.dose_changed', 'rehab.session_updated', 'health.observation_created', etc.\n    aggregate_type VARCHAR(64) NOT NULL,        -- e.g. 'dose_occurrence', 'rehab_session', 'measurement_group', 'prescription', etc.\n    aggregate_id VARCHAR(64) NOT NULL,          -- e.g. occurrence_id, session_id, group_id, prescription_id\n    aggregate_version INTEGER NOT NULL DEFAULT 1,\n    occurred_at TEXT NOT NULL,                  -- ISO 8601 UTC timestamp of occurrence\n    actor_id VARCHAR(64),                       -- User ID who performed the action (nullable for system/camera)\n    source VARCHAR(64) NOT NULL DEFAULT 'elder_app', -- 'elder_app', 'camera_ai', 'web_caregiver', 'web_clinician', 'scheduler'\n    payload_minimal TEXT NOT NULL DEFAULT '{}', -- Minimal JSON payload: only IDs/state for client to refetch\n    processed_at TEXT,                          -- ISO 8601 UTC when processed by relay worker (NULL if pending)\n    attempts INTEGER NOT NULL DEFAULT 0,        -- Number of delivery/relay attempts\n    last_error TEXT,                            -- Last error message if failed\n    FOREIGN KEY (patient_id) REFERENCES patients(patient_id) ON DELETE RESTRICT\n);"
+  },
+  {
+    "table": "sync_inbox",
+    "source_path": "database/migrations/003_outbox_and_sync.sql",
+    "line_range": [
+      26,
+      35
+    ],
+    "columns": [
+      {
+        "name": "client_event_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "source_device_id",
+        "type": "VARCHAR(64)",
+        "constraints": "DEFAULT 'desktop_01'"
+      },
+      {
+        "name": "received_at",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL DEFAULT 'PROCESSED'"
+      },
+      {
+        "name": "canonical_event_id",
+        "type": "VARCHAR(64)",
+        "constraints": ""
+      },
+      {
+        "name": "error_code",
+        "type": "VARCHAR(64)",
+        "constraints": ""
+      }
+    ],
+    "primary_key": [
+      "client_event_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "patient_id",
+        "target": "patients",
+        "target_columns": "patient_id",
+        "on_delete": "RESTRICT"
+      }
+    ],
+    "unique_constraints": [],
+    "ddl": "CREATE TABLE IF NOT EXISTS sync_inbox (\n    client_event_id VARCHAR(64) PRIMARY KEY,    -- Unique ID generated by client device or camera\n    patient_id VARCHAR(64) NOT NULL,\n    source_device_id VARCHAR(64) DEFAULT 'desktop_01',\n    received_at TEXT NOT NULL,                  -- ISO 8601 UTC when server received\n    status VARCHAR(32) NOT NULL DEFAULT 'PROCESSED', -- 'RECEIVED', 'PROCESSED', 'DUPLICATE', 'FAILED'\n    canonical_event_id VARCHAR(64),             -- Mapped canonical event_id in outbox_events or business tables\n    error_code VARCHAR(64),\n    FOREIGN KEY (patient_id) REFERENCES patients(patient_id) ON DELETE RESTRICT\n);"
+  },
+  {
+    "table": "device_sessions",
+    "source_path": "database/migrations/003_outbox_and_sync.sql",
+    "line_range": [
+      38,
+      45
+    ],
+    "columns": [
+      {
+        "name": "device_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "app_version",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL DEFAULT '1.0.0'"
+      },
+      {
+        "name": "last_seen_at",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "is_online",
+        "type": "INTEGER",
+        "constraints": "NOT NULL DEFAULT 1 CHECK(is_online IN (0, 1))"
+      }
+    ],
+    "primary_key": [
+      "device_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "patient_id",
+        "target": "patients",
+        "target_columns": "patient_id",
+        "on_delete": "CASCADE"
+      }
+    ],
+    "unique_constraints": [],
+    "ddl": "CREATE TABLE IF NOT EXISTS device_sessions (\n    device_id VARCHAR(64) PRIMARY KEY,\n    patient_id VARCHAR(64) NOT NULL,\n    app_version VARCHAR(32) NOT NULL DEFAULT '1.0.0',\n    last_seen_at TEXT NOT NULL,\n    is_online INTEGER NOT NULL DEFAULT 1 CHECK(is_online IN (0, 1)),\n    FOREIGN KEY (patient_id) REFERENCES patients(patient_id) ON DELETE CASCADE\n);"
+  },
+  {
+    "table": "measurement_requests",
+    "source_path": "database/migrations/004_flow_adjustments_and_measurement_requests.sql",
+    "line_range": [
+      11,
+      27
+    ],
+    "columns": [
+      {
+        "name": "request_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "requested_by_user_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "observation_type_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "due_at_utc",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "local_due_time",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "instructions",
+        "type": "TEXT",
+        "constraints": "DEFAULT ''"
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL DEFAULT 'PENDING' CHECK(status IN ('PENDING', 'COMPLETED', 'MISSED', 'CANCELLED'))"
+      },
+      {
+        "name": "completed_observation_id",
+        "type": "VARCHAR(64)",
+        "constraints": ""
+      },
+      {
+        "name": "created_at_utc",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "client_request_id",
+        "type": "VARCHAR(128)",
+        "constraints": "UNIQUE"
+      }
+    ],
+    "primary_key": [
+      "request_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "patient_id",
+        "target": "patients",
+        "target_columns": "patient_id",
+        "on_delete": "RESTRICT"
+      },
+      {
+        "columns": "requested_by_user_id",
+        "target": "users",
+        "target_columns": "user_id",
+        "on_delete": "RESTRICT"
+      },
+      {
+        "columns": "observation_type_id",
+        "target": "observation_types",
+        "target_columns": "observation_type_id",
+        "on_delete": "RESTRICT"
+      },
+      {
+        "columns": "completed_observation_id",
+        "target": "health_observations",
+        "target_columns": "observation_id",
+        "on_delete": "SET NULL"
+      }
+    ],
+    "unique_constraints": [
+      "client_request_id"
+    ],
+    "ddl": "CREATE TABLE IF NOT EXISTS measurement_requests (\n    request_id VARCHAR(64) PRIMARY KEY,\n    patient_id VARCHAR(64) NOT NULL,\n    requested_by_user_id VARCHAR(64) NOT NULL,\n    observation_type_id VARCHAR(64) NOT NULL,\n    due_at_utc TEXT NOT NULL,\n    local_due_time TEXT NOT NULL,\n    instructions TEXT DEFAULT '',\n    status VARCHAR(32) NOT NULL DEFAULT 'PENDING' CHECK(status IN ('PENDING', 'COMPLETED', 'MISSED', 'CANCELLED')),\n    completed_observation_id VARCHAR(64),\n    created_at_utc TEXT NOT NULL,\n    client_request_id VARCHAR(128) UNIQUE,\n    FOREIGN KEY (patient_id) REFERENCES patients(patient_id) ON DELETE RESTRICT,\n    FOREIGN KEY (requested_by_user_id) REFERENCES users(user_id) ON DELETE RESTRICT,\n    FOREIGN KEY (observation_type_id) REFERENCES observation_types(observation_type_id) ON DELETE RESTRICT,\n    FOREIGN KEY (completed_observation_id) REFERENCES health_observations(observation_id) ON DELETE SET NULL\n);"
+  },
+  {
+    "table": "exercise_plan_versions",
+    "source_path": "database/migrations/004_flow_adjustments_and_measurement_requests.sql",
+    "line_range": [
+      30,
+      48
+    ],
+    "columns": [
+      {
+        "name": "plan_version_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "plan_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "version",
+        "type": "INTEGER",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "target_count",
+        "type": "INTEGER",
+        "constraints": "NOT NULL CHECK(target_count > 0)"
+      },
+      {
+        "name": "quality_threshold",
+        "type": "REAL",
+        "constraints": "NOT NULL DEFAULT 80.0"
+      },
+      {
+        "name": "local_reminder_time",
+        "type": "VARCHAR(16)",
+        "constraints": "NOT NULL DEFAULT '16:00'"
+      },
+      {
+        "name": "timezone",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL DEFAULT 'Asia/Ho_Chi_Minh'"
+      },
+      {
+        "name": "effective_from",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "effective_to",
+        "type": "TEXT",
+        "constraints": ""
+      },
+      {
+        "name": "created_by_user_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "created_at",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "reason",
+        "type": "TEXT",
+        "constraints": "DEFAULT ''"
+      }
+    ],
+    "primary_key": [
+      "plan_version_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "plan_id",
+        "target": "rehab_plans",
+        "target_columns": "plan_id",
+        "on_delete": "CASCADE"
+      },
+      {
+        "columns": "patient_id",
+        "target": "patients",
+        "target_columns": "patient_id",
+        "on_delete": "RESTRICT"
+      },
+      {
+        "columns": "created_by_user_id",
+        "target": "users",
+        "target_columns": "user_id",
+        "on_delete": "RESTRICT"
+      }
+    ],
+    "unique_constraints": [
+      "plan_id, version"
+    ],
+    "ddl": "CREATE TABLE IF NOT EXISTS exercise_plan_versions (\n    plan_version_id VARCHAR(64) PRIMARY KEY,\n    plan_id VARCHAR(64) NOT NULL,\n    patient_id VARCHAR(64) NOT NULL,\n    version INTEGER NOT NULL,\n    target_count INTEGER NOT NULL CHECK(target_count > 0),\n    quality_threshold REAL NOT NULL DEFAULT 80.0,\n    local_reminder_time VARCHAR(16) NOT NULL DEFAULT '16:00',\n    timezone VARCHAR(64) NOT NULL DEFAULT 'Asia/Ho_Chi_Minh',\n    effective_from TEXT NOT NULL,\n    effective_to TEXT,\n    created_by_user_id VARCHAR(64) NOT NULL,\n    created_at TEXT NOT NULL,\n    reason TEXT DEFAULT '',\n    FOREIGN KEY (plan_id) REFERENCES rehab_plans(plan_id) ON DELETE CASCADE,\n    FOREIGN KEY (patient_id) REFERENCES patients(patient_id) ON DELETE RESTRICT,\n    FOREIGN KEY (created_by_user_id) REFERENCES users(user_id) ON DELETE RESTRICT,\n    UNIQUE(plan_id, version)\n);"
+  },
+  {
+    "table": "measurement_request_logs",
+    "source_path": "database/migrations/004_flow_adjustments_and_measurement_requests.sql",
+    "line_range": [
+      51,
+      59
+    ],
+    "columns": [
+      {
+        "name": "log_id",
+        "type": "VARCHAR(64)",
+        "constraints": "PRIMARY KEY"
+      },
+      {
+        "name": "request_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "action",
+        "type": "VARCHAR(32)",
+        "constraints": "NOT NULL CHECK(action IN ('CREATED', 'COMPLETED', 'MARKED_MISSED', 'CANCELLED'))"
+      },
+      {
+        "name": "actor_id",
+        "type": "VARCHAR(64)",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "occurred_at_utc",
+        "type": "TEXT",
+        "constraints": "NOT NULL"
+      },
+      {
+        "name": "details",
+        "type": "TEXT",
+        "constraints": "DEFAULT '{}'"
+      }
+    ],
+    "primary_key": [
+      "log_id"
+    ],
+    "foreign_keys": [
+      {
+        "columns": "request_id",
+        "target": "measurement_requests",
+        "target_columns": "request_id",
+        "on_delete": "CASCADE"
+      }
+    ],
+    "unique_constraints": [],
+    "ddl": "CREATE TABLE IF NOT EXISTS measurement_request_logs (\n    log_id VARCHAR(64) PRIMARY KEY,\n    request_id VARCHAR(64) NOT NULL,\n    action VARCHAR(32) NOT NULL CHECK(action IN ('CREATED', 'COMPLETED', 'MARKED_MISSED', 'CANCELLED')),\n    actor_id VARCHAR(64) NOT NULL,\n    occurred_at_utc TEXT NOT NULL,\n    details TEXT DEFAULT '{}',\n    FOREIGN KEY (request_id) REFERENCES measurement_requests(request_id) ON DELETE CASCADE\n);"
+  }
+]

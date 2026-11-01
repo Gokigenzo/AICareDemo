@@ -1,0 +1,43 @@
+{
+  "audit_date": "2026-10-09",
+  "outcome": "PASS",
+  "environment": {
+    "python": "3.14.4",
+    "platform": "Linux",
+    "machine": "x86_64"
+  },
+  "commands": [
+    "PYTHONDONTWRITEBYTECODE=1 python3 docs/khkt_technical_evidence/generate_evidence.py",
+    "PYTHONDONTWRITEBYTECODE=1 python3 docs/khkt_technical_evidence/validate_evidence.py"
+  ],
+  "application_tests_executed": 0,
+  "external_calls": 0,
+  "production_db_opened": false,
+  "required_files": 12,
+  "markdown_documents": 11,
+  "manifest_claims": 107,
+  "migration_tables": 47,
+  "source_snapshot_files_checked": 380,
+  "source_snapshot_changes": [],
+  "checks": [
+    "Required files",
+    "JSON syntax and manifest fields",
+    "Status enum",
+    "AST symbols and line spans",
+    "Source/artefact existence",
+    "IMPLEMENTED supporting artefacts",
+    "Claim references and consolidated coverage",
+    "Markdown headings and balanced fences",
+    "Five architecture diagrams and ERD declaration",
+    "Credential/contact pattern scan in generated Markdown/JSON",
+    "Benchmark aggregate consistency",
+    "SHA-256 source snapshot"
+  ],
+  "errors": [],
+  "limitations": [
+    "Static validation only; existing test logs were not rerun.",
+    "Mermaid blocks checked structurally, not rendered by Mermaid engine.",
+    "Pattern scan and manual review do not prove absence of every possible sensitive string.",
+    "Snapshot covers selected code/config/dependency files; original dirty worktree was preserved."
+  ]
+}

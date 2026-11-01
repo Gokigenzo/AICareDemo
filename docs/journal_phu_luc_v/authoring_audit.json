@@ -1,0 +1,11 @@
+{
+  "output": "D:\\Code\\AICareDemo_HP\\AICareDemo\\docs\\journal_phu_luc_v\\NHAT_KY_NGHIEN_CUU_AI_CARE_PHU_LUC_V.docx",
+  "entry_count": 15,
+  "evidence_count": 15,
+  "reference_sha256": "2ff52949ef519e166e8f7d794d253d73624f9ada078c8fc7df8248c7ae90e43b",
+  "input_journal_used_as_factual_source": false,
+  "dates_based_on": "Dated project records and artifact metadata; no invented individual assignments",
+  "rendered_pages": 10,
+  "all_pages_visually_reviewed": true,
+  "final_sha256": "06be4052c3742ab4f2890cc640ac7c74fac7c5ea67476171991e541ba679334d"
+}

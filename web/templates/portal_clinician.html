@@ -1,0 +1,2365 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cổng Bác Sĩ (Mô Phỏng Demo) — AI Care Assistant</title>
+  <style>
+    :root {
+      --primary: #1B63CC;
+      --primary-hover: #134B9C;
+      --primary-bg: #EAF2FE;
+      --navy: #0F172A;
+      --text: #334155;
+      --muted: #64748B;
+      --border: #CBD5E1;
+      --bg: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --success: #059669;
+      --success-bg: #D1FAE5;
+      --warning: #D97706;
+      --warning-bg: #FEF3C7;
+      --danger: #DC2626;
+      --danger-bg: #FEE2E2;
+      --indigo: #4338CA;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); line-height: 1.5; min-height: 100vh; }
+
+    /* Mandatory Simulation Banner */
+    .simulation-banner {
+      background: linear-gradient(90deg, #4338CA, #3730A3);
+      color: #FFF;
+      padding: 9px 24px;
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      letter-spacing: 0.5px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    header {
+      background: #FFFFFF;
+      border-bottom: 1.5px solid var(--border);
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-icon { width: 38px; height: 38px; background: #4338CA; color: #fff; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px; }
+    .brand-title { font-size: 18px; font-weight: 700; color: var(--navy); }
+    .brand-sub { font-size: 12px; color: var(--muted); }
+
+    .header-controls { display: flex; align-items: center; gap: 16px; }
+    .select-patient { padding: 8px 14px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 14px; font-weight: 600; color: var(--navy); background: #FFF; outline: none; }
+    .user-info { font-size: 14px; color: var(--navy); font-weight: 600; display: flex; align-items: center; gap: 10px; }
+    .btn-logout { padding: 6px 14px; border: 1px solid var(--border); background: #FFF; border-radius: 6px; font-size: 13px; cursor: pointer; color: var(--danger); font-weight: 600; transition: all 0.2s; }
+    .btn-logout:hover { background: var(--danger-bg); border-color: var(--danger); }
+
+    /* Two-Column App Layout with Persistent Left Sidebar */
+    .app-layout {
+      display: flex;
+      gap: 24px;
+      max-width: 1520px;
+      margin: 20px auto;
+      padding: 0 24px;
+      align-items: flex-start;
+    }
+
+    /* Left Sidebar: Patients List */
+    .sidebar-patients {
+      width: 320px;
+      flex-shrink: 0;
+      background: #ffffff;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+      position: sticky;
+      top: 88px;
+      max-height: calc(100vh - 110px);
+      overflow-y: auto;
+    }
+    .sidebar-header {
+      border-bottom: 1.5px solid var(--border);
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .sidebar-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .sidebar-count {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .sidebar-patient-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .patient-card-item {
+      background: var(--bg);
+      border: 1.5px solid #E2E8F0;
+      border-radius: 10px;
+      padding: 12px 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .patient-card-item:hover {
+      border-color: #93C5FD;
+      background: #FFFFFF;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      transform: translateY(-1px);
+    }
+    .patient-card-item.active {
+      background: #EFF6FF;
+      border-color: var(--primary);
+      box-shadow: 0 3px 10px rgba(27, 99, 204, 0.15);
+    }
+    .patient-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+    .patient-card-name {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .patient-card-sub {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .patient-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 8px;
+    }
+    .patient-card-role {
+      font-size: 11px;
+      color: #1E40AF;
+      background: #DBEAFE;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    /* Green Indicator Dot for New Updates */
+    .dot-green {
+      width: 10px;
+      height: 10px;
+      background-color: #10B981;
+      border-radius: 50%;
+      display: inline-block;
+      position: relative;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      animation: pulse-green 1.8s infinite;
+    }
+    @keyframes pulse-green {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { transform: scale(1.2); box-shadow: 0 0 0 7px rgba(16, 185, 129, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+    .badge-update-alert {
+      font-size: 11px;
+      font-weight: 700;
+      background: #ECFDF5;
+      color: #065F46;
+      border: 1px solid #A7F3D0;
+      padding: 2px 7px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* Main Content Area */
+    .main-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* Nav Tabs */
+    .tabs-nav { display: flex; gap: 8px; border-bottom: 2px solid var(--border); margin-bottom: 20px; overflow-x: auto; }
+    .tab-btn { padding: 12px 18px; border: none; background: transparent; font-size: 15px; font-weight: 600; color: var(--muted); cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.2s; white-space: nowrap; }
+    .tab-btn:hover { color: var(--primary); }
+    .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); font-weight: 700; }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    .card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: 12px; padding: 22px; margin-bottom: 22px; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
+    .card-title { font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; }
+
+    .grid-overview { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; margin-bottom: 22px; }
+    .metric-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px; border-left: 4px solid var(--primary); }
+    .metric-label { font-size: 12.5px; color: var(--muted); font-weight: 600; margin-bottom: 6px; text-transform: uppercase; }
+    .metric-value { font-size: 24px; font-weight: 800; color: var(--navy); }
+    .metric-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+    table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
+    th { background: var(--bg); padding: 10px 14px; font-weight: 700; color: var(--navy); border-bottom: 2px solid var(--border); }
+    td { padding: 12px 14px; border-bottom: 1px solid var(--border); color: var(--text); }
+    tr:hover { background-color: #F8FAFC; }
+
+    .badge { display: inline-block; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 700; }
+    .badge-success { background: var(--success-bg); color: var(--success); }
+    .badge-warning { background: var(--warning-bg); color: var(--warning); }
+    .badge-danger { background: var(--danger-bg); color: var(--danger); }
+    .badge-primary { background: var(--primary-bg); color: var(--primary); }
+
+    .form-group { margin-bottom: 14px; }
+    .form-label { display: block; font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+    .form-control { width: 100%; padding: 10px 12px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 14px; outline: none; }
+    .form-control:focus { border-color: var(--primary); }
+    .btn-submit { background: var(--primary); color: #fff; border: none; padding: 10px 22px; border-radius: 8px; font-weight: 700; font-size: 14px; cursor: pointer; transition: background 0.2s; }
+    .btn-submit:hover { background: var(--primary-hover); }
+
+    /* Enlarged Visual SVG Chart Area */
+    .chart-card { background: #ffffff; border: 1.5px solid var(--border); border-radius: 12px; padding: 20px; margin: 14px 0; }
+    .chart-summary-bar { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 14px; }
+    .summary-chip { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; flex: 1; min-width: 140px; }
+    .summary-chip .chip-label { font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--muted); }
+    .summary-chip .chip-val { font-size: 17px; font-weight: 800; color: var(--navy); margin-top: 3px; }
+    .summary-chip .chip-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+    .chart-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; font-size: 13px; font-weight: 600; margin: 10px 0 14px 0; }
+    .legend-item { display: inline-flex; align-items: center; gap: 6px; }
+    .legend-indicator { width: 14px; height: 14px; border-radius: 3px; display: inline-block; }
+
+    /* Vital Sign Switcher Sub-Tabs */
+    .vital-type-selector-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1.5px solid var(--border);
+    }
+    .vital-tab-btn {
+      background: #F1F5F9;
+      border: 1.5px solid #CBD5E1;
+      color: var(--navy);
+      padding: 9px 16px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease-in-out;
+    }
+    .vital-tab-btn:hover {
+      background: #E2E8F0;
+      border-color: #94A3B8;
+    }
+    .vital-tab-btn.active {
+      background: #4338CA;
+      border-color: #3730A3;
+      color: #FFFFFF;
+      box-shadow: 0 2px 6px rgba(67, 56, 202, 0.25);
+    }
+
+    .chart-svg-wrapper {
+      position: relative;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 10px;
+      border: 1.5px solid #E2E8F0;
+      padding: 14px 10px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+      min-height: 480px;
+    }
+    .chart-tooltip {
+      position: absolute;
+      background: rgba(15, 23, 42, 0.95);
+      color: #ffffff;
+      padding: 9px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      line-height: 1.45;
+      pointer-events: none;
+      display: none;
+      z-index: 100;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      white-space: nowrap;
+      transform: translate(-50%, -100%);
+      margin-top: -10px;
+    }
+    .btn-chart-toggle {
+      background: #F1F5F9;
+      border: 1px solid var(--border);
+      color: var(--navy);
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .btn-chart-toggle:hover { background: #E2E8F0; }
+
+    .disclaimer-box { background: var(--bg); border-left: 4px solid #4338CA; padding: 12px 16px; border-radius: 4px; font-size: 13px; color: var(--muted); margin: 14px 0; }
+
+    /* Two-Way Chat Conversation Interface (Tab Reports) */
+    .chat-card {
+      background: #FFFFFF;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      height: 620px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+    .chat-card-header {
+      background: #F8FAFC;
+      border-bottom: 1.5px solid var(--border);
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .chat-header-info { display: flex; align-items: center; gap: 10px; }
+    .chat-header-title { font-size: 15px; font-weight: 700; color: var(--navy); }
+    .chat-header-sub { font-size: 12px; color: var(--muted); }
+    .chat-stream {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      background: #F8FAFC;
+    }
+    .chat-bubble {
+      max-width: 82%;
+      padding: 14px 18px;
+      border-radius: 12px;
+      font-size: 14px;
+      line-height: 1.5;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+      position: relative;
+    }
+    .chat-bubble.from-caregiver {
+      align-self: flex-start;
+      background: #FFFFFF;
+      border: 1.5px solid #E2E8F0;
+      border-top-left-radius: 2px;
+    }
+    .chat-bubble.from-doctor {
+      align-self: flex-end;
+      background: #EEF2FF;
+      border: 1.5px solid #C7D2FE;
+      color: #1E1B4B;
+      border-top-right-radius: 2px;
+    }
+    .chat-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 6px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .chat-meta .author-cg { color: #D97706; display: flex; align-items: center; gap: 5px; }
+    .chat-meta .author-doc { color: #4338CA; display: flex; align-items: center; gap: 5px; }
+    .chat-meta .time { color: var(--muted); font-weight: normal; font-size: 11.5px; }
+    .chat-severity-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 6px;
+    }
+    .chat-severity-URGENT { background: var(--danger-bg); color: var(--danger); }
+    .chat-severity-LOW { background: var(--warning-bg); color: var(--warning); }
+    .chat-severity-NORMAL { background: var(--primary-bg); color: var(--primary); }
+
+    .chat-replies-list {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed #CBD5E1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .chat-reply-item {
+      background: #F1F5F9;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border-left: 3px solid #4338CA;
+      font-size: 13px;
+    }
+    .chat-input-container {
+      border-top: 1.5px solid var(--border);
+      padding: 14px 20px;
+      background: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .chat-input-row {
+      display: flex;
+      gap: 12px;
+      align-items: flex-end;
+    }
+    .chat-textarea {
+      flex: 1;
+      padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 14px;
+      resize: none;
+      height: 52px;
+      font-family: inherit;
+      outline: none;
+    }
+    .chat-textarea:focus { border-color: #4338CA; }
+    .btn-chat-send {
+      background: #4338CA;
+      color: white;
+      border: none;
+      padding: 0 22px;
+      height: 52px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .btn-chat-send:hover { background: #3730A3; }
+
+    /* Prescription Revocation & Custom Med Box */
+    .btn-cancel-rx {
+      background: #FEE2E2;
+      color: #DC2626;
+      border: 1.5px solid #FCA5A5;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-cancel-rx:hover {
+      background: #DC2626;
+      color: #FFFFFF;
+    }
+    .custom-med-panel {
+      background: #F8FAFC;
+      border: 1.5px dashed #94A3B8;
+      border-radius: 8px;
+      padding: 14px;
+      margin-top: 12px;
+    }
+  </style>
+  <link rel="stylesheet" href="/assets/portal-theme.css?v=20261024">
+</head>
+<body class="portal-clinician">
+
+  <!-- Simulation Header Banner -->
+  <div class="simulation-banner">
+    <span>⚠️ TÀI KHOẢN MÔ PHỎNG (DEMO) — DÀNH CHO MỤC ĐÍCH TRÌNH DIỄN NGHIỆP VỤ Y TẾ</span>
+    <span>KHÔNG XUẤT CHỈ ĐỊNH ĐẾN NGƯỜI THẬT</span>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <div class="brand-icon">👨‍⚕️</div>
+      <div>
+        <div class="brand-title">CỔNG BÁC SĨ THEO DÕI TỪ XA</div>
+        <div class="brand-sub">Bệnh viện Lão khoa Trung Ương — Quản lý Care Team</div>
+      </div>
+    </div>
+    <div class="header-controls">
+      <select id="patientSelect" class="select-patient" onchange="changePatient(this.value)">
+        <option value="">Đang tải danh sách bệnh nhân...</option>
+      </select>
+      <div class="user-info">
+        <span id="syncBadge" class="badge" style="background:#2E7D32; color:#fff; font-size:12px; padding:6px 12px; border-radius:12px; font-weight:700;">● Đang kết nối trực tiếp (SSE)</span>
+        <span id="docNameLbl">BS. Nguyễn Văn An (Mô phỏng)</span>
+        <button class="btn-logout" onclick="logout()">Đăng xuất</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- App Two-Column Layout -->
+  <div class="app-layout">
+    
+    <!-- Left Persistent Sidebar: Doctor's Patients List -->
+    <aside class="sidebar-patients">
+      <div class="sidebar-header">
+        <div>
+          <div class="sidebar-title">Danh sách bệnh nhân</div>
+          <div class="sidebar-sub">Phụ trách theo dõi</div>
+        </div>
+        <span class="sidebar-count" id="sidebarPatientCount">-- BN</span>
+      </div>
+      <div class="sidebar-patient-list" id="sidebarPatientList">
+        <div style="text-align: center; color: var(--muted); padding: 20px; font-size: 13px;">
+          Đang tải danh sách...
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Tabs Nav -->
+      <div class="tabs-nav">
+        <button class="tab-btn active" onclick="switchTab('vitals')">Tổng quan & Chỉ số sinh tồn</button>
+        <button class="tab-btn" onclick="switchTab('prescription')">Đơn thuốc & Điều chỉnh phiên bản</button>
+        <button class="tab-btn" onclick="switchTab('reports')">💬 Trò chuyện & Phản hồi Người nhà</button>
+        <button class="tab-btn" onclick="switchTab('recs')">Lời khuyên chuyên môn</button>
+      </div>
+
+      <!-- 1. VITALS & REVIEWS TAB (Enlarged Chart) -->
+      <div id="tab-vitals" class="tab-content active">
+      <section id="localVoiceRequests" aria-live="polite"></section>
+        <div class="grid-overview">
+          <div class="metric-box">
+            <div class="metric-label">Huyết áp đo mới nhất</div>
+            <div class="metric-value" id="docBpVal">-- / --</div>
+            <div class="metric-sub" id="docBpSub">mmHg</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-label">Nhịp tim đo mới nhất</div>
+            <div class="metric-value" id="docHrVal">-- bpm</div>
+            <div class="metric-sub" id="docHrSub">Chưa có số đo mới</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-label">Đường huyết mới nhất</div>
+            <div class="metric-value" id="docGluVal">-- mg/dL</div>
+            <div class="metric-sub" id="docGluSub">Chưa có số đo mới</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-label">Oxy máu (SpO2) mới nhất</div>
+            <div class="metric-value" id="docSpo2Val">-- %</div>
+            <div class="metric-sub" id="docSpo2Sub">Chưa có số đo mới</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-label">Báo cáo người nhà chưa xem</div>
+            <div class="metric-value" id="docReportsUnread">--</div>
+            <div class="metric-sub">Cần bác sĩ phản hồi</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-label">Cảnh báo thuốc chưa xử lý</div>
+            <div class="metric-value" id="docAlertsCnt">--</div>
+            <div class="metric-sub">Quá hạn chưa xác nhận</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <!-- Vital Metric Tabs Bar -->
+          <div class="vital-type-selector-bar">
+            <button class="vital-tab-btn active" id="btnVitalBp" onclick="changeDocVitalType('blood_pressure')">
+              🔴 Huyết áp (BP)
+            </button>
+            <button class="vital-tab-btn" id="btnVitalHr" onclick="changeDocVitalType('heart_rate')">
+              🟣 Nhịp tim (Heart Rate)
+            </button>
+            <button class="vital-tab-btn" id="btnVitalGlu" onclick="changeDocVitalType('blood_glucose')">
+              🟠 Đường huyết (Glucose)
+            </button>
+            <button class="vital-tab-btn" id="btnVitalSpo2" onclick="changeDocVitalType('spo2')">
+              🔵 Nồng độ Oxy (SpO2)
+            </button>
+            <button class="vital-tab-btn" id="btnVitalTemp" onclick="changeDocVitalType('temperature')">
+              🌡️ Thân nhiệt (Temp)
+            </button>
+          </div>
+
+          <div class="card-title">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span id="docChartTitle">Biểu đồ Trực quan hóa Xu hướng Huyết áp (SYS/DIA — mmHg)</span>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <select id="docResolutionSelect" class="select-patient" style="font-size: 13px;" onchange="loadVitals()">
+                <option value="raw" selected>Dữ liệu gốc (Chi tiết từng lần đo)</option>
+                <option value="day">Tổng hợp theo ngày (có n mẫu)</option>
+              </select>
+              <select id="docDaysSelect" class="select-patient" style="font-size: 13px;" onchange="loadVitals()">
+                <option value="7">7 ngày</option>
+                <option value="30" selected>30 ngày</option>
+                <option value="90">90 ngày</option>
+              </select>
+              <button class="btn-chart-toggle" onclick="toggleChartZoom()">🔍 Phóng to / Thu nhỏ</button>
+            </div>
+          </div>
+
+          <div class="disclaimer-box">
+            Theo quy chuẩn kiểm toán & lâm sàng: Biểu đồ trực quan hóa đa điểm kích thước mở rộng. Giữ nguyên điểm đo gốc, <strong>không nội suy đường cong xuyên qua các ngày thiếu dữ liệu</strong>. Điểm tổng hợp ngày ghi rõ số mẫu n.
+          </div>
+
+          <!-- Summary Bar -->
+          <div class="chart-summary-bar" id="docVitalsSummaryBar"></div>
+
+          <!-- Legend -->
+          <div class="chart-legend" id="docVitalsLegend"></div>
+
+          <!-- Visual SVG Chart (Enlarged) -->
+          <div class="chart-svg-wrapper" id="docBpChartWrapper">
+            <div id="docBpChartContainer">
+              Đang tạo biểu đồ đồ họa...
+            </div>
+            <div class="chart-tooltip" id="docChartTooltip"></div>
+          </div>
+        </div>
+
+        <!-- Collapsible Detailed Table -->
+        <details class="card" style="margin-top: 14px;">
+          <summary style="cursor: pointer; font-size: 15px; font-weight: 700; color: var(--navy); padding: 4px 0;">
+            📋 Xem bảng dữ liệu đo lường chi tiết
+          </summary>
+          <div style="overflow-x: auto; margin-top: 12px;">
+            <table id="tblDocVitalsRaw">
+              <thead id="tblDocVitalsHead">
+                <tr>
+                  <th>Thời điểm đo</th>
+                  <th>Tâm thu (SYS)</th>
+                  <th>Tâm trương (DIA)</th>
+                  <th>Đơn vị</th>
+                  <th>Nguồn đo</th>
+                  <th>Người nhập</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td colspan="6">Đang tải...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+      </div>
+
+      <!-- 2. PRESCRIPTION & REVISION TAB -->
+      <div id="tab-prescription" class="tab-content">
+        <div class="card">
+          <div class="card-title">Đơn thuốc đang có hiệu lực & Lịch sử phiên bản</div>
+          <div class="disclaimer-box">
+            Nguyên tắc bất biến: Khi điều chỉnh đơn hoặc ngưng hiệu lực, <strong>phiên bản cũ và các lần uống trong quá khứ được giữ nguyên 100%</strong>. Chỉ hủy các lần dự kiến tương lai chưa thực hiện.
+          </div>
+          <div id="prescriptionsContainer">Đang tải đơn thuốc...</div>
+        </div>
+
+        <!-- New Prescription Card -->
+        <div class="card">
+          <div class="card-title">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span>➕ Kê đơn thuốc mới cho người bệnh</span>
+              <span class="badge badge-success">Tạo mới đơn v1</span>
+            </div>
+            <span style="font-size: 13px; font-weight: normal; color: var(--muted);">Tạo phác đồ điều trị mới và sinh lịch uống tự động</span>
+          </div>
+          <form onsubmit="submitNewPrescription(event)">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-bottom: 14px;">
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label">Mã đơn thuốc (để trống tự sinh)</label>
+                <input type="text" id="newRxCode" class="form-control" placeholder="VD: RX-202610-009">
+              </div>
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label">Chẩn đoán / Chỉ định lâm sàng <span style="color: var(--danger);">*</span></label>
+                <input type="text" id="newRxDiagnosis" class="form-control" placeholder="VD: Tăng huyết áp độ 1, Đái tháo đường típ 2..." required>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 14px;">
+              <div style="flex: 2; min-width: 240px;">
+                <label class="form-label">Thuốc chỉ định <span style="color: var(--danger);">*</span></label>
+                <select id="newMedSelect" class="form-control" onchange="onNewMedicationSelectChange()">
+                  <option value="med_001">Amlor 5mg (Amlodipine) — Viên nén</option>
+                  <option value="med_002">Glucophage 500mg (Metformin) — Viên nén</option>
+                  <option value="med_003">Panadol 500mg (Paracetamol) — Viên nén</option>
+                  <option value="__custom__">➕ Nhập loại thuốc mới ngoài danh mục...</option>
+                </select>
+              </div>
+              <div style="flex: 1; min-width: 120px;">
+                <label class="form-label">Liều mỗi lần</label>
+                <input type="number" step="0.5" id="newDoseAmt" class="form-control" value="1.0" required>
+              </div>
+              <div style="flex: 1; min-width: 120px;">
+                <label class="form-label">Đơn vị</label>
+                <input type="text" id="newDoseUnit" class="form-control" value="viên">
+              </div>
+            </div>
+
+            <div id="newCustomMedPanel" class="custom-med-panel" style="display: none; margin-bottom: 14px;">
+              <div style="font-size: 13px; font-weight: 700; color: #4338CA; margin-bottom: 8px;">
+                ➕ NHẬP THÔNG TIN LOẠI THUỐC MỚI:
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px;">
+                <div>
+                  <label class="form-label" style="font-size: 12px;">Tên biệt dược *</label>
+                  <input type="text" id="newCustomName" class="form-control" placeholder="VD: Telmisartan 40mg">
+                </div>
+                <div>
+                  <label class="form-label" style="font-size: 12px;">Tên hoạt chất</label>
+                  <input type="text" id="newCustomGeneric" class="form-control" placeholder="VD: Telmisartan">
+                </div>
+                <div>
+                  <label class="form-label" style="font-size: 12px;">Hàm lượng & Đơn vị</label>
+                  <input type="text" id="newCustomStrength" class="form-control" placeholder="VD: 40 mg">
+                </div>
+                <div>
+                  <label class="form-label" style="font-size: 12px;">Dạng bào chế</label>
+                  <select id="newCustomForm" class="form-control">
+                    <option value="Viên nén">Viên nén</option>
+                    <option value="Viên bao phim">Viên bao phim</option>
+                    <option value="Viên nang">Viên nang</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Chỉ dẫn dùng thuốc <span style="color: var(--danger);">*</span></label>
+              <input type="text" id="newRxInstructions" class="form-control" value="Uống sau bữa ăn sáng 30 phút" required>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 14px;">
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label">Giờ uống trong ngày (HH:MM)</label>
+                <input type="text" id="newRxTimes" class="form-control" value="08:00, 20:00" required>
+              </div>
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label">Khoảng thời gian (Ngày bắt đầu & kết thúc)</label>
+                <div style="display: flex; gap: 8px;">
+                  <input type="date" id="newRxStartDate" class="form-control" required>
+                  <input type="date" id="newRxEndDate" class="form-control">
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn-submit" style="background: #16A34A;">Kê đơn thuốc mới & Lên lịch</button>
+          </form>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Tạo bản sửa đổi đơn thuốc (Revision mới)</div>
+          <form onsubmit="submitPrescriptionRevision(event)">
+            <div class="form-group">
+              <label class="form-label">Chọn đơn thuốc cần điều chỉnh</label>
+              <select id="revOldPrescriptionSelect" class="form-control"></select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Lý do điều chỉnh lâm sàng</label>
+              <input type="text" id="revReason" class="form-control" placeholder="Ví dụ: Huyết áp dao động, điều chỉnh liều hoặc bổ sung thuốc mới..." required>
+            </div>
+            <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+              <div style="flex: 2; min-width: 240px;">
+                <label class="form-label">Thuốc chỉ định</label>
+                <select id="revMedSelect" class="form-control" onchange="onMedicationSelectChange()">
+                  <option value="med_001">Amlor 5mg (Amlodipine) — Viên nén</option>
+                  <option value="med_002">Glucophage 500mg (Metformin) — Viên nén</option>
+                  <option value="med_003">Panadol 500mg (Paracetamol) — Viên nén</option>
+                  <option value="__custom__">➕ Nhập loại thuốc mới ngoài danh mục...</option>
+                </select>
+              </div>
+              <div style="flex: 1; min-width: 120px;">
+                <label class="form-label">Liều mỗi lần</label>
+                <input type="number" step="0.5" id="revDoseAmt" class="form-control" value="1.0" required>
+              </div>
+              <div style="flex: 1; min-width: 120px;">
+                <label class="form-label">Đơn vị</label>
+                <input type="text" id="revDoseUnit" class="form-control" value="viên">
+              </div>
+            </div>
+
+            <!-- Custom Medication Input Panel (Toggled when selecting __custom__) -->
+            <div id="customMedPanel" class="custom-med-panel" style="display: none;">
+              <div style="font-size: 13px; font-weight: 700; color: #4338CA; margin-bottom: 8px;">
+                ➕ NHẬP THÔNG TIN LOẠI THUỐC MỚI (TỰ ĐỘNG LƯU DANH MỤC):
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
+                <div>
+                  <label class="form-label" style="font-size: 12px;">Tên biệt dược mới *</label>
+                  <input type="text" id="revCustomName" class="form-control" placeholder="VD: Losartan 50mg">
+                </div>
+                <div>
+                  <label class="form-label" style="font-size: 12px;">Tên hoạt chất (Generic)</label>
+                  <input type="text" id="revCustomGeneric" class="form-control" placeholder="VD: Losartan potassium">
+                </div>
+                <div>
+                  <label class="form-label" style="font-size: 12px;">Hàm lượng</label>
+                  <input type="text" id="revCustomStrength" class="form-control" placeholder="VD: 50">
+                </div>
+                <div>
+                  <label class="form-label" style="font-size: 12px;">Đơn vị hàm lượng</label>
+                  <input type="text" id="revCustomStrengthUnit" class="form-control" placeholder="VD: mg">
+                </div>
+                <div>
+                  <label class="form-label" style="font-size: 12px;">Dạng bào chế</label>
+                  <select id="revCustomForm" class="form-control">
+                    <option value="Viên nén">Viên nén</option>
+                    <option value="Viên bao phim">Viên bao phim</option>
+                    <option value="Viên nang">Viên nang</option>
+                    <option value="Gói bột">Gói bột</option>
+                    <option value="Dung dịch uống">Dung dịch uống</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 14px;">
+              <label class="form-label">Chỉ dẫn dùng thuốc</label>
+              <input type="text" id="revInstructions" class="form-control" value="Uống sau bữa ăn sáng 30 phút" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Giờ uống trong ngày (HH:MM)</label>
+              <input type="text" id="revTimes" class="form-control" value="08:00, 20:00" required>
+            </div>
+            <button type="submit" class="btn-submit" style="background: #4338CA;">Xác nhận tạo phiên bản đơn mới</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- 3. CAREGIVER REPORTS TAB (Interactive Two-Way Chat Dialog) -->
+      <div id="tab-reports" class="tab-content">
+        <div class="chat-card">
+          <div class="chat-card-header">
+            <div class="chat-header-info">
+              <span style="font-size: 24px;">💬</span>
+              <div>
+                <div class="chat-header-title">Hộp thoại Trò chuyện & Phản hồi Người nhà</div>
+                <div class="chat-header-sub" id="chatHeaderSub">Đang kết nối với người nhà phụ trách...</div>
+              </div>
+            </div>
+            <div style="font-size: 12px; color: var(--muted); font-weight: 600;">
+              Kênh trao đổi lâm sàng bảo mật
+            </div>
+          </div>
+
+          <!-- Scrollable Chat Stream -->
+          <div class="chat-stream" id="chatMessagesStream">
+            <div style="text-align: center; color: var(--muted); padding: 30px;">
+              Đang tải hộp thoại trao đổi...
+            </div>
+          </div>
+
+          <!-- Bottom Chat Input Bar -->
+          <div class="chat-input-container">
+            <div style="display: flex; gap: 10px; align-items: center; font-size: 12px; color: var(--muted);">
+              <span>Phản hồi vào chủ đề:</span>
+              <select id="chatTargetReportSelect" class="form-control" style="width: auto; padding: 4px 8px; font-size: 12px; height: auto;">
+                <option value="">(Tất cả báo cáo / Phản hồi mới nhất)</option>
+              </select>
+            </div>
+            <div class="chat-input-row">
+              <textarea id="chatInputBody" class="chat-textarea" placeholder="Nhập ý kiến chuyên môn phản hồi người nhà (Bấm Enter hoặc click Gửi phản hồi)..." onkeydown="handleChatKeyDown(event)"></textarea>
+              <button class="btn-chat-send" onclick="sendDoctorChatMessage()">
+                <span>Gửi phản hồi</span>
+                <span>💬</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. RECOMMENDATIONS TAB -->
+      <div id="tab-recs" class="tab-content">
+        <div class="card">
+          <div class="card-title">Gửi lời khuyên chuyên môn cá nhân hóa (Dữ liệu mô phỏng demo)</div>
+          <div class="disclaimer-box">
+            Lời khuyên được gắn phiên bản, tên người soạn và danh mục (Dinh dưỡng / Vận động / Tinh thần). Người nhà và người già sẽ nhận thông báo trên cổng thông tin.
+          </div>
+          <form onsubmit="submitRecommendation(event)">
+            <div style="display: flex; gap: 14px; margin-bottom: 14px;">
+              <div style="width: 200px;">
+                <label class="form-label">Danh mục lời khuyên</label>
+                <select id="recCategory" class="form-control">
+                  <option value="nutrition">Dinh dưỡng (Ăn uống)</option>
+                  <option value="exercise">Vận động (Phục hồi)</option>
+                  <option value="mental">Tinh thần (Nghỉ ngơi)</option>
+                  <option value="general">Chăm sóc chung</option>
+                </select>
+              </div>
+              <div style="flex: 1;">
+                <label class="form-label">Tiêu đề lời khuyên</label>
+                <input type="text" id="recTitle" class="form-control" placeholder="Ví dụ: Lời khuyên kiểm soát muối và vận động nhẹ..." required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Nội dung chi tiết</label>
+              <textarea id="recContent" class="form-control" rows="3" placeholder="Bác sĩ khuyên cụ duy trì thói quen đi bộ nhẹ nhàng..." required></textarea>
+            </div>
+            <button type="submit" class="btn-submit" style="background: #4338CA;">Gửi lời khuyên đến bệnh nhân</button>
+          </form>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Danh sách lời khuyên đang có hiệu lực</div>
+          <div id="recsListContainer">Đang tải...</div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    let currentToken = localStorage.getItem("auth_token") || "";
+    let currentPatientId = "";
+    let cachedPatients = [];
+    let isChartZoomed = false;
+    let currentVitalType = "blood_pressure";
+    let sseSource = null;
+    let sseReconnectTimer = null;
+    let pollingFallbackTimer = null;
+
+    function setupRealtimeSSE() {
+      if (!currentToken) return;
+      if (sseSource) {
+        try { sseSource.close(); } catch(e) {}
+      }
+
+      const badge = document.getElementById("syncBadge");
+      const sseUrl = `/api/stream?token=${encodeURIComponent(currentToken)}`;
+
+      try {
+        sseSource = new EventSource(sseUrl);
+
+        sseSource.onopen = function() {
+          if (badge) {
+            badge.innerText = "● Đang kết nối trực tiếp (SSE)";
+            badge.style.backgroundColor = "#2E7D32";
+          }
+          if (pollingFallbackTimer) {
+            clearInterval(pollingFallbackTimer);
+            pollingFallbackTimer = null;
+          }
+        };
+
+        sseSource.onmessage = function(e) {
+          if (!e.data) return;
+          try {
+            const signal = JSON.parse(e.data);
+            console.log("Clinician SSE event received:", signal);
+
+            if (signal.type === "access.revoked") {
+              alert("Quyền theo dõi bệnh nhân đã bị thu hồi!");
+              window.location.href = "/login";
+              return;
+            }
+
+            if (signal.patient_id === currentPatientId) {
+              handleRealtimeSignal(signal);
+            }
+          } catch(err) {
+            console.error("Error parsing SSE data:", err);
+          }
+        };
+
+        sseSource.onerror = function() {
+          if (badge) {
+            badge.innerText = "● Đang kết nối lại...";
+            badge.style.backgroundColor = "#ED6C02";
+          }
+          try { sseSource.close(); } catch(e) {}
+
+          if (!pollingFallbackTimer) {
+            pollingFallbackTimer = setInterval(() => {
+              console.log("Clinician fallback polling tick...");
+              loadAllData();
+            }, 30000);
+          }
+
+          if (!sseReconnectTimer) {
+            sseReconnectTimer = setTimeout(() => {
+              sseReconnectTimer = null;
+              setupRealtimeSSE();
+            }, 3000);
+          }
+        };
+      } catch(err) {
+        console.error("Clinician SSE connection error:", err);
+      }
+    }
+
+    function handleRealtimeSignal(signal) {
+      const type = signal.type;
+      if (type && type.startsWith("voice.request_")) { loadVoiceRequests(); return; }
+      if (type === "medication.dose_changed" || type === "medication.alert_created" || type === "medication.alert_acknowledged" || type === "medication.dose_overdue") {
+        if (type === "medication.alert_created" && signal.payload && signal.payload.alert_type === "HELP_REQUESTED") {
+          alert("🆘 CẢNH BÁO BỆNH NHÂN: Người cao tuổi vừa bấm nút 'CẦN HỖ TRỢ' khi uống thuốc! Vui lòng kiểm tra và hỗ trợ ngay!");
+        }
+        loadOverview();
+        loadPrescriptions();
+      } else if (type === "rehab.session_updated" || type === "rehab.plan_updated") {
+        loadOverview();
+      } else if (type === "health.observation_created") {
+        loadVitals();
+        loadOverview();
+      } else if (type === "mood.checkin_created" || type === "emotion.summary_updated") {
+        loadMood();
+        loadOverview();
+      } else if (type === "caregiver.report_created" || type === "caregiver.report_replied") {
+        loadReports();
+      } else if (type === "prescription.revised" || type === "prescription.cancelled") {
+        loadPrescriptions();
+        loadOverview();
+      } else if (type === "recommendation.created" || type === "recommendation.read") {
+        loadRecommendations();
+      }
+    }
+
+    async function apiCall(endpoint, method = "GET", body = null) {
+      const headers = { "Content-Type": "application/json" };
+      if (currentToken) headers["Authorization"] = `Bearer ${currentToken}`;
+      const opts = { method, headers };
+      if (body) opts.body = JSON.stringify(body);
+      const res = await fetch(endpoint, opts);
+      if (res.status === 401) {
+        window.location.href = "/login";
+        return null;
+      }
+      return await res.json();
+    }
+
+    async function init() {
+      if (!currentToken) {
+        window.location.href = "/login";
+        return;
+      }
+      const meData = await apiCall("/api/auth/me");
+      if (!meData || !meData.user) {
+        window.location.href = "/login";
+        return;
+      }
+      document.getElementById("docNameLbl").innerText = `${meData.user.full_name} (Mô phỏng Demo)`;
+
+      await loadPatientsList();
+      await loadMedicationsCatalog();
+
+      const startDateInput = document.getElementById("newRxStartDate");
+      if (startDateInput && !startDateInput.value) {
+        startDateInput.value = new Date().toISOString().slice(0, 10);
+      }
+    }
+
+    async function loadPatientsList() {
+      const pData = await apiCall("/api/me/patients");
+      const sel = document.getElementById("patientSelect");
+      const sidebarList = document.getElementById("sidebarPatientList");
+      const countLbl = document.getElementById("sidebarPatientCount");
+      sel.innerHTML = "";
+      sidebarList.innerHTML = "";
+
+      if (pData && pData.patients && pData.patients.length > 0) {
+        cachedPatients = pData.patients;
+        countLbl.innerText = `${pData.patients.length} bệnh nhân`;
+
+        pData.patients.forEach((p, idx) => {
+          // 1. Populate Header select
+          const opt = document.createElement("option");
+          opt.value = p.patient_id;
+          opt.innerText = `${p.full_name} (${p.role_description || 'Care Team'})`;
+          sel.appendChild(opt);
+
+          // 2. Build Sidebar Patient Card
+          const card = document.createElement("div");
+          card.className = `patient-card-item ${idx === 0 ? 'active' : ''}`;
+          card.id = `sidebarCard_${p.patient_id}`;
+          card.onclick = () => changePatient(p.patient_id);
+
+          const avatar = (p.gender === 'FEMALE' || p.gender === 'Nữ') ? '👵' : '👴';
+          const updateHtml = p.has_new_update ? `
+            <span class="badge-update-alert">
+              <span class="dot-green"></span>
+              ${p.new_alerts_count > 0 ? `${p.new_alerts_count} cảnh báo` : (p.new_reports_count > 0 ? `${p.new_reports_count} báo cáo` : 'Cập nhật')}
+            </span>
+          ` : '';
+
+          card.innerHTML = `
+            <div class="patient-card-head">
+              <span class="patient-card-name">${avatar} ${p.full_name}</span>
+              ${updateHtml}
+            </div>
+            <div class="patient-card-sub">
+              ${p.date_of_birth ? `Sinh: ${p.date_of_birth} | ` : ''}ID: ${p.patient_id}
+            </div>
+            <div class="patient-card-footer">
+              <span class="patient-card-role">${p.role_description || 'Bác sĩ điều trị'}</span>
+            </div>
+          `;
+          sidebarList.appendChild(card);
+        });
+
+        if (!currentPatientId) {
+          currentPatientId = pData.patients[0].patient_id;
+        }
+        sel.value = currentPatientId;
+      } else {
+        sel.innerHTML = "<option>Không có bệnh nhân thuộc Care Team</option>";
+        sidebarList.innerHTML = "<div style='color: var(--muted); text-align: center; padding: 20px;'>Chưa có bệnh nhân nào được phân công.</div>";
+        return;
+      }
+
+      loadAllData();
+      setupRealtimeSSE();
+    }
+
+    function changePatient(patientId) {
+      currentPatientId = patientId;
+      document.getElementById("patientSelect").value = patientId;
+
+      // Update sidebar active classes
+      document.querySelectorAll(".patient-card-item").forEach(c => c.classList.remove("active"));
+      const activeCard = document.getElementById(`sidebarCard_${patientId}`);
+      if (activeCard) activeCard.classList.add("active");
+
+      // Update chat header sub
+      const p = cachedPatients.find(x => x.patient_id === patientId);
+      if (p) {
+        document.getElementById("chatHeaderSub").innerText = `Đang kết nối: ${p.full_name} — Người nhà chăm sóc`;
+      }
+
+      loadAllData();
+      setupRealtimeSSE();
+    }
+
+    function switchTab(tabId) {
+      if (tabId === 'overview') tabId = 'vitals';
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+      if (window.event && window.event.target && window.event.target.classList && window.event.target.classList.contains("tab-btn")) {
+        window.event.target.classList.add("active");
+      } else {
+        const btn = document.querySelector(`.tab-btn[onclick*="'${tabId}'"]`);
+        if (btn) btn.classList.add("active");
+      }
+      const targetEl = document.getElementById(`tab-${tabId}`);
+      if (targetEl) targetEl.classList.add("active");
+    }
+
+    function toggleChartZoom() {
+      const wrapper = document.getElementById("docBpChartWrapper");
+      isChartZoomed = !isChartZoomed;
+      if (isChartZoomed) {
+        wrapper.style.minHeight = "640px";
+      } else {
+        wrapper.style.minHeight = "480px";
+      }
+      loadVitals();
+    }
+
+
+    async function loadVoiceRequests() {
+      const patient = currentPatientId;
+      const data = await apiCall(`/api/patients/${patient}/voice-requests`);
+      if (patient !== currentPatientId) return;
+      const box = document.getElementById('localVoiceRequests');
+      if (!box) return;
+      box.replaceChildren();
+      const heading = document.createElement('h3');
+      heading.textContent = 'Yêu cầu giọng nói'; box.appendChild(heading);
+      const requestLabels = {open:'Chờ tiếp nhận',acknowledged:'Đã tiếp nhận',resolved:'Đã giải quyết',cancelled:'Đã hủy/đính chính'};
+      const deliveryLabels = {queued:'Chờ gửi',sent:'Máy chủ thư đã chấp nhận',failed:'Chưa gửi được',unknown:'Chưa rõ kết quả gửi',cancelled:'Đã hủy giao tin'};
+      for (const request of ((data && data.requests) || [])) {
+        const row = document.createElement('div');
+        row.style.padding = '10px';
+        const text = document.createElement('p');
+        text.textContent = `${request.created_at} — ${request.original_text} — ${requestLabels[request.status] || request.status} (giao tin: ${deliveryLabels[request.delivery_status] || request.delivery_status})`;
+        row.appendChild(text);
+        for (const [target, label] of [['acknowledged','Tiếp nhận'],['resolved','Đã giải quyết']]) {
+          if ((target === 'acknowledged' && request.status !== 'open') || (target === 'resolved' && request.status !== 'acknowledged')) continue;
+          const button = document.createElement('button'); button.textContent = label;
+          button.onclick = async () => {
+            if (patient !== currentPatientId) return;
+            await apiCall(`/api/patients/${patient}/voice-requests/${request.request_id}/${target}`, 'POST', {});
+            loadVoiceRequests();
+          };
+          row.appendChild(button);
+        }
+        box.appendChild(row);
+      }
+    }
+
+    async function loadAllData() {
+      if (!currentPatientId) return;
+      loadVoiceRequests();
+      loadOverview();
+      loadVitals();
+      loadPrescriptions();
+      loadReports();
+      loadRecommendations();
+    }
+
+    async function loadOverview() {
+      const data = await apiCall(`/api/patients/${currentPatientId}/overview`);
+      if (!data) return;
+      if (data.latest_blood_pressure) {
+        document.getElementById("docBpVal").innerText = `${data.latest_blood_pressure.systolic}/${data.latest_blood_pressure.diastolic}`;
+        document.getElementById("docBpSub").innerText = `${data.latest_blood_pressure.measured_at.slice(11, 16)} (${data.latest_blood_pressure.device_label || 'Thủ công'})`;
+      } else {
+        document.getElementById("docBpVal").innerText = "-- / --";
+        document.getElementById("docBpSub").innerText = "Chưa có số đo mới";
+      }
+
+      if (data.latest_heart_rate) {
+        document.getElementById("docHrVal").innerText = `${data.latest_heart_rate.value_numeric} bpm`;
+        document.getElementById("docHrSub").innerText = `Đo lúc ${data.latest_heart_rate.measured_at.slice(11, 16)} (${data.latest_heart_rate.device_label || 'Thủ công'})`;
+      } else {
+        document.getElementById("docHrVal").innerText = "-- bpm";
+        document.getElementById("docHrSub").innerText = "Chưa có số đo mới";
+      }
+
+      if (data.latest_blood_glucose) {
+        let gluVal = data.latest_blood_glucose.value_numeric;
+        let gluUnit = data.latest_blood_glucose.unit_code;
+        let subTxt = `Đo lúc ${data.latest_blood_glucose.measured_at.slice(11, 16)}`;
+        if (gluUnit === 'mmol/L') {
+          subTxt += ` (~${Math.round(gluVal * 18.0)} mg/dL)`;
+        }
+        document.getElementById("docGluVal").innerText = `${gluVal} ${gluUnit}`;
+        document.getElementById("docGluSub").innerText = subTxt;
+      } else {
+        document.getElementById("docGluVal").innerText = "-- mg/dL";
+        document.getElementById("docGluSub").innerText = "Chưa có số đo mới";
+      }
+
+      if (data.latest_spo2) {
+        document.getElementById("docSpo2Val").innerText = `${data.latest_spo2.value_numeric}%`;
+        document.getElementById("docSpo2Sub").innerText = `Đo lúc ${data.latest_spo2.measured_at.slice(11, 16)} (${data.latest_spo2.device_label || 'Thủ công'})`;
+      } else {
+        document.getElementById("docSpo2Val").innerText = "-- %";
+        document.getElementById("docSpo2Sub").innerText = "Chưa có số đo mới";
+      }
+
+      document.getElementById("docAlertsCnt").innerText = data.unresolved_alerts_count || 0;
+    }
+
+    function changeDocVitalType(type) {
+      currentVitalType = type;
+      document.querySelectorAll(".vital-tab-btn").forEach(b => b.classList.remove("active"));
+      const btnMap = {
+        blood_pressure: "btnVitalBp",
+        heart_rate: "btnVitalHr",
+        blood_glucose: "btnVitalGlu",
+        spo2: "btnVitalSpo2",
+        temperature: "btnVitalTemp"
+      };
+      const activeBtn = document.getElementById(btnMap[type]);
+      if (activeBtn) activeBtn.classList.add("active");
+
+      const titleMap = {
+        blood_pressure: "Biểu đồ Trực quan hóa Xu hướng Huyết áp (SYS/DIA — mmHg)",
+        heart_rate: "Biểu đồ Trực quan hóa Xu hướng Nhịp tim (Heart Rate — bpm)",
+        blood_glucose: "Biểu đồ Trực quan hóa Xu hướng Đường huyết (Blood Glucose — mg/dL)",
+        spo2: "Biểu đồ Trực quan hóa Xu hướng Nồng độ Oxy máu (SpO2 — %)",
+        temperature: "Biểu đồ Trực quan hóa Xu hướng Thân nhiệt (Body Temperature — °C)"
+      };
+      const titleEl = document.getElementById("docChartTitle");
+      if (titleEl) titleEl.innerText = titleMap[type] || "Biểu đồ Trực quan hóa Chỉ số Sinh tồn";
+
+      loadVitals();
+    }
+
+    async function loadVitals() {
+      const days = document.getElementById("docDaysSelect").value;
+      const res = document.getElementById("docResolutionSelect").value;
+      const data = await apiCall(`/api/patients/${currentPatientId}/observations?type=${currentVitalType}&days=${days}&resolution=${res}`);
+      if (!data) return;
+
+      const chartEl = document.getElementById("docBpChartContainer");
+      if (currentVitalType === "blood_pressure") {
+        updateDocBpSummary(data.readings || [], data.aggregated || [], res);
+        renderClinicianBpSvgChart(chartEl, data.readings || [], data.aggregated || [], res);
+        updateDocBpTable(data.readings || []);
+      } else {
+        updateDocSingleVitalSummary(data.readings || [], data.aggregated || [], res, currentVitalType);
+        renderClinicianSingleVitalSvgChart(chartEl, data.readings || [], data.aggregated || [], res, currentVitalType);
+        updateDocSingleVitalTable(data.readings || [], currentVitalType);
+      }
+    }
+
+    function updateDocBpSummary(readings, aggregated, res) {
+      const bar = document.getElementById("docVitalsSummaryBar");
+      const leg = document.getElementById("docVitalsLegend");
+      if (!bar) return;
+
+      if (!readings || readings.length === 0) {
+        bar.innerHTML = `<div class="summary-chip"><div class="chip-label">Huyết áp</div><div class="chip-val">-- / --</div><div class="chip-sub">Chưa có dữ liệu</div></div>`;
+        if (leg) leg.innerHTML = "";
+        return;
+      }
+
+      const latest = readings[readings.length - 1];
+      const allSys = readings.map(r => r.systolic).filter(v => v != null);
+      const allDia = readings.map(r => r.diastolic).filter(v => v != null);
+      const avgSys = allSys.length ? (allSys.reduce((a, b) => a + b, 0) / allSys.length).toFixed(1) : '--';
+      const avgDia = allDia.length ? (allDia.reduce((a, b) => a + b, 0) / allDia.length).toFixed(1) : '--';
+
+      let statusColor = "#16a34a";
+      let statusText = "Huyết áp ổn định";
+      if (latest.systolic >= 140 || latest.diastolic >= 90) {
+        statusColor = "#dc2626";
+        statusText = "Cần theo dõi sát";
+      }
+
+      bar.innerHTML = `
+        <div class="summary-chip">
+          <div class="chip-label">Số đo gần nhất</div>
+          <div class="chip-val" style="color: ${statusColor};">${latest.systolic}/${latest.diastolic} <span style="font-size: 13px; font-weight: 500;">mmHg</span></div>
+          <div class="chip-sub">${statusText} | Lúc ${latest.measured_at.slice(11, 16)} (${latest.device_label || 'Thủ công'})</div>
+        </div>
+        <div class="summary-chip">
+          <div class="chip-label">Chế độ hiển thị</div>
+          <div class="chip-val" style="color: #4338CA; font-size: 15px;">${res === 'day' ? 'Tổng hợp theo ngày' : 'Điểm đo gốc (Raw)'}</div>
+          <div class="chip-sub">${res === 'day' ? `${aggregated.length} ngày có dữ liệu` : `${readings.length} lượt đo`}</div>
+        </div>
+        <div class="summary-chip">
+          <div class="chip-label">Tâm thu trung bình</div>
+          <div class="chip-val">${avgSys} <span style="font-size: 13px; font-weight: 500;">mmHg</span></div>
+          <div class="chip-sub">Mục tiêu: &lt; 130 mmHg (${allSys.length} lượt)</div>
+        </div>
+        <div class="summary-chip">
+          <div class="chip-label">Tâm trương trung bình</div>
+          <div class="chip-val">${avgDia} <span style="font-size: 13px; font-weight: 500;">mmHg</span></div>
+          <div class="chip-sub">Mục tiêu: &lt; 85 mmHg (${allDia.length} lượt)</div>
+        </div>
+      `;
+
+      if (leg) {
+        leg.innerHTML = `
+          <div class="legend-item"><span class="legend-indicator" style="background: #ef4444;"></span> 🔴 Huyết áp Tâm thu (SYS)</div>
+          <div class="legend-item"><span class="legend-indicator" style="background: #3b82f6;"></span> 🔵 Huyết áp Tâm trương (DIA)</div>
+          <div class="legend-item"><span class="legend-indicator" style="background: rgba(34, 197, 94, 0.15); border: 1px dashed #22c55e;"></span> 🟩 Dải tham chiếu mục tiêu (&lt; 130/85 mmHg)</div>
+          ${res === 'day' ? '<div class="legend-item"><span class="legend-indicator" style="background: #7c3aed; border-radius: 50%;"></span> 🟣 Kích thước điểm thể hiện số mẫu (n)</div>' : ''}
+          <div class="legend-item" style="color: #64748b; font-size: 12px; margin-left: auto;">(Không nối đường cong qua ngày thiếu &gt; 36h)</div>
+        `;
+      }
+    }
+
+    function updateDocBpTable(readings) {
+      const thead = document.getElementById("tblDocVitalsHead");
+      if (thead) {
+        thead.innerHTML = `
+          <tr>
+            <th>Thời điểm đo</th>
+            <th>Tâm thu (SYS)</th>
+            <th>Tâm trương (DIA)</th>
+            <th>Đơn vị</th>
+            <th>Nguồn đo</th>
+            <th>Người nhập</th>
+          </tr>
+        `;
+      }
+      const tbody = document.querySelector("#tblDocVitalsRaw tbody");
+      if (!tbody) return;
+      tbody.innerHTML = "";
+      if (!readings || readings.length === 0) {
+        tbody.innerHTML = "<tr><td colspan='6' style='text-align: center; color: var(--muted);'>Không có dữ liệu trong khoảng thời gian này.</td></tr>";
+        return;
+      }
+      readings.forEach(r => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${r.measured_at.replace("T", " ").slice(0, 19)}</td>
+          <td><strong style="color: #dc2626;">${r.systolic || '--'}</strong></td>
+          <td><strong style="color: #2563eb;">${r.diastolic || '--'}</strong></td>
+          <td>${r.unit_code}</td>
+          <td>${r.device_label || 'Thủ công'}</td>
+          <td>${r.entered_by_name || 'Hệ thống'}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    /* Enlarged Clinical BP SVG Chart (1120x460) */
+    function renderClinicianBpSvgChart(containerEl, readings, aggregated, res) {
+      const isDayMode = (res === "day" && aggregated && aggregated.length > 0);
+      const items = isDayMode ? [...aggregated] : [...readings];
+
+      if (!items || items.length === 0) {
+        containerEl.innerHTML = `
+          <div style="text-align: center; padding: 60px; color: var(--muted);">
+            <div style="font-size: 42px; margin-bottom: 12px;">📊</div>
+            <div style="font-weight: 600; font-size: 16px;">Chưa có số đo huyết áp nào trong khoảng thời gian này.</div>
+          </div>
+        `;
+        return;
+      }
+
+      items.sort((a, b) => new Date(isDayMode ? a.date : a.measured_at) - new Date(isDayMode ? b.date : b.measured_at));
+
+      const svgW = 1120;
+      const svgH = isChartZoomed ? 600 : 460;
+      const padL = 60;
+      const padR = 36;
+      const padT = 36;
+      const padB = 52;
+      const plotW = svgW - padL - padR;
+      const plotH = svgH - padT - padB;
+
+      const allSys = items.map(r => isDayMode ? r.mean_systolic : r.systolic).filter(v => v != null);
+      const allDia = items.map(r => isDayMode ? r.mean_diastolic : r.diastolic).filter(v => v != null);
+      const minVal = Math.min(...allDia, ...allSys, 50);
+      const maxVal = Math.max(...allSys, ...allDia, 170);
+
+      const minY = Math.floor(Math.max(40, minVal - 15) / 10) * 10;
+      const maxY = Math.ceil((maxVal + 15) / 10) * 10;
+
+      function getY(v) {
+        if (v == null) return null;
+        return padT + plotH - ((v - minY) / (maxY - minY)) * plotH;
+      }
+
+      function getX(idx) {
+        if (items.length <= 1) return padL + plotW / 2;
+        return padL + (idx / (items.length - 1)) * plotW;
+      }
+
+      let svg = `<svg viewBox="0 0 ${svgW} ${svgH}" width="100%" height="${svgH}" style="overflow: visible;" xmlns="http://www.w3.org/2000/svg">`;
+
+      // 1. Shaded Safe Target Band
+      const ySys130 = getY(130);
+      const yDia60 = getY(60);
+      const yDia85 = getY(85);
+
+      if (ySys130 != null && yDia60 != null) {
+        svg += `<rect x="${padL}" y="${ySys130}" width="${plotW}" height="${yDia60 - ySys130}" fill="#22c55e" fill-opacity="0.07" rx="6" />`;
+        svg += `<line x1="${padL}" y1="${ySys130}" x2="${padL + plotW}" y2="${ySys130}" stroke="#22c55e" stroke-width="1.2" stroke-dasharray="5,5" stroke-opacity="0.6" />`;
+        svg += `<line x1="${padL}" y1="${yDia85}" x2="${padL + plotW}" y2="${yDia85}" stroke="#3b82f6" stroke-width="1.2" stroke-dasharray="5,5" stroke-opacity="0.6" />`;
+        svg += `<text x="${padL + plotW - 10}" y="${ySys130 - 8}" font-size="11.5" fill="#15803d" font-weight="700" text-anchor="end">Dải mục tiêu an toàn lâm sàng: &lt; 130/85 mmHg</text>`;
+      }
+
+      // 2. Horizontal Gridlines & Y-Axis Labels
+      const stepY = (maxY - minY) > 100 ? 30 : 20;
+      for (let yVal = minY; yVal <= maxY; yVal += stepY) {
+        const y = getY(yVal);
+        svg += `
+          <line x1="${padL}" y1="${y}" x2="${padL + plotW}" y2="${y}" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,4" />
+          <text x="${padL - 12}" y="${y + 4}" font-size="12" fill="#64748b" text-anchor="end" font-family="sans-serif" font-weight="600">${yVal}</text>
+        `;
+      }
+      svg += `<text x="${padL}" y="${padT - 14}" font-size="12" fill="#334155" font-weight="800">mmHg</text>`;
+
+      // 3. Connective Lines & Gap Protection
+      let sysPaths = [];
+      let diaPaths = [];
+      let curSysSeg = [];
+      let curDiaSeg = [];
+
+      for (let i = 0; i < items.length; i++) {
+        const it = items[i];
+        const x = getX(i);
+        const sysVal = isDayMode ? it.mean_systolic : it.systolic;
+        const diaVal = isDayMode ? it.mean_diastolic : it.diastolic;
+        const ySys = getY(sysVal);
+        const yDia = getY(diaVal);
+
+        let isGap = false;
+        if (i > 0) {
+          const prevT = new Date(isDayMode ? items[i-1].date : items[i-1].measured_at).getTime();
+          const thisT = new Date(isDayMode ? it.date : it.measured_at).getTime();
+          const diffHours = (thisT - prevT) / (3600 * 1000);
+          if (diffHours > 36) {
+            isGap = true;
+          }
+        }
+
+        if (isGap) {
+          if (curSysSeg.length > 0) sysPaths.push(curSysSeg);
+          if (curDiaSeg.length > 0) diaPaths.push(curDiaSeg);
+          curSysSeg = [];
+          curDiaSeg = [];
+        }
+
+        if (ySys != null) curSysSeg.push([x, ySys]);
+        if (yDia != null) curDiaSeg.push([x, yDia]);
+      }
+      if (curSysSeg.length > 0) sysPaths.push(curSysSeg);
+      if (curDiaSeg.length > 0) diaPaths.push(curDiaSeg);
+
+      // Render Systolic Lines
+      sysPaths.forEach(seg => {
+        if (seg.length > 1) {
+          const d = seg.map((pt, idx) => `${idx === 0 ? 'M' : 'L'} ${pt[0]} ${pt[1]}`).join(' ');
+          svg += `<path d="${d}" fill="none" stroke="#ef4444" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />`;
+        }
+      });
+
+      // Render Diastolic Lines
+      diaPaths.forEach(seg => {
+        if (seg.length > 1) {
+          const d = seg.map((pt, idx) => `${idx === 0 ? 'M' : 'L'} ${pt[0]} ${pt[1]}`).join(' ');
+          svg += `<path d="${d}" fill="none" stroke="#3b82f6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />`;
+        }
+      });
+
+      // 4. Data Points & Tooltip
+      const showLabels = items.length <= 16;
+      items.forEach((it, idx) => {
+        const x = getX(idx);
+        const sysVal = isDayMode ? it.mean_systolic : it.systolic;
+        const diaVal = isDayMode ? it.mean_diastolic : it.diastolic;
+        const ySys = getY(sysVal);
+        const yDia = getY(diaVal);
+
+        if (ySys != null && yDia != null) {
+          svg += `<line x1="${x}" y1="${ySys}" x2="${x}" y2="${yDia}" stroke="#cbd5e1" stroke-width="1.8" stroke-dasharray="2,2" />`;
+        }
+
+        const dateStr = isDayMode ? it.date : it.measured_at.slice(0, 19).replace('T', ' ');
+        const tDate = isDayMode ? it.date.slice(5).replace('-', '/') : it.measured_at.slice(5, 10).replace('-', '/');
+        const tTime = isDayMode ? `n=${it.n}` : it.measured_at.slice(11, 16);
+        const dotR = isDayMode ? Math.min(9, 5 + (it.n || 1)) : 6;
+        const tipData = `data-date="${dateStr}" data-sys="${sysVal || '--'}" data-dia="${diaVal || '--'}" data-note="${isDayMode ? `Tổng hợp ngày (Số mẫu n=${it.n})` : (it.device_label || 'Thủ công')}"`;
+
+        if (ySys != null) {
+          svg += `<circle cx="${x}" cy="${ySys}" r="${dotR}" fill="#ef4444" stroke="#ffffff" stroke-width="2.5" style="cursor: pointer;" ${tipData} onmouseenter="showDocChartTooltip(event)" onmouseleave="hideDocChartTooltip()" />`;
+          if (showLabels) {
+            svg += `<text x="${x}" y="${ySys - 11}" font-size="11" font-weight="700" fill="#dc2626" text-anchor="middle">${sysVal}</text>`;
+          }
+        }
+
+        if (yDia != null) {
+          svg += `<circle cx="${x}" cy="${yDia}" r="${dotR}" fill="#3b82f6" stroke="#ffffff" stroke-width="2.5" style="cursor: pointer;" ${tipData} onmouseenter="showDocChartTooltip(event)" onmouseleave="hideDocChartTooltip()" />`;
+          if (showLabels) {
+            svg += `<text x="${x}" y="${yDia + 18}" font-size="11" font-weight="700" fill="#2563eb" text-anchor="middle">${diaVal}</text>`;
+          }
+        }
+
+        const stepLabel = Math.max(1, Math.floor(items.length / 10));
+        if (idx % stepLabel === 0 || idx === items.length - 1) {
+          svg += `
+            <line x1="${x}" y1="${padT + plotH}" x2="${x}" y2="${padT + plotH + 6}" stroke="#94a3b8" stroke-width="1.2" />
+            <text x="${x}" y="${padT + plotH + 20}" font-size="11" fill="#475569" text-anchor="middle" font-weight="600">${tDate}</text>
+            <text x="${x}" y="${padT + plotH + 34}" font-size="10" fill="${isDayMode ? '#7c3aed' : '#94a3b8'}" font-weight="${isDayMode ? '700' : 'normal'}" text-anchor="middle">${tTime}</text>
+          `;
+        }
+      });
+
+      svg += `</svg>`;
+      containerEl.innerHTML = svg;
+    }
+
+    /* Single Vital Sign SVG Chart (HR, Blood Glucose, SpO2, Temperature) */
+    function renderClinicianSingleVitalSvgChart(containerEl, readings, aggregated, res, vitalType) {
+      const isDayMode = (res === "day" && aggregated && aggregated.length > 0);
+      const items = isDayMode ? [...aggregated] : [...readings];
+
+      const metaMap = {
+        heart_rate: { name: "Nhịp tim", unit: "bpm", safeLow: 60, safeHigh: 100, safeLabel: "Dải nhịp tim an toàn: 60 - 100 bpm", color: "#7c3aed", minBound: 45, maxBound: 130, step: 20 },
+        blood_glucose: { name: "Đường huyết", unit: "mg/dL", safeLow: 70, safeHigh: 130, safeLabel: "Dải đường huyết mục tiêu (đói): 70 - 130 mg/dL (3.9 - 7.2 mmol/L)", color: "#ea580c", minBound: 50, maxBound: 180, step: 20 },
+        spo2: { name: "SpO2", unit: "%", safeLow: 95, safeHigh: 100, safeLabel: "Dải SpO2 tiêu chuẩn: ≥ 95%", color: "#0284c7", minBound: 88, maxBound: 100, step: 2 },
+        temperature: { name: "Thân nhiệt", unit: "°C", safeLow: 36.1, safeHigh: 37.2, safeLabel: "Thân nhiệt sinh lý: 36.1 - 37.2 °C", color: "#e11d48", minBound: 35.5, maxBound: 39.0, step: 0.5 }
+      };
+      const meta = metaMap[vitalType] || { name: "Chỉ số", unit: "", safeLow: 0, safeHigh: 100, safeLabel: "Dải bình thường", color: "#4338CA", minBound: 0, maxBound: 100, step: 10 };
+
+      if (!items || items.length === 0) {
+        containerEl.innerHTML = `
+          <div style="text-align: center; padding: 60px; color: var(--muted);">
+            <div style="font-size: 42px; margin-bottom: 12px;">📊</div>
+            <div style="font-weight: 600; font-size: 16px;">Chưa có số đo ${meta.name.toLowerCase()} nào trong khoảng thời gian này.</div>
+          </div>
+        `;
+        return;
+      }
+
+      items.sort((a, b) => new Date(isDayMode ? a.date : a.measured_at) - new Date(isDayMode ? b.date : b.measured_at));
+
+      const svgW = 1120;
+      const svgH = isChartZoomed ? 600 : 460;
+      const padL = 60;
+      const padR = 36;
+      const padT = 36;
+      const padB = 52;
+      const plotW = svgW - padL - padR;
+      const plotH = svgH - padT - padB;
+
+      const allVals = items.map(r => isDayMode ? r.mean_value : (r.standard_value ?? r.value_numeric)).filter(v => v != null);
+      let rawMin = Math.min(...allVals, meta.safeLow);
+      let rawMax = Math.max(...allVals, meta.safeHigh);
+
+      let minY = (vitalType === 'temperature')
+        ? Math.floor((rawMin - 0.4) * 2) / 2
+        : Math.floor(Math.min(meta.minBound, rawMin - 10) / 10) * 10;
+      let maxY = (vitalType === 'temperature')
+        ? Math.ceil((rawMax + 0.4) * 2) / 2
+        : Math.ceil(Math.max(meta.maxBound, rawMax + 10) / 10) * 10;
+
+      function getY(v) {
+        if (v == null) return null;
+        return padT + plotH - ((v - minY) / (maxY - minY)) * plotH;
+      }
+
+      function getX(idx) {
+        if (items.length <= 1) return padL + plotW / 2;
+        return padL + (idx / (items.length - 1)) * plotW;
+      }
+
+      let svg = `<svg viewBox="0 0 ${svgW} ${svgH}" width="100%" height="${svgH}" style="overflow: visible;" xmlns="http://www.w3.org/2000/svg">`;
+
+      // 1. Shaded Safe Target Band
+      const ySafeHigh = getY(meta.safeHigh);
+      const ySafeLow = getY(meta.safeLow);
+      if (ySafeHigh != null && ySafeLow != null) {
+        const bandH = Math.abs(ySafeLow - ySafeHigh);
+        const topY = Math.min(ySafeHigh, ySafeLow);
+        svg += `<rect x="${padL}" y="${topY}" width="${plotW}" height="${bandH}" fill="#22c55e" fill-opacity="0.08" rx="6" />`;
+        svg += `<line x1="${padL}" y1="${ySafeHigh}" x2="${padL + plotW}" y2="${ySafeHigh}" stroke="#22c55e" stroke-width="1.2" stroke-dasharray="5,5" stroke-opacity="0.7" />`;
+        svg += `<line x1="${padL}" y1="${ySafeLow}" x2="${padL + plotW}" y2="${ySafeLow}" stroke="#22c55e" stroke-width="1.2" stroke-dasharray="5,5" stroke-opacity="0.7" />`;
+        svg += `<text x="${padL + plotW - 10}" y="${topY - 8}" font-size="11.5" fill="#15803d" font-weight="700" text-anchor="end">${meta.safeLabel}</text>`;
+      }
+
+      // 2. Horizontal Gridlines & Y-Axis Labels
+      for (let yVal = minY; yVal <= maxY + 0.001; yVal += meta.step) {
+        const y = getY(yVal);
+        const labelText = (vitalType === 'temperature') ? yVal.toFixed(1) : Math.round(yVal);
+        svg += `
+          <line x1="${padL}" y1="${y}" x2="${padL + plotW}" y2="${y}" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,4" />
+          <text x="${padL - 12}" y="${y + 4}" font-size="12" fill="#64748b" text-anchor="end" font-family="sans-serif" font-weight="600">${labelText}</text>
+        `;
+      }
+      svg += `<text x="${padL}" y="${padT - 14}" font-size="12" fill="#334155" font-weight="800">${meta.unit}</text>`;
+
+      // 3. Connective Lines & Gap Protection (>36h)
+      let paths = [];
+      let curSeg = [];
+      for (let i = 0; i < items.length; i++) {
+        const it = items[i];
+        const x = getX(i);
+        const val = isDayMode ? it.mean_value : (it.standard_value ?? it.value_numeric);
+        const y = getY(val);
+
+        let isGap = false;
+        if (i > 0) {
+          const prevT = new Date(isDayMode ? items[i-1].date : items[i-1].measured_at).getTime();
+          const thisT = new Date(isDayMode ? it.date : it.measured_at).getTime();
+          const diffHours = (thisT - prevT) / (3600 * 1000);
+          if (diffHours > 36) {
+            isGap = true;
+          }
+        }
+
+        if (isGap) {
+          if (curSeg.length > 0) paths.push(curSeg);
+          curSeg = [];
+        }
+
+        if (y != null) curSeg.push([x, y]);
+      }
+      if (curSeg.length > 0) paths.push(curSeg);
+
+      paths.forEach(seg => {
+        if (seg.length > 1) {
+          const d = seg.map((pt, idx) => `${idx === 0 ? 'M' : 'L'} ${pt[0]} ${pt[1]}`).join(' ');
+          svg += `<path d="${d}" fill="none" stroke="${meta.color}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />`;
+        }
+      });
+
+      // 4. Data Points & Tooltips
+      const showLabels = items.length <= 16;
+      items.forEach((it, idx) => {
+        const x = getX(idx);
+        const val = isDayMode ? it.mean_value : (it.standard_value ?? it.value_numeric);
+        const y = getY(val);
+
+        const dateStr = isDayMode ? it.date : it.measured_at.slice(0, 19).replace('T', ' ');
+        const tDate = isDayMode ? it.date.slice(5).replace('-', '/') : it.measured_at.slice(5, 10).replace('-', '/');
+        const tTime = isDayMode ? `n=${it.n}` : it.measured_at.slice(11, 16);
+        const dotR = isDayMode ? Math.min(10, 5 + (it.n || 1)) : 6;
+
+        let evalText = "Bình thường";
+        if (val < meta.safeLow) evalText = "Thấp hơn mục tiêu";
+        else if (val > meta.safeHigh) evalText = "Cao hơn mục tiêu";
+
+        let extraNote = "";
+        if (vitalType === 'blood_glucose' && !isDayMode && it.unit_code === 'mmol/L') {
+          extraNote = `Nhập: ${it.value_numeric} mmol/L`;
+        }
+
+        const noteText = isDayMode ? `Tổng hợp ngày (Số mẫu n=${it.n})` : (it.device_label || 'Thủ công');
+        const tipData = `data-date="${dateStr}" data-val="${val}" data-unit="${meta.unit}" data-extra="${extraNote}" data-note="${noteText}" data-eval="${evalText}"`;
+
+        if (y != null) {
+          svg += `<circle cx="${x}" cy="${y}" r="${dotR}" fill="${meta.color}" stroke="#ffffff" stroke-width="2.5" style="cursor: pointer;" ${tipData} onmouseenter="showDocChartTooltipSingle(event)" onmouseleave="hideDocChartTooltip()" />`;
+          if (showLabels) {
+            svg += `<text x="${x}" y="${y - 11}" font-size="11" font-weight="700" fill="${meta.color}" text-anchor="middle">${val}</text>`;
+          }
+        }
+
+        const stepLabel = Math.max(1, Math.floor(items.length / 10));
+        if (idx % stepLabel === 0 || idx === items.length - 1) {
+          svg += `
+            <line x1="${x}" y1="${padT + plotH}" x2="${x}" y2="${padT + plotH + 6}" stroke="#94a3b8" stroke-width="1.2" />
+            <text x="${x}" y="${padT + plotH + 20}" font-size="11" fill="#475569" text-anchor="middle" font-weight="600">${tDate}</text>
+            <text x="${x}" y="${padT + plotH + 34}" font-size="10" fill="${isDayMode ? '#7c3aed' : '#94a3b8'}" font-weight="${isDayMode ? '700' : 'normal'}" text-anchor="middle">${tTime}</text>
+          `;
+        }
+      });
+
+      svg += `</svg>`;
+      containerEl.innerHTML = svg;
+    }
+
+    function updateDocSingleVitalSummary(readings, aggregated, res, vitalType) {
+      const bar = document.getElementById("docVitalsSummaryBar");
+      const leg = document.getElementById("docVitalsLegend");
+      if (!bar) return;
+
+      const metaMap = {
+        heart_rate: { name: "Nhịp tim", unit: "bpm", safeLow: 60, safeHigh: 100, safeText: "60 - 100 bpm", color: "#7c3aed" },
+        blood_glucose: { name: "Đường huyết", unit: "mg/dL", safeLow: 70, safeHigh: 130, safeText: "70 - 130 mg/dL (đói)", color: "#ea580c" },
+        spo2: { name: "SpO2 (Oxy máu)", unit: "%", safeLow: 95, safeHigh: 100, safeText: "≥ 95%", color: "#0284c7" },
+        temperature: { name: "Thân nhiệt", unit: "°C", safeLow: 36.1, safeHigh: 37.2, safeText: "36.1 - 37.2 °C", color: "#e11d48" }
+      };
+      const meta = metaMap[vitalType] || { name: "Chỉ số", unit: "", safeLow: 0, safeHigh: 100, safeText: "Bình thường", color: "#4338CA" };
+
+      if (!readings || readings.length === 0) {
+        bar.innerHTML = `<div class="summary-chip"><div class="chip-label">${meta.name}</div><div class="chip-val">-- ${meta.unit}</div><div class="chip-sub">Chưa có dữ liệu</div></div>`;
+        if (leg) leg.innerHTML = "";
+        return;
+      }
+
+      const latest = readings[readings.length - 1];
+      const latVal = latest.standard_value ?? latest.value_numeric;
+      const allVals = readings.map(r => r.standard_value ?? r.value_numeric).filter(v => v != null);
+      const avgVal = allVals.length ? (allVals.reduce((a, b) => a + b, 0) / allVals.length).toFixed(1) : '--';
+      const minVal = allVals.length ? Math.min(...allVals) : '--';
+      const maxVal = allVals.length ? Math.max(...allVals) : '--';
+
+      let statusColor = "#16a34a";
+      let statusText = "Trong giới hạn an toàn";
+      if (latVal < meta.safeLow || latVal > meta.safeHigh) {
+        statusColor = "#dc2626";
+        statusText = latVal < meta.safeLow ? "Thấp hơn mục tiêu" : "Cao hơn mục tiêu";
+      }
+
+      let latestDisplay = `${latVal} <span style="font-size: 13px; font-weight: 500;">${meta.unit}</span>`;
+      if (vitalType === 'blood_glucose' && latest.unit_code === 'mmol/L') {
+        latestDisplay = `${latest.value_numeric} mmol/L <span style="font-size: 12px; color: var(--muted);">(${latVal} mg/dL)</span>`;
+      }
+
+      bar.innerHTML = `
+        <div class="summary-chip">
+          <div class="chip-label">Số đo gần nhất</div>
+          <div class="chip-val" style="color: ${statusColor};">${latestDisplay}</div>
+          <div class="chip-sub">${statusText} | Lúc ${latest.measured_at.slice(11, 16)}</div>
+        </div>
+        <div class="summary-chip">
+          <div class="chip-label">Chế độ hiển thị</div>
+          <div class="chip-val" style="color: #4338CA; font-size: 15px;">${res === 'day' ? 'Tổng hợp theo ngày' : 'Điểm đo gốc (Raw)'}</div>
+          <div class="chip-sub">${res === 'day' ? `${aggregated.length} ngày có dữ liệu` : `${readings.length} lượt đo`}</div>
+        </div>
+        <div class="summary-chip">
+          <div class="chip-label">Giá trị trung bình</div>
+          <div class="chip-val">${avgVal} <span style="font-size: 13px; font-weight: 500;">${meta.unit}</span></div>
+          <div class="chip-sub">Mục tiêu: ${meta.safeText}</div>
+        </div>
+        <div class="summary-chip">
+          <div class="chip-label">Biên độ dao động</div>
+          <div class="chip-val">${minVal} – ${maxVal} <span style="font-size: 13px; font-weight: 500;">${meta.unit}</span></div>
+          <div class="chip-sub">Số mẫu: ${allVals.length} lượt đo</div>
+        </div>
+      `;
+
+      if (leg) {
+        leg.innerHTML = `
+          <div class="legend-item"><span class="legend-indicator" style="background: ${meta.color};"></span> 🟣 Đường diễn tiến ${meta.name}</div>
+          <div class="legend-item"><span class="legend-indicator" style="background: rgba(34, 197, 94, 0.15); border: 1px dashed #22c55e;"></span> 🟩 Dải mục tiêu an toàn (${meta.safeText})</div>
+          ${res === 'day' ? '<div class="legend-item"><span class="legend-indicator" style="background: #7c3aed; border-radius: 50%;"></span> 🟣 Kích thước điểm thể hiện số mẫu (n)</div>' : ''}
+          <div class="legend-item" style="color: #64748b; font-size: 12px; margin-left: auto;">(Không nối đường cong qua ngày thiếu &gt; 36h)</div>
+        `;
+      }
+    }
+
+    function updateDocSingleVitalTable(readings, vitalType) {
+      const metaMap = {
+        heart_rate: { name: "Nhịp tim", unit: "bpm", safeLow: 60, safeHigh: 100 },
+        blood_glucose: { name: "Đường huyết", unit: "mg/dL", safeLow: 70, safeHigh: 130 },
+        spo2: { name: "SpO2", unit: "%", safeLow: 95, safeHigh: 100 },
+        temperature: { name: "Thân nhiệt", unit: "°C", safeLow: 36.1, safeHigh: 37.2 }
+      };
+      const meta = metaMap[vitalType] || { name: "Chỉ số", unit: "", safeLow: 0, safeHigh: 100 };
+
+      const thead = document.getElementById("tblDocVitalsHead");
+      if (thead) {
+        thead.innerHTML = `
+          <tr>
+            <th>Thời điểm đo</th>
+            <th>Chỉ số (${meta.name})</th>
+            <th>Đơn vị</th>
+            <th>Đánh giá lâm sàng</th>
+            <th>Nguồn đo</th>
+            <th>Người nhập</th>
+          </tr>
+        `;
+      }
+      const tbody = document.querySelector("#tblDocVitalsRaw tbody");
+      if (!tbody) return;
+      tbody.innerHTML = "";
+      if (!readings || readings.length === 0) {
+        tbody.innerHTML = `<tr><td colspan='6' style='text-align: center; color: var(--muted);'>Không có số đo ${meta.name.toLowerCase()} trong khoảng thời gian này.</td></tr>`;
+        return;
+      }
+      readings.forEach(r => {
+        const val = r.standard_value ?? r.value_numeric;
+        let badgeClass = "badge-success";
+        let evalText = "Bình thường";
+        if (val < meta.safeLow) {
+          badgeClass = "badge-warning";
+          evalText = "Thấp hơn mục tiêu";
+        } else if (val > meta.safeHigh) {
+          badgeClass = "badge-danger";
+          evalText = "Cao hơn mục tiêu";
+        }
+
+        let origText = `${val}`;
+        if (vitalType === 'blood_glucose' && r.unit_code === 'mmol/L') {
+          origText = `${val} <span style="font-size: 11px; color: var(--muted);">(${r.value_numeric} mmol/L)</span>`;
+        }
+
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${r.measured_at.replace("T", " ").slice(0, 19)}</td>
+          <td><strong>${origText}</strong></td>
+          <td>${meta.unit}</td>
+          <td><span class="badge ${badgeClass}">${evalText}</span></td>
+          <td>${r.device_label || 'Thủ công'}</td>
+          <td>${r.entered_by_name || 'Hệ thống'}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function showDocChartTooltip(e) {
+      const el = e.target;
+      const tip = document.getElementById("docChartTooltip");
+      if (!tip) return;
+      const d = el.getAttribute("data-date");
+      const s = el.getAttribute("data-sys");
+      const di = el.getAttribute("data-dia");
+      const note = el.getAttribute("data-note");
+      tip.innerHTML = `
+        <div style="font-weight: 700; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 3px; margin-bottom: 4px;">📅 ${d}</div>
+        <div>🔴 Tâm thu (SYS): <strong>${s} mmHg</strong></div>
+        <div>🔵 Tâm trương (DIA): <strong>${di} mmHg</strong></div>
+        <div style="font-size: 11px; color: #94a3b8; margin-top: 3px;">ℹ️ ${note}</div>
+      `;
+      const rect = el.getBoundingClientRect();
+      const parentRect = el.closest(".chart-svg-wrapper").getBoundingClientRect();
+      tip.style.left = `${rect.left - parentRect.left + rect.width / 2}px`;
+      tip.style.top = `${rect.top - parentRect.top}px`;
+      tip.style.display = "block";
+    }
+
+    function showDocChartTooltipSingle(e) {
+      const el = e.target;
+      const tip = document.getElementById("docChartTooltip");
+      if (!tip) return;
+      const d = el.getAttribute("data-date");
+      const v = el.getAttribute("data-val");
+      const u = el.getAttribute("data-unit");
+      const extra = el.getAttribute("data-extra");
+      const note = el.getAttribute("data-note");
+      const ev = el.getAttribute("data-eval");
+      tip.innerHTML = `
+        <div style="font-weight: 700; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 3px; margin-bottom: 4px;">📅 ${d}</div>
+        <div>Chỉ số: <strong style="font-size: 14px;">${v} ${u}</strong> ${extra ? `<span style="font-size: 11px; color: #cbd5e1;">(${extra})</span>` : ''}</div>
+        <div style="font-size: 12px; margin-top: 2px;">Đánh giá: <strong>${ev}</strong></div>
+        <div style="font-size: 11px; color: #94a3b8; margin-top: 3px;">ℹ️ ${note}</div>
+      `;
+      const rect = el.getBoundingClientRect();
+      const parentRect = el.closest(".chart-svg-wrapper").getBoundingClientRect();
+      tip.style.left = `${rect.left - parentRect.left + rect.width / 2}px`;
+      tip.style.top = `${rect.top - parentRect.top}px`;
+      tip.style.display = "block";
+    }
+
+    function hideDocChartTooltip() {
+      const tip = document.getElementById("docChartTooltip");
+      if (tip) tip.style.display = "none";
+    }
+
+    /* PRESCRIPTION & MEDICATION CATALOG */
+    async function loadMedicationsCatalog() {
+      const res = await apiCall("/api/medications");
+      const revSel = document.getElementById("revMedSelect");
+      const newSel = document.getElementById("newMedSelect");
+      if (res && res.medications && res.medications.length > 0) {
+        if (revSel) revSel.innerHTML = "";
+        if (newSel) newSel.innerHTML = "";
+        res.medications.forEach(m => {
+          const opt1 = document.createElement("option");
+          opt1.value = m.medication_id;
+          opt1.innerText = `${m.brand_name} (${m.generic_name || ''} ${m.product_strength}${m.strength_unit}) — ${m.dosage_form}`;
+          if (revSel) revSel.appendChild(opt1);
+
+          if (newSel) {
+            const opt2 = opt1.cloneNode(true);
+            newSel.appendChild(opt2);
+          }
+        });
+        // Append Custom Option at the bottom
+        if (revSel) {
+          const customOpt1 = document.createElement("option");
+          customOpt1.value = "__custom__";
+          customOpt1.innerText = "➕ Nhập loại thuốc mới ngoài danh mục...";
+          revSel.appendChild(customOpt1);
+        }
+        if (newSel) {
+          const customOpt2 = document.createElement("option");
+          customOpt2.value = "__custom__";
+          customOpt2.innerText = "➕ Nhập loại thuốc mới ngoài danh mục...";
+          newSel.appendChild(customOpt2);
+        }
+      }
+    }
+
+    function onMedicationSelectChange() {
+      const sel = document.getElementById("revMedSelect");
+      const customPanel = document.getElementById("customMedPanel");
+      if (sel.value === "__custom__") {
+        customPanel.style.display = "block";
+        document.getElementById("revCustomName").focus();
+      } else {
+        customPanel.style.display = "none";
+      }
+    }
+
+    async function loadPrescriptions() {
+      const data = await apiCall(`/api/patients/${currentPatientId}/prescriptions`);
+      const container = document.getElementById("prescriptionsContainer");
+      const sel = document.getElementById("revOldPrescriptionSelect");
+      sel.innerHTML = "";
+
+      if (!data || !data.prescriptions || data.prescriptions.length === 0) {
+        container.innerHTML = "<p style='color: var(--muted);'>Bệnh nhân chưa có đơn thuốc nào.</p>";
+        return;
+      }
+
+      let html = "";
+      data.prescriptions.forEach(p => {
+        const opt = document.createElement("option");
+        opt.value = p.prescription_id;
+        opt.dataset.version = p.version;
+        opt.innerText = `${p.prescription_code} (Phiên bản v${p.version}) - ${p.status}`;
+        sel.appendChild(opt);
+
+        let itemsHtml = "";
+        (p.items || []).forEach(it => {
+          itemsHtml += `
+            <div style="background: var(--bg); padding: 8px 12px; border-radius: 6px; margin-top: 6px; font-size: 13.5px;">
+              <strong>💊 ${it.brand_name} (${it.product_strength} ${it.strength_unit}):</strong> Liều dùng ${it.dose_amount} ${it.dose_unit} — ${it.original_instructions}
+            </div>
+          `;
+        });
+
+        const canCancel = (p.status === 'ACTIVE');
+
+        html += `
+          <div style="border: 1.5px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 14px; background: #ffffff;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <div>
+                <strong style="font-size: 15px; color: var(--navy);">${p.prescription_code} — Phiên bản v${p.version}</strong>
+                <div style="font-size: 12.5px; color: var(--muted); margin-top: 3px;">
+                  Ngày kê: ${p.prescribed_date} | Bác sĩ kê: ${p.prescriber_name || 'Bác sĩ phụ trách'}
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="badge ${p.status === 'ACTIVE' ? 'badge-success' : (p.status === 'SUPERSEDED' ? 'badge-warning' : 'badge-danger')}">${p.status}</span>
+                ${canCancel ? `
+                  <button class="btn-cancel-rx" onclick="cancelPrescription('${p.prescription_id}', '${p.prescription_code}')">
+                    🚫 Ngưng hiệu lực / Xóa đơn này
+                  </button>
+                ` : ''}
+              </div>
+            </div>
+            <div style="margin-top: 10px;">
+              ${itemsHtml}
+            </div>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+    }
+
+    async function cancelPrescription(rxId, rxCode) {
+      const confirmReason = prompt(`Xác nhận ngưng hiệu lực / xóa đơn thuốc "${rxCode}"?\n\nLưu ý: Các lần uống thuộc đơn này sẽ được ngưng hiệu lực và tự động đồng bộ gỡ bỏ tức thời khỏi danh mục uống thuốc của người già.\n\nNhập lý do ngưng đơn (ví dụ: Thay đổi phác đồ / Khỏi bệnh / Bệnh nhân gặp phản ứng phụ):`, "Bác sĩ ngưng hiệu lực đơn thuốc");
+      if (confirmReason === null) return;
+
+      const res = await apiCall(`/api/patients/${currentPatientId}/prescriptions/${rxId}/cancel`, "POST", {
+        reason: confirmReason || "Bác sĩ ngưng hiệu lực đơn thuốc"
+      });
+
+      if (res && res.status === "CANCELLED") {
+        alert(`Đã ngưng hiệu lực đơn thuốc "${rxCode}" thành công! Lịch uống trên ứng dụng người già đã được tự động cập nhật ngay lập tức.`);
+        loadPrescriptions();
+        loadOverview();
+      } else {
+        alert(res?.error || "Có lỗi xảy ra khi ngưng hiệu lực đơn thuốc.");
+      }
+    }
+
+    async function submitPrescriptionRevision(e) {
+      e.preventDefault();
+      const sel = document.getElementById("revOldPrescriptionSelect");
+      const oldRxId = sel.value;
+      const selectedOpt = sel.options[sel.selectedIndex];
+      const expectedVersion = selectedOpt ? parseInt(selectedOpt.dataset.version, 10) : 1;
+
+      const reason = document.getElementById("revReason").value;
+      const medSelect = document.getElementById("revMedSelect");
+      const medId = medSelect.value;
+      const doseAmt = parseFloat(document.getElementById("revDoseAmt").value);
+      const doseUnit = document.getElementById("revDoseUnit").value;
+      const instr = document.getElementById("revInstructions").value;
+      const times = document.getElementById("revTimes").value.split(",").map(t => t.trim());
+
+      const itemPayload = {
+        medication_id: medId,
+        dose_amount: doseAmt,
+        dose_unit: doseUnit,
+        instructions: instr,
+        local_times: times
+      };
+
+      if (medId === "__custom__") {
+        const customName = document.getElementById("revCustomName").value.trim();
+        if (!customName) {
+          alert("Vui lòng nhập tên biệt dược cho loại thuốc mới!");
+          document.getElementById("revCustomName").focus();
+          return;
+        }
+        itemPayload.custom_brand_name = customName;
+        itemPayload.generic_name = document.getElementById("revCustomGeneric").value.trim() || customName;
+        itemPayload.product_strength = document.getElementById("revCustomStrength").value.trim() || "500";
+        itemPayload.strength_unit = document.getElementById("revCustomStrengthUnit").value.trim() || "mg";
+        itemPayload.dosage_form = document.getElementById("revCustomForm").value;
+      }
+
+      const res = await apiCall(`/api/patients/${currentPatientId}/prescriptions/${oldRxId}/revisions`, "POST", {
+        expected_version: expectedVersion,
+        reason: reason,
+        items: [itemPayload]
+      });
+
+      if (res && res.version) {
+        alert(`Đã cập nhật đơn thuốc lên phiên bản mới v${res.version}! Lịch uống tương lai đã được làm mới.`);
+        document.getElementById("revReason").value = "";
+        document.getElementById("revCustomName").value = "";
+        document.getElementById("customMedPanel").style.display = "none";
+        await loadMedicationsCatalog();
+        loadPrescriptions();
+        loadOverview();
+      } else if (res && res.error && (res.error.includes("Xung đột") || res.error.includes("409"))) {
+        alert(`⚠️ Xung đột phiên bản (409 Conflict): Đơn thuốc này đã được cập nhật bởi bác sĩ khác hoặc phiên làm việc khác. Vui lòng tải lại đơn thuốc trước khi sửa!`);
+        loadPrescriptions();
+      } else {
+        alert(res?.error || "Không thể tạo bản sửa đổi đơn thuốc.");
+      }
+    }
+
+    async function submitNewPrescription(e) {
+      e.preventDefault();
+      const formEl = e.target;
+      const submitBtn = formEl.querySelector("button[type='submit']") || formEl.querySelector(".btn-submit");
+      const originalText = submitBtn ? submitBtn.innerText : "Kê đơn thuốc mới & Lên lịch";
+
+      if (!currentPatientId) {
+        alert("⚠️ Vui lòng chọn người bệnh trong danh sách bên trái trước khi kê đơn.");
+        return;
+      }
+
+      const diagnosis = document.getElementById("newRxDiagnosis").value.trim();
+      if (!diagnosis) {
+        alert("⚠️ Vui lòng nhập Chẩn đoán / Chỉ định lâm sàng.");
+        document.getElementById("newRxDiagnosis").focus();
+        return;
+      }
+
+      const startDate = document.getElementById("newRxStartDate").value;
+      if (!startDate) {
+        alert("⚠️ Vui lòng chọn Ngày bắt đầu dùng thuốc.");
+        document.getElementById("newRxStartDate").focus();
+        return;
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerText = "⏳ Đang kê đơn thuốc & Đồng bộ lịch...";
+      }
+
+      try {
+        const code = document.getElementById("newRxCode").value.trim();
+        const medVal = document.getElementById("newMedSelect").value;
+        const doseAmt = parseFloat(document.getElementById("newDoseAmt").value) || 1.0;
+        const doseUnit = document.getElementById("newDoseUnit").value.trim();
+        const instructions = document.getElementById("newRxInstructions").value.trim();
+        const times = document.getElementById("newRxTimes").value.split(",").map(s => s.trim()).filter(Boolean);
+        const endDate = document.getElementById("newRxEndDate").value;
+        if (endDate && endDate < startDate) {
+          alert("Ngày kết thúc không được trước ngày bắt đầu dùng thuốc.");
+          document.getElementById("newRxEndDate").focus();
+          return;
+        }
+        if (!times.length || times.some(t => !/^([01]\d|2[0-3]):[0-5]\d$/.test(t))) {
+          alert("Vui lòng nhập giờ uống theo định dạng HH:MM, ví dụ 08:00,20:00.");
+          return;
+        }
+
+
+        let itemPayload = {
+          dose_amount: doseAmt,
+          dose_unit: doseUnit,
+          instructions: instructions,
+          times_of_day: times
+        };
+
+        if (medVal !== "__custom__") {
+          itemPayload.medication_id = medVal;
+        } else {
+          itemPayload.brand_name = document.getElementById("newCustomName").value.trim();
+          itemPayload.generic_name = document.getElementById("newCustomGeneric").value.trim();
+          itemPayload.product_strength = document.getElementById("newCustomStrength").value.trim();
+          itemPayload.strength_unit = "mg";
+          itemPayload.dosage_form = document.getElementById("newCustomForm").value;
+          if (!itemPayload.brand_name) {
+            alert("⚠️ Vui lòng nhập Tên biệt dược mới.");
+            if (submitBtn) { submitBtn.disabled = false; submitBtn.innerText = originalText; }
+            return;
+          }
+        }
+
+        const res = await apiCall(`/api/patients/${currentPatientId}/prescriptions`, "POST", {
+          prescription_code: code || undefined,
+          diagnosis: diagnosis,
+          clinical_indication: diagnosis,
+          start_date: startDate,
+          end_date: endDate || undefined,
+          items: [itemPayload]
+        });
+
+        if (res && res.prescription_id) {
+          alert(`✅ Kê đơn thuốc mới thành công (${res.prescription_code})!\nLịch uống thuốc đã được đồng bộ tự động tới người bệnh.`);
+          document.getElementById("newRxCode").value = "";
+          document.getElementById("newRxDiagnosis").value = "";
+          document.getElementById("newCustomMedPanel").style.display = "none";
+          await loadPrescriptions();
+          await loadOverview();
+          await loadMedicationsCatalog();
+        } else {
+          alert(res?.error || "Không thể kê đơn thuốc mới. Vui lòng kiểm tra lại thông tin kết nối.");
+        }
+      } catch (err) {
+        console.error("Error submitting prescription:", err);
+        alert("Lỗi kết nối khi gửi đơn thuốc: " + (err.message || err));
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerText = originalText;
+        }
+      }
+    }
+
+    function onNewMedicationSelectChange() {
+      const val = document.getElementById("newMedSelect").value;
+      document.getElementById("newCustomMedPanel").style.display = (val === "__custom__") ? "block" : "none";
+    }
+
+    /* TWO-WAY CHAT & CAREGIVER REPORTS */
+    let cachedReports = [];
+
+    async function loadReports() {
+      const data = await apiCall(`/api/patients/${currentPatientId}/caregiver-reports`);
+      const streamEl = document.getElementById("chatMessagesStream");
+      const targetSelect = document.getElementById("chatTargetReportSelect");
+      targetSelect.innerHTML = "<option value=''>(Tất cả báo cáo / Phản hồi mới nhất)</option>";
+
+      if (!data || !data.reports || data.reports.length === 0) {
+        streamEl.innerHTML = `
+          <div style="text-align: center; color: var(--muted); padding: 40px;">
+            <div style="font-size: 32px; margin-bottom: 8px;">💬</div>
+            <div style="font-weight: 600;">Chưa có hội thoại nào với người nhà bệnh nhân.</div>
+            <div style="font-size: 12px; margin-top: 4px;">Khi người nhà gửi báo cáo dấu hiệu, nội dung trò chuyện sẽ xuất hiện tại đây.</div>
+          </div>
+        `;
+        document.getElementById("docReportsUnread").innerText = "0";
+        cachedReports = [];
+        return;
+      }
+
+      cachedReports = data.reports;
+      let unread = 0;
+      let html = "";
+
+      // Populate target select with existing reports
+      data.reports.forEach(r => {
+        const opt = document.createElement("option");
+        opt.value = r.report_id;
+        opt.innerText = `Báo cáo lúc ${r.created_at.slice(11, 16)} (${r.severity}): ${r.description.slice(0, 35)}...`;
+        targetSelect.appendChild(opt);
+      });
+
+      data.reports.forEach(r => {
+        if (r.status !== 'RESPONDED' && r.status !== 'CLOSED') unread++;
+
+        // Render Caregiver Bubble (Left)
+        html += `
+          <div class="chat-bubble from-caregiver" id="reportBubble_${r.report_id}">
+            <div class="chat-meta">
+              <span class="author-cg">
+                👤 ${r.caregiver_name || 'Người nhà'}
+                <span class="chat-severity-tag chat-severity-${r.severity}">Mức độ: ${r.severity}</span>
+              </span>
+              <span class="time">${r.created_at.replace("T", " ").slice(0, 16)}</span>
+            </div>
+            <div style="margin-top: 6px; font-weight: 500;">
+              ${r.description}
+            </div>
+            <div style="font-size: 11.5px; color: var(--muted); margin-top: 6px;">
+              ⏱️ Quan sát từ lúc: ${r.observed_at.replace("T", " ").slice(0, 16)} | Trạng thái: <strong>${r.status}</strong>
+            </div>
+
+            <!-- Doctor Replies Thread -->
+            ${(r.messages && r.messages.length > 0) ? `
+              <div class="chat-replies-list">
+                ${r.messages.map(m => `
+                  <div class="chat-reply-item">
+                    <div style="display: flex; justify-content: space-between; font-weight: 700; color: #4338CA; font-size: 12px; margin-bottom: 3px;">
+                      <span>👨‍⚕️ ${m.sender_name || 'Bác sĩ phụ trách'}:</span>
+                      <span style="font-weight: normal; color: var(--muted);">${m.created_at.slice(11, 16)}</span>
+                    </div>
+                    <div>${m.body}</div>
+                  </div>
+                `).join('')}
+              </div>
+            ` : ''}
+
+            ${r.status !== 'RESPONDED' ? `
+              <div style="margin-top: 10px; display: flex; gap: 8px;">
+                <input type="text" id="inlineReply_${r.report_id}" class="form-control" style="font-size: 13px; padding: 6px 10px;" placeholder="Gửi phản hồi nhanh cho báo cáo này...">
+                <button onclick="sendInlineReply('${r.report_id}')" class="btn-submit" style="background: #4338CA; padding: 6px 14px; font-size: 13px; white-space: nowrap;">Trả lời</button>
+              </div>
+            ` : ''}
+          </div>
+        `;
+      });
+
+      streamEl.innerHTML = html;
+      document.getElementById("docReportsUnread").innerText = unread;
+      // Auto-scroll to bottom of chat
+      streamEl.scrollTop = streamEl.scrollHeight;
+    }
+
+    function handleChatKeyDown(e) {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        sendDoctorChatMessage();
+      }
+    }
+
+    async function sendDoctorChatMessage() {
+      const input = document.getElementById("chatInputBody");
+      const body = input.value.trim();
+      if (!body) return;
+
+      let targetReportId = document.getElementById("chatTargetReportSelect").value;
+      // If none selected, pick the most recent report or first unread
+      if (!targetReportId && cachedReports.length > 0) {
+        const unreadReport = cachedReports.find(r => r.status !== 'RESPONDED');
+        targetReportId = unreadReport ? unreadReport.report_id : cachedReports[0].report_id;
+      }
+
+      if (!targetReportId) {
+        alert("Hiện chưa có báo cáo nào từ người nhà để phản hồi. Bác sĩ có thể gửi lời khuyên chuyên môn tại tab 'Lời khuyên chuyên môn'.");
+        return;
+      }
+
+      const res = await apiCall(`/api/patients/${currentPatientId}/caregiver-reports/${targetReportId}/respond`, "POST", { body });
+      if (res && res.status === "RESPONDED") {
+        input.value = "";
+        await loadReports();
+        await loadPatientsList(); // Refresh sidebar green dot
+      } else {
+        alert(res?.error || "Không thể gửi phản hồi.");
+      }
+    }
+
+    async function sendInlineReply(reportId) {
+      const input = document.getElementById(`inlineReply_${reportId}`);
+      const body = input.value.trim();
+      if (!body) return;
+
+      const res = await apiCall(`/api/patients/${currentPatientId}/caregiver-reports/${reportId}/respond`, "POST", { body });
+      if (res && res.status === "RESPONDED") {
+        input.value = "";
+        await loadReports();
+        await loadPatientsList();
+      } else {
+        alert(res?.error || "Không thể gửi phản hồi.");
+      }
+    }
+
+    /* CARE RECOMMENDATIONS */
+    async function loadRecommendations() {
+      const data = await apiCall(`/api/patients/${currentPatientId}/recommendations`);
+      const container = document.getElementById("recsListContainer");
+      if (!data || !data.recommendations || data.recommendations.length === 0) {
+        container.innerHTML = "<p style='color: var(--muted); text-align: center; padding: 20px;'>Chưa có lời khuyên nào.</p>";
+        return;
+      }
+      let html = "";
+      data.recommendations.forEach(rec => {
+        html += `
+          <div style="border: 1px solid var(--border); border-radius: 8px; padding: 14px; margin-bottom: 10px; background: #ffffff;">
+            <div style="display: flex; justify-content: space-between;">
+              <strong style="color: var(--navy); font-size: 15px;">${rec.title} [${rec.category.toUpperCase()}]</strong>
+              <span class="badge badge-primary">Phiên bản v${rec.version} (Demo)</span>
+            </div>
+            <p style="font-size: 14px; margin: 6px 0;">${rec.content}</p>
+            <div style="font-size: 12px; color: var(--muted);">BS soạn: ${rec.author_name} (${rec.created_at.slice(0, 10)})</div>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+    }
+
+    async function submitRecommendation(e) {
+      e.preventDefault();
+      const cat = document.getElementById("recCategory").value;
+      const title = document.getElementById("recTitle").value;
+      const content = document.getElementById("recContent").value;
+      await apiCall(`/api/patients/${currentPatientId}/recommendations`, "POST", { category: cat, title, content });
+      document.getElementById("recTitle").value = "";
+      document.getElementById("recContent").value = "";
+      alert("Đã lưu lời khuyên chuyên môn thành công!");
+      loadRecommendations();
+    }
+
+    function logout() {
+      localStorage.removeItem("auth_token");
+      window.location.href = "/login";
+    }
+
+    window.onload = init;
+  </script>
+</body>
+</html>

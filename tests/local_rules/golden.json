@@ -1,0 +1,2368 @@
+[
+  {
+    "id": "g001",
+    "text": "Gọi bác sĩ giúp tôi",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "doctor_contact"
+    ],
+    "expected_roles": [
+      [
+        "doctor"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g002",
+    "text": "Tôi muốn gặp bác sĩ",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "doctor_contact"
+    ],
+    "expected_roles": [
+      [
+        "doctor"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g003",
+    "text": "Cho tôi nói chuyện với bác sỹ",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "doctor_contact"
+    ],
+    "expected_roles": [
+      [
+        "doctor"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g004",
+    "text": "Gọi con giúp tôi",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "caregiver_contact"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g005",
+    "text": "Báo người nhà",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "caregiver_contact"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g006",
+    "text": "Gọi người chăm sóc",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "caregiver_contact"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g007",
+    "text": "Lấy nước giúp tôi",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "daily_assistance"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g008",
+    "text": "Tôi muốn đi vệ sinh",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "daily_assistance"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g009",
+    "text": "Giúp tôi đứng dậy",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "daily_assistance"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g010",
+    "text": "Mang đồ ăn cho tôi",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "daily_assistance"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g011",
+    "text": "Tôi thấy cô đơn",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "companionship"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g012",
+    "text": "Tôi muốn có người ở đây",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "companionship"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g013",
+    "text": "Tôi đau đầu",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "health_report"
+    ],
+    "expected_roles": [
+      [
+        "doctor",
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g014",
+    "text": "Tôi chóng mặt",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "health_report"
+    ],
+    "expected_roles": [
+      [
+        "doctor",
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g015",
+    "text": "Tôi buồn nôn",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "health_report"
+    ],
+    "expected_roles": [
+      [
+        "doctor",
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g016",
+    "text": "Tôi đau bụng",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "health_report"
+    ],
+    "expected_roles": [
+      [
+        "doctor",
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g017",
+    "text": "Tôi thấy không khỏe",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "health_report"
+    ],
+    "expected_roles": [
+      [
+        "doctor",
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g018",
+    "text": "Đến giờ uống thuốc chưa",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "medication_schedule"
+    ],
+    "expected_roles": [
+      []
+    ],
+    "expected_confirmation": [
+      false
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g019",
+    "text": "Hôm nay uống thuốc gì",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "medication_schedule"
+    ],
+    "expected_roles": [
+      []
+    ],
+    "expected_confirmation": [
+      false
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g020",
+    "text": "Cho tôi xem thuốc cần uống",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "medication_schedule"
+    ],
+    "expected_roles": [
+      []
+    ],
+    "expected_confirmation": [
+      false
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g021",
+    "text": "Bác ơi, Gọi bác sĩ giúp tôi",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "doctor_contact"
+    ],
+    "expected_roles": [
+      [
+        "doctor"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g022",
+    "text": "Bác ơi, Tôi muốn gặp bác sĩ",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "doctor_contact"
+    ],
+    "expected_roles": [
+      [
+        "doctor"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g023",
+    "text": "Bác ơi, Cho tôi nói chuyện với bác sỹ",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "doctor_contact"
+    ],
+    "expected_roles": [
+      [
+        "doctor"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g024",
+    "text": "Bác ơi, Gọi con giúp tôi",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "caregiver_contact"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g025",
+    "text": "Bác ơi, Báo người nhà",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "caregiver_contact"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g026",
+    "text": "Bác ơi, Gọi người chăm sóc",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "caregiver_contact"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g027",
+    "text": "Bác ơi, Lấy nước giúp tôi",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "daily_assistance"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g028",
+    "text": "Bác ơi, Tôi muốn đi vệ sinh",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "daily_assistance"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g029",
+    "text": "Bác ơi, Giúp tôi đứng dậy",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "daily_assistance"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g030",
+    "text": "Bác ơi, Mang đồ ăn cho tôi",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "daily_assistance"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g031",
+    "text": "Bác ơi, Tôi thấy cô đơn",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "companionship"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g032",
+    "text": "Bác ơi, Tôi muốn có người ở đây",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "companionship"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g033",
+    "text": "Bác ơi, Tôi đau đầu",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "health_report"
+    ],
+    "expected_roles": [
+      [
+        "doctor",
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g034",
+    "text": "Bác ơi, Tôi chóng mặt",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "health_report"
+    ],
+    "expected_roles": [
+      [
+        "doctor",
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g035",
+    "text": "Bác ơi, Tôi buồn nôn",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "health_report"
+    ],
+    "expected_roles": [
+      [
+        "doctor",
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g036",
+    "text": "Bác ơi, Tôi đau bụng",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "health_report"
+    ],
+    "expected_roles": [
+      [
+        "doctor",
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g037",
+    "text": "Bác ơi, Tôi thấy không khỏe",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "health_report"
+    ],
+    "expected_roles": [
+      [
+        "doctor",
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g038",
+    "text": "Bác ơi, Đến giờ uống thuốc chưa",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "medication_schedule"
+    ],
+    "expected_roles": [
+      []
+    ],
+    "expected_confirmation": [
+      false
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g039",
+    "text": "Bác ơi, Hôm nay uống thuốc gì",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "medication_schedule"
+    ],
+    "expected_roles": [
+      []
+    ],
+    "expected_confirmation": [
+      false
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g040",
+    "text": "Bác ơi, Cho tôi xem thuốc cần uống",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "medication_schedule"
+    ],
+    "expected_roles": [
+      []
+    ],
+    "expected_confirmation": [
+      false
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g041",
+    "text": "Xin giúp, Gọi bác sĩ giúp tôi",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "doctor_contact"
+    ],
+    "expected_roles": [
+      [
+        "doctor"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g042",
+    "text": "Xin giúp, Tôi muốn gặp bác sĩ",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "doctor_contact"
+    ],
+    "expected_roles": [
+      [
+        "doctor"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g043",
+    "text": "Xin giúp, Cho tôi nói chuyện với bác sỹ",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "doctor_contact"
+    ],
+    "expected_roles": [
+      [
+        "doctor"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g044",
+    "text": "Xin giúp, Gọi con giúp tôi",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "caregiver_contact"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g045",
+    "text": "Xin giúp, Báo người nhà",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "caregiver_contact"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g046",
+    "text": "Xin giúp, Gọi người chăm sóc",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "caregiver_contact"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g047",
+    "text": "Xin giúp, Lấy nước giúp tôi",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "daily_assistance"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g048",
+    "text": "Xin giúp, Tôi muốn đi vệ sinh",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "daily_assistance"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g049",
+    "text": "Xin giúp, Giúp tôi đứng dậy",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "daily_assistance"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g050",
+    "text": "Xin giúp, Mang đồ ăn cho tôi",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "daily_assistance"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g051",
+    "text": "Xin giúp, Tôi thấy cô đơn",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "companionship"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g052",
+    "text": "Xin giúp, Tôi muốn có người ở đây",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "companionship"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g053",
+    "text": "Xin giúp, Tôi đau đầu",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "health_report"
+    ],
+    "expected_roles": [
+      [
+        "doctor",
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g054",
+    "text": "Xin giúp, Tôi chóng mặt",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "health_report"
+    ],
+    "expected_roles": [
+      [
+        "doctor",
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g055",
+    "text": "Xin giúp, Tôi buồn nôn",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "health_report"
+    ],
+    "expected_roles": [
+      [
+        "doctor",
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g056",
+    "text": "Xin giúp, Tôi đau bụng",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "health_report"
+    ],
+    "expected_roles": [
+      [
+        "doctor",
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g057",
+    "text": "Xin giúp, Tôi thấy không khỏe",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "health_report"
+    ],
+    "expected_roles": [
+      [
+        "doctor",
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g058",
+    "text": "Xin giúp, Đến giờ uống thuốc chưa",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "medication_schedule"
+    ],
+    "expected_roles": [
+      []
+    ],
+    "expected_confirmation": [
+      false
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g059",
+    "text": "Xin giúp, Hôm nay uống thuốc gì",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "medication_schedule"
+    ],
+    "expected_roles": [
+      []
+    ],
+    "expected_confirmation": [
+      false
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g060",
+    "text": "Xin giúp, Cho tôi xem thuốc cần uống",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "medication_schedule"
+    ],
+    "expected_roles": [
+      []
+    ],
+    "expected_confirmation": [
+      false
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g061",
+    "text": "Tôi không đau, chỉ muốn gọi con",
+    "group": "scope",
+    "context": {},
+    "expected_intents": [
+      "caregiver_contact"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g062",
+    "text": "Tôi không đau nhưng chóng mặt",
+    "group": "scope",
+    "context": {},
+    "expected_intents": [
+      "health_report"
+    ],
+    "expected_roles": [
+      [
+        "doctor",
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g063",
+    "text": "Tôi không muốn gọi bác sĩ",
+    "group": "scope",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "unknown"
+  },
+  {
+    "id": "g064",
+    "text": "Đừng gọi con, gọi bác sĩ",
+    "group": "scope",
+    "context": {},
+    "expected_intents": [
+      "doctor_contact"
+    ],
+    "expected_roles": [
+      [
+        "doctor"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g065",
+    "text": "Không, tôi cần bác sĩ",
+    "group": "scope",
+    "context": {},
+    "expected_intents": [
+      "doctor_contact"
+    ],
+    "expected_roles": [
+      [
+        "doctor"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g066",
+    "text": "Hôm qua tôi đau đầu, hôm nay đỡ rồi",
+    "group": "scope",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "ambiguous"
+  },
+  {
+    "id": "g067",
+    "text": "Nếu tôi đau thì gọi bác sĩ thế nào",
+    "group": "scope",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "ambiguous"
+  },
+  {
+    "id": "g068",
+    "text": "Con tôi bị đau đầu",
+    "group": "scope",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "ambiguous"
+  },
+  {
+    "id": "g069",
+    "text": "Hôm qua tôi bị ngã, giờ ổn rồi",
+    "group": "scope",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "ambiguous"
+  },
+  {
+    "id": "g070",
+    "text": "Nếu tôi không thở được thì sao",
+    "group": "scope",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "ambiguous"
+  },
+  {
+    "id": "g071",
+    "text": "Con tôi nói cứu tôi",
+    "group": "scope",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "ambiguous"
+  },
+  {
+    "id": "g072",
+    "text": "Tôi không đau đầu",
+    "group": "scope",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "unknown"
+  },
+  {
+    "id": "g073",
+    "text": "Đừng gọi bác sĩ",
+    "group": "scope",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "unknown"
+  },
+  {
+    "id": "g074",
+    "text": "Tôi không cần gọi con",
+    "group": "scope",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "unknown"
+  },
+  {
+    "id": "g075",
+    "text": "Cháu tôi bị đau bụng",
+    "group": "scope",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "ambiguous"
+  },
+  {
+    "id": "g076",
+    "text": "Tôi chưa muốn gọi con",
+    "group": "scope",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "unknown"
+  },
+  {
+    "id": "g077",
+    "text": "Tôi không cần gặp bác sĩ",
+    "group": "scope",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "unknown"
+  },
+  {
+    "id": "g078",
+    "text": "Đừng lấy nước giúp tôi",
+    "group": "scope",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "unknown"
+  },
+  {
+    "id": "g079",
+    "text": "Tôi không chóng mặt",
+    "group": "scope",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "unknown"
+  },
+  {
+    "id": "g080",
+    "text": "Tôi không buồn nôn",
+    "group": "scope",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "unknown"
+  },
+  {
+    "id": "g081",
+    "text": "Tôi không đau bụng",
+    "group": "scope",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "unknown"
+  },
+  {
+    "id": "g082",
+    "text": "Nếu tôi bị ngã không đứng dậy được",
+    "group": "scope",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "ambiguous"
+  },
+  {
+    "id": "g083",
+    "text": "Giả sử tôi cần bác sĩ",
+    "group": "scope",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "ambiguous"
+  },
+  {
+    "id": "g084",
+    "text": "Trước đây tôi không thở được",
+    "group": "scope",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "ambiguous"
+  },
+  {
+    "id": "g085",
+    "text": "Con tôi không thở được",
+    "group": "scope",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "ambiguous"
+  },
+  {
+    "id": "g086",
+    "text": "Bà ấy chóng mặt",
+    "group": "scope",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "ambiguous"
+  },
+  {
+    "id": "g087",
+    "text": "Ông ấy nói cứu tôi",
+    "group": "scope",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "ambiguous"
+  },
+  {
+    "id": "g088",
+    "text": "Tôi không muốn gặp bác sĩ, gọi con",
+    "group": "scope",
+    "context": {},
+    "expected_intents": [
+      "caregiver_contact"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g089",
+    "text": "Đừng gọi bác sĩ, lấy nước giúp tôi",
+    "group": "scope",
+    "context": {},
+    "expected_intents": [
+      "daily_assistance"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g090",
+    "text": "Tôi không đau đầu nhưng buồn nôn",
+    "group": "scope",
+    "context": {},
+    "expected_intents": [
+      "health_report"
+    ],
+    "expected_roles": [
+      [
+        "doctor",
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g091",
+    "text": "Tôi uống rồi",
+    "group": "context",
+    "context": {
+      "patient_id": "p1",
+      "medication_occurrence_id": "d1"
+    },
+    "expected_intents": [
+      "medication_taken"
+    ],
+    "expected_roles": [
+      []
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g092",
+    "text": "Đã uống thuốc",
+    "group": "context",
+    "context": {
+      "patient_id": "p1",
+      "medication_occurrence_id": "d1"
+    },
+    "expected_intents": [
+      "medication_taken"
+    ],
+    "expected_roles": [
+      []
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g093",
+    "text": "Tôi vừa uống xong",
+    "group": "context",
+    "context": {
+      "patient_id": "p1",
+      "medication_occurrence_id": "d1"
+    },
+    "expected_intents": [
+      "medication_taken"
+    ],
+    "expected_roles": [
+      []
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g094",
+    "text": "Tôi chưa uống thuốc",
+    "group": "context",
+    "context": {
+      "patient_id": "p1",
+      "medication_occurrence_id": "d1"
+    },
+    "expected_intents": [
+      "medication_not_taken"
+    ],
+    "expected_roles": [
+      []
+    ],
+    "expected_confirmation": [
+      false
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g095",
+    "text": "Chưa",
+    "group": "context",
+    "context": {
+      "patient_id": "p1",
+      "medication_occurrence_id": "d1"
+    },
+    "expected_intents": [
+      "medication_not_taken"
+    ],
+    "expected_roles": [
+      []
+    ],
+    "expected_confirmation": [
+      false
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g096",
+    "text": "Rồi",
+    "group": "context",
+    "context": {
+      "patient_id": "p1",
+      "medication_occurrence_id": "d1"
+    },
+    "expected_intents": [
+      "medication_taken"
+    ],
+    "expected_roles": [
+      []
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g097",
+    "text": "Nhắc lại sau",
+    "group": "context",
+    "context": {
+      "patient_id": "p1",
+      "medication_occurrence_id": "d1"
+    },
+    "expected_intents": [
+      "medication_snooze"
+    ],
+    "expected_roles": [
+      []
+    ],
+    "expected_confirmation": [
+      false
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g098",
+    "text": "Lát nữa nhắc tôi",
+    "group": "context",
+    "context": {
+      "patient_id": "p1",
+      "medication_occurrence_id": "d1"
+    },
+    "expected_intents": [
+      "medication_snooze"
+    ],
+    "expected_roles": [
+      []
+    ],
+    "expected_confirmation": [
+      false
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g099",
+    "text": "Mười phút nữa nhắc lại",
+    "group": "context",
+    "context": {
+      "patient_id": "p1",
+      "medication_occurrence_id": "d1"
+    },
+    "expected_intents": [
+      "medication_snooze"
+    ],
+    "expected_roles": [
+      []
+    ],
+    "expected_confirmation": [
+      false
+    ],
+    "expected_level": "strong",
+    "expected_parameters": [
+      {
+        "snooze_minutes": 10
+      }
+    ]
+  },
+  {
+    "id": "g100",
+    "text": "Tôi uống rồi",
+    "group": "context",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "ambiguous"
+  },
+  {
+    "id": "g101",
+    "text": "Nhắc lại sau",
+    "group": "context",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "ambiguous"
+  },
+  {
+    "id": "g102",
+    "text": "Dừng lại",
+    "group": "context",
+    "context": {
+      "patient_id": "p1",
+      "running": true
+    },
+    "expected_intents": [
+      "rehab_stop"
+    ],
+    "expected_roles": [
+      []
+    ],
+    "expected_confirmation": [
+      false
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g103",
+    "text": "Tôi không tập nữa",
+    "group": "context",
+    "context": {
+      "patient_id": "p1",
+      "running": true
+    },
+    "expected_intents": [
+      "rehab_stop"
+    ],
+    "expected_roles": [
+      []
+    ],
+    "expected_confirmation": [
+      false
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g104",
+    "text": "Xong rồi",
+    "group": "context",
+    "context": {
+      "patient_id": "p1",
+      "running": true
+    },
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "unknown"
+  },
+  {
+    "id": "g105",
+    "text": "Đúng rồi",
+    "group": "context",
+    "context": {
+      "patient_id": "p1",
+      "medication_occurrence_id": "d1"
+    },
+    "expected_intents": [
+      "confirm"
+    ],
+    "expected_roles": [
+      []
+    ],
+    "expected_confirmation": [
+      false
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g106",
+    "text": "Dừng bài tập, gọi con",
+    "group": "compound",
+    "context": {
+      "patient_id": "p1",
+      "running": true
+    },
+    "expected_intents": [
+      "rehab_stop",
+      "caregiver_contact"
+    ],
+    "expected_roles": [
+      [],
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      false,
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g107",
+    "text": "Tôi chóng mặt, gọi con",
+    "group": "compound",
+    "context": {},
+    "expected_intents": [
+      "caregiver_contact"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g108",
+    "text": "Tôi không thở được",
+    "group": "compound",
+    "context": {},
+    "expected_intents": [
+      "urgent_help"
+    ],
+    "expected_roles": [
+      [
+        "doctor",
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      false
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g109",
+    "text": "Cứu tôi",
+    "group": "compound",
+    "context": {},
+    "expected_intents": [
+      "urgent_help"
+    ],
+    "expected_roles": [
+      [
+        "doctor",
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      false
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g110",
+    "text": "Giúp tôi ngay",
+    "group": "compound",
+    "context": {},
+    "expected_intents": [
+      "urgent_help"
+    ],
+    "expected_roles": [
+      [
+        "doctor",
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      false
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g111",
+    "text": "Tôi bị ngã không đứng dậy được",
+    "group": "compound",
+    "context": {},
+    "expected_intents": [
+      "urgent_help"
+    ],
+    "expected_roles": [
+      [
+        "doctor",
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      false
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g112",
+    "text": "Tập đau quá",
+    "group": "compound",
+    "context": {
+      "patient_id": "p1",
+      "running": true
+    },
+    "expected_intents": [
+      "rehab_stop",
+      "rehab_discomfort"
+    ],
+    "expected_roles": [
+      [],
+      [
+        "doctor"
+      ]
+    ],
+    "expected_confirmation": [
+      false,
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g113",
+    "text": "Tôi không tìm thấy thuốc",
+    "group": "compound",
+    "context": {},
+    "expected_intents": [
+      "medication_assistance"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g114",
+    "text": "Tôi không hiểu liều thuốc",
+    "group": "compound",
+    "context": {},
+    "expected_intents": [
+      "medication_question"
+    ],
+    "expected_roles": [
+      [
+        "doctor"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g115",
+    "text": "Uống thuốc xong tôi thấy khó chịu",
+    "group": "compound",
+    "context": {},
+    "expected_intents": [
+      "medication_discomfort"
+    ],
+    "expected_roles": [
+      [
+        "doctor"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g116",
+    "text": "Cho tôi tập",
+    "group": "compound",
+    "context": {},
+    "expected_intents": [
+      "rehab_start"
+    ],
+    "expected_roles": [
+      []
+    ],
+    "expected_confirmation": [
+      false
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g117",
+    "text": "Tôi thấy khó chịu",
+    "group": "compound",
+    "context": {},
+    "expected_intents": [
+      "ambiguous_help"
+    ],
+    "expected_roles": [
+      []
+    ],
+    "expected_confirmation": [
+      false
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g118",
+    "text": "Bầu trời xanh",
+    "group": "compound",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "unknown"
+  },
+  {
+    "id": "g119",
+    "text": "Gọi bánh sĩ",
+    "group": "compound",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "unknown"
+  },
+  {
+    "id": "g120",
+    "text": "Hủy",
+    "group": "compound",
+    "context": {},
+    "expected_intents": [
+      "cancel"
+    ],
+    "expected_roles": [
+      []
+    ],
+    "expected_confirmation": [
+      false
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g121",
+    "text": "Dừng lại, cứu tôi",
+    "group": "multi_stt",
+    "context": {
+      "patient_id": "p1",
+      "running": true
+    },
+    "expected_intents": [
+      "rehab_stop",
+      "urgent_help"
+    ],
+    "expected_roles": [
+      [],
+      [
+        "doctor",
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      false,
+      false
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g122",
+    "text": "Dừng lại, gọi bác sĩ",
+    "group": "multi_stt",
+    "context": {
+      "patient_id": "p1",
+      "running": true
+    },
+    "expected_intents": [
+      "rehab_stop",
+      "doctor_contact"
+    ],
+    "expected_roles": [
+      [],
+      [
+        "doctor"
+      ]
+    ],
+    "expected_confirmation": [
+      false,
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g123",
+    "text": "Tôi chóng mặt, gọi bác sĩ",
+    "group": "multi_stt",
+    "context": {},
+    "expected_intents": [
+      "doctor_contact"
+    ],
+    "expected_roles": [
+      [
+        "doctor"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g124",
+    "text": "Đừng gọi bác sĩ, gọi người chăm sóc",
+    "group": "multi_stt",
+    "context": {},
+    "expected_intents": [
+      "caregiver_contact"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g125",
+    "text": "Tôi không đau, gọi con, lấy nước giúp tôi",
+    "group": "multi_stt",
+    "context": {},
+    "expected_intents": [
+      "caregiver_contact",
+      "daily_assistance"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ],
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true,
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g126",
+    "text": "Cứu tôi, gọi con",
+    "group": "multi_stt",
+    "context": {},
+    "expected_intents": [
+      "urgent_help"
+    ],
+    "expected_roles": [
+      [
+        "doctor",
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      false
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g127",
+    "text": "Tập đau quá, gọi con",
+    "group": "multi_stt",
+    "context": {
+      "patient_id": "p1",
+      "running": true
+    },
+    "expected_intents": [
+      "rehab_stop",
+      "caregiver_contact"
+    ],
+    "expected_roles": [
+      [],
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      false,
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g128",
+    "text": "Tôi chóng mặt sau khi uống, gọi con",
+    "group": "multi_stt",
+    "context": {},
+    "expected_intents": [
+      "caregiver_contact"
+    ],
+    "expected_roles": [
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g129",
+    "text": "Tôi uống rồi, gọi con",
+    "group": "multi_stt",
+    "context": {
+      "patient_id": "p1",
+      "medication_occurrence_id": "d1"
+    },
+    "expected_intents": [
+      "medication_taken",
+      "caregiver_contact"
+    ],
+    "expected_roles": [
+      [],
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true,
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g130",
+    "text": "Tôi chưa uống thuốc, gọi con",
+    "group": "multi_stt",
+    "context": {
+      "patient_id": "p1",
+      "medication_occurrence_id": "d1"
+    },
+    "expected_intents": [
+      "medication_not_taken",
+      "caregiver_contact"
+    ],
+    "expected_roles": [
+      [],
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      false,
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g131",
+    "text": "Gọi bác sĩ và gọi người nhà",
+    "group": "multi_stt",
+    "context": {},
+    "expected_intents": [
+      "doctor_contact",
+      "caregiver_contact"
+    ],
+    "expected_roles": [
+      [
+        "doctor"
+      ],
+      [
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true,
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g132",
+    "text": "toi uong roi",
+    "group": "multi_stt",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "unknown"
+  },
+  {
+    "id": "g133",
+    "text": "cuu toi",
+    "group": "multi_stt",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "unknown"
+  },
+  {
+    "id": "g134",
+    "text": "Gọi bắc sĩ",
+    "group": "multi_stt",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "unknown"
+  },
+  {
+    "id": "g135",
+    "text": "Tập đau quá, cứu tôi",
+    "group": "multi_stt",
+    "context": {
+      "patient_id": "p1",
+      "running": true
+    },
+    "expected_intents": [
+      "rehab_stop",
+      "urgent_help"
+    ],
+    "expected_roles": [
+      [],
+      [
+        "doctor",
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      false,
+      false
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g136",
+    "text": "Từ cứu tôi trong cuốn sách",
+    "group": "multi_stt",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "unknown"
+  },
+  {
+    "id": "g137",
+    "text": "Cứu tôi có nghĩa là gì",
+    "group": "multi_stt",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "unknown"
+  },
+  {
+    "id": "g138",
+    "text": "Bạn có không thở được không",
+    "group": "multi_stt",
+    "context": {},
+    "expected_intents": [],
+    "expected_roles": [],
+    "expected_confirmation": [],
+    "expected_level": "unknown"
+  },
+  {
+    "id": "g139",
+    "text": "Tôi mệt mỏi",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "health_report"
+    ],
+    "expected_roles": [
+      [
+        "doctor",
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g140",
+    "text": "Tôi đau chân",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "health_report"
+    ],
+    "expected_roles": [
+      [
+        "doctor",
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g141",
+    "text": "Tôi đau tay",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "health_report"
+    ],
+    "expected_roles": [
+      [
+        "doctor",
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  },
+  {
+    "id": "g142",
+    "text": "Tôi đau chân tay",
+    "group": "intent",
+    "context": {},
+    "expected_intents": [
+      "health_report"
+    ],
+    "expected_roles": [
+      [
+        "doctor",
+        "caregiver"
+      ]
+    ],
+    "expected_confirmation": [
+      true
+    ],
+    "expected_level": "strong"
+  }
+]

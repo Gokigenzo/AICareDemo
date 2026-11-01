@@ -1,0 +1,10 @@
+{
+  "output": "D:\\Code\\AICareDemo_HP\\AICareDemo\\docs\\ai_disclosure_phu_luc_vi\\PHIEU_KHAI_BAO_SU_DUNG_AI_AI_CARE_PHU_LUC_VI.docx",
+  "reference_sha256": "6c470e5f55f71af9127e65d154afa2dbf6db04a47fd3d0728f28f93cdf2e8f09",
+  "tools_rows": 6,
+  "prompt_summaries": 6,
+  "invented_identity_or_signatures": false,
+  "rendered_pages": 3,
+  "all_pages_visually_reviewed": true,
+  "output_sha256": "74DDEC2ACC7A1711841844AAD69E25CA543B4A2EFA2588E915DA6AF88E4D51E4"
+}

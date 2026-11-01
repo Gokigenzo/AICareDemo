@@ -1,0 +1,233 @@
+{
+  "schema_version": 1,
+  "pending_seconds": 60,
+  "repeat_seconds": 10,
+  "retention_days": 30,
+  "rules": [
+    {
+      "id": "local_urgent_help",
+      "intent": "urgent_help",
+      "patterns": [
+        "^(?:xin |hãy |làm ơn )?cứu tôi(?: với| ngay| giúp tôi)?$",
+        "^(?:xin |hãy |làm ơn )?giúp tôi ngay(?: với)?$",
+        "^(?:tôi )?không thở được(?: nữa| rồi)?$",
+        "^(?:tôi )?bị ngã không đứng dậy được(?: nữa| rồi)?$"
+      ],
+      "roles": [
+        "doctor",
+        "caregiver"
+      ],
+      "confirmation": false,
+      "context": "none"
+    },
+    {
+      "id": "local_doctor_contact",
+      "intent": "doctor_contact",
+      "patterns": [
+        "\\b(?:gọi|báo|nhờ|nhắn|gặp|liên hệ|cần|nói chuyện với) (?:cho )?bác s[ĩỹ]\\b"
+      ],
+      "roles": [
+        "doctor"
+      ],
+      "confirmation": true,
+      "context": "none"
+    },
+    {
+      "id": "local_caregiver_contact",
+      "intent": "caregiver_contact",
+      "patterns": [
+        "\\b(?:gọi|báo|nhờ|nhắn|gặp|liên hệ|nói chuyện với) (?:cho )?(?:con(?: tôi)?|cháu(?: tôi)?|người nhà|người thân|người chăm sóc)\\b"
+      ],
+      "roles": [
+        "caregiver"
+      ],
+      "confirmation": true,
+      "context": "none"
+    },
+    {
+      "id": "local_daily_assistance",
+      "intent": "daily_assistance",
+      "patterns": [
+        "\\b(?:lấy nước|đi vệ sinh|giúp tôi đứng dậy|mang đồ ăn)\\b"
+      ],
+      "roles": [
+        "caregiver"
+      ],
+      "confirmation": true,
+      "context": "none"
+    },
+    {
+      "id": "local_companionship",
+      "intent": "companionship",
+      "patterns": [
+        "\\b(?:cô đơn|muốn có người ở đây)\\b"
+      ],
+      "roles": [
+        "caregiver"
+      ],
+      "confirmation": true,
+      "context": "none"
+    },
+    {
+      "id": "local_medication_schedule",
+      "intent": "medication_schedule",
+      "patterns": [
+        "\\b(?:đến giờ uống thuốc|hôm nay uống thuốc gì|xem thuốc|lịch thuốc)\\b"
+      ],
+      "roles": [],
+      "confirmation": false,
+      "context": "none"
+    },
+    {
+      "id": "local_medication_taken",
+      "intent": "medication_taken",
+      "patterns": [
+        "\\b(?:tôi (?:đã )?uống rồi|đã uống thuốc|vừa uống xong|uống xong rồi)\\b",
+        "^(?:rồi|đã uống)$"
+      ],
+      "roles": [],
+      "confirmation": true,
+      "context": "dose"
+    },
+    {
+      "id": "local_medication_not_taken",
+      "intent": "medication_not_taken",
+      "patterns": [
+        "\\b(?:tôi chưa uống(?: thuốc)?|chưa uống thuốc)\\b",
+        "^chưa$"
+      ],
+      "roles": [],
+      "confirmation": false,
+      "context": "dose"
+    },
+    {
+      "id": "local_medication_snooze",
+      "intent": "medication_snooze",
+      "patterns": [
+        "\\b(?:nhắc lại sau|lát nữa nhắc tôi|mười phút nữa nhắc lại)\\b",
+        "^nhắc lại$"
+      ],
+      "roles": [],
+      "confirmation": false,
+      "context": "dose"
+    },
+    {
+      "id": "local_medication_assistance",
+      "intent": "medication_assistance",
+      "patterns": [
+        "\\b(?:không tìm thấy thuốc|không biết lấy viên nào|giúp tôi uống thuốc)\\b"
+      ],
+      "roles": [
+        "caregiver"
+      ],
+      "confirmation": true,
+      "context": "none"
+    },
+    {
+      "id": "local_medication_question",
+      "intent": "medication_question",
+      "patterns": [
+        "\\b(?:không hiểu liều thuốc|hỏi bác s[ĩỹ] về thuốc)\\b"
+      ],
+      "roles": [
+        "doctor"
+      ],
+      "confirmation": true,
+      "context": "none"
+    },
+    {
+      "id": "local_medication_discomfort",
+      "intent": "medication_discomfort",
+      "patterns": [
+        "\\b(?:uống thuốc xong tôi thấy khó chịu|chóng mặt sau khi uống|khó chịu sau khi uống thuốc)\\b"
+      ],
+      "roles": [
+        "doctor"
+      ],
+      "confirmation": true,
+      "context": "none"
+    },
+    {
+      "id": "local_rehab_start",
+      "intent": "rehab_start",
+      "patterns": [
+        "\\b(?:cho tôi tập|mở bài tập|đến giờ tập|bài tập hôm nay)\\b"
+      ],
+      "roles": [],
+      "confirmation": false,
+      "context": "none"
+    },
+    {
+      "id": "local_rehab_stop",
+      "intent": "rehab_stop",
+      "patterns": [
+        "\\b(?:dừng lại|dừng bài tập|muốn nghỉ|không tập nữa)\\b"
+      ],
+      "roles": [],
+      "confirmation": false,
+      "context": "exercise"
+    },
+    {
+      "id": "local_rehab_discomfort",
+      "intent": "rehab_discomfort",
+      "patterns": [
+        "\\b(?:tập đau quá|không khỏe khi tập|khó chịu khi tập)\\b"
+      ],
+      "roles": [
+        "doctor"
+      ],
+      "confirmation": true,
+      "context": "none"
+    },
+    {
+      "id": "local_health_report",
+      "intent": "health_report",
+      "patterns": [
+        "\\b(?:đau đầu|nhức đầu|chóng mặt|buồn nôn|đau bụng|thấy không khỏe|mệt mỏi|mỏi mệt|thấy mệt|mệt quá|người mệt|mệt trong người|mệt lắm|mệt|đau chân|đau tay|đau chân tay|đau tay chân|mỏi chân|mỏi tay|mỏi chân tay|mỏi tay chân|nhức chân|nhức tay|đau khớp|đau lưng|đau người|đau nhức|nhức mỏi)\\b"
+      ],
+      "roles": [
+        "doctor",
+        "caregiver"
+      ],
+      "confirmation": true,
+      "context": "none"
+    },
+    {
+      "id": "local_ambiguous_help",
+      "intent": "ambiguous_help",
+      "patterns": [
+        "^(?:giúp tôi với|tôi cần hỗ trợ|tôi thấy khó chịu)$"
+      ],
+      "roles": [],
+      "confirmation": false,
+      "context": "none"
+    },
+    {
+      "id": "local_confirm",
+      "intent": "confirm",
+      "patterns": [
+        "^(?:đúng rồi|đồng ý|xác nhận)$"
+      ],
+      "roles": [],
+      "confirmation": false,
+      "context": "none"
+    },
+    {
+      "id": "local_cancel",
+      "intent": "cancel",
+      "patterns": [
+        "^(?:không|hủy|thôi không cần nữa|báo nhầm)$"
+      ],
+      "roles": [],
+      "confirmation": false,
+      "context": "none"
+    }
+  ],
+  "request_ttl_seconds": 1800,
+  "retry_seconds": 5,
+  "retry_max": 3,
+  "snooze_max_minutes": 30,
+  "snooze_duration_aliases": {
+    "mười phút": 10
+  }
+}

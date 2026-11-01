@@ -1,0 +1,91 @@
+{
+  "manifest_version": "1.0.0",
+  "description": "AI Models Manifest for AI Rehabilitation & Safety Assistant Windows Release",
+  "generated_at": "2026-10-10T21:28:30Z",
+  "models": [
+    {
+      "id": "mediapipe-face-landmarker",
+      "name": "MediaPipe Face Landmarker Task",
+      "target_path": "modules/emotion/models/face_landmarker.task",
+      "size_bytes": 3758596,
+      "sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+      "source_url": "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/latest/face_landmarker.task",
+      "required_for_core": true,
+      "category": "vision_emotion"
+    },
+    {
+      "id": "mediapipe-pose-landmarker",
+      "name": "MediaPipe Pose Landmarker Lite Task",
+      "target_path": "modules/rehabilitation/models/pose_landmarker_lite.task",
+      "size_bytes": 5777746,
+      "sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a",
+      "source_url": "https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/latest/pose_landmarker_lite.task",
+      "required_for_core": true,
+      "category": "vision_rehab"
+    },
+    {
+      "id": "opencv-face-detector-pb",
+      "name": "OpenCV Res10 SSD Face Detector uint8",
+      "target_path": "modules/face/models/opencv_face_detector_uint8.pb",
+      "size_bytes": 2727750,
+      "sha256": "5c71d752ef2cbf2f457ac82fdd580fcb2522fd04c5efdaed18eb6d9e2843fbed",
+      "source_url": "https://raw.githubusercontent.com/opencv/opencv_3rdparty/dnn_samples_face_detector_20180220_uint8/opencv_face_detector_uint8.pb",
+      "required_for_core": true,
+      "category": "vision_face"
+    },
+    {
+      "id": "expression-net-pth",
+      "name": "ExpressionNet MLP Weight",
+      "target_path": "modules/emotion/models/expression_net.pth",
+      "size_bytes": 71785,
+      "sha256": "f3580ca70a3eafa819fb5941402fe85e50a403fb71697f38991f2d2387488b91",
+      "source_url": "",
+      "required_for_core": true,
+      "category": "vision_emotion"
+    },
+    {
+      "id": "zipformer-vi-encoder-int8-onnx",
+      "name": "Vietnamese Zipformer INT8 encoder.int8.onnx",
+      "target_path": "data/models/sherpa-onnx-zipformer-vi-30M-int8-2026-02-09/encoder.int8.onnx",
+      "size_bytes": 27699063,
+      "sha256": "8ef5286dd427eb108055c2ddc1982aa31e544706072d5ea228729292dacade68",
+      "source_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-zipformer-vi-30M-int8-2026-02-09.tar.bz2",
+      "required_for_core": false,
+      "category": "speech_stt",
+      "archive_member": "sherpa-onnx-zipformer-vi-30M-int8-2026-02-09/encoder.int8.onnx"
+    },
+    {
+      "id": "zipformer-vi-decoder-onnx",
+      "name": "Vietnamese Zipformer INT8 decoder.onnx",
+      "target_path": "data/models/sherpa-onnx-zipformer-vi-30M-int8-2026-02-09/decoder.onnx",
+      "size_bytes": 5165084,
+      "sha256": "cf2aa385b82c9d5d40cd29c3188af52d0249b3b78f0d4b7eb84ad502d50c7e7f",
+      "source_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-zipformer-vi-30M-int8-2026-02-09.tar.bz2",
+      "required_for_core": false,
+      "category": "speech_stt",
+      "archive_member": "sherpa-onnx-zipformer-vi-30M-int8-2026-02-09/decoder.onnx"
+    },
+    {
+      "id": "zipformer-vi-joiner-int8-onnx",
+      "name": "Vietnamese Zipformer INT8 joiner.int8.onnx",
+      "target_path": "data/models/sherpa-onnx-zipformer-vi-30M-int8-2026-02-09/joiner.int8.onnx",
+      "size_bytes": 1033417,
+      "sha256": "7311d2e17b810ecea515d79c71cc4668af8759256a06fa01d27047772320c821",
+      "source_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-zipformer-vi-30M-int8-2026-02-09.tar.bz2",
+      "required_for_core": false,
+      "category": "speech_stt",
+      "archive_member": "sherpa-onnx-zipformer-vi-30M-int8-2026-02-09/joiner.int8.onnx"
+    },
+    {
+      "id": "zipformer-vi-tokens-txt",
+      "name": "Vietnamese Zipformer INT8 tokens.txt",
+      "target_path": "data/models/sherpa-onnx-zipformer-vi-30M-int8-2026-02-09/tokens.txt",
+      "size_bytes": 23238,
+      "sha256": "ca8171f8bbd516c050b627582f2125c8f5f1f6ed967ab41b0fa9aae2cf61b492",
+      "source_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-zipformer-vi-30M-int8-2026-02-09.tar.bz2",
+      "required_for_core": false,
+      "category": "speech_stt",
+      "archive_member": "sherpa-onnx-zipformer-vi-30M-int8-2026-02-09/tokens.txt"
+    }
+  ]
+}

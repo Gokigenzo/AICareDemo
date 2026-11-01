@@ -1,0 +1,141 @@
+/* AI Care: quiet surfaces, mist-blue accents and clear information hierarchy. */
+:root {
+  --primary:#367B8D; --primary-hover:#285E6E; --primary-bg:#DDEDF0;
+  --navy:#203238; --text:#40545B; --muted:#7A8A90; --border:#E3E9EB;
+  --bg:#F1F4F5; --card-bg:#FCFDFD; --indigo:#627B91;
+}
+body { background:#F1F4F5; color:var(--text); font-size:14px; -webkit-font-smoothing:antialiased; }
+header { background:#FAFCFD; border-bottom:1px solid var(--border); padding:20px 30px; box-shadow:none; gap:20px; }
+.brand-icon { background:#DFEDF1; color:#347B90; border-radius:11px; box-shadow:none; }
+.brand-title { font-size:16px; font-weight:650; letter-spacing:-.35px; color:#203238; }
+.brand-sub { font-size:11px; line-height:1.6; color:#89979B; }
+.header-controls { gap:14px; flex-wrap:wrap; }
+.user-info { font-size:13px; }
+.select-patient { background:#FFF; border:1px solid #DFE6E8; border-radius:9px; font-weight:500; max-width:270px; }
+.simulation-banner,.admin-banner { background:#EAF0F2; color:#61787F; box-shadow:none; font-size:11px; font-weight:500; letter-spacing:.2px; border-bottom:1px solid #DFE6E8; }
+.emergency-banner { border:1px solid #EBDCC5; border-radius:10px; background:#FFF9EF; margin:20px 30px 0; padding:12px 16px; }
+.card,.chart-card,.chat-card,.metric-card,.sidebar-patients { background:#FCFDFD; border:1px solid #E5EBED; box-shadow:0 3px 14px rgba(33,55,65,.025); border-radius:14px; }
+.card { padding:24px; margin-bottom:22px; }
+.card-title,.card h2 { color:#22363C; font-size:17px; font-weight:650; letter-spacing:-.25px; }
+.card-sub,.card-header-bar p { color:#829197; font-size:12px; }
+.metrics-grid { gap:16px; margin-bottom:25px; }
+.metric-card { padding:22px; min-height:132px; align-items:flex-start; }
+.metric-card:nth-child(2) { background:#DCECF0; border-color:#DCECF0; }
+.metric-value { color:#1C3138; font-size:30px; letter-spacing:-1px; font-weight:600; }
+.metric-label { color:#40575F; font-size:12px; }
+.metric-sub { color:#83949A; font-size:11px; margin-top:8px; }
+.metric-icon-box { width:38px; height:38px; border-radius:50%; font-size:18px; background:#F5F9FA !important; color:#508492 !important; }
+.tabs-nav { border-bottom:0; gap:6px; padding:5px; background:#E9EFF1; border-radius:10px; }
+.tab-btn { border:0; border-radius:7px; color:#6C8088; font-size:13px; font-weight:500; padding:11px 15px; }
+.tab-btn.active { color:#285D6B; background:#FFFFFF; border:0; box-shadow:0 1px 5px #CFDADF55; }
+.tab-btn:hover { background:#F6FAFA; color:#285D6B; }
+button { transition:background .15s,border-color .15s; }
+button:focus-visible,a:focus-visible { outline:3px solid #8ABBC7; outline-offset:3px; }
+.btn-primary,.btn-submit { background:#367B8D; border:1px solid #367B8D; border-radius:8px; font-weight:600; box-shadow:none; }
+.btn-primary:hover,.btn-submit:hover { background:#285E6E; }
+.btn-secondary,.btn-copy,.btn-logout { border:1px solid #DFE6E8; background:#FFF; border-radius:8px; font-weight:500; }
+.form-control,.filter-select,.search-input-box { border:1px solid #DFE6E8; border-radius:8px; background:#FFF; }
+.form-control:focus { border-color:#659EAD; box-shadow:0 0 0 3px #DDEDF088; }
+table { border-collapse:separate; border-spacing:0; font-size:13px; }
+thead th { background:#F5F8F9; color:#7A8B91; font-size:11px; font-weight:500; letter-spacing:.15px; border-bottom:1px solid #E7EDF0; padding:16px 14px; }
+tbody td { border-bottom:1px solid #EEF2F3; padding:17px 14px; }
+tbody tr:hover { background:#F7FBFC; }
+.badge,.status-badge,.tab-counter { font-size:11px; font-weight:500; border-radius:5px; }
+.summary-chip { background:#F5F8F9; border:0; border-radius:10px; }
+.summary-chip:nth-child(2) { background:#E6EFF2; }
+.chart-card { padding:22px; }
+.chart-card svg { max-width:100%; }
+.chat-card-header { background:#F8FBFC; border-bottom:1px solid #E7EDF0; }
+/* Preserve the existing navigation/actions, move them into a calm left rail. */
+.portal-caregiver::before,.portal-admin::before { content:''; position:fixed; inset:0 auto 0 0; width:232px; background:#FAFCFD; border-right:1px solid #E0E7E9; z-index:90; }
+.portal-caregiver header,.portal-admin header { margin-left:232px; min-height:84px; }
+.portal-admin .admin-banner { margin-left:232px; }
+.portal-caregiver header>.brand,.portal-admin header>.brand { position:fixed; left:22px; top:32px; width:188px; z-index:112; display:flex; flex-wrap:wrap; gap:10px; }
+.portal-caregiver .brand-title,.portal-admin .brand-title { font-size:14px; line-height:1.6; }
+.portal-caregiver .brand-sub,.portal-admin .brand-sub { display:block; font-size:10px; line-height:1.65; }
+.portal-caregiver .container,.portal-admin .container { max-width:none; margin:26px 30px 32px 262px; padding:0; }
+.portal-caregiver .emergency-banner { margin-left:262px; }
+.portal-caregiver .tabs-nav,.portal-admin .tabs-nav-container { position:fixed; z-index:112; top:193px; left:14px; width:204px; display:flex; flex-direction:column; align-items:stretch; gap:6px; border:0 !important; margin:0 !important; background:transparent; padding:0; max-height:calc(100vh - 215px); overflow:auto; }
+.portal-caregiver .tabs-nav .tab-btn,.portal-admin .main-tab-btn { white-space:normal; text-align:left; border:0; border-radius:8px; padding:13px 14px; font-size:13px; line-height:1.65; background:transparent; color:#6B7D84; width:100%; }
+.portal-caregiver .tabs-nav .tab-btn.active,.portal-admin .main-tab-btn.active { background:#DDECF0; color:#285D6B; box-shadow:none; }
+.portal-admin .main-tab-btn strong { font-size:12px; font-weight:600; }
+.portal-admin .main-tab-btn .tab-counter { margin-left:0; background:#F5FAFB; }
+.portal-clinician .app-layout { max-width:none; padding:0 30px; gap:22px; margin-top:24px; }
+.portal-clinician .sidebar-patients { width:240px; padding:18px 14px; background:#F9FCFC; }
+.portal-clinician .sidebar-title { font-size:14px; font-weight:600; }
+.portal-clinician .patient-card { border:1px solid #E5ECEF; border-radius:9px; background:#FFF; }
+.portal-clinician .patient-card.active { background:#E0EDF1; border-color:#CBDDE3; }
+.portal-clinician .main-content { min-width:0; }
+/* Login: two-column form and a CSS illustration made from this product's UI. */
+.login-page { background:#DEE2E5; padding:48px 36px; }
+.login-shell { width:min(1180px,100%); min-height:730px; display:grid; grid-template-columns:1fr 1fr; gap:24px; background:#FAFBFC; border:1px solid #FFF; border-radius:17px; padding:18px; box-shadow:0 18px 70px #526C7A12; }
+.login-page .login-card { background:transparent; width:100%; max-width:none; padding:38px 54px 26px; border:0; box-shadow:none; border-radius:0; }
+.login-page .brand-section { text-align:left; margin-bottom:42px; }
+.login-page .brand-icon { margin:0 0 15px; background:#DDECF1; color:#286C84; border-radius:9px; width:42px; height:42px; font-size:23px; }
+.login-page .brand-title { font-size:16px; color:#213B45; letter-spacing:-.3px; }
+.login-page .brand-sub { color:#849399; margin-top:6px; font-size:11px; }
+.login-page .role-toggle { background:#EEF2F4; padding:4px; border:1px solid #E3E9EC; border-radius:9px; box-shadow:none; }
+.login-page .role-toggle-btn { font-size:12px; border-radius:6px; padding:10px 5px; font-weight:500; }
+.login-page .role-toggle-btn.active { background:#FFF; color:#286B84; box-shadow:0 1px 4px #D1DBDF88; }
+.login-page .role-caption { font-size:12px; text-align:left; color:#76868E; padding-top:9px; }
+.login-page .form-group { margin-bottom:19px; }
+.login-page label { font-size:12px; color:#354A54; font-weight:500; }
+.login-page input { padding:12px 14px; border:1px solid #D9E1E5; border-radius:7px; background:#FFF; font-size:14px; }
+.login-page input:focus { outline:3px solid #DCEBF2; border-color:#70A2B8; }
+.login-page .btn-submit { background:#1976A6; border:1px solid #14628B; font-size:14px; padding:13px; margin-top:8px; }
+.login-page .btn-submit:hover { background:#155F87; }
+.login-help { margin-top:30px; border-top:1px solid #E2E8EB; padding-top:17px; font-size:12px; color:#74868F; }
+.login-help summary { cursor:pointer; color:#5D7886; }
+.login-help .quick-section { margin-top:15px; }
+.login-visual { position:relative; overflow:hidden; background:linear-gradient(155deg,#0646A3 0%,#1459B9 54%,#438BE8 100%); border-radius:12px; min-height:690px; color:white; padding:42px; }
+.login-visual::before { content:''; position:absolute; width:450px; height:450px; border:65px solid #FFFFFF05; border-radius:50%; left:100px; top:-170px; }
+.login-visual .visual-brand { font-size:14px; letter-spacing:2px; color:#D6E8FF; font-weight:600; }
+.login-visual h2 { position:relative; margin-top:28px; max-width:310px; font-size:29px; line-height:1.3; font-weight:500; color:#FFF; letter-spacing:-.7px; }
+.login-visual p { position:relative; color:#CCE0FC; font-size:13px; line-height:1.8; max-width:260px; margin-top:14px; }
+.preview-device { position:absolute; top:290px; left:70px; width:570px; height:480px; background:#111D29; padding:13px; border:2px solid #93B1C2; border-radius:26px; box-shadow:-15px 20px 25px #072A6655; transform:rotate(-19deg); }
+.preview-screen { height:100%; background:#F1F5F7; border-radius:13px; overflow:hidden; color:#375562; display:grid; grid-template-columns:112px 1fr; }
+.preview-rail { padding:23px 12px; background:#FBFDFE; border-right:1px solid #E0E8ED; font-size:9px; line-height:3.9; }
+.preview-rail b { display:block; font-size:13px; color:#2B657A; margin-bottom:20px; }
+.preview-main { padding:25px 18px; }
+.preview-main h3 { font-size:17px; font-weight:600; margin-bottom:18px; }
+.preview-tiles { display:flex; gap:9px; }
+.preview-tiles span { background:#FFF; border-radius:7px; padding:14px 9px; font-size:9px; flex:1; }
+.preview-tiles span:nth-child(2) { background:#D9EAF0; }
+.preview-chart { padding:15px; background:#FFF; margin-top:15px; border-radius:9px; font-size:10px; }
+.preview-chart svg { width:100%; height:90px; display:block; margin-top:14px; }
+.preview-lines { background:repeating-linear-gradient(to bottom,#EAF0F3 0px,#EAF0F3 1px,#FFF 1px,#FFF 33px); height:100px; margin-top:14px; border-radius:8px; }
+@media(max-width:1100px) {
+  .header-controls { gap:8px; }
+  .brand-sub { max-width:190px; }
+  .login-page .login-card { padding:32px 25px; }
+}
+@media(max-width:900px) {
+  .portal-caregiver::before,.portal-admin::before { display:none; }
+  .portal-caregiver header,.portal-admin header,.portal-admin .admin-banner { margin-left:0; }
+  .portal-caregiver header>.brand,.portal-admin header>.brand { position:static; width:auto; max-width:230px; }
+  header { flex-wrap:wrap; padding:16px; }
+  .portal-caregiver .container,.portal-admin .container { margin:20px 16px; }
+  .portal-caregiver .emergency-banner { margin:16px; }
+  .portal-caregiver .tabs-nav,.portal-admin .tabs-nav-container { position:static; width:auto; flex-direction:row; overflow-x:auto; max-height:none; margin-bottom:18px !important; background:#E9EFF1; padding:4px; }
+  .portal-caregiver .tabs-nav .tab-btn,.portal-admin .main-tab-btn { width:auto; min-width:150px; }
+  .portal-clinician .app-layout { padding:0 16px; flex-direction:column; }
+  .portal-clinician .sidebar-patients { position:static; width:100%; max-height:260px; }
+  .portal-clinician .main-content { width:100%; }
+  .metrics-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .login-shell { min-height:0; grid-template-columns:1fr; max-width:560px; }
+  .login-visual { display:none; }
+  .login-page { padding:24px 14px; }
+  .login-page .brand-section { margin-bottom:28px; }
+}
+@media(prefers-reduced-motion:reduce) { * { transition:none !important; } }
+
+.metric-box { background:#FCFDFD; border:1px solid #E5EBED; border-radius:13px; padding:20px; box-shadow:0 3px 14px rgba(33,55,65,.02); }
+.metric-box:nth-child(2) { background:#DCECF0; border-color:#DCECF0; }
+.metric-box .metric-value { font-size:27px; font-weight:600; }
+@media(max-width:900px) {
+  .portal-clinician .tabs-nav { max-width:100%; overflow-x:auto; }
+  .portal-clinician .card-title { flex-wrap:wrap; align-items:flex-start; }
+  .portal-clinician .card-title > div { flex-wrap:wrap; max-width:100%; }
+  .portal-clinician .card-title select { max-width:100%; }
+  .portal-clinician .chart-controls { flex-wrap:wrap; max-width:100%; }
+}

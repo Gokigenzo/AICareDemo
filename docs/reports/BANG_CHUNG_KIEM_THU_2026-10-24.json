@@ -1,0 +1,284 @@
+{
+  "date": "2026-10-24",
+  "source_commit": "1b7512e66e0e04ba9d7eca2ffae022a550cec9d9",
+  "method": "Windows; temporary databases; QT_QPA_PLATFORM=offscreen; AI_CARE_DISABLE_CAMERA=1",
+  "runs": [
+    {
+      "source": "runtime/report-verification/results.xml",
+      "groups": {
+        "tests.test_elder_prescription_audio_regression": {
+          "total": 7,
+          "passed": 7
+        },
+        "tests.test_family_music": {
+          "total": 15,
+          "passed": 15
+        },
+        "tests.test_caregiver_clinician_health_sync": {
+          "total": 3,
+          "failed": 2,
+          "passed": 1
+        },
+        "tests.test_caregiver_desktop_registration_flow.TestCaregiverDesktopRegistrationFlow": {
+          "total": 2,
+          "passed": 2
+        },
+        "tests.test_prescription_cancel_sync": {
+          "total": 1,
+          "passed": 1
+        },
+        "tests.test_caregiver_rehab_config_sync.TestCaregiverRehabConfigSync": {
+          "total": 6,
+          "passed": 5,
+          "failed": 1
+        },
+        "tests.test_emotion_summary": {
+          "total": 1,
+          "passed": 1
+        }
+      },
+      "issues": [
+        {
+          "class": "tests.test_caregiver_clinician_health_sync",
+          "test": "test_doctor_and_caregiver_overview_perfectly_synchronized",
+          "status": "failed",
+          "message": "AssertionError: assert None is not None\n +  where None = <built-in method get of dict object at 0x000001F0D8F06F40>('latest_blood_pressure')\n +    where <built-in method get of dict object at 0x000001F0D8F06F40> = {'patient': {'patient_id': 'patient_001', 'user_id': 'user_pat_001', 'full_name': 'Cụ Hoàng Anh', 'date_of_birth': '1951-04-15', ...}, 'patient_id': 'patient_001', 'full_name': 'Cụ Hoàng Anh', 'gender': 'Nam', ...}.get"
+        },
+        {
+          "class": "tests.test_caregiver_clinician_health_sync",
+          "test": "test_doctor_and_caregiver_observations_chart_data_identical",
+          "status": "failed",
+          "message": "assert 0 > 0\n +  where 0 = len([])"
+        },
+        {
+          "class": "tests.test_caregiver_rehab_config_sync.TestCaregiverRehabConfigSync",
+          "test": "test_desktop_app_live_sync_and_ui_update",
+          "status": "failed",
+          "message": "AssertionError: '12 VƯƠN TAY' not found in '🔄 Bắt đầu chuỗi bài tập 15:45\\n(12 vươn tay ➔ 10 đứng ngồi ➔ 18 đi bộ)'"
+        }
+      ]
+    },
+    {
+      "source": "runtime/report-verification-additional/results.xml",
+      "groups": {
+        "tests.local_rules.test_dashboard": {
+          "total": 3,
+          "passed": 3
+        },
+        "tests.local_rules.test_desktop": {
+          "total": 26,
+          "passed": 25,
+          "failed": 1
+        },
+        "tests.local_rules.test_elder_doctor_caregiver_sync": {
+          "total": 12,
+          "error": 12
+        },
+        "tests.local_rules.test_engine": {
+          "total": 153,
+          "passed": 153
+        },
+        "tests.local_rules.test_local_rules_medication": {
+          "total": 7,
+          "passed": 7
+        },
+        "tests.local_rules.test_requests": {
+          "total": 15,
+          "passed": 13,
+          "failed": 2
+        },
+        "tests.test_routine_and_games.TestRehabRoutineAndCognitiveGames": {
+          "total": 6,
+          "passed": 6
+        },
+        "tests.test_vitals_sync_regression": {
+          "total": 13,
+          "passed": 13
+        }
+      },
+      "issues": [
+        {
+          "class": "tests.local_rules.test_desktop",
+          "test": "test_voice_snapshot_requires_real_identity_mapping",
+          "status": "failed",
+          "message": "sqlite3.IntegrityError: UNIQUE constraint failed: legacy_patient_map.legacy_id"
+        },
+        {
+          "class": "tests.local_rules.test_elder_doctor_caregiver_sync",
+          "test": "test_doctor_resolution_and_dispatch",
+          "status": "error",
+          "message": "failed on setup with \"sqlite3.IntegrityError: UNIQUE constraint failed: patients.patient_id\""
+        },
+        {
+          "class": "tests.local_rules.test_elder_doctor_caregiver_sync",
+          "test": "test_caregiver_resolution_and_dispatch",
+          "status": "error",
+          "message": "failed on setup with \"sqlite3.IntegrityError: UNIQUE constraint failed: patients.patient_id\""
+        },
+        {
+          "class": "tests.local_rules.test_elder_doctor_caregiver_sync",
+          "test": "test_both_doctor_and_caregiver_spoken_command",
+          "status": "error",
+          "message": "failed on setup with \"sqlite3.IntegrityError: UNIQUE constraint failed: patients.patient_id\""
+        },
+        {
+          "class": "tests.local_rules.test_elder_doctor_caregiver_sync",
+          "test": "test_urgent_help_dispatches_to_both",
+          "status": "error",
+          "message": "failed on setup with \"sqlite3.IntegrityError: UNIQUE constraint failed: patients.patient_id\""
+        },
+        {
+          "class": "tests.local_rules.test_elder_doctor_caregiver_sync",
+          "test": "test_patient_002_also_synchronized",
+          "status": "error",
+          "message": "failed on setup with \"sqlite3.IntegrityError: UNIQUE constraint failed: patients.patient_id\""
+        },
+        {
+          "class": "tests.local_rules.test_elder_doctor_caregiver_sync",
+          "test": "test_health_report_symptoms_dispatch_to_both_doctor_and_caregiver[T\\xf4i m\\u1ec7t m\\u1ecfi]",
+          "status": "error",
+          "message": "failed on setup with \"sqlite3.IntegrityError: UNIQUE constraint failed: patients.patient_id\""
+        },
+        {
+          "class": "tests.local_rules.test_elder_doctor_caregiver_sync",
+          "test": "test_health_report_symptoms_dispatch_to_both_doctor_and_caregiver[T\\xf4i \\u0111au b\\u1ee5ng]",
+          "status": "error",
+          "message": "failed on setup with \"sqlite3.IntegrityError: UNIQUE constraint failed: patients.patient_id\""
+        },
+        {
+          "class": "tests.local_rules.test_elder_doctor_caregiver_sync",
+          "test": "test_health_report_symptoms_dispatch_to_both_doctor_and_caregiver[T\\xf4i \\u0111au \\u0111\\u1ea7u]",
+          "status": "error",
+          "message": "failed on setup with \"sqlite3.IntegrityError: UNIQUE constraint failed: patients.patient_id\""
+        },
+        {
+          "class": "tests.local_rules.test_elder_doctor_caregiver_sync",
+          "test": "test_health_report_symptoms_dispatch_to_both_doctor_and_caregiver[T\\xf4i \\u0111au ch\\xe2n]",
+          "status": "error",
+          "message": "failed on setup with \"sqlite3.IntegrityError: UNIQUE constraint failed: patients.patient_id\""
+        },
+        {
+          "class": "tests.local_rules.test_elder_doctor_caregiver_sync",
+          "test": "test_health_report_symptoms_dispatch_to_both_doctor_and_caregiver[T\\xf4i \\u0111au tay]",
+          "status": "error",
+          "message": "failed on setup with \"sqlite3.IntegrityError: UNIQUE constraint failed: patients.patient_id\""
+        },
+        {
+          "class": "tests.local_rules.test_elder_doctor_caregiver_sync",
+          "test": "test_health_report_symptoms_dispatch_to_both_doctor_and_caregiver[T\\xf4i \\u0111au ch\\xe2n tay]",
+          "status": "error",
+          "message": "failed on setup with \"sqlite3.IntegrityError: UNIQUE constraint failed: patients.patient_id\""
+        },
+        {
+          "class": "tests.local_rules.test_elder_doctor_caregiver_sync",
+          "test": "test_health_report_symptoms_dispatch_to_both_doctor_and_caregiver[T\\xf4i th\\u1ea5y m\\u1ec7t qu\\xe1]",
+          "status": "error",
+          "message": "failed on setup with \"sqlite3.IntegrityError: UNIQUE constraint failed: patients.patient_id\""
+        },
+        {
+          "class": "tests.local_rules.test_requests",
+          "test": "test_same_recipient_two_roles",
+          "status": "failed",
+          "message": "sqlite3.IntegrityError: UNIQUE constraint failed: caregivers.user_id"
+        },
+        {
+          "class": "tests.local_rules.test_requests",
+          "test": "test_no_identity_mapping_or_stale_recipient",
+          "status": "failed",
+          "message": "Failed: DID NOT RAISE ValueError"
+        }
+      ]
+    }
+  ],
+  "source_commit_note": "GitHub baseline only; local Zipformer changes observed after this commit. Portable ZIP validation predates those changes.",
+  "zipformer_benchmark": {
+    "cold_load_ms": 1958,
+    "results": [
+      {
+        "session_id": "",
+        "status": "completed",
+        "transcript": "RỒI CŨNG HỖ TRỢ CHO LÂU LÂU CŨNG CHO GẠO CHO NÀY KIA",
+        "language": "vi",
+        "audio_duration_ms": 3740,
+        "inference_ms": 171,
+        "device": "cpu",
+        "model": "sherpa-onnx-zipformer-vi-30M-int8-2026-02-09",
+        "speech_duration_ms": null,
+        "error_code": null,
+        "file": "0.wav"
+      },
+      {
+        "session_id": "",
+        "status": "completed",
+        "transcript": "RỒI CŨNG HỖ TRỢ CHO LÂU LÂU CŨNG CHO GẠO CHO NÀY KIA",
+        "language": "vi",
+        "audio_duration_ms": 3740,
+        "inference_ms": 62,
+        "device": "cpu",
+        "model": "sherpa-onnx-zipformer-vi-30M-int8-2026-02-09",
+        "speech_duration_ms": null,
+        "error_code": null,
+        "file": "0.wav"
+      },
+      {
+        "session_id": "",
+        "status": "completed",
+        "transcript": "RỒI CŨNG HỖ TRỢ CHO LÂU LÂU CŨNG CHO GẠO CHO NÀY KIA",
+        "language": "vi",
+        "audio_duration_ms": 3740,
+        "inference_ms": 52,
+        "device": "cpu",
+        "model": "sherpa-onnx-zipformer-vi-30M-int8-2026-02-09",
+        "speech_duration_ms": null,
+        "error_code": null,
+        "file": "0.wav"
+      }
+    ],
+    "p50_ms": 62.0,
+    "p95_ms": 160.1,
+    "rss_bytes": 229535744,
+    "camera_read_p95_ms": null,
+    "camera_errors": [],
+    "camera_pipeline": "capture only, no pose/face inference"
+  },
+  "portable_validation": {
+    "package_type": "Windows x64 portable",
+    "PT": {
+      "edition": "PT",
+      "file": "AI_FOR_EXAM_PT.zip",
+      "bytes": 1003492303,
+      "files": 18093,
+      "sha256": "09500fb5b4e4493f9f5f9e24670e8962e22a069312278c429f241123bd5584a8",
+      "crc": "passed"
+    },
+    "HP": {
+      "edition": "HP",
+      "file": "AI_FOR_EXAM_HP.zip",
+      "bytes": 1003486508,
+      "files": 18092,
+      "sha256": "1241b67798e0651b2a73d60cd73bd0f42ae1a33e96b127dc78571e14e6dd691b",
+      "crc": "passed"
+    },
+    "checks": [
+      "Embedded Python isolation",
+      "Launcher EXE self-test",
+      "Desktop dashboard offscreen",
+      "HTTP authentication and graceful shutdown",
+      "Model integrity rejection",
+      "ZIP CRC"
+    ],
+    "limitations": "Tested on build-host Windows; second clean Windows machine and physical camera/microphone not tested.",
+    "previous_setup_packages": "releases/setup"
+  },
+  "evidence_sha256": {
+    "services/local_voice/engine.py": "fd2e7fdbed5be50a7f3ad799fae91d18ebc262817fee9c1cd825853427c99afb",
+    "services/local_voice/config.py": "faab7d1dcd7b1819121422ebeaf67971f9695571f2b32c69a8d840f9e256efac",
+    "app/dashboard.py": "d7ba2ff84464a5a0808bedb30128e1d16bbdffc8436cd3b7201e8902f7788c87",
+    "app/today_todo_widget.py": "6cb7ad5ab13a1d547e3454baf91283eed0e0d023aa13af717a7e7896d7982d6a",
+    "web/api_router.py": "bd235e5f73a82ac2a504e35a32c0fe69b56e5eb6d0ce655c76bf7309f6e571b7",
+    "services/music_playback.py": "04a50173187d1a261a11bfea40807aad342f609327c4b175efc6a3110edb562e",
+    "services/emotion_summary_service.py": "3077366309fe52446941da9032328d33fb6755d82f3e0e28bd4c2999cc348e9f",
+    "runtime/report-verification/results.xml": "16061ce959e750208eda00f475b0a64bcab265b47eccd922a5d83dcf81251452",
+    "runtime/report-verification-additional/results.xml": "6508fb49989aa9806da1f89fd571f2f78209ce6357891abf46ec991564cd95fd"
+  }
+}

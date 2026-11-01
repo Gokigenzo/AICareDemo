@@ -1,0 +1,359 @@
+{
+  "archives": [
+    {
+      "path": "releases\\AI_FOR_EXAM_HP.zip",
+      "kind": "portable",
+      "missing_app_local_crt": [],
+      "status": "CRT present; see QA"
+    },
+    {
+      "path": "releases\\AI_FOR_EXAM_PT.zip",
+      "kind": "portable",
+      "missing_app_local_crt": [],
+      "status": "CRT present; see QA"
+    },
+    {
+      "path": "releases\\AI_FOR_EXAM_V3.zip",
+      "kind": "portable",
+      "missing_app_local_crt": [],
+      "status": "CRT present; see QA"
+    },
+    {
+      "path": "releases\\AICareDemo-v6.0.0-windows-x64-setup-20261023-183552.zip",
+      "kind": "setup/source (requires installation)",
+      "missing_app_local_crt": [
+        "msvcp140.dll",
+        "concrt140.dll",
+        "vcruntime140.dll",
+        "vcruntime140_1.dll"
+      ],
+      "status": "superseded; do not distribute"
+    },
+    {
+      "path": "releases\\setup\\AI_FOR_EXAM_HP.zip",
+      "kind": "setup/source (requires installation)",
+      "missing_app_local_crt": [
+        "msvcp140.dll",
+        "concrt140.dll",
+        "vcruntime140.dll",
+        "vcruntime140_1.dll"
+      ],
+      "status": "superseded; do not distribute"
+    },
+    {
+      "path": "releases\\setup\\AI_FOR_EXAM_PT.zip",
+      "kind": "setup/source (requires installation)",
+      "missing_app_local_crt": [
+        "msvcp140.dll",
+        "concrt140.dll",
+        "vcruntime140.dll",
+        "vcruntime140_1.dll"
+      ],
+      "status": "superseded; do not distribute"
+    }
+  ],
+  "extracted": [
+    {
+      "path": "releases\\AI_FOR_EXAM_V3\\AICare",
+      "missing_app_local_crt": [
+        "msvcp140.dll",
+        "concrt140.dll"
+      ],
+      "mediapipe_pe": {
+        "machine": "0x8664",
+        "imports": [
+          "opencv_world3410.dll",
+          "python312.dll",
+          "dbghelp.dll",
+          "MSVCP140.dll",
+          "KERNEL32.dll",
+          "VCRUNTIME140.dll",
+          "VCRUNTIME140_1.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-utility-l1-1-0.dll",
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-filesystem-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-locale-l1-1-0.dll"
+        ]
+      },
+      "status": "superseded; do not distribute"
+    },
+    {
+      "path": "releases\\portable-nativefix\\HP\\AICare",
+      "missing_app_local_crt": [],
+      "mediapipe_pe": {
+        "machine": "0x8664",
+        "imports": [
+          "opencv_world3410.dll",
+          "python312.dll",
+          "dbghelp.dll",
+          "MSVCP140.dll",
+          "KERNEL32.dll",
+          "VCRUNTIME140.dll",
+          "VCRUNTIME140_1.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-utility-l1-1-0.dll",
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-filesystem-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-locale-l1-1-0.dll"
+        ]
+      },
+      "status": "CRT present; see QA"
+    },
+    {
+      "path": "releases\\portable-nativefix\\PT\\AICare",
+      "missing_app_local_crt": [],
+      "mediapipe_pe": {
+        "machine": "0x8664",
+        "imports": [
+          "opencv_world3410.dll",
+          "python312.dll",
+          "dbghelp.dll",
+          "MSVCP140.dll",
+          "KERNEL32.dll",
+          "VCRUNTIME140.dll",
+          "VCRUNTIME140_1.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-utility-l1-1-0.dll",
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-filesystem-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-locale-l1-1-0.dll"
+        ]
+      },
+      "status": "CRT present; see QA"
+    },
+    {
+      "path": "releases\\portable-nativefix\\V3\\AICare",
+      "missing_app_local_crt": [],
+      "mediapipe_pe": {
+        "machine": "0x8664",
+        "imports": [
+          "opencv_world3410.dll",
+          "python312.dll",
+          "dbghelp.dll",
+          "MSVCP140.dll",
+          "KERNEL32.dll",
+          "VCRUNTIME140.dll",
+          "VCRUNTIME140_1.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-utility-l1-1-0.dll",
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-filesystem-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-locale-l1-1-0.dll"
+        ]
+      },
+      "status": "CRT present; see QA"
+    },
+    {
+      "path": "releases\\portable-v1\\PT\\AICare",
+      "missing_app_local_crt": [
+        "msvcp140.dll",
+        "concrt140.dll"
+      ],
+      "mediapipe_pe": {
+        "machine": "0x8664",
+        "imports": [
+          "opencv_world3410.dll",
+          "python312.dll",
+          "dbghelp.dll",
+          "MSVCP140.dll",
+          "KERNEL32.dll",
+          "VCRUNTIME140.dll",
+          "VCRUNTIME140_1.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-utility-l1-1-0.dll",
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-filesystem-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-locale-l1-1-0.dll"
+        ]
+      },
+      "status": "superseded; do not distribute"
+    },
+    {
+      "path": "releases\\portable-v1b\\HP\\AICare",
+      "missing_app_local_crt": [
+        "msvcp140.dll",
+        "concrt140.dll"
+      ],
+      "mediapipe_pe": {
+        "machine": "0x8664",
+        "imports": [
+          "opencv_world3410.dll",
+          "python312.dll",
+          "dbghelp.dll",
+          "MSVCP140.dll",
+          "KERNEL32.dll",
+          "VCRUNTIME140.dll",
+          "VCRUNTIME140_1.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-utility-l1-1-0.dll",
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-filesystem-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-locale-l1-1-0.dll"
+        ]
+      },
+      "status": "superseded; do not distribute"
+    },
+    {
+      "path": "releases\\portable-v1b\\PT\\AICare",
+      "missing_app_local_crt": [
+        "msvcp140.dll",
+        "concrt140.dll"
+      ],
+      "mediapipe_pe": {
+        "machine": "0x8664",
+        "imports": [
+          "opencv_world3410.dll",
+          "python312.dll",
+          "dbghelp.dll",
+          "MSVCP140.dll",
+          "KERNEL32.dll",
+          "VCRUNTIME140.dll",
+          "VCRUNTIME140_1.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-utility-l1-1-0.dll",
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-filesystem-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-locale-l1-1-0.dll"
+        ]
+      },
+      "status": "superseded; do not distribute"
+    },
+    {
+      "path": "releases\\portable-v3\\V3\\AICare",
+      "missing_app_local_crt": [
+        "msvcp140.dll",
+        "concrt140.dll"
+      ],
+      "mediapipe_pe": {
+        "machine": "0x8664",
+        "imports": [
+          "opencv_world3410.dll",
+          "python312.dll",
+          "dbghelp.dll",
+          "MSVCP140.dll",
+          "KERNEL32.dll",
+          "VCRUNTIME140.dll",
+          "VCRUNTIME140_1.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-utility-l1-1-0.dll",
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-filesystem-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-locale-l1-1-0.dll"
+        ]
+      },
+      "status": "superseded; do not distribute"
+    },
+    {
+      "path": "releases\\portable-zipformer\\HP\\AICare",
+      "missing_app_local_crt": [
+        "msvcp140.dll",
+        "concrt140.dll"
+      ],
+      "mediapipe_pe": {
+        "machine": "0x8664",
+        "imports": [
+          "opencv_world3410.dll",
+          "python312.dll",
+          "dbghelp.dll",
+          "MSVCP140.dll",
+          "KERNEL32.dll",
+          "VCRUNTIME140.dll",
+          "VCRUNTIME140_1.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-utility-l1-1-0.dll",
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-filesystem-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-locale-l1-1-0.dll"
+        ]
+      },
+      "status": "superseded; do not distribute"
+    },
+    {
+      "path": "releases\\portable-zipformer\\PT\\AICare",
+      "missing_app_local_crt": [
+        "msvcp140.dll",
+        "concrt140.dll"
+      ],
+      "mediapipe_pe": {
+        "machine": "0x8664",
+        "imports": [
+          "opencv_world3410.dll",
+          "python312.dll",
+          "dbghelp.dll",
+          "MSVCP140.dll",
+          "KERNEL32.dll",
+          "VCRUNTIME140.dll",
+          "VCRUNTIME140_1.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-utility-l1-1-0.dll",
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-filesystem-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-locale-l1-1-0.dll"
+        ]
+      },
+      "status": "superseded; do not distribute"
+    }
+  ],
+  "scope": "All release ZIPs (excluding internal runtime ZIPs) and extracted runtime/python.exe folders. Static inventory only; not proof of execution on another computer."
+}

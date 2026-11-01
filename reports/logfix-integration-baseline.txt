@@ -1,0 +1,89 @@
+W0000 00:00:1793497390.992403   10964 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1793497391.029107    9024 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+FFF.F........FF..F....                                                   [100%]
+================================== FAILURES ===================================
+_ TestRealtimeSync12Scenarios.test_doctor_prescription_cancellation_removes_from_elder_today_snapshot _
+tests\test_realtime_sync_12_scenarios.py:337: in test_doctor_prescription_cancellation_removes_from_elder_today_snapshot
+    self.assertTrue(any("Amlor" in m for m in rx_meds_before))
+E   AssertionError: False is not true
+_ TestRealtimeSync12Scenarios.test_scenario_01_three_clients_one_touch_medication_sync _
+tests\test_realtime_sync_12_scenarios.py:101: in test_scenario_01_three_clients_one_touch_medication_sync
+    self.assertGreater(len(snapshot["doses"]), 0, "Phải có liều thuốc được lên lịch hôm nay")
+E   AssertionError: 0 not greater than 0 : Phải có liều thuốc được lên lịch hôm nay
+_ TestRealtimeSync12Scenarios.test_scenario_02_camera_offline_reminders_intact_no_video_stream _
+tests\test_realtime_sync_12_scenarios.py:163: in test_scenario_02_camera_offline_reminders_intact_no_video_stream
+    self.assertGreater(len(snapshot["doses"]), 0, "Lịch thuốc phải tồn tại độc lập với camera")
+E   AssertionError: 0 not greater than 0 : Lịch thuốc phải tồn tại độc lập với camera
+_ TestRealtimeSync12Scenarios.test_scenario_04_doctor_prescription_revision_and_advice_two_way_sync _
+tests\test_realtime_sync_12_scenarios.py:286: in test_scenario_04_doctor_prescription_revision_and_advice_two_way_sync
+    self.assertEqual(code, 201)
+E   AssertionError: 404 != 201
+__________ test_doctor_and_caregiver_overview_perfectly_synchronized __________
+tests\test_caregiver_clinician_health_sync.py:46: in test_doctor_and_caregiver_overview_perfectly_synchronized
+    assert cg_data.get('latest_blood_pressure') is not None
+E   AssertionError: assert None is not None
+E    +  where None = <built-in method get of dict object at 0x0000020189570800>('latest_blood_pressure')
+E    +    where <built-in method get of dict object at 0x0000020189570800> = {'patient': {'patient_id': 'patient_001', 'user_id': 'user_pat_001', 'full_name': 'Cụ Hoàng Anh', 'date_of_birth': '1951-04-15', ...}, 'patient_id': 'patient_001', 'full_name': 'Cụ Hoàng Anh', 'gender': 'Nam', ...}.get
+_________ test_doctor_and_caregiver_observations_chart_data_identical _________
+tests\test_caregiver_clinician_health_sync.py:95: in test_doctor_and_caregiver_observations_chart_data_identical
+    assert len(cg_readings) > 0
+E   assert 0 > 0
+E    +  where 0 = len([])
+____ TestCaregiverRehabConfigSync.test_desktop_app_live_sync_and_ui_update ____
+tests\test_caregiver_rehab_config_sync.py:182: in test_desktop_app_live_sync_and_ui_update
+    self.assertIn("12 VƯƠN TAY", window.btn_start_routine.text())
+E   AssertionError: '12 VƯƠN TAY' not found in '🔄 Bắt đầu chuỗi bài tập 15:45\n(12 vươn tay ➔ 10 đứng ngồi ➔ 18 đi bộ)'
+---------------------------- Captured stderr call -----------------------------
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+W0000 00:00:1793497388.707627   15564 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1793497388.725744    2472 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1793497389.143727    6520 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1793497389.163251    6520 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+Traceback (most recent call last):
+
+  File "<string>", line 1, in <module>
+
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python312\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+
+    exitcode = _main(fd, parent_sentinel)
+
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python312\Lib\multiprocessing\spawn.py", line 131, in _main
+
+    prepare(preparation_data)
+
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python312\Lib\multiprocessing\spawn.py", line 246, in prepare
+
+    _fixup_main_from_path(data['init_main_from_path'])
+
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python312\Lib\multiprocessing\spawn.py", line 297, in _fixup_main_from_path
+
+    main_content = runpy.run_path(main_path,
+
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "<frozen runpy>", line 286, in run_path
+
+  File "<frozen runpy>", line 254, in _get_code_from_file
+
+OSError: [Errno 22] Invalid argument: 'D:\\Code\\AICareDemo_HP\\AICareDemo\\<stdin>'
+
+============================== warnings summary ===============================
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: Type google._upb._message.MessageMapContainer uses PyType_Spec with a metaclass that has custom tp_new. This is deprecated and will no longer be allowed in Python 3.14.
+
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: Type google._upb._message.ScalarMapContainer uses PyType_Spec with a metaclass that has custom tp_new. This is deprecated and will no longer be allowed in Python 3.14.
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_realtime_sync_12_scenarios.py::TestRealtimeSync12Scenarios::test_doctor_prescription_cancellation_removes_from_elder_today_snapshot
+FAILED tests/test_realtime_sync_12_scenarios.py::TestRealtimeSync12Scenarios::test_scenario_01_three_clients_one_touch_medication_sync
+FAILED tests/test_realtime_sync_12_scenarios.py::TestRealtimeSync12Scenarios::test_scenario_02_camera_offline_reminders_intact_no_video_stream
+FAILED tests/test_realtime_sync_12_scenarios.py::TestRealtimeSync12Scenarios::test_scenario_04_doctor_prescription_revision_and_advice_two_way_sync
+FAILED tests/test_caregiver_clinician_health_sync.py::test_doctor_and_caregiver_overview_perfectly_synchronized
+FAILED tests/test_caregiver_clinician_health_sync.py::test_doctor_and_caregiver_observations_chart_data_identical
+FAILED tests/test_caregiver_rehab_config_sync.py::TestCaregiverRehabConfigSync::test_desktop_app_live_sync_and_ui_update
+7 failed, 15 passed, 2 warnings in 4.66s

@@ -1,0 +1,3756 @@
+{
+  "schema_version": 1,
+  "files": [
+    {
+      "path": ".github/workflows/build_windows_exe.yml",
+      "bytes": 2152,
+      "sha256": "87806eb76819462aa2ab43f0900b53d429bc42ba080639c83bbc98a35fd9813b"
+    },
+    {
+      "path": "adapters/__init__.py",
+      "bytes": 650,
+      "sha256": "47950308df84b72b7f7ad12da30e0634721690766a8dbaed01ff797b40c62bb6",
+      "symbols": [],
+      "imports": [
+        "emotion_adapter",
+        "face_adapter",
+        "fall_adapter",
+        "rehabilitation_adapter"
+      ]
+    },
+    {
+      "path": "adapters/emotion_adapter.py",
+      "bytes": 15621,
+      "sha256": "159d369a4672a213e0707f1b3c5007cd58b6d92e366cee29ff185e644a78865b",
+      "symbols": [
+        {
+          "name": "EmotionAdapter",
+          "line": 59,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "collections",
+        "config",
+        "core.drawing_utils",
+        "cv2",
+        "datetime",
+        "json",
+        "logging",
+        "mediapipe",
+        "modules.emotion.main",
+        "modules.emotion.src.config",
+        "modules.emotion.utils.preprocess",
+        "numpy",
+        "os",
+        "pathlib",
+        "sys",
+        "tempfile",
+        "time",
+        "torch",
+        "typing"
+      ]
+    },
+    {
+      "path": "adapters/face_adapter.py",
+      "bytes": 35495,
+      "sha256": "8b405392c859b8751142c0607f3ab86a7be111ebb93cba918a8446b675d5f5da",
+      "symbols": [
+        {
+          "name": "FaceAdapter",
+          "line": 36,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "collections",
+        "config",
+        "core.drawing_utils",
+        "cv2",
+        "datetime",
+        "json",
+        "logging",
+        "numpy",
+        "os",
+        "pathlib",
+        "shutil",
+        "time",
+        "typing"
+      ]
+    },
+    {
+      "path": "adapters/fall_adapter.py",
+      "bytes": 3687,
+      "sha256": "4cb773817d6c03e7d11742df4c396c405e17f68bddd0387fb28f842321f505e9",
+      "symbols": [
+        {
+          "name": "FallAdapter",
+          "line": 27,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "config",
+        "datetime",
+        "json",
+        "logging",
+        "numpy",
+        "pathlib",
+        "services.fall_monitor",
+        "typing"
+      ]
+    },
+    {
+      "path": "adapters/rehabilitation_adapter.py",
+      "bytes": 7378,
+      "sha256": "e00db1de979c12e3270d0a648c8d79edc4c04aa9e401a56e5763e3db64d6b29c",
+      "symbols": [
+        {
+          "name": "RehabilitationAdapter",
+          "line": 28,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "config",
+        "datetime",
+        "json",
+        "logging",
+        "modules.rehabilitation.rehab_engine",
+        "numpy",
+        "pathlib",
+        "typing"
+      ]
+    },
+    {
+      "path": "AI_Rehab_Safety_Assistant.spec",
+      "bytes": 3528,
+      "sha256": "e7e178b5131dcb1fad99c689c4d1f469eabf86e88aa5ac2ebd85e25240ee93fc",
+      "symbols": [],
+      "imports": [
+        "PyInstaller.utils.hooks",
+        "os",
+        "pathlib",
+        "sys"
+      ]
+    },
+    {
+      "path": "app/__init__.py",
+      "bytes": 309,
+      "sha256": "fd4e10813e9c7d3ea8aba94669f336c468856366be4304de3ea82edbc8a9b905",
+      "symbols": [],
+      "imports": [
+        "dashboard",
+        "launcher",
+        "router",
+        "state"
+      ]
+    },
+    {
+      "path": "app/camera_manager.py",
+      "bytes": 216,
+      "sha256": "c8191edabf44e46f3af82cd0329f7f57af7fb5750cb6cd7fd4e39247bd2074b9",
+      "symbols": [],
+      "imports": [
+        "core.camera_manager"
+      ]
+    },
+    {
+      "path": "app/dashboard.py",
+      "bytes": 71407,
+      "sha256": "47169c5b460c1df7a442bea5d58916e5bcd01200083dd11e3685e7804ff5d27b",
+      "symbols": [
+        {
+          "name": "DashboardWindow",
+          "line": 110,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "PyQt5.QtCore",
+        "PyQt5.QtGui",
+        "PyQt5.QtWidgets",
+        "__future__",
+        "app.fall_video_worker",
+        "app.registration_dialog",
+        "app.router",
+        "app.state",
+        "app.theme",
+        "config",
+        "core.camera_manager",
+        "core.frame_source",
+        "cv2",
+        "datetime",
+        "json",
+        "logging",
+        "modules.fall.hfd_pose_backend",
+        "numpy",
+        "os",
+        "pathlib",
+        "services.fall_test_runner",
+        "sys",
+        "time",
+        "typing"
+      ]
+    },
+    {
+      "path": "app/fall_video_worker.py",
+      "bytes": 666,
+      "sha256": "ff11cca6159f3a88eb55fa8143259e3c2c5fdb070bb18f011d4240aa54c7af08",
+      "symbols": [
+        {
+          "name": "FallVideoTask",
+          "line": 5,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "PyQt5.QtCore"
+      ]
+    },
+    {
+      "path": "app/launcher.py",
+      "bytes": 4408,
+      "sha256": "c2dde68241c96a450ca67c0b38cba94d8bac358d4acdad9925cc80fc4ae06070",
+      "symbols": [
+        {
+          "name": "ModuleLauncher",
+          "line": 20,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "config",
+        "logging",
+        "subprocess",
+        "typing"
+      ]
+    },
+    {
+      "path": "app/registration_dialog.py",
+      "bytes": 29208,
+      "sha256": "0b5b69f5532e27d15112ffcf983afa22ea330a4861791499a71386c5fb16662e",
+      "symbols": [
+        {
+          "name": "RegistrationDialog",
+          "line": 168,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "PatientManagementDialog",
+          "line": 626,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "PyQt5.QtCore",
+        "PyQt5.QtGui",
+        "PyQt5.QtWidgets",
+        "__future__",
+        "adapters.face_adapter",
+        "app.theme",
+        "core.camera_manager",
+        "cv2",
+        "datetime",
+        "json",
+        "logging",
+        "numpy",
+        "pathlib",
+        "services.user_service",
+        "typing"
+      ]
+    },
+    {
+      "path": "app/router.py",
+      "bytes": 6030,
+      "sha256": "c4e4d7c911f96fed3458131685da0a33c897a897555709f7bdd8242f95f2b19f",
+      "symbols": [
+        {
+          "name": "DashboardRouter",
+          "line": 28,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "PyQt5.QtWidgets",
+        "__future__",
+        "adapters",
+        "app.dashboard",
+        "logging",
+        "services.state_service",
+        "typing"
+      ]
+    },
+    {
+      "path": "app/state.py",
+      "bytes": 4183,
+      "sha256": "d405ecd51ec0984b759ccc88e10b7b0259b452e64894783d3a0313db5cc80a02",
+      "symbols": [
+        {
+          "name": "AppState",
+          "line": 23,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "config",
+        "datetime",
+        "json",
+        "pathlib",
+        "services.state_service",
+        "typing"
+      ]
+    },
+    {
+      "path": "app/theme.py",
+      "bytes": 9973,
+      "sha256": "665d7cb97136f998c0199a6aff9f720032112ddfcff1ec62442456222520e775",
+      "symbols": [
+        {
+          "name": "get_badge_stylesheet",
+          "line": 308,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "__future__"
+      ]
+    },
+    {
+      "path": "archive/voice/intents.py",
+      "bytes": 3674,
+      "sha256": "65ee0e5f3f03523fd6ceca3016301a576bcef063d9b3f2f571310d0142ef9061",
+      "symbols": [
+        {
+          "name": "normalize_text",
+          "line": 85,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "classify_intent",
+          "line": 93,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "re",
+        "typing"
+      ]
+    },
+    {
+      "path": "archive/voice/main.py",
+      "bytes": 9340,
+      "sha256": "80f720890962172e005e2a9d0f2974e9a0847aba93178627d5b35548d069aa03",
+      "symbols": [
+        {
+          "name": "audio_callback",
+          "line": 33,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "listen_and_recognize",
+          "line": 38,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "log_message",
+          "line": 89,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "set_reminder",
+          "line": 97,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "parse_time_phrase",
+          "line": 103,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "_speak_repeated_emergency",
+          "line": 134,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "notify_caregiver_simulated",
+          "line": 143,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "show_emergency_popup",
+          "line": 149,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "handle_intent",
+          "line": 207,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "start_listening",
+          "line": 238,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "intents",
+        "json",
+        "os",
+        "queue",
+        "re",
+        "sounddevice",
+        "threading",
+        "time",
+        "tkinter",
+        "tts_utils",
+        "vosk"
+      ]
+    },
+    {
+      "path": "archive/voice/requirements.txt",
+      "bytes": 28,
+      "sha256": "94f74fda52f8d70db83fe48a1b843de9c769f55c88c6decb6294305579afb611"
+    },
+    {
+      "path": "archive/voice/tts_utils.py",
+      "bytes": 1582,
+      "sha256": "b88b7cdebd94e74d96493f91b5c5942d95a3a919aa23eca0e344aa5d75baf36a",
+      "symbols": [
+        {
+          "name": "speak",
+          "line": 15,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "os",
+        "subprocess",
+        "sys"
+      ]
+    },
+    {
+      "path": "archive/voice/voice_adapter.py",
+      "bytes": 7428,
+      "sha256": "334b5a913c81bc600ca9a9901fca37d24359aaa8432ab8705617b665c66ed95e",
+      "symbols": [
+        {
+          "name": "VoiceAdapter",
+          "line": 41,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "config",
+        "datetime",
+        "json",
+        "logging",
+        "modules.voice.intents",
+        "os",
+        "pathlib",
+        "subprocess",
+        "sys",
+        "threading",
+        "time",
+        "typing"
+      ]
+    },
+    {
+      "path": "archive/voice/voice_runner.py",
+      "bytes": 1016,
+      "sha256": "85bf6162d67b2b1a71862b022ec5b0841ac6b9b405f318fa5254dcf674e42e1e",
+      "symbols": [
+        {
+          "name": "main",
+          "line": 19,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "adapters.voice_adapter",
+        "argparse",
+        "pathlib",
+        "sys"
+      ]
+    },
+    {
+      "path": "build_windows_exe.bat",
+      "bytes": 3345,
+      "sha256": "4cbd497e2c974695040a3efe4dbd2ba03e37fbb984f5cd50d503d4b624250d1e"
+    },
+    {
+      "path": "CHECK_SYSTEM.bat",
+      "bytes": 562,
+      "sha256": "2fef5a431d38ea81bdbe9747c35821e632f0716075485ad52b650b9ea3c1c84f"
+    },
+    {
+      "path": "CHECK_SYSTEM.py",
+      "bytes": 10976,
+      "sha256": "bda5a3a91a5aeb6e23b2ebc52347984f9d29ec07d1079768abf0d4e7370af301",
+      "symbols": [
+        {
+          "name": "run_checks",
+          "line": 34,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "PIL",
+        "PyQt5.QtCore",
+        "PyQt5.QtWidgets",
+        "__future__",
+        "config",
+        "cv2",
+        "dotenv",
+        "mediapipe",
+        "numpy",
+        "os",
+        "pathlib",
+        "platform",
+        "psutil",
+        "sys",
+        "tempfile",
+        "time",
+        "torch"
+      ]
+    },
+    {
+      "path": "config.py",
+      "bytes": 7998,
+      "sha256": "5846a3700769a25e5017e1dd5f4baa6c2bec618307535f6bb315385d8ed901cb",
+      "symbols": [
+        {
+          "name": "resource_path",
+          "line": 40,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "dotenv",
+        "logging",
+        "mediapipe",
+        "os",
+        "pathlib",
+        "shutil",
+        "sys",
+        "tempfile",
+        "torch"
+      ]
+    },
+    {
+      "path": "core/__init__.py",
+      "bytes": 168,
+      "sha256": "740884f7699be00687ff980373397934d7fb088b1c811aec3eaa842c88bc079a",
+      "symbols": [],
+      "imports": [
+        "camera_manager"
+      ]
+    },
+    {
+      "path": "core/camera_manager.py",
+      "bytes": 10327,
+      "sha256": "f4294200203e55c908416cbe119a769a3d40bf68a0206b26b2d7b1ba25d90e31",
+      "symbols": [
+        {
+          "name": "CameraManager",
+          "line": 36,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "PyQt5.QtCore",
+        "PyQt5.QtGui",
+        "__future__",
+        "config",
+        "cv2",
+        "datetime",
+        "logging",
+        "numpy",
+        "os",
+        "pathlib",
+        "sys",
+        "threading",
+        "time",
+        "typing"
+      ]
+    },
+    {
+      "path": "core/drawing_utils.py",
+      "bytes": 7668,
+      "sha256": "71616f40cac6bbbd79dc742cbeee60cc1d4348dffd29b9a53be737ed448339be",
+      "symbols": [
+        {
+          "name": "strip_accents_ascii",
+          "line": 59,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "_get_font",
+          "line": 66,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "_get_text_patch",
+          "line": 79,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "draw_vietnamese_text",
+          "line": 130,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "get_text_size",
+          "line": 181,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "draw_pill_badge",
+          "line": 190,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "PIL",
+        "__future__",
+        "cv2",
+        "functools",
+        "logging",
+        "numpy",
+        "os",
+        "pathlib",
+        "typing",
+        "unicodedata"
+      ]
+    },
+    {
+      "path": "core/fall_backends.py",
+      "bytes": 13617,
+      "sha256": "a4e5fbfa2c33fb55de41f1d4c134c6d28e05d6fd75d2c1edd8981fc7a38831d2",
+      "symbols": [
+        {
+          "name": "ForegroundAssistedBackend",
+          "line": 15,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "coco_to_mediapipe",
+          "line": 89,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "OnnxPoseBackend",
+          "line": 101,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "YoloPoseBackend",
+          "line": 157,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "create_pose_backend",
+          "line": 223,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "core.fall_pipeline",
+        "cv2",
+        "hashlib",
+        "importlib.util",
+        "mediapipe",
+        "modules.fall.hfd_pose_backend",
+        "numpy",
+        "onnxruntime",
+        "os",
+        "pathlib",
+        "sys",
+        "torch",
+        "ultralytics"
+      ]
+    },
+    {
+      "path": "core/fall_evaluation.py",
+      "bytes": 5824,
+      "sha256": "18e777260a091b0fd83eeb154318d83af3b9981b766c3ef62cf0fc49887d259e",
+      "symbols": [
+        {
+          "name": "subject_for",
+          "line": 7,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "evaluate",
+          "line": 22,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "core.fall_pipeline",
+        "numpy",
+        "scipy.optimize"
+      ]
+    },
+    {
+      "path": "core/fall_evidence.py",
+      "bytes": 3588,
+      "sha256": "b8e6e89dd72688979f1c23412a67e39af69c76babd1356faf038b049e4e320a0",
+      "symbols": [
+        {
+          "name": "VideoEvidenceRecorder",
+          "line": 10,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "collections",
+        "cv2",
+        "hashlib",
+        "json",
+        "numpy",
+        "pathlib"
+      ]
+    },
+    {
+      "path": "core/fall_pipeline.py",
+      "bytes": 27531,
+      "sha256": "7abb931ae0c5da463563f5cdaf5e7a2ea2c560187b70d5bc2da31bc0166590b2",
+      "symbols": [
+        {
+          "name": "FramePacket",
+          "line": 16,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "PersonObservation",
+          "line": 26,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "FallConfig",
+          "line": 43,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "FallEvent",
+          "line": 63,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "CheckNotice",
+          "line": 89,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "iou",
+          "line": 100,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "PersonPoseBackend",
+          "line": 108,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "TrackState",
+          "line": 156,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "FallPipeline",
+          "line": 182,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "collections",
+        "core.drawing_utils",
+        "core.fall_backends",
+        "cv2",
+        "dataclasses",
+        "math",
+        "mediapipe",
+        "modules.fall.hfd_classifier",
+        "numpy",
+        "os",
+        "scipy.optimize",
+        "uuid"
+      ]
+    },
+    {
+      "path": "core/frame_source.py",
+      "bytes": 11470,
+      "sha256": "808cf584bcadd57de495589ecca5e9cf4f076e7d91548d9cd3550e18a93350ff",
+      "symbols": [
+        {
+          "name": "FrameSource",
+          "line": 25,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "CameraFrameSource",
+          "line": 101,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "VideoFileFrameSource",
+          "line": 189,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "abc",
+        "core.camera_manager",
+        "cv2",
+        "hashlib",
+        "logging",
+        "numpy",
+        "os",
+        "pathlib",
+        "threading",
+        "time",
+        "typing"
+      ]
+    },
+    {
+      "path": "demo.py",
+      "bytes": 11189,
+      "sha256": "6aaec0e72d65bfd1d6f8a5a5c937fe61ebb4f2e4ae0214d9bb3b32ac44468249",
+      "symbols": [
+        {
+          "name": "SafetyAssistantDemo",
+          "line": 61,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "main",
+          "line": 209,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "adapters.emotion_adapter",
+        "adapters.face_adapter",
+        "adapters.fall_adapter",
+        "adapters.rehabilitation_adapter",
+        "argparse",
+        "cv2",
+        "datetime",
+        "json",
+        "logging",
+        "modules.fall.fall_detector",
+        "numpy",
+        "os",
+        "pathlib",
+        "services.email_service",
+        "services.fall_monitor",
+        "services.state_service",
+        "services.user_service",
+        "sys",
+        "tempfile",
+        "time",
+        "unittest.mock"
+      ]
+    },
+    {
+      "path": "experiments/benchmark.py",
+      "bytes": 11540,
+      "sha256": "041a4cecc230012439bdfec137daf44196d17dbc0910b1e19688cd643730570b",
+      "symbols": [
+        {
+          "name": "run_face_benchmark",
+          "line": 44,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "run_emotion_benchmark",
+          "line": 84,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "run_rehabilitation_benchmark",
+          "line": 169,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "run_fall_benchmark",
+          "line": 221,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "main",
+          "line": 260,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "adapters.emotion_adapter",
+        "adapters.face_adapter",
+        "adapters.fall_adapter",
+        "adapters.rehabilitation_adapter",
+        "config",
+        "datetime",
+        "json",
+        "logging",
+        "modules.fall.fall_detector",
+        "numpy",
+        "os",
+        "pathlib",
+        "sys",
+        "tempfile",
+        "time",
+        "typing"
+      ]
+    },
+    {
+      "path": "experiments/debug_p2.py",
+      "bytes": 859,
+      "sha256": "1a0cb6189e4318239438912d0ffd9a99bfc7ca372a08c094dad1efbca3ce7fa3",
+      "symbols": [],
+      "imports": [
+        "core.frame_source",
+        "experiments.fall_legacy_reference",
+        "mediapipe",
+        "os",
+        "sys",
+        "torch"
+      ]
+    },
+    {
+      "path": "experiments/fall_legacy_reference.py",
+      "bytes": 25723,
+      "sha256": "87ce6ab54dee604a5f4a95bf1e7de179e77f469766ba6387e8d959d53971ac9c",
+      "symbols": [
+        {
+          "name": "TrackState",
+          "line": 30,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "TestEvent",
+          "line": 48,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "FallTestRunner",
+          "line": 61,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "core.frame_source",
+        "cv2",
+        "dataclasses",
+        "datetime",
+        "json",
+        "logging",
+        "modules.fall.fall_detector",
+        "numpy",
+        "os",
+        "pathlib",
+        "time",
+        "typing"
+      ]
+    },
+    {
+      "path": "experiments/fall_legacy_source.py",
+      "bytes": 406,
+      "sha256": "87211067131cd0bc547d220dc8229232fbb75390c250cbe66767616760289d82",
+      "symbols": [
+        {
+          "name": "VideoFileFrameSource",
+          "line": 8,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "core.frame_source"
+      ]
+    },
+    {
+      "path": "experiments/test_runner_eval.py",
+      "bytes": 1324,
+      "sha256": "b990cb0562016ec112e631162052de0cd7530881f0eff4c1eb312623f9b7a062",
+      "symbols": [],
+      "imports": [
+        "core.frame_source",
+        "mediapipe",
+        "os",
+        "services.fall_test_runner",
+        "sys",
+        "torch"
+      ]
+    },
+    {
+      "path": "generate_user_guide_docx.py",
+      "bytes": 36848,
+      "sha256": "be247e28c273582ef757b14811f331127c380098b6fde82eb7fbb0bb3620b444",
+      "symbols": [
+        {
+          "name": "set_cell_background",
+          "line": 18,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "set_cell_margins",
+          "line": 24,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "create_callout_box",
+          "line": 37,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "format_table_headers",
+          "line": 92,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "style_data_row",
+          "line": 108,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "build_document",
+          "line": 128,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "docx",
+        "docx.enum.table",
+        "docx.enum.text",
+        "docx.oxml",
+        "docx.oxml.ns",
+        "docx.shared",
+        "os",
+        "pathlib"
+      ]
+    },
+    {
+      "path": "installer_setup.iss",
+      "bytes": 2331,
+      "sha256": "e6556842dad1dc821ef3ca33f4ae86892e4f515b6e8cd203428b1855cea91a98"
+    },
+    {
+      "path": "main.py",
+      "bytes": 2391,
+      "sha256": "e037d3c502dd5a1e71f3386ad9b2ce409d1e3691fc978015ea243cfd4a5730f8",
+      "symbols": [
+        {
+          "name": "main",
+          "line": 44,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "PyQt5",
+        "PyQt5.QtCore",
+        "PyQt5.QtWidgets",
+        "__future__",
+        "app.dashboard",
+        "config",
+        "logging",
+        "mediapipe",
+        "multiprocessing",
+        "os",
+        "sys",
+        "tempfile",
+        "torch"
+      ]
+    },
+    {
+      "path": "modules/emotion/main.py",
+      "bytes": 4654,
+      "sha256": "8e7cc821ef601469c2da75b7c667dbe718e92cca0b0f4dd246f65924de863f7e",
+      "symbols": [
+        {
+          "name": "draw_text",
+          "line": 17,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "load_model",
+          "line": 22,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "predict_expression",
+          "line": 43,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "run_demo",
+          "line": 51,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "collections",
+        "cv2",
+        "mediapipe",
+        "numpy",
+        "pathlib",
+        "src.config",
+        "src.model",
+        "time",
+        "torch",
+        "utils.preprocess"
+      ]
+    },
+    {
+      "path": "modules/emotion/requirements.txt",
+      "bytes": 90,
+      "sha256": "892460311a2567184da46fae5cde756bcface6c4895dadd60c3b231973008d04"
+    },
+    {
+      "path": "modules/emotion/src/baseline.py",
+      "bytes": 2332,
+      "sha256": "6a55638db7651f8cd69ccb3308f3cac1c175a786cfd1d7532ca4e34e7ed014c6",
+      "symbols": [
+        {
+          "name": "train_baseline",
+          "line": 16,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "parse_args",
+          "line": 57,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "argparse",
+        "joblib",
+        "pathlib",
+        "sklearn.linear_model",
+        "sklearn.metrics",
+        "sklearn.pipeline",
+        "sklearn.preprocessing",
+        "src.config",
+        "src.data"
+      ]
+    },
+    {
+      "path": "modules/emotion/src/collect_data.py",
+      "bytes": 5788,
+      "sha256": "38b08abb4ee8795415695e62f98fe537b1791af7b492e777a243d133084fda15",
+      "symbols": [
+        {
+          "name": "draw_text",
+          "line": 20,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "append_sample",
+          "line": 25,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "collect_data",
+          "line": 50,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "parse_args",
+          "line": 128,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "argparse",
+        "csv",
+        "cv2",
+        "datetime",
+        "mediapipe",
+        "pathlib",
+        "src.config",
+        "time",
+        "utils.preprocess",
+        "uuid"
+      ]
+    },
+    {
+      "path": "modules/emotion/src/config.py",
+      "bytes": 1959,
+      "sha256": "4a18e9374395587031d2024241046950a53083a6f64adb9119bf5b52ed114af3",
+      "symbols": [
+        {
+          "name": "Paths",
+          "line": 35,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "TrainingConfig",
+          "line": 44,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "InferenceConfig",
+          "line": 58,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "dataclasses",
+        "pathlib"
+      ]
+    },
+    {
+      "path": "modules/emotion/src/data.py",
+      "bytes": 8291,
+      "sha256": "f51de991dd3a7fccff31803ed67cbd66e10616edec5cbcdc2187ea3f3f2e80a6",
+      "symbols": [
+        {
+          "name": "load_expression_dataset",
+          "line": 17,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "_labels_by_split",
+          "line": 39,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "create_session_splits",
+          "line": 43,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "validate_existing_splits",
+          "line": 111,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "load_or_create_splits",
+          "line": 165,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "split_dataframe",
+          "line": 180,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "features_and_labels",
+          "line": 187,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "json",
+        "numpy",
+        "pandas",
+        "pathlib",
+        "random",
+        "src.config"
+      ]
+    },
+    {
+      "path": "modules/emotion/src/evaluate.py",
+      "bytes": 7320,
+      "sha256": "01e95be9578cd35515a6b738d56ab1e93e7d2264632832b8fa15e83e9310107a",
+      "symbols": [
+        {
+          "name": "_metric_payload",
+          "line": 25,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "_save_confusion_matrix",
+          "line": 55,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "_load_expression_net",
+          "line": 76,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "_predict_expression_net",
+          "line": 93,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "_predict_baseline",
+          "line": 100,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "evaluate",
+          "line": 109,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "parse_args",
+          "line": 178,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "argparse",
+        "joblib",
+        "json",
+        "matplotlib",
+        "matplotlib.pyplot",
+        "numpy",
+        "pathlib",
+        "sklearn.metrics",
+        "src.config",
+        "src.data",
+        "src.model",
+        "torch"
+      ]
+    },
+    {
+      "path": "modules/emotion/src/model.py",
+      "bytes": 611,
+      "sha256": "d648088c205c102ef85da82d1601b3b55dca1fcd68cb2125d72e55caf2e7375e",
+      "symbols": [
+        {
+          "name": "ExpressionNet",
+          "line": 7,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "src.config",
+        "torch",
+        "torch.nn"
+      ]
+    },
+    {
+      "path": "modules/emotion/src/train.py",
+      "bytes": 8558,
+      "sha256": "7431a968cff034b22fc8248b0ffaa1e6bf9ec78d0982caf13e6bee3cb6824f70",
+      "symbols": [
+        {
+          "name": "set_seed",
+          "line": 23,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "make_loader",
+          "line": 33,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "evaluate_phase",
+          "line": 38,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "class_weights",
+          "line": 62,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "train_model",
+          "line": 69,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "parse_args",
+          "line": 212,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "argparse",
+        "copy",
+        "matplotlib",
+        "matplotlib.pyplot",
+        "numpy",
+        "pandas",
+        "pathlib",
+        "random",
+        "sklearn.metrics",
+        "src.config",
+        "src.data",
+        "src.model",
+        "torch",
+        "torch.nn",
+        "torch.utils.data"
+      ]
+    },
+    {
+      "path": "modules/emotion/tests/test_config.py",
+      "bytes": 556,
+      "sha256": "a7967e1eb4bc9b24ce72b32c19f6de334b21f4a54bae56aca457f47197d048e5",
+      "symbols": [
+        {
+          "name": "test_class_mapping_is_stable",
+          "line": 4,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "test_feature_columns_match_selected_landmarks",
+          "line": 10,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "src.config"
+      ]
+    },
+    {
+      "path": "modules/emotion/tests/test_model.py",
+      "bytes": 394,
+      "sha256": "e2fda1fbc3a3743eef50677cd8a70c3f7a25371babd4f705bf2c34d43f78e969",
+      "symbols": [
+        {
+          "name": "test_expression_net_output_shape",
+          "line": 7,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "src.config",
+        "src.model",
+        "torch"
+      ]
+    },
+    {
+      "path": "modules/emotion/tests/test_model_loading.py",
+      "bytes": 910,
+      "sha256": "b9f62307c8bb57d79240390d77f6c8b2a031dcdea3cb1d44115735d10bde79eb",
+      "symbols": [
+        {
+          "name": "test_load_model_returns_none_for_missing_checkpoint",
+          "line": 8,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "test_load_model_round_trip",
+          "line": 12,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "main",
+        "src.config",
+        "src.model",
+        "torch"
+      ]
+    },
+    {
+      "path": "modules/emotion/tests/test_preprocess.py",
+      "bytes": 1326,
+      "sha256": "f7a0ee54a9df0dfa9b5acec78e8c73939a64bb46ff74d0ca28137f020769f6fa",
+      "symbols": [
+        {
+          "name": "make_landmarks",
+          "line": 8,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "test_normalize_face_landmarks_returns_face_only_features",
+          "line": 18,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "test_normalization_is_translation_invariant",
+          "line": 24,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "test_missing_or_invalid_face_returns_none",
+          "line": 35,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "test_validate_feature_vector_rejects_wrong_shape",
+          "line": 40,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "numpy",
+        "pytest",
+        "src.config",
+        "utils.preprocess"
+      ]
+    },
+    {
+      "path": "modules/emotion/tests/test_session_splits.py",
+      "bytes": 2495,
+      "sha256": "a97a093eb8cb68ac7aab8129a80fd7f1e70c4262a5d4ce7e73cbd1b38c7ab463",
+      "symbols": [
+        {
+          "name": "make_dataset",
+          "line": 9,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "test_session_split_refuses_too_few_sessions",
+          "line": 27,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "test_session_split_separates_sessions",
+          "line": 35,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "test_existing_split_refuses_missing_current_sessions",
+          "line": 51,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "test_existing_split_refuses_unknown_deleted_sessions",
+          "line": 61,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "pandas",
+        "pytest",
+        "src.config",
+        "src.data"
+      ]
+    },
+    {
+      "path": "modules/emotion/utils/preprocess.py",
+      "bytes": 2495,
+      "sha256": "fc5b4a501eee3bef8998a90c88db0781cee6a6b1f5e3b82e51b31cb0cecd843f",
+      "symbols": [
+        {
+          "name": "_as_landmark_array",
+          "line": 10,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "normalize_face_landmarks",
+          "line": 22,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "feature_dict",
+          "line": 48,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "extract_face_features",
+          "line": 54,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "validate_feature_vector",
+          "line": 61,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "numpy",
+        "src.config",
+        "typing"
+      ]
+    },
+    {
+      "path": "modules/face/face_recognition/__init__.py",
+      "bytes": 664,
+      "sha256": "8b9afa9a56ecd01493830f0b39f03bc41d4c75fbea69e7be5d632c1e9d1c6992",
+      "symbols": [],
+      "imports": [
+        "config",
+        "database",
+        "face_processor",
+        "logging_config",
+        "media_handler",
+        "ui",
+        "utils"
+      ]
+    },
+    {
+      "path": "modules/face/face_recognition/config.py",
+      "bytes": 5433,
+      "sha256": "778a40d0f14c3b80fc9f7b2020ad13207e3168ad8b7671dbdc7f19d9627fdf22",
+      "symbols": [
+        {
+          "name": "Config",
+          "line": 11,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "json",
+        "os",
+        "pathlib",
+        "typing"
+      ]
+    },
+    {
+      "path": "modules/face/face_recognition/database.py",
+      "bytes": 17630,
+      "sha256": "8d75e118c25e98ba2935eed1045fbf3d183d2c1f0bb0ab9adeca3dfc42f66c1e",
+      "symbols": [
+        {
+          "name": "FaceDatabase",
+          "line": 19,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "config",
+        "cv2",
+        "datetime",
+        "json",
+        "numpy",
+        "os",
+        "pathlib",
+        "pickle",
+        "shutil",
+        "typing",
+        "utils"
+      ]
+    },
+    {
+      "path": "modules/face/face_recognition/face_processor.py",
+      "bytes": 15128,
+      "sha256": "b0d23473e02775fbcc97eb2f7f17a3b120535bc4092e5f90608acacbed557721",
+      "symbols": [
+        {
+          "name": "FaceProcessor",
+          "line": 13,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "config",
+        "core.drawing_utils",
+        "cv2",
+        "database",
+        "numpy",
+        "time",
+        "typing"
+      ]
+    },
+    {
+      "path": "modules/face/face_recognition/logging_config.py",
+      "bytes": 8643,
+      "sha256": "31dcb8ee1095d9548c1f8955f5717a364e34d3944992406e0e3405f9ec459dac",
+      "symbols": [
+        {
+          "name": "FaceRecognitionLogger",
+          "line": 12,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "get_logger",
+          "line": 164,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "setup_logging",
+          "line": 181,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "log_exception",
+          "line": 197,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "PerformanceLogger",
+          "line": 217,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "cv2",
+        "logging",
+        "logging.handlers",
+        "numpy",
+        "os",
+        "pathlib",
+        "platform",
+        "sys",
+        "time",
+        "typing"
+      ]
+    },
+    {
+      "path": "modules/face/face_recognition/media_handler.py",
+      "bytes": 15891,
+      "sha256": "8103ce561cef10638c0750a9f93e2510bd4f5d98fe50c87e7cd7db5604e5e533",
+      "symbols": [
+        {
+          "name": "MediaHandler",
+          "line": 15,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "config",
+        "cv2",
+        "os",
+        "sys",
+        "time",
+        "typing",
+        "utils"
+      ]
+    },
+    {
+      "path": "modules/face/face_recognition/ui.py",
+      "bytes": 23381,
+      "sha256": "53a09849726bb86f2107b01adb8a45039a26a290724f78ffbdf61dc2564c4afb",
+      "symbols": [
+        {
+          "name": "UIManager",
+          "line": 16,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "config",
+        "cv2",
+        "database",
+        "os",
+        "pathlib",
+        "sys",
+        "typing",
+        "utils"
+      ]
+    },
+    {
+      "path": "modules/face/face_recognition/utils.py",
+      "bytes": 5869,
+      "sha256": "2549211a098ab917a5b87b9d1e01449b4679295fea5aa6a82827aaa21a62b08d",
+      "symbols": [
+        {
+          "name": "setup_logging",
+          "line": 11,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "get_input_type",
+          "line": 24,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "validate_image_path",
+          "line": 52,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "ensure_directory",
+          "line": 80,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "get_file_age_in_days",
+          "line": 95,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "format_file_size",
+          "line": 113,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "safe_filename",
+          "line": 135,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "validate_age",
+          "line": 156,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "validate_gender",
+          "line": 180,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "ProgressTracker",
+          "line": 202,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "logging",
+        "os",
+        "pathlib",
+        "re",
+        "time",
+        "typing"
+      ]
+    },
+    {
+      "path": "modules/face/main.py",
+      "bytes": 13274,
+      "sha256": "4308f3a18e0210cb8c0835e9af9a4628c7f844bbebb2d0b4685e3ae6e8a3c756",
+      "symbols": [
+        {
+          "name": "parse_arguments",
+          "line": 33,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "process_single_image",
+          "line": 71,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "process_video_stream",
+          "line": 124,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "main",
+          "line": 245,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "argparse",
+        "cv2",
+        "face_recognition",
+        "face_recognition.logging_config",
+        "pathlib",
+        "sys"
+      ]
+    },
+    {
+      "path": "modules/face/requirements.txt",
+      "bytes": 46,
+      "sha256": "52ab242431152d262568d795d192bf6fe96626e6fdb3a08da33e1632d04fa04e"
+    },
+    {
+      "path": "modules/fall/fall_detector.py",
+      "bytes": 10814,
+      "sha256": "ae4b42b5ac8c88bbb03dcc0409cdbdbaa649e024cc5bc45932d0dbd542fcdd80",
+      "symbols": [
+        {
+          "name": "PostureMetrics",
+          "line": 26,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "FallDetector",
+          "line": 45,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "core.drawing_utils",
+        "cv2",
+        "dataclasses",
+        "logging",
+        "math",
+        "mediapipe",
+        "numpy",
+        "time",
+        "typing"
+      ]
+    },
+    {
+      "path": "modules/fall/hfd_classifier.py",
+      "bytes": 3849,
+      "sha256": "eadc8c902648a13ed12646f0cfc7b58d424b72bbc20b833b89d91c3b10ffae95",
+      "symbols": [
+        {
+          "name": "LSTMModel",
+          "line": 17,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "SequenceState",
+          "line": 29,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "HfdClassifier",
+          "line": 36,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "collections",
+        "dataclasses",
+        "hashlib",
+        "modules.fall.hfd_features",
+        "numpy",
+        "pathlib",
+        "torch"
+      ]
+    },
+    {
+      "path": "modules/fall/hfd_features.py",
+      "bytes": 5459,
+      "sha256": "3f13267037f459da150f115fc4a4b9f2a5d96dfa5e7af0086c2fdf0ab057431d",
+      "symbols": [
+        {
+          "name": "pose_sample",
+          "line": 15,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "feature_vector",
+          "line": 44,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "get_angle",
+          "line": 55,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "get_rot_energy",
+          "line": 58,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "get_angle_vertical",
+          "line": 84,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "get_gf",
+          "line": 87,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "get_ratio_derivative",
+          "line": 148,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "core.fall_backends",
+        "math",
+        "numpy"
+      ]
+    },
+    {
+      "path": "modules/fall/hfd_pose_backend.py",
+      "bytes": 6097,
+      "sha256": "63cc6deb11dd4b06f115199f91a196c6fa697eb2e6397a64c1001e32fe481c5a",
+      "symbols": [
+        {
+          "name": "HfdPoseBackend",
+          "line": 16,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "core.fall_backends",
+        "core.fall_pipeline",
+        "hashlib",
+        "json",
+        "numpy",
+        "os",
+        "pathlib",
+        "queue",
+        "struct",
+        "subprocess",
+        "threading"
+      ]
+    },
+    {
+      "path": "modules/fall/HumanFallDetection/algorithms.py",
+      "bytes": 23912,
+      "sha256": "60f98b55f74eb6b99ced9be7f63d7ab04f0966525c06e63eb26b74c83e09cb25",
+      "symbols": [
+        {
+          "name": "get_source",
+          "line": 20,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "resize",
+          "line": 39,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "extract_keypoints_parallel",
+          "line": 50,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "show_tracked_img",
+          "line": 131,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "remove_wrongly_matched",
+          "line": 164,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "match_unmatched",
+          "line": 179,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "alg2_sequential",
+          "line": 241,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "get_all_features",
+          "line": 406,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "get_frame_features",
+          "line": 501,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "base64",
+        "cv2",
+        "default_params",
+        "helpers",
+        "logging",
+        "math",
+        "matplotlib.pyplot",
+        "model.model",
+        "numpy",
+        "pandas",
+        "re",
+        "scipy.signal",
+        "time",
+        "torch",
+        "vis.inv_pendulum",
+        "vis.processor",
+        "vis.visual"
+      ]
+    },
+    {
+      "path": "modules/fall/HumanFallDetection/default_params.py",
+      "bytes": 628,
+      "sha256": "1f4b740b3f529e0b1b11acbc1e730bccab85e92d3fa0a203a80c93281ca478fc",
+      "symbols": [],
+      "imports": []
+    },
+    {
+      "path": "modules/fall/HumanFallDetection/fall_detector.py",
+      "bytes": 6828,
+      "sha256": "4dc5456564228f3f436e533445f5b88786327eff8c1970d4bf89e8da6d93387d",
+      "symbols": [
+        {
+          "name": "FallDetector",
+          "line": 20,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "algorithms",
+        "argparse",
+        "copy",
+        "csv",
+        "default_params",
+        "helpers",
+        "logging",
+        "matplotlib.pyplot",
+        "openpifpaf",
+        "os",
+        "torch",
+        "torch.multiprocessing"
+      ]
+    },
+    {
+      "path": "modules/fall/HumanFallDetection/helpers.py",
+      "bytes": 1956,
+      "sha256": "847211e8274aa612f0577676587ce3612613272ca8a25b38cda6ce3245ce74c1",
+      "symbols": [
+        {
+          "name": "pop_and_add",
+          "line": 8,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "last_ip",
+          "line": 14,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "last_valid_hist",
+          "line": 19,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "dist",
+          "line": 24,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "move_figure",
+          "line": 30,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "valid_candidate_hist",
+          "line": 42,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "dist_hist",
+          "line": 48,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "get_hist",
+          "line": 63,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "PIL",
+        "cv2",
+        "matplotlib",
+        "numpy"
+      ]
+    },
+    {
+      "path": "modules/fall/HumanFallDetection/model/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "symbols": [],
+      "imports": []
+    },
+    {
+      "path": "modules/fall/HumanFallDetection/model/model.py",
+      "bytes": 2092,
+      "sha256": "4fbcdd29d3b081546429cd7e00af738eee5ebbe13c194f5bbc1cb1bfffc049f3",
+      "symbols": [
+        {
+          "name": "LSTMModel",
+          "line": 10,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "pandas",
+        "torch",
+        "torch.nn"
+      ]
+    },
+    {
+      "path": "modules/fall/HumanFallDetection/process_data.py",
+      "bytes": 999,
+      "sha256": "b6dce15d4e62b4d17b5db45a2f79c1a52c99af8b4f3022634269dd20564d73c1",
+      "symbols": [],
+      "imports": [
+        "csv",
+        "fall_detector",
+        "joblib",
+        "os",
+        "sys",
+        "time"
+      ]
+    },
+    {
+      "path": "modules/fall/HumanFallDetection/requirements.txt",
+      "bytes": 311,
+      "sha256": "d076a4c0ac300bd233e0c97d9b8127e89780b946c0f1bf4d74349ab378e513de"
+    },
+    {
+      "path": "modules/fall/HumanFallDetection/vis/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "symbols": [],
+      "imports": []
+    },
+    {
+      "path": "modules/fall/HumanFallDetection/vis/inv_pendulum.py",
+      "bytes": 11997,
+      "sha256": "194d41d63135da54e456721d1580bc3aa880255d0859523356ccf992a74e83e9",
+      "symbols": [
+        {
+          "name": "match_ip",
+          "line": 7,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "extend_vector",
+          "line": 55,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "perp",
+          "line": 61,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "seg_intersect",
+          "line": 72,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "get_kp",
+          "line": 82,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "get_angle",
+          "line": 158,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "is_valid",
+          "line": 162,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "get_rot_energy",
+          "line": 170,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "get_angle_vertical",
+          "line": 198,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "get_gf",
+          "line": 202,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "get_height_bbox",
+          "line": 274,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "get_ratio_bbox",
+          "line": 281,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "get_ratio_derivative",
+          "line": 292,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "match_ip2",
+          "line": 302,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "default_params",
+        "helpers",
+        "numpy",
+        "visual"
+      ]
+    },
+    {
+      "path": "modules/fall/HumanFallDetection/vis/processor.py",
+      "bytes": 3663,
+      "sha256": "3c4fbad4e2cadea4561c2efe9ade544e7b543504cb5df8da0e348f85c9637c13",
+      "symbols": [
+        {
+          "name": "Processor",
+          "line": 11,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "PIL",
+        "base64",
+        "io",
+        "numpy",
+        "openpifpaf",
+        "time",
+        "torch"
+      ]
+    },
+    {
+      "path": "modules/fall/HumanFallDetection/vis/visual.py",
+      "bytes": 5852,
+      "sha256": "224ff058a1d0a3b4a74b10d440b60fce02063f2168bb202c5fc3b8c81c500132",
+      "symbols": [
+        {
+          "name": "CocoPart",
+          "line": 8,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "write_on_image",
+          "line": 78,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "visualise",
+          "line": 102,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "visualise_tracking",
+          "line": 132,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "cv2",
+        "enum",
+        "numpy",
+        "typing"
+      ]
+    },
+    {
+      "path": "modules/rehabilitation/care.py",
+      "bytes": 4713,
+      "sha256": "e4674bf6d97dcdc11a6bcd5ce2ecaec28e3baa83c9aa6c308e3c26d66770d5ea",
+      "symbols": [
+        {
+          "name": "calculate_angle",
+          "line": 12,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "cv2",
+        "mediapipe",
+        "numpy",
+        "time"
+      ]
+    },
+    {
+      "path": "modules/rehabilitation/rehab_engine.py",
+      "bytes": 28811,
+      "sha256": "86aca4e2e7b718ca29b842ec05b97c4a41ed4ab3982f83c238fd0e45783c48ec",
+      "symbols": [
+        {
+          "name": "calculate_angle",
+          "line": 34,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "ExerciseMetrics",
+          "line": 51,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "BaseExerciseTracker",
+          "line": 64,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "ArmRaiseTracker",
+          "line": 105,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "SitToStandTracker",
+          "line": 232,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "MarchingTracker",
+          "line": 329,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "RehabilitationEngine",
+          "line": 413,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "config",
+        "core.drawing_utils",
+        "cv2",
+        "dataclasses",
+        "logging",
+        "math",
+        "mediapipe",
+        "numpy",
+        "time",
+        "typing"
+      ]
+    },
+    {
+      "path": "modules/rehabilitation/rehab_runner.py",
+      "bytes": 2056,
+      "sha256": "6515caedae42d1bda6fec833bdac43ce64ecdbdc1aed8b9783f13836579fe4e9",
+      "symbols": [
+        {
+          "name": "main",
+          "line": 23,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "adapters.rehabilitation_adapter",
+        "argparse",
+        "cv2",
+        "numpy",
+        "pathlib",
+        "sys"
+      ]
+    },
+    {
+      "path": "modules/rehabilitation/requirements.txt",
+      "bytes": 86,
+      "sha256": "e80c105801e11e552f7fd838136718a8b15390a85027ef94f4c1d5ea639876a3"
+    },
+    {
+      "path": "packaging/AI_Rehabilitation_Assistant.spec",
+      "bytes": 6145,
+      "sha256": "316d21a64fe2a0d69fab53a4ae14b6c45d8c43e66968bdd9871fc5557d0b55cd",
+      "symbols": [],
+      "imports": [
+        "PyInstaller.utils.hooks",
+        "os",
+        "pathlib",
+        "sys"
+      ]
+    },
+    {
+      "path": "packaging/build_windows_debug.ps1",
+      "bytes": 2256,
+      "sha256": "fe7295682743f4895a913c33cc393b6c6e1b59bc059ab494b563782912b78c12"
+    },
+    {
+      "path": "packaging/build_windows_release.ps1",
+      "bytes": 2276,
+      "sha256": "9b63bcf2131f4e3d63b5f8da0bf5995edb9ae9c21b18bb4b275542d4b5e40108"
+    },
+    {
+      "path": "packaging/portable/BUILD_PORTABLE.bat",
+      "bytes": 1284,
+      "sha256": "34d3e43c2c75385d6b88a99f1bc3b04842a087a8a21ec9a19201d02e7d392b19"
+    },
+    {
+      "path": "packaging/portable/build_portable.py",
+      "bytes": 7272,
+      "sha256": "71cf21a62d5d82d1c0593a174a10b31d90f7e3d1401ca4ed2622f42f2e18b83d",
+      "symbols": [
+        {
+          "name": "clean_existing_release",
+          "line": 75,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "should_exclude",
+          "line": 88,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "copy_source_tree",
+          "line": 100,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "build_zip",
+          "line": 173,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "verify_package",
+          "line": 187,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "main",
+          "line": 225,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "os",
+        "pathlib",
+        "shutil",
+        "sys",
+        "zipfile"
+      ]
+    },
+    {
+      "path": "packaging/portable/CHECK_SYSTEM.bat",
+      "bytes": 561,
+      "sha256": "02edc72347cb466b892a2b7b55e70575779a8e31bfec5c25b3573fd39157b7b2"
+    },
+    {
+      "path": "packaging/portable/SETUP.bat",
+      "bytes": 6374,
+      "sha256": "785af45e5fc9756b01328b0baa6a3df351bfdb2a0981665e27cf77bbbca428a9"
+    },
+    {
+      "path": "packaging/portable/START.bat",
+      "bytes": 1200,
+      "sha256": "63d9e6e0b473fe07ac0dcdee3a12fe4eae495c927a07617ac5153846da39a91f"
+    },
+    {
+      "path": "packaging/portable/START_DEBUG.bat",
+      "bytes": 1023,
+      "sha256": "a30176ed5c971a1b22100322690659d473fc11f728e0f1fcb538be1eb70e9457"
+    },
+    {
+      "path": "packaging/rthook_mediapipe_dll.py",
+      "bytes": 1932,
+      "sha256": "cacf2b8ddda6fc2458e7b27f472a2e4f14911be82f751a8ec44d7ebeaab0babb",
+      "symbols": [
+        {
+          "name": "_init_windows_dlls",
+          "line": 19,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "ctypes",
+        "mediapipe",
+        "os",
+        "sys",
+        "torch"
+      ]
+    },
+    {
+      "path": "requirements-fall-hfd-worker.txt",
+      "bytes": 635,
+      "sha256": "bce399cdf31d9c35e938dce42cf07637d28a3d06a01fe1be0afc767cf02012ea"
+    },
+    {
+      "path": "requirements-fall-onnx.txt",
+      "bytes": 100,
+      "sha256": "155b9417fd8052d936f69c91fa731559e5c5a986198559c3accb1a0ead4e1e52"
+    },
+    {
+      "path": "requirements-fall-pose.txt",
+      "bytes": 245,
+      "sha256": "cbcb0c6fc93b427c42b696652591bbeec9068c1703d6e47aba21c77d22b29423"
+    },
+    {
+      "path": "requirements-windows.txt",
+      "bytes": 657,
+      "sha256": "e50ac0f43c8e64cb3bdbdd42e7b8638ea2dbd32a10f022bb02d12a4af54bf08e"
+    },
+    {
+      "path": "requirements.txt",
+      "bytes": 381,
+      "sha256": "07291749e764e744fb63e7f5677381d985f1385746ba20481db03ebd3e2e4218"
+    },
+    {
+      "path": "scripts/benchmark_fall_backends.py",
+      "bytes": 5454,
+      "sha256": "0dda6f65abee002e8bd07e6c3ab5e4f7777a4a259fd056efd5797c0476874c71",
+      "symbols": [
+        {
+          "name": "main",
+          "line": 21,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "argparse",
+        "core.fall_backends",
+        "core.fall_pipeline",
+        "core.frame_source",
+        "cv2",
+        "dataclasses",
+        "hashlib",
+        "json",
+        "mediapipe",
+        "modules.fall.hfd_pose_backend",
+        "numpy",
+        "pathlib",
+        "sys",
+        "time",
+        "torch"
+      ]
+    },
+    {
+      "path": "scripts/build_codebase_inventory.py",
+      "bytes": 3249,
+      "sha256": "1b0231531cec746559c1649e7e252962580be976772f9160f76649b0780ae9bf",
+      "symbols": [
+        {
+          "name": "inventory",
+          "line": 16,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "main",
+          "line": 51,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "argparse",
+        "ast",
+        "hashlib",
+        "json",
+        "os",
+        "pathlib"
+      ]
+    },
+    {
+      "path": "scripts/capture_ui_screenshot.py",
+      "bytes": 2779,
+      "sha256": "c41a04923bac8c33bc932b26f5ed65147e1f7aeb1919afa9f9c04b1dfc245880",
+      "symbols": [
+        {
+          "name": "capture_screenshots",
+          "line": 33,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "PyQt5.QtCore",
+        "PyQt5.QtWidgets",
+        "adapters.face_adapter",
+        "app.dashboard",
+        "app.registration_dialog",
+        "mediapipe",
+        "os",
+        "pathlib",
+        "sys",
+        "time",
+        "torch"
+      ]
+    },
+    {
+      "path": "scripts/capture_verification_screenshots.py",
+      "bytes": 7269,
+      "sha256": "0175137a85c6e9d3a364b82e920e6b2734996b2257b0b5a72e365ca45590359d",
+      "symbols": [
+        {
+          "name": "save_pixmap",
+          "line": 47,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "main",
+          "line": 54,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "PyQt5.QtCore",
+        "PyQt5.QtGui",
+        "PyQt5.QtWidgets",
+        "app.dashboard",
+        "app.registration_dialog",
+        "app.theme",
+        "cv2",
+        "mediapipe",
+        "numpy",
+        "os",
+        "shutil",
+        "sys",
+        "torch"
+      ]
+    },
+    {
+      "path": "scripts/debug_style.py",
+      "bytes": 928,
+      "sha256": "6132c87c632c70ababbb061873994ffee6658e51f3cf93bcfeaffdb36e5c8873",
+      "symbols": [],
+      "imports": [
+        "PyQt5.QtWidgets",
+        "app.dashboard",
+        "mediapipe",
+        "os",
+        "pathlib",
+        "sys",
+        "torch"
+      ]
+    },
+    {
+      "path": "scripts/evaluate_fall.py",
+      "bytes": 7879,
+      "sha256": "988a2312365729870b37cd6be2a5ebd1a24599361bbfa27d49d44c95196513ff",
+      "symbols": [
+        {
+          "name": "digest",
+          "line": 24,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "write",
+          "line": 28,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "main",
+          "line": 32,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "argparse",
+        "core.fall_backends",
+        "core.fall_pipeline",
+        "core.frame_source",
+        "cv2",
+        "dataclasses",
+        "datetime",
+        "experiments.fall_legacy_reference",
+        "experiments.fall_legacy_source",
+        "hashlib",
+        "json",
+        "mediapipe",
+        "modules.fall.hfd_pose_backend",
+        "numpy",
+        "os",
+        "pathlib",
+        "platform",
+        "psutil",
+        "services.fall_test_runner",
+        "subprocess",
+        "sys",
+        "time",
+        "torch",
+        "unittest.mock"
+      ]
+    },
+    {
+      "path": "scripts/export_fall_pose_onnx.py",
+      "bytes": 732,
+      "sha256": "e99de8e1f5886fa11a5ac31154348e5b37f619aecfbcc2e17b55b97f38ce1a89",
+      "symbols": [
+        {
+          "name": "main",
+          "line": 7,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "argparse",
+        "os",
+        "pathlib",
+        "ultralytics"
+      ]
+    },
+    {
+      "path": "scripts/export_hfd_onnx.py",
+      "bytes": 1056,
+      "sha256": "0f0174435247883a946623afcd99287be3725648ccba5579dcc3e44f0efb76ce",
+      "symbols": [
+        {
+          "name": "main",
+          "line": 9,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "argparse",
+        "openpifpaf",
+        "openpifpaf.export_onnx",
+        "pathlib",
+        "torch"
+      ]
+    },
+    {
+      "path": "scripts/finalize_fall_report.py",
+      "bytes": 10255,
+      "sha256": "6d429722351a1056c5e0eab4d31553bf5ee54c84a0fde7ac14d34c7e78775858",
+      "symbols": [
+        {
+          "name": "main",
+          "line": 11,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "hashlib",
+        "json",
+        "pathlib",
+        "platform",
+        "sys"
+      ]
+    },
+    {
+      "path": "scripts/hfd_pose_worker.py",
+      "bytes": 5847,
+      "sha256": "3818fbf112ab168e35d403d5f400edfeea8ea614a32ccc12743c6acc73c891f0",
+      "symbols": [
+        {
+          "name": "read_exact",
+          "line": 9,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "main",
+          "line": 18,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "PIL",
+        "argparse",
+        "cv2",
+        "json",
+        "numpy",
+        "onnxruntime",
+        "openpifpaf",
+        "os",
+        "pathlib",
+        "struct",
+        "sys",
+        "torch",
+        "traceback"
+      ]
+    },
+    {
+      "path": "scripts/inspect_fall_events.py",
+      "bytes": 502,
+      "sha256": "9aaee79f297b6c17da7dd642c941b10fc56232436e3b740d476049fcd36072a1",
+      "symbols": [],
+      "imports": [
+        "cv2",
+        "pathlib",
+        "sys"
+      ]
+    },
+    {
+      "path": "scripts/inspect_fall_inputs.py",
+      "bytes": 1332,
+      "sha256": "e8d3944f508fdae889bfc570691929b1bc54d54b830a174c4aef901f6d049818",
+      "symbols": [],
+      "imports": [
+        "cv2",
+        "hashlib",
+        "json",
+        "pathlib"
+      ]
+    },
+    {
+      "path": "scripts/migrate_fall_labels.py",
+      "bytes": 916,
+      "sha256": "daa1f83878cd8626d5ceb5c1e199762ae14224feb70bea996786a3be91c19a80",
+      "symbols": [],
+      "imports": [
+        "json",
+        "pathlib"
+      ]
+    },
+    {
+      "path": "scripts/prepare_fall_annotation.py",
+      "bytes": 6263,
+      "sha256": "932c048cbcead87f52bc53f70df0733460ec6cb02b92f620a99b118a7b1f9d2c",
+      "symbols": [
+        {
+          "name": "main",
+          "line": 42,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "argparse",
+        "cv2",
+        "hashlib",
+        "json",
+        "pathlib"
+      ]
+    },
+    {
+      "path": "scripts/reassess_fall_runs.py",
+      "bytes": 2926,
+      "sha256": "ad34f4e54c546df64983d34f5a18926c07c063b9d2cf2f543a072235eeef370f",
+      "symbols": [
+        {
+          "name": "sha",
+          "line": 16,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "core.fall_evaluation",
+        "core.fall_pipeline",
+        "cv2",
+        "dataclasses",
+        "hashlib",
+        "importlib.metadata",
+        "json",
+        "pathlib",
+        "platform",
+        "sys"
+      ]
+    },
+    {
+      "path": "scripts/replay_fall_observations.py",
+      "bytes": 3229,
+      "sha256": "e003496e75f908690f986a42a9ffc337461879b68fdafaaefc94096dfa373712",
+      "symbols": [
+        {
+          "name": "EmptyBackend",
+          "line": 14,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "replay",
+          "line": 18,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "main",
+          "line": 39,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "argparse",
+        "core.fall_pipeline",
+        "dataclasses",
+        "json",
+        "mediapipe",
+        "modules.fall.hfd_classifier",
+        "numpy",
+        "pathlib",
+        "sys"
+      ]
+    },
+    {
+      "path": "scripts/run_fall_checks.py",
+      "bytes": 2686,
+      "sha256": "7b021b354886c7e645c773ca4e663dc3bff104dcb7d5840aca67103427f9bbed",
+      "symbols": [
+        {
+          "name": "main",
+          "line": 19,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "argparse",
+        "config",
+        "json",
+        "logging",
+        "mediapipe",
+        "os",
+        "pathlib",
+        "sys",
+        "tempfile",
+        "unittest",
+        "unittest.mock"
+      ]
+    },
+    {
+      "path": "scripts/setup_hfd.ps1",
+      "bytes": 2153,
+      "sha256": "91348a083676d856024e43b28f3899ec205737d298a7ce7dc31a1178c8bbd504"
+    },
+    {
+      "path": "scripts/support_cached_fall_detections.py",
+      "bytes": 2291,
+      "sha256": "fbfbf6605cd4d9099f4d1a4e97f0bc3a66e7a46f69abb3e98b0e80c87576996b",
+      "symbols": [
+        {
+          "name": "CachedBackend",
+          "line": 16,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "main",
+          "line": 32,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "argparse",
+        "core.fall_backends",
+        "core.fall_pipeline",
+        "core.frame_source",
+        "cv2",
+        "json",
+        "mediapipe",
+        "numpy",
+        "pathlib",
+        "sys"
+      ]
+    },
+    {
+      "path": "scripts/test_qss_parser.py",
+      "bytes": 389,
+      "sha256": "add3d9a97aa94c662e9084e9cf26313274d0e21d877f4a1db74877a9591ec002",
+      "symbols": [],
+      "imports": [
+        "PyQt5.QtWidgets",
+        "app.theme",
+        "mediapipe",
+        "os",
+        "sys"
+      ]
+    },
+    {
+      "path": "scripts/verify_hfd_onnx.py",
+      "bytes": 1835,
+      "sha256": "a7ef6e5eb4bd650b18f171df3e9043ac64ae68bea8e540d883aff8a643cf93a6",
+      "symbols": [
+        {
+          "name": "main",
+          "line": 11,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "argparse",
+        "json",
+        "numpy",
+        "onnxruntime",
+        "openpifpaf",
+        "pathlib",
+        "torch"
+      ]
+    },
+    {
+      "path": "services/__init__.py",
+      "bytes": 194,
+      "sha256": "586595a9bbd8cbc59062aefff8e0832d10a5656b758bd28fb6b13ca395808fa5",
+      "symbols": [],
+      "imports": [
+        "state_service"
+      ]
+    },
+    {
+      "path": "services/email_service.py",
+      "bytes": 13954,
+      "sha256": "d4c81017c4e4c7818f78ff5c524f7470c0e3d0d19e49c24ef299adbc2e6dc000",
+      "symbols": [
+        {
+          "name": "DeliveryStatus",
+          "line": 34,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "DeliveryResult",
+          "line": 48,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "EmailService",
+          "line": 62,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "config",
+        "dataclasses",
+        "email.mime.image",
+        "email.mime.multipart",
+        "email.mime.text",
+        "logging",
+        "pathlib",
+        "services.user_service",
+        "smtplib",
+        "threading",
+        "time",
+        "typing"
+      ]
+    },
+    {
+      "path": "services/fall_monitor.py",
+      "bytes": 23534,
+      "sha256": "4bf26d870aadbc7c541f3a3a9b163c2b0e60c99334b8a5f3d778938d653dac89",
+      "symbols": [
+        {
+          "name": "_pipeline_guard",
+          "line": 36,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "FallEvent",
+          "line": 45,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "FallMonitor",
+          "line": 60,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "config",
+        "core.drawing_utils",
+        "core.fall_pipeline",
+        "cv2",
+        "dataclasses",
+        "datetime",
+        "functools",
+        "json",
+        "logging",
+        "modules.fall.fall_detector",
+        "numpy",
+        "pathlib",
+        "services.email_service",
+        "services.user_service",
+        "threading",
+        "time",
+        "typing"
+      ]
+    },
+    {
+      "path": "services/fall_test_runner.py",
+      "bytes": 8848,
+      "sha256": "3435407be55d1c6c2dc7edd3f7b183dddbf965e8ccc7eaf329bc18e484e27aa8",
+      "symbols": [
+        {
+          "name": "FallTestRunner",
+          "line": 16,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "core.drawing_utils",
+        "core.fall_evaluation",
+        "core.fall_evidence",
+        "core.fall_pipeline",
+        "core.frame_source",
+        "dataclasses",
+        "hashlib",
+        "json",
+        "pathlib",
+        "services.email_service",
+        "uuid"
+      ]
+    },
+    {
+      "path": "services/state_service.py",
+      "bytes": 3854,
+      "sha256": "2edb0bb5be3e5c93f01c99a43ba701d5c425c36c879599ddcca2f9a644929c1d",
+      "symbols": [
+        {
+          "name": "StateService",
+          "line": 19,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "config",
+        "datetime",
+        "json",
+        "logging",
+        "pathlib",
+        "typing"
+      ]
+    },
+    {
+      "path": "services/user_service.py",
+      "bytes": 7799,
+      "sha256": "8199e38b1ca1c1b779cfcfaed2a27a02b4e49a43a95f189a51434385483d88ec",
+      "symbols": [
+        {
+          "name": "UserService",
+          "line": 22,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "config",
+        "datetime",
+        "json",
+        "logging",
+        "pathlib",
+        "re",
+        "typing"
+      ]
+    },
+    {
+      "path": "SETUP.bat",
+      "bytes": 6374,
+      "sha256": "785af45e5fc9756b01328b0baa6a3df351bfdb2a0981665e27cf77bbbca428a9"
+    },
+    {
+      "path": "Setup_and_Run_Windows.bat",
+      "bytes": 2528,
+      "sha256": "2ece9c6e4492e3e24c97c9fd21ef9b3a997afa651d3482e7bd786cf8890b204e"
+    },
+    {
+      "path": "simulate_fall_alert.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "symbols": [],
+      "imports": []
+    },
+    {
+      "path": "START.bat",
+      "bytes": 1201,
+      "sha256": "a9c6f694650650bd2aaf9f464d82c9316505486bce8c4da8195276532708e6b7"
+    },
+    {
+      "path": "START_DEBUG.bat",
+      "bytes": 1024,
+      "sha256": "74449627d5cf658ebdeca4228e0f41694c43efce222cfe7646bd479996db09a7"
+    },
+    {
+      "path": "START_HFD.bat",
+      "bytes": 344,
+      "sha256": "a23ac3e15675ca986c346331e0f4c46848c740f134b4d966b8cdd89a45a5cee6"
+    },
+    {
+      "path": "test.py",
+      "bytes": 55,
+      "sha256": "999a05ea503a94a56b2f5c90df274a1006a49e39e5ca841bea6edee4b41f3cf6",
+      "symbols": [],
+      "imports": []
+    },
+    {
+      "path": "tests/test_acceptance_a1_a7.py",
+      "bytes": 27868,
+      "sha256": "f664588d7b31e64ff6a0d272cc89cb59ea7a2aafdf0eff8ce58eb05f16f93753",
+      "symbols": [
+        {
+          "name": "MockLandmark",
+          "line": 45,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "create_mock_pose",
+          "line": 57,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "TestAcceptanceA1ToA7",
+          "line": 139,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "adapters.emotion_adapter",
+        "adapters.face_adapter",
+        "adapters.fall_adapter",
+        "adapters.rehabilitation_adapter",
+        "config",
+        "cv2",
+        "json",
+        "modules.fall.fall_detector",
+        "modules.rehabilitation.rehab_engine",
+        "numpy",
+        "os",
+        "pathlib",
+        "services.email_service",
+        "services.fall_monitor",
+        "services.user_service",
+        "shutil",
+        "smtplib",
+        "tempfile",
+        "time",
+        "unittest",
+        "unittest.mock"
+      ]
+    },
+    {
+      "path": "tests/test_face_registration.py",
+      "bytes": 3848,
+      "sha256": "367f8db4f4471ff7fb1d46609b9a6fdbde369619b3abfd4817ddcf363f51a111",
+      "symbols": [
+        {
+          "name": "TestFaceRegistrationDecoupled",
+          "line": 20,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "PyQt5.QtWidgets",
+        "adapters.face_adapter",
+        "app.registration_dialog",
+        "config",
+        "cv2",
+        "numpy",
+        "pathlib",
+        "sys",
+        "unittest"
+      ]
+    },
+    {
+      "path": "tests/test_fall_and_safety.py",
+      "bytes": 11763,
+      "sha256": "ed2bee7e286d70642f9c4bbd664f55eae54edaa1e329eb69dccbf63667b03edf",
+      "symbols": [
+        {
+          "name": "MockLandmark",
+          "line": 30,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "build_mock_pose_landmarks",
+          "line": 41,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "TestFallDetector",
+          "line": 91,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "TestFallMonitorFSM",
+          "line": 131,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "TestUserService",
+          "line": 194,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "TestEmailService",
+          "line": 240,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "adapters.fall_adapter",
+        "config",
+        "core.fall_pipeline",
+        "json",
+        "modules.fall.fall_detector",
+        "numpy",
+        "os",
+        "pathlib",
+        "services.email_service",
+        "services.fall_monitor",
+        "services.user_service",
+        "shutil",
+        "tempfile",
+        "test_fall_pipeline_v2",
+        "time",
+        "unittest",
+        "unittest.mock"
+      ]
+    },
+    {
+      "path": "tests/test_fall_fusion_v3.py",
+      "bytes": 8818,
+      "sha256": "0b54b13ba7955f3f3c8deed12411f5ae7959d9956e2b46d230dcaa86afa0a52c",
+      "symbols": [
+        {
+          "name": "FusionTests",
+          "line": 11,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "BackendTests",
+          "line": 91,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "ForegroundTests",
+          "line": 148,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "core.fall_backends",
+        "core.fall_pipeline",
+        "dataclasses",
+        "json",
+        "numpy",
+        "tests.test_fall_pipeline_v2",
+        "types",
+        "unittest",
+        "unittest.mock"
+      ]
+    },
+    {
+      "path": "tests/test_fall_pipeline_v2.py",
+      "bytes": 14315,
+      "sha256": "f1eec2074debb92baec4fda312a6c1d1786379a5b4b4a23496bc0f8279bae28b",
+      "symbols": [
+        {
+          "name": "EmptyBackend",
+          "line": 17,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "observation",
+          "line": 22,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "CoreTests",
+          "line": 43,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "EvaluationTests",
+          "line": 143,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "LifecycleTests",
+          "line": 170,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "DispatchTests",
+          "line": 247,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "core.fall_evaluation",
+        "core.fall_pipeline",
+        "core.frame_source",
+        "cv2",
+        "dataclasses",
+        "numpy",
+        "pathlib",
+        "services.email_service",
+        "services.fall_test_runner",
+        "smtplib",
+        "tempfile",
+        "unittest",
+        "unittest.mock"
+      ]
+    },
+    {
+      "path": "tests/test_fall_ui_v2.py",
+      "bytes": 4220,
+      "sha256": "1fea1150c6fc9b2a5eb0757f9624949b71bec51647001868b5598afdde78dbef",
+      "symbols": [
+        {
+          "name": "VideoUiTests",
+          "line": 19,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "PyQt5.QtCore",
+        "PyQt5.QtWidgets",
+        "app.dashboard",
+        "core.camera_manager",
+        "cv2",
+        "mediapipe",
+        "numpy",
+        "pathlib",
+        "tempfile",
+        "tests.test_fall_pipeline_v2",
+        "time",
+        "unittest",
+        "unittest.mock"
+      ]
+    },
+    {
+      "path": "tests/test_hfd_integration.py",
+      "bytes": 11186,
+      "sha256": "8b00397b1cbbdb49396385df6eae13e2209e3008059ba57f43bd2c60377da8ba",
+      "symbols": [
+        {
+          "name": "observed",
+          "line": 24,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "upstream_functions",
+          "line": 31,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "FeatureTests",
+          "line": 42,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "ClassifierTests",
+          "line": 86,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "WorkerProtocolTests",
+          "line": 121,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "PolicyTests",
+          "line": 188,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "ast",
+        "collections",
+        "copy",
+        "core.fall_evidence",
+        "core.fall_pipeline",
+        "io",
+        "json",
+        "modules.fall.hfd_classifier",
+        "modules.fall.hfd_features",
+        "modules.fall.hfd_pose_backend",
+        "numpy",
+        "pathlib",
+        "queue",
+        "services.fall_monitor",
+        "tempfile",
+        "tests.test_fall_pipeline_v2",
+        "torch",
+        "unittest",
+        "unittest.mock"
+      ]
+    },
+    {
+      "path": "tests/test_launcher.py",
+      "bytes": 1839,
+      "sha256": "268ffb9bffa6d632098f3c8b2411c2f1e344649666359592c3421cf9044f4e7d",
+      "symbols": [
+        {
+          "name": "TestModuleLauncher",
+          "line": 15,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "app.launcher",
+        "config",
+        "sys",
+        "unittest"
+      ]
+    },
+    {
+      "path": "tests/test_plan_acceptance_u01_u03_f01_f05_r01.py",
+      "bytes": 16596,
+      "sha256": "9a4184bf6e76af2468535030b3a3a02a382e4cff492433071907d32d8528afaa",
+      "symbols": [
+        {
+          "name": "TestAcceptanceU01ToU03",
+          "line": 48,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "TestVideoModeF01ToF05",
+          "line": 181,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "TestRegressionR01",
+          "line": 365,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "PyQt5.QtCore",
+        "PyQt5.QtWidgets",
+        "__future__",
+        "app.dashboard",
+        "app.registration_dialog",
+        "app.state",
+        "core.frame_source",
+        "cv2",
+        "json",
+        "mediapipe",
+        "numpy",
+        "os",
+        "pathlib",
+        "services.email_service",
+        "services.fall_test_runner",
+        "shutil",
+        "smtplib",
+        "sys",
+        "torch",
+        "unittest",
+        "unittest.mock"
+      ]
+    },
+    {
+      "path": "tests/test_plan_verification.py",
+      "bytes": 22341,
+      "sha256": "ed326557fa3599446d88a6de6ed78150faf6aada79b16e29015645880190c78d",
+      "symbols": [
+        {
+          "name": "DeliveryStatus",
+          "line": 37,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "FallState",
+          "line": 46,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "MockLandmark",
+          "line": 55,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "create_pose_landmarks",
+          "line": 67,
+          "kind": "FunctionDef"
+        },
+        {
+          "name": "TestPlanVerification",
+          "line": 126,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "adapters.emotion_adapter",
+        "adapters.face_adapter",
+        "adapters.fall_adapter",
+        "adapters.rehabilitation_adapter",
+        "config",
+        "json",
+        "modules.fall.fall_detector",
+        "modules.rehabilitation.rehab_engine",
+        "numpy",
+        "os",
+        "pathlib",
+        "services.email_service",
+        "services.fall_monitor",
+        "services.user_service",
+        "shutil",
+        "smtplib",
+        "socket",
+        "tempfile",
+        "time",
+        "unittest",
+        "unittest.mock"
+      ]
+    },
+    {
+      "path": "tests/test_rehab_assistant.py",
+      "bytes": 11652,
+      "sha256": "07063a83a688d5c4093ec3f9454389309db4d9eaa048cbb7c31f90da4ef9a3c1",
+      "symbols": [
+        {
+          "name": "TestCameraManager",
+          "line": 41,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "TestFaceAdapter",
+          "line": 73,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "TestEmotionAdapter",
+          "line": 106,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "TestRehabilitationEngine",
+          "line": 183,
+          "kind": "ClassDef"
+        },
+        {
+          "name": "TestDashboardRouter",
+          "line": 270,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "adapters.emotion_adapter",
+        "adapters.face_adapter",
+        "adapters.rehabilitation_adapter",
+        "app.router",
+        "config",
+        "core.camera_manager",
+        "core.drawing_utils",
+        "modules.rehabilitation.rehab_engine",
+        "numpy",
+        "os",
+        "pathlib",
+        "services.state_service",
+        "tempfile",
+        "unittest"
+      ]
+    },
+    {
+      "path": "tests/test_source_capabilities.py",
+      "bytes": 4708,
+      "sha256": "b0a778d39a65db8b5197fe9c6f51441d4e32d82859e119b0131960c6d1f9eef0",
+      "symbols": [
+        {
+          "name": "test_all",
+          "line": 22,
+          "kind": "FunctionDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "adapters.emotion_adapter",
+        "adapters.face_adapter",
+        "adapters.rehabilitation_adapter",
+        "config",
+        "core.camera_manager",
+        "cv2",
+        "modules.fall.fall_detector",
+        "numpy",
+        "os",
+        "pathlib",
+        "services.email_service",
+        "services.fall_monitor",
+        "sys",
+        "time"
+      ]
+    },
+    {
+      "path": "tests/test_state.py",
+      "bytes": 1821,
+      "sha256": "1effda845b9063fa9360e07d46e7b251941ee8544e80be09f5b358a6d76f03a4",
+      "symbols": [
+        {
+          "name": "TestStateService",
+          "line": 15,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "__future__",
+        "pathlib",
+        "services.state_service",
+        "tempfile",
+        "unittest"
+      ]
+    },
+    {
+      "path": "tests/test_ui_acceptance_u1_u8.py",
+      "bytes": 11297,
+      "sha256": "9c9bef4ace6509e4110d5775033c5f01a31e969c865dd1049946ec110f627349",
+      "symbols": [
+        {
+          "name": "TestUIAcceptanceU1ToU8",
+          "line": 46,
+          "kind": "ClassDef"
+        }
+      ],
+      "imports": [
+        "PyQt5.QtCore",
+        "PyQt5.QtWidgets",
+        "__future__",
+        "app.dashboard",
+        "app.registration_dialog",
+        "app.theme",
+        "mediapipe",
+        "os",
+        "sys",
+        "torch",
+        "unittest",
+        "unittest.mock"
+      ]
+    }
+  ],
+  "parse_errors": []
+}

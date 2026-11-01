@@ -1,0 +1,127 @@
+[
+  {
+    "id": "MC01",
+    "path": "docs/PORTABLE_WINDOWS_REPORT.md",
+    "sha256": "f953a9e7a5f8992035560c30f238e6f45a5d01cfdf7223d63ba1dd7a6a0124e4"
+  },
+  {
+    "id": "MC02",
+    "path": "docs/WINDOWS_SETUP_V3_REPORT.md",
+    "sha256": "d60320264c8c83171151b7f38ce1cc37c9013edec5550ab0a314c6cc94e01b24"
+  },
+  {
+    "id": "MC02",
+    "path": "packaging/portable/test_setup.ps1",
+    "sha256": "dbb2450122f0b66d34e3eaa8fcd005da3bf6e1d88d3636012ab31192fe34f738"
+  },
+  {
+    "id": "MC03",
+    "path": "docs/local_rules/HANDOFF.md",
+    "sha256": "54f9e8db7a98c7b545dda11205c58aa414ada235da4482cb7c30dc9648f2d82f"
+  },
+  {
+    "id": "MC04",
+    "path": "docs/VITALS_SYNC_FIX.md",
+    "sha256": "f47e7025e0152885d9e9d8acb406249d59dfb20155eee8cefd3a3172c7c0bcad"
+  },
+  {
+    "id": "MC04",
+    "path": "tests/test_vitals_sync_regression.py",
+    "sha256": "b3140b0312702c860f62c7a5352e20df51fd4a67dcbdfa014c3cafedbac9918f"
+  },
+  {
+    "id": "MC05",
+    "path": "docs/EMOTION_SUMMARY_UPDATE.md",
+    "sha256": "564d084a5986da845b82de651865d05e70d30e8273e1600f6ed075ec974a1d8a"
+  },
+  {
+    "id": "MC05",
+    "path": "services/emotion_summary_service.py",
+    "sha256": "3077366309fe52446941da9032328d33fb6755d82f3e0e28bd4c2999cc348e9f"
+  },
+  {
+    "id": "MC06",
+    "path": "docs/FAMILY_MUSIC_UPDATE.md",
+    "sha256": "f717fbe946d740227364c22e47195523b66e957e438375464ffa7140113312e3"
+  },
+  {
+    "id": "MC06",
+    "path": "services/family_music_service.py",
+    "sha256": "dce03b336028779af598db44f7a7a02c6d30dffdb5701180e8e7b8be00128f70"
+  },
+  {
+    "id": "MC06",
+    "path": "services/music_playback.py",
+    "sha256": "04a50173187d1a261a11bfea40807aad342f609327c4b175efc6a3110edb562e"
+  },
+  {
+    "id": "MC07",
+    "path": "docs/STT_ACCURACY_UPGRADE.md",
+    "sha256": "0cb176df488faac162fc01eb37fc3a892b1e022eb3a8ad5b04e609bf9f87a41d"
+  },
+  {
+    "id": "MC08",
+    "path": "main.py",
+    "sha256": "21b0011660ba3604b8cd9eff87ba0f4b7eebafd60629850929159b4950077c1a"
+  },
+  {
+    "id": "MC09",
+    "path": "runtime/report-verification/results.xml",
+    "sha256": "16061ce959e750208eda00f475b0a64bcab265b47eccd922a5d83dcf81251452"
+  },
+  {
+    "id": "MC10",
+    "path": "runtime/report-verification-additional/results.xml",
+    "sha256": "6508fb49989aa9806da1f89fd571f2f78209ce6357891abf46ec991564cd95fd"
+  },
+  {
+    "id": "MC11",
+    "path": "reports/local_stt/zipformer-benchmark.json",
+    "sha256": "4cb49d8544a8fc017f01955873b1b9fddfc6ed9bbafda9f6a3028875994fb744"
+  },
+  {
+    "id": "MC11",
+    "path": "docs/STT_ZIPFORMER.md",
+    "sha256": "befb5ce651fb427398a195d0e63d929c205fad255b0107579bdd1dddba268fb9"
+  },
+  {
+    "id": "MC11",
+    "path": "models/manifest.json",
+    "sha256": "bb7d4ee6793025183049eccf60cd4079a3bb836cf0d228e194443c0501f30407"
+  },
+  {
+    "id": "MC12",
+    "path": "services/local_voice/controller.py",
+    "sha256": "94f8e6206c47051494333b46517a50c11fe719b8ee5c157474016b603116c84f"
+  },
+  {
+    "id": "MC12",
+    "path": "services/local_voice/dispatcher.py",
+    "sha256": "3345f5029215eb8d1ae944c498773cbc5731c213b3d850d8392aaacb00e9629a"
+  },
+  {
+    "id": "MC12",
+    "path": "app/local_voice_widget.py",
+    "sha256": "0d8a8cb83412aff11bddb119c928e2b11b45aed1397d2fd5ea6bdedfa0859b1d"
+  },
+  {
+    "id": "MC12",
+    "path": "tests/voice_ai/test_local_voice.py",
+    "sha256": "ea4a2c1020b94a81db34eb27135574101d802d75cd7b0f2cc7782c02ab5b576b"
+  },
+  {
+    "id": "MC14",
+    "path": "releases/PORTABLE_PT_VALIDATION.json",
+    "sha256": "69cc8c260ce43a11a44224d1c1260fa9b726f0146ddc1ecb2353a49b071dbd72"
+  },
+  {
+    "id": "MC14",
+    "path": "releases/PORTABLE_HP_VALIDATION.json",
+    "sha256": "2931a8bda3e87ae22d0f5e63faabc696c928f682a9d1e3bf3e2d868b162716ba"
+  },
+  {
+    "id": "MC15",
+    "path": "docs/report_phu_luc_iii/BAO_CAO_AI_CARE_THEO_PHU_LUC_III.docx",
+    "sha256": "1a520d5f01fa577ffb85b1dafed4a2166ec0647ec6868fd0f6b9a5462795c9be"
+  }
+]

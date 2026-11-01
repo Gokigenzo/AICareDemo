@@ -1,0 +1,26 @@
+# AI Care & Rehabilitation System - MVP Dependencies
+# Python >= 3.10, 3.11, 3.12
+
+PyQt5>=5.15.10
+opencv-contrib-python>=4.8.0
+numpy>=1.24.0
+scipy>=1.10,<2.0
+mediapipe>=0.10.14
+torch>=2.0.0
+torchvision>=0.15.0
+pyttsx3>=2.90
+sounddevice==0.5.6
+python-dotenv>=1.0.0
+Pillow>=10.0.0
+psutil>=5.9.0
+requests>=2.31.0
+filelock==4.0.12
+
+# Local Vietnamese Zipformer STT
+sherpa-onnx==1.12.40
+# Audio file decoding
+av==18.1.0
+pydantic>=2.10.0
+
+# IANA timezone database required by zoneinfo on Windows
+tzdata>=2024.1

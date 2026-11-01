@@ -1,0 +1,50 @@
+{
+  "cold_load_ms": 1958,
+  "results": [
+    {
+      "session_id": "",
+      "status": "completed",
+      "transcript": "RỒI CŨNG HỖ TRỢ CHO LÂU LÂU CŨNG CHO GẠO CHO NÀY KIA",
+      "language": "vi",
+      "audio_duration_ms": 3740,
+      "inference_ms": 171,
+      "device": "cpu",
+      "model": "sherpa-onnx-zipformer-vi-30M-int8-2026-02-09",
+      "speech_duration_ms": null,
+      "error_code": null,
+      "file": "0.wav"
+    },
+    {
+      "session_id": "",
+      "status": "completed",
+      "transcript": "RỒI CŨNG HỖ TRỢ CHO LÂU LÂU CŨNG CHO GẠO CHO NÀY KIA",
+      "language": "vi",
+      "audio_duration_ms": 3740,
+      "inference_ms": 62,
+      "device": "cpu",
+      "model": "sherpa-onnx-zipformer-vi-30M-int8-2026-02-09",
+      "speech_duration_ms": null,
+      "error_code": null,
+      "file": "0.wav"
+    },
+    {
+      "session_id": "",
+      "status": "completed",
+      "transcript": "RỒI CŨNG HỖ TRỢ CHO LÂU LÂU CŨNG CHO GẠO CHO NÀY KIA",
+      "language": "vi",
+      "audio_duration_ms": 3740,
+      "inference_ms": 52,
+      "device": "cpu",
+      "model": "sherpa-onnx-zipformer-vi-30M-int8-2026-02-09",
+      "speech_duration_ms": null,
+      "error_code": null,
+      "file": "0.wav"
+    }
+  ],
+  "p50_ms": 62.0,
+  "p95_ms": 160.1,
+  "rss_bytes": 229535744,
+  "camera_read_p95_ms": null,
+  "camera_errors": [],
+  "camera_pipeline": "capture only, no pose/face inference"
+}

@@ -1,0 +1,63 @@
+{
+  "$defs": {
+    "Decision": {
+      "enum": [
+        "route",
+        "clarify",
+        "unsupported"
+      ],
+      "title": "Decision",
+      "type": "string"
+    },
+    "Intent": {
+      "enum": [
+        "navigate_home",
+        "snooze_medication",
+        "confirm_medication_taken",
+        "request_medication_help",
+        "start_rehabilitation",
+        "pause_rehabilitation",
+        "unknown"
+      ],
+      "title": "Intent",
+      "type": "string"
+    },
+    "Slots": {
+      "additionalProperties": false,
+      "properties": {
+        "snooze_minutes": {
+          "default": null,
+          "title": "Snooze Minutes",
+          "type": "null"
+        }
+      },
+      "title": "Slots",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "intent": {
+      "$ref": "#/$defs/Intent"
+    },
+    "slots": {
+      "$ref": "#/$defs/Slots"
+    },
+    "decision": {
+      "$ref": "#/$defs/Decision"
+    },
+    "evidence_text": {
+      "maxLength": 240,
+      "title": "Evidence Text",
+      "type": "string"
+    }
+  },
+  "required": [
+    "intent",
+    "slots",
+    "decision",
+    "evidence_text"
+  ],
+  "title": "IntentProposal",
+  "type": "object"
+}

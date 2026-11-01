@@ -1,0 +1,2386 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cổng Quản Trị Viên — Quản Lý Tài Khoản Bác Sĩ, Người Già & Người Nhà</title>
+  <style>
+    :root {
+      --primary: #1B63CC;
+      --primary-hover: #134B9C;
+      --primary-bg: #EAF2FE;
+      --navy: #0F172A;
+      --text: #334155;
+      --muted: #64748B;
+      --border: #CBD5E1;
+      --bg: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --success: #059669;
+      --success-bg: #D1FAE5;
+      --warning: #D97706;
+      --warning-bg: #FEF3C7;
+      --danger: #DC2626;
+      --danger-bg: #FEE2E2;
+      --indigo: #4338CA;
+      --purple-bg: #F3E8FF;
+      --purple: #7E22CE;
+      --emerald-bg: #ECFDF5;
+      --emerald: #047857;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); line-height: 1.5; min-height: 100vh; }
+
+    /* Top Banner */
+    .admin-banner {
+      background: linear-gradient(90deg, #1E1B4B, #312E81);
+      color: #FFF;
+      padding: 10px 24px;
+      font-size: 13.5px;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      letter-spacing: 0.3px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .admin-banner a { color: #A5B4FC; text-decoration: none; margin-left: 14px; font-weight: 600; }
+    .admin-banner a:hover { text-decoration: underline; color: #FFF; }
+
+    header {
+      background: #FFFFFF;
+      border-bottom: 1.5px solid var(--border);
+      padding: 14px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+    }
+    .brand { display: flex; align-items: center; gap: 14px; }
+    .brand-icon { width: 42px; height: 42px; background: #312E81; color: #fff; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 22px; box-shadow: 0 2px 8px rgba(49, 46, 129, 0.3); }
+    .brand-title { font-size: 19px; font-weight: 800; color: var(--navy); }
+    .brand-sub { font-size: 12.5px; color: var(--muted); }
+
+    .header-controls { display: flex; align-items: center; gap: 16px; }
+    .user-info { display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 600; color: var(--navy); }
+    .btn-logout { background: #F1F5F9; border: 1.5px solid var(--border); color: #475569; padding: 7px 16px; border-radius: 8px; font-weight: 700; font-size: 13.5px; cursor: pointer; transition: all 0.2s; }
+    .btn-logout:hover { background: #E2E8F0; color: var(--danger); border-color: #CBD5E1; }
+
+    .container { max-width: 1380px; margin: 24px auto; padding: 0 24px; }
+
+    /* Dashboard Metrics Cards */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .metric-card {
+      background: #FFFFFF;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .metric-icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+    .metric-details { display: flex; flex-direction: column; }
+    .metric-value { font-size: 26px; font-weight: 800; color: var(--navy); line-height: 1.1; }
+    .metric-label { font-size: 13px; font-weight: 600; color: var(--muted); margin-top: 4px; }
+    .metric-sub { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+
+    /* Main Navigation Tabs */
+    .tabs-nav-container {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #E2E8F0;
+      padding-bottom: 2px;
+    }
+    .main-tab-btn {
+      background: #FFFFFF;
+      border: 1.5px solid var(--border);
+      border-bottom: none;
+      padding: 13px 24px;
+      border-radius: 12px 12px 0 0;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s ease;
+      position: relative;
+      bottom: -4px;
+    }
+    .main-tab-btn:hover {
+      color: var(--navy);
+      background: #F8FAFC;
+    }
+    .main-tab-btn.active {
+      color: var(--primary);
+      background: #FFFFFF;
+      border-color: var(--border);
+      border-bottom: 3px solid var(--primary);
+      font-weight: 800;
+      box-shadow: 0 -2px 6px rgba(0,0,0,0.04);
+    }
+    .tab-counter {
+      background: #F1F5F9;
+      color: var(--text);
+      padding: 2px 9px;
+      border-radius: 10px;
+      font-size: 12.5px;
+      font-weight: 800;
+    }
+    .main-tab-btn.active .tab-counter {
+      background: var(--primary-bg);
+      color: var(--primary);
+    }
+
+    /* Main Content Card */
+    .card {
+      background: #FFFFFF;
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+    }
+    .card-header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1.5px solid #F1F5F9;
+    }
+    .card-title-group h2 { font-size: 18px; font-weight: 800; color: var(--navy); display: flex; align-items: center; gap: 8px; }
+    .card-title-group p { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+    .action-buttons-group { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--primary);
+      color: #FFFFFF;
+      border: none;
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-secondary {
+      background: #F1F5F9;
+      color: var(--navy);
+      border: 1.5px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 13.5px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover { background: #E2E8F0; }
+    .btn-success {
+      background: var(--success);
+      color: #FFFFFF;
+      border: none;
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-success:hover { background: #047857; }
+
+    /* Search & Filter Toolbar */
+    .filter-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+    .search-input-box {
+      flex: 1;
+      min-width: 280px;
+      position: relative;
+    }
+    .search-input-box input {
+      width: 100%;
+      padding: 10px 14px 10px 38px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+      background: #F8FAFC;
+    }
+    .search-input-box input:focus { border-color: var(--primary); background: #FFF; }
+    .search-icon { position: absolute; left: 12px; top: 11px; font-size: 16px; color: var(--muted); }
+
+    .filter-select {
+      padding: 9px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--navy);
+      background: #FFF;
+      outline: none;
+    }
+
+    /* Table Styles */
+    .table-responsive { overflow-x: auto; width: 100%; }
+    table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13.5px; }
+    th {
+      background: #F8FAFC;
+      color: #475569;
+      font-weight: 700;
+      padding: 12px 14px;
+      border-bottom: 2px solid var(--border);
+      white-space: nowrap;
+    }
+    td {
+      padding: 14px;
+      border-bottom: 1px solid #EDF2F7;
+      vertical-align: middle;
+    }
+    tr:hover td { background-color: #F8FAFC; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 11.5px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .badge-success { background: var(--success-bg); color: #065F46; }
+    .badge-danger { background: var(--danger-bg); color: #991B1B; }
+    .badge-warning { background: var(--warning-bg); color: #92400E; }
+    .badge-primary { background: var(--primary-bg); color: #1E40AF; }
+    .badge-purple { background: var(--purple-bg); color: #6B21A8; }
+    .badge-emerald { background: var(--emerald-bg); color: #065F46; }
+    .badge-muted { background: #F1F5F9; color: #475569; border: 1px solid #CBD5E1; }
+
+    .avatar-col { display: flex; align-items: center; gap: 12px; }
+    .avatar-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #EEF2FF;
+      color: #4338CA;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 16px;
+      border: 1.5px solid #C7D2FE;
+      flex-shrink: 0;
+    }
+    .avatar-elderly {
+      background: #FEF3C7;
+      color: #B45309;
+      border-color: #FDE68A;
+      font-size: 18px;
+    }
+    .avatar-caregiver {
+      background: #ECFDF5;
+      color: #047857;
+      border-color: #A7F3D0;
+      font-size: 18px;
+    }
+
+    .action-btn-group { display: flex; gap: 6px; align-items: center; flex-wrap: nowrap; }
+    .btn-action {
+      background: #F8FAFC;
+      border: 1px solid var(--border);
+      color: var(--navy);
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s;
+    }
+    .btn-action:hover { background: #EEF2FF; border-color: #A5B4FC; color: #3730A3; }
+    .btn-action-danger { color: #DC2626; border-color: #FECACA; background: #FFF; }
+    .btn-action-danger:hover { background: #FEE2E2; border-color: #F87171; color: #991B1B; }
+
+    /* Modals */
+    .modal-backdrop {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(2px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+    .modal-backdrop.show { display: flex; }
+    .modal-card {
+      background: #FFFFFF;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 620px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      animation: modalSlide 0.2s ease-out;
+    }
+    @keyframes modalSlide {
+      from { transform: translateY(-20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .modal-header {
+      background: #F8FAFC;
+      border-bottom: 1.5px solid var(--border);
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-title { font-size: 17px; font-weight: 800; color: var(--navy); display: flex; align-items: center; gap: 8px; }
+    .modal-close { background: none; border: none; font-size: 22px; color: var(--muted); cursor: pointer; }
+    .modal-close:hover { color: var(--navy); }
+    .modal-body { padding: 24px; max-height: 80vh; overflow-y: auto; }
+    .modal-footer {
+      background: #F8FAFC;
+      border-top: 1.5px solid var(--border);
+      padding: 14px 24px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    .form-group { margin-bottom: 16px; }
+    .form-label { display: block; font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .form-control {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+      background: #FFF;
+      color: var(--navy);
+    }
+    .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(27, 99, 204, 0.12); }
+    .form-hint { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+    /* Toast Notification */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .toast {
+      background: #FFFFFF;
+      border-left: 5px solid var(--primary);
+      padding: 14px 20px;
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 300px;
+      animation: toastIn 0.3s ease-out;
+    }
+    @keyframes toastIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+    .spin { display: inline-block; animation: spin 0.8s linear infinite; }
+  </style>
+  <link rel="stylesheet" href="/assets/portal-theme.css?v=20261024">
+</head>
+<body class="portal-admin">
+
+  <!-- Top Banner -->
+  <div class="admin-banner">
+    <div>
+      🛡️ <strong>KHÔNG GIAN QUẢN TRỊ VIÊN HỆ THỐNG</strong> — Quản lý toàn diện Bác sĩ, Người cao tuổi & Người nhà
+    </div>
+    <div>
+      <a href="/clinician" target="_blank">🩺 Xem Cổng Bác Sĩ</a>
+      <a href="/caregiver" target="_blank">🏡 Xem Cổng Người Nhà</a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <div class="brand-icon">⚙️</div>
+      <div>
+        <div class="brand-title">HỆ THỐNG QUẢN TRỊ TRUNG TÂM Y TẾ & PHỤC HỒI</div>
+        <div class="brand-sub">Quản lý Bác sĩ điều trị, Người cao tuổi (Bệnh nhân) & Người nhà (Chăm sóc)</div>
+      </div>
+    </div>
+    <div class="header-controls">
+      <div class="user-info">
+        <span class="badge badge-success" id="sseStatusBadge">● SSE Trực Tuyến</span>
+        <span id="adminNameLbl">Quản Trị Viên Hệ Thống</span>
+      </div>
+      <button class="btn-primary" id="btnSyncAccounts" onclick="handleSyncAllAccounts()" style="background: #059669; font-size: 13.5px; padding: 7px 15px;" title="Đồng bộ tất cả tài khoản Bác sĩ, Người già và Người nhà giữa CSDL và các tệp JSON">
+        <span id="syncSpinIcon" style="display: inline-block;">🔄</span> Đồng Bộ Tài Khoản
+      </button>
+      <button class="btn-logout" onclick="handleLogout()">Đăng xuất</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Metrics Grid -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-icon-box" style="background: #EEF2FF; color: #4338CA;">👨‍⚕️</div>
+        <div class="metric-details">
+          <div class="metric-value" id="valTotalDoctors">0</div>
+          <div class="metric-label">Bác sĩ & Cán bộ y tế</div>
+          <div class="metric-sub" id="subActiveDoctors">0 đang hoạt động</div>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon-box" style="background: #FEF3C7; color: #D97706;">👴</div>
+        <div class="metric-details">
+          <div class="metric-value" id="valTotalPatients">0</div>
+          <div class="metric-label">Người cao tuổi (Bệnh nhân)</div>
+          <div class="metric-sub" id="subActivePatients">0 đang theo dõi</div>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon-box" style="background: #ECFDF5; color: #059669;">👨‍👩‍👧</div>
+        <div class="metric-details">
+          <div class="metric-value" id="valTotalCaregivers">0</div>
+          <div class="metric-label">Người nhà (Chăm sóc)</div>
+          <div class="metric-sub" id="subActiveCaregivers">0 đang kích hoạt</div>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon-box" style="background: #EFF6FF; color: #2563EB;">🤝</div>
+        <div class="metric-details">
+          <div class="metric-value" id="valTotalAssignments">0</div>
+          <div class="metric-label">Phân công chăm sóc</div>
+          <div class="metric-sub" id="subAssignmentDetail">0 Care Team • 0 Gia đình</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Segmented Navigation Tabs: 2 DISTINCT TABLES + VIEW MODE SWITCHER -->
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; border-bottom: 2px solid #E2E8F0; padding-bottom: 2px;">
+      <div class="tabs-nav-container" style="margin-bottom: 0; border-bottom: none;">
+        <button class="main-tab-btn active" id="tabBtnDoctors" onclick="switchMainTab('doctors')">
+          <span>👨‍⚕️</span> <strong>BẢNG 1: BÁC SĨ & CÁN BỘ Y TẾ</strong>
+          <span class="tab-counter" id="badgeDocCount">0</span>
+        </button>
+        <button class="main-tab-btn" id="tabBtnFamily" onclick="switchMainTab('family')">
+          <span>👨‍👩‍👧‍👦</span> <strong>BẢNG 2: NGƯỜI NHÀ & NGƯỜI GIÀ</strong>
+          <span class="tab-counter" id="badgeFamilyCount">0</span>
+        </button>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+        <span style="font-size: 13px; font-weight: 700; color: var(--muted);">Chế độ xem:</span>
+        <div style="display: flex; background: #F1F5F9; padding: 3px; border-radius: 8px; border: 1.5px solid var(--border);">
+          <button id="viewModeTabsBtn" onclick="setViewMode('tabs')" style="border: none; background: #FFF; color: var(--navy); padding: 6px 14px; border-radius: 6px; font-size: 12.5px; font-weight: 700; cursor: pointer; box-shadow: 0 1px 2px rgba(0,0,0,0.06);">
+            📑 Từng bảng (Tab)
+          </button>
+          <button id="viewModeDualBtn" onclick="setViewMode('dual')" style="border: none; background: transparent; color: var(--muted); padding: 6px 14px; border-radius: 6px; font-size: 12.5px; font-weight: 700; cursor: pointer;">
+            👀 Cả 2 bảng cùng lúc
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- SECTION 1: BẢNG 1 - QUẢN LÝ BÁC SĨ & CÁN BỘ Y TẾ               -->
+    <!-- ============================================================== -->
+    <div class="card" id="doctorsSection">
+      <div class="card-header-bar">
+        <div class="card-title-group">
+          <h2>👨‍⚕️ Danh Sách Bác Sĩ & Cán Bộ Y Tế Phụ Trách</h2>
+          <p>Tạo tài khoản bác sĩ, cấp quyền kê đơn, quản lý phân công bệnh nhân và trạng thái hoạt động</p>
+        </div>
+        <div class="action-buttons-group">
+          <button class="btn-primary" onclick="openCreateDoctorModal()">
+            <span>➕</span> Cấp Tài Khoản Bác Sĩ Mới
+          </button>
+          <button class="btn-secondary" onclick="loadDashboard()">
+            <span>🔄</span> Tải lại
+          </button>
+        </div>
+      </div>
+
+      <!-- Toolbar -->
+      <div class="filter-toolbar">
+        <div class="search-input-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="Tìm theo tên bác sĩ, email, bệnh viện, chuyên khoa..." oninput="handleSearch()">
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <select id="statusFilter" class="filter-select" onchange="handleFilter()">
+            <option value="ALL">Tất cả trạng thái</option>
+            <option value="ACTIVE">Đang hoạt động</option>
+            <option value="LOCKED">Đã khóa</option>
+            <option value="SIMULATION">Tài khoản Demo</option>
+            <option value="REAL">Bác sĩ thực tế</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Doctors Table -->
+      <div class="table-responsive">
+        <table id="doctorsTable">
+          <thead>
+            <tr>
+              <th>Bác Sĩ & Chức Danh</th>
+              <th>Email & Số Điện Thoại</th>
+              <th>Bệnh Viện & Chuyên Khoa</th>
+              <th>Số CCHN</th>
+              <th>Loại Tài Khoản</th>
+              <th>Người Bệnh Phụ Trách</th>
+              <th>Trạng Thái</th>
+              <th style="text-align: right;">Thao Tác</th>
+            </tr>
+          </thead>
+          <tbody id="doctorsTableBody">
+            <tr>
+              <td colspan="8" style="text-align: center; color: var(--muted); padding: 36px;">
+                Đang tải danh sách bác sĩ...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- SECTION 2: BẢNG 2 - QUẢN LÝ NGƯỜI NHÀ & NGƯỜI GIÀ              -->
+    <!-- ============================================================== -->
+    <div class="card" id="familySection" style="display: none;">
+      <div class="card-header-bar">
+        <div class="card-title-group">
+          <h2>👨‍👩‍👧‍👦 Danh Sách Người Nhà & Người Cao Tuổi</h2>
+          <p>Quản lý hồ sơ người cao tuổi, tài khoản người nhà chăm sóc và thiết lập mạng lưới liên kết gia đình</p>
+        </div>
+        <div class="action-buttons-group">
+          <button class="btn-secondary" onclick="openCreatePatientModal()" style="border-color: #FDE68A; background: #FFFBEB; color: #92400E;">
+            <span>👴➕</span> Thêm Hồ Sơ Người Già
+          </button>
+          <button class="btn-success" onclick="openCreateCaregiverModal()">
+            <span>👨‍👩‍👧➕</span> Cấp Tài Khoản Người Nhà
+          </button>
+          <button class="btn-primary" onclick="openLinkCaregiverModal()">
+            <span>🔗</span> Phân Công Chăm Sóc
+          </button>
+          <button class="btn-secondary" onclick="handleSyncAllAccounts()" title="Đồng bộ lại tài khoản người nhà và người già từ cơ sở dữ liệu">
+            <span>🔄</span> Đồng Bộ Tài Khoản
+          </button>
+          <button class="btn-secondary" onclick="loadDashboard()">
+            <span>↻</span> Tải lại
+          </button>
+        </div>
+      </div>
+
+      <!-- Toolbar Table 2 -->
+      <div class="filter-toolbar">
+        <div class="search-input-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchFamilyInput" placeholder="Tìm theo tên người già, người nhà, email, số điện thoại, mã định danh..." oninput="handleFamilySearch()">
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <select id="roleFamilyFilter" class="filter-select" onchange="handleFamilyFilter()">
+            <option value="ALL">👥 Tất cả đối tượng</option>
+            <option value="PATIENT">👴 Chỉ Người cao tuổi</option>
+            <option value="CAREGIVER">👨‍👩‍👧 Chỉ Người nhà</option>
+          </select>
+          <select id="statusFamilyFilter" class="filter-select" onchange="handleFamilyFilter()">
+            <option value="ALL">Tất cả trạng thái</option>
+            <option value="ACTIVE">🟢 Đang hoạt động</option>
+            <option value="LOCKED">🔒 Đã khóa / Tạm dừng</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Family & Elderly Table -->
+      <div class="table-responsive">
+        <table id="familyTable">
+          <thead>
+            <tr>
+              <th>Đối Tượng & Vai Trò</th>
+              <th>Mã Định Danh & Tài Khoản</th>
+              <th>Thông Tin Chi Tiết</th>
+              <th>Liên Kết Gia Đình & Chăm Sóc</th>
+              <th>Bác Sĩ Phụ Trách</th>
+              <th>Trạng Thái</th>
+              <th style="text-align: right;">Thao Tác</th>
+            </tr>
+          </thead>
+          <tbody id="familyTableBody">
+            <tr>
+              <td colspan="7" style="text-align: center; color: var(--muted); padding: 36px;">
+                Đang tải danh sách người nhà và người già...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- MODALS FOR DOCTORS                                             -->
+  <!-- ============================================================== -->
+
+  <!-- MODAL: CREATE DOCTOR -->
+  <div class="modal-backdrop" id="createDoctorModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title"><span>➕</span> Cấp Tài Khoản Bác Sĩ Điều Trị Mới</div>
+        <button class="modal-close" onclick="closeModal('createDoctorModal')">&times;</button>
+      </div>
+      <form id="createDoctorForm" onsubmit="handleCreateDoctorSubmit(event)">
+        <div class="modal-body">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group" style="grid-column: 1 / -1;">
+              <label class="form-label">Họ và tên Bác sĩ <span style="color: var(--danger);">*</span></label>
+              <input type="text" id="docFullName" class="form-control" placeholder="Ví dụ: BS.CKII Nguyễn Văn An" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email đăng nhập <span style="color: var(--danger);">*</span></label>
+              <input type="email" id="docEmail" class="form-control" placeholder="contact-f30b5463@example.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Mật khẩu khởi tạo</label>
+              <input type="password" id="docPassword" class="form-control" placeholder="Nhập mật khẩu riêng" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Số điện thoại liên hệ</label>
+              <input type="tel" id="docPhone" class="form-control" placeholder="0912345678">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Số Chứng chỉ hành nghề (CCHN)</label>
+              <input type="text" id="docLicense" class="form-control" placeholder="CCHN-123456-BYT">
+            </div>
+            <div class="form-group" style="grid-column: 1 / -1;">
+              <label class="form-label">Bệnh viện / Cơ sở y tế công tác</label>
+              <input type="text" id="docWorkplace" class="form-control" value="Bệnh viện Lão khoa Trung Ương" required>
+            </div>
+            <div class="form-group" style="grid-column: 1 / -1;">
+              <label class="form-label">Chuyên khoa điều trị</label>
+              <input type="text" id="docSpecialty" class="form-control" value="Lão khoa & Tim mạch" required>
+            </div>
+            <div class="form-group" style="grid-column: 1 / -1;">
+              <label class="form-label">Loại tài khoản</label>
+              <select id="docIsSim" class="form-control">
+                <option value="0">Bác sĩ thực tế (Tài khoản chuẩn)</option>
+                <option value="1">Tài khoản Demo / Mô phỏng giảng dạy</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeModal('createDoctorModal')">Hủy bỏ</button>
+          <button type="submit" class="btn-primary">💾 Cấp Tài Khoản Bác Sĩ</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: EDIT DOCTOR -->
+  <div class="modal-backdrop" id="editDoctorModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title"><span>✏️</span> Chỉnh Sửa Thông Tin Bác Sĩ</div>
+        <button class="modal-close" onclick="closeModal('editDoctorModal')">&times;</button>
+      </div>
+      <form id="editDoctorForm" onsubmit="handleEditDoctorSubmit(event)">
+        <input type="hidden" id="editDocId">
+        <div class="modal-body">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group" style="grid-column: 1 / -1;">
+              <label class="form-label">Họ và tên Bác sĩ <span style="color: var(--danger);">*</span></label>
+              <input type="text" id="editDocFullName" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email <span style="color: var(--danger);">*</span></label>
+              <input type="email" id="editDocEmail" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Số điện thoại</label>
+              <input type="tel" id="editDocPhone" class="form-control">
+            </div>
+            <div class="form-group" style="grid-column: 1 / -1;">
+              <label class="form-label">Bệnh viện / Nơi công tác</label>
+              <input type="text" id="editDocWorkplace" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Chuyên khoa</label>
+              <input type="text" id="editDocSpecialty" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Số CCHN</label>
+              <input type="text" id="editDocLicense" class="form-control">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Loại tài khoản</label>
+              <select id="editDocIsSim" class="form-control">
+                <option value="0">Bác sĩ thực tế</option>
+                <option value="1">Demo / Mô phỏng</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Trạng thái đăng nhập</label>
+              <select id="editDocIsActive" class="form-control">
+                <option value="1">🟢 Hoạt động bình thường</option>
+                <option value="0">🔒 Khóa tài khoản</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeModal('editDoctorModal')">Hủy bỏ</button>
+          <button type="submit" class="btn-primary">💾 Cập Nhật Bác Sĩ</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: RESET DOCTOR PASSWORD -->
+  <div class="modal-backdrop" id="resetPasswordModal">
+    <div class="modal-card" style="max-width: 440px;">
+      <div class="modal-header">
+        <div class="modal-title"><span>🔑</span> Đặt Lại Mật Khẩu Bác Sĩ</div>
+        <button class="modal-close" onclick="closeModal('resetPasswordModal')">&times;</button>
+      </div>
+      <form id="resetPasswordForm" onsubmit="handleResetPasswordSubmit(event)">
+        <input type="hidden" id="resetDocId">
+        <div class="modal-body">
+          <p style="font-size: 13.5px; color: var(--muted); margin-bottom: 14px;">
+            Đặt lại mật khẩu đăng nhập cho bác sĩ: <strong id="resetDocName" style="color: var(--navy);">--</strong>
+          </p>
+          <div class="form-group">
+            <label class="form-label">Mật khẩu mới <span style="color: var(--danger);">*</span></label>
+            <input type="password" id="resetNewPassword" class="form-control" placeholder="Nhập mật khẩu mới..." required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeModal('resetPasswordModal')">Hủy</button>
+          <button type="submit" class="btn-primary">🔑 Lưu Mật Khẩu Mới</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: MANAGE CARE TEAM ASSIGNMENTS -->
+  <div class="modal-backdrop" id="careTeamModal">
+    <div class="modal-card" style="max-width: 720px;">
+      <div class="modal-header">
+        <div class="modal-title"><span>👥</span> Phân Công Người Bệnh Cho Bác Sĩ</div>
+        <button class="modal-close" onclick="closeModal('careTeamModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="background: #F8FAFC; border: 1.5px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 18px;">
+          <div style="font-size: 15px; font-weight: 700; color: var(--navy);" id="careTeamDocName">BS. --</div>
+          <div style="font-size: 13px; color: var(--muted);" id="careTeamDocSub">Bệnh viện -- • Chuyên khoa --</div>
+        </div>
+
+        <form id="addCareTeamForm" onsubmit="handleAddCareTeamSubmit(event)" style="display: grid; grid-template-columns: 2fr 2fr auto; gap: 10px; align-items: end; margin-bottom: 20px;">
+          <input type="hidden" id="careTeamDocId">
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label">Chọn Người bệnh cần phân công</label>
+            <select id="careTeamPatientSelect" class="form-control" required>
+              <option value="">Đang tải danh sách người bệnh...</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label">Vai trò trong Care Team</label>
+            <input type="text" id="careTeamRoleDesc" class="form-control" value="Bác sĩ điều trị phụ trách" required>
+          </div>
+          <div>
+            <button type="submit" class="btn-primary" style="padding: 10px 18px;">
+              <span>➕</span> Phân công
+            </button>
+          </div>
+        </form>
+
+        <h4 style="font-size: 14px; font-weight: 800; color: var(--navy); margin-bottom: 10px;">
+          📋 Danh sách Người bệnh bác sĩ đang phụ trách:
+        </h4>
+        <div class="table-responsive" style="max-height: 280px; overflow-y: auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Người Bệnh</th>
+                <th>Mã Hồ Sơ</th>
+                <th>Vai Trò Phụ Trách</th>
+                <th style="text-align: right;">Gỡ Phân Công</th>
+              </tr>
+            </thead>
+            <tbody id="careTeamTableBody">
+              <tr>
+                <td colspan="4" style="text-align: center; color: var(--muted); padding: 16px;">
+                  Bác sĩ chưa được phân công phụ trách người bệnh nào.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-primary" onclick="closeModal('careTeamModal')">Đóng</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- MODALS FOR PATIENTS (NGƯỜI GIÀ)                                -->
+  <!-- ============================================================== -->
+
+  <!-- MODAL: CREATE PATIENT -->
+  <div class="modal-backdrop" id="createPatientModal">
+    <div class="modal-card" style="max-width: 540px;">
+      <div class="modal-header">
+        <div class="modal-title"><span>👴➕</span> Thêm Hồ Sơ Người Cao Tuổi / Bệnh Nhân Mới</div>
+        <button class="modal-close" onclick="closeModal('createPatientModal')">&times;</button>
+      </div>
+      <form id="createPatientForm" onsubmit="handleCreatePatientSubmit(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Họ và tên người cao tuổi <span style="color: var(--danger);">*</span></label>
+            <input type="text" id="patFullName" class="form-control" placeholder="Ví dụ: Cụ Hoàng Văn Anh" required>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="form-group">
+              <label class="form-label">Mã bệnh nhân (tùy chọn)</label>
+              <input type="text" id="patId" class="form-control" placeholder="patient_xxx (để trống sẽ tự sinh)">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Giới tính</label>
+              <select id="patGender" class="form-control">
+                <option value="Nam">Nam</option>
+                <option value="Nữ">Nữ</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Ngày sinh / Năm sinh</label>
+            <input type="date" id="patDob" class="form-control" value="1950-01-01">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Ghi chú sức khỏe ban đầu</label>
+            <input type="text" id="patNotes" class="form-control" placeholder="Ví dụ: Tăng huyết áp, cần nhắc nhở vận động tay chân...">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeModal('createPatientModal')">Hủy</button>
+          <button type="submit" class="btn-primary">💾 Tạo Hồ Sơ Người Già</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: EDIT PATIENT -->
+  <div class="modal-backdrop" id="editPatientModal">
+    <div class="modal-card" style="max-width: 540px;">
+      <div class="modal-header">
+        <div class="modal-title"><span>✏️</span> Chỉnh Sửa Hồ Sơ Người Cao Tuổi</div>
+        <button class="modal-close" onclick="closeModal('editPatientModal')">&times;</button>
+      </div>
+      <form id="editPatientForm" onsubmit="handleEditPatientSubmit(event)">
+        <input type="hidden" id="editPatId">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Họ và tên <span style="color: var(--danger);">*</span></label>
+            <input type="text" id="editPatFullName" class="form-control" required>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="form-group">
+              <label class="form-label">Giới tính</label>
+              <select id="editPatGender" class="form-control">
+                <option value="Nam">Nam</option>
+                <option value="Nữ">Nữ</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Trạng thái hồ sơ</label>
+              <select id="editPatStatus" class="form-control">
+                <option value="ACTIVE">🟢 Đang hoạt động / Theo dõi</option>
+                <option value="INACTIVE">🔒 Tạm ngưng hoạt động</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Ngày sinh / Năm sinh</label>
+            <input type="date" id="editPatDob" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Ghi chú sức khỏe</label>
+            <input type="text" id="editPatNotes" class="form-control">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeModal('editPatientModal')">Hủy</button>
+          <button type="submit" class="btn-primary">💾 Cập Nhật Hồ Sơ</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- MODALS FOR CAREGIVERS (NGƯỜI NHÀ)                              -->
+  <!-- ============================================================== -->
+
+  <!-- MODAL: CREATE CAREGIVER -->
+  <div class="modal-backdrop" id="createCaregiverModal">
+    <div class="modal-card" style="max-width: 580px;">
+      <div class="modal-header">
+        <div class="modal-title"><span>👨‍👩‍👧➕</span> Cấp Tài Khoản Người Nhà / Người Chăm Sóc Mới</div>
+        <button class="modal-close" onclick="closeModal('createCaregiverModal')">&times;</button>
+      </div>
+      <form id="createCaregiverForm" onsubmit="handleCreateCaregiverSubmit(event)">
+        <div class="modal-body">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group" style="grid-column: 1 / -1;">
+              <label class="form-label">Họ và tên người nhà <span style="color: var(--danger);">*</span></label>
+              <input type="text" id="cgFullName" class="form-control" placeholder="Ví dụ: Nguyễn Văn Hùng (Con trai)" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email đăng nhập <span style="color: var(--danger);">*</span></label>
+              <input type="email" id="cgEmail" class="form-control" placeholder="contact-99aca01d@example.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Mật khẩu khởi tạo</label>
+              <input type="password" id="cgPassword" class="form-control" placeholder="Nhập mật khẩu riêng" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Số điện thoại liên hệ</label>
+              <input type="tel" id="cgPhone" class="form-control" placeholder="0987654321">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Mối quan hệ với người già</label>
+              <select id="cgRelation" class="form-control">
+                <option value="Con trai">Con trai</option>
+                <option value="Con gái">Con gái</option>
+                <option value="Vợ/Chồng">Vợ / Chồng</option>
+                <option value="Cháu ruột">Cháu ruột</option>
+                <option value="Người giám hộ">Người giám hộ</option>
+                <option value="Người chăm sóc hỗ trợ">Người chăm sóc hỗ trợ</option>
+              </select>
+            </div>
+            <div class="form-group" style="grid-column: 1 / -1;">
+              <label class="form-label">Liên kết ngay với Người cao tuổi (Tùy chọn)</label>
+              <select id="cgInitialPatientSelect" class="form-control">
+                <option value="">-- Chưa gán người già ngay (Có thể gán sau) --</option>
+              </select>
+              <div class="form-hint">Người nhà sẽ được phân quyền xem chỉ số và theo dõi đơn thuốc của người bệnh này</div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeModal('createCaregiverModal')">Hủy bỏ</button>
+          <button type="submit" class="btn-success">💾 Cấp Tài Khoản Người Nhà</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: EDIT CAREGIVER -->
+  <div class="modal-backdrop" id="editCaregiverModal">
+    <div class="modal-card" style="max-width: 540px;">
+      <div class="modal-header">
+        <div class="modal-title"><span>✏️</span> Chỉnh Sửa Tài Khoản Người Nhà</div>
+        <button class="modal-close" onclick="closeModal('editCaregiverModal')">&times;</button>
+      </div>
+      <form id="editCaregiverForm" onsubmit="handleEditCaregiverSubmit(event)">
+        <input type="hidden" id="editCgId">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Họ và tên <span style="color: var(--danger);">*</span></label>
+            <input type="text" id="editCgFullName" class="form-control" required>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="form-group">
+              <label class="form-label">Email đăng nhập <span style="color: var(--danger);">*</span></label>
+              <input type="email" id="editCgEmail" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Số điện thoại</label>
+              <input type="tel" id="editCgPhone" class="form-control">
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="form-group">
+              <label class="form-label">Mối quan hệ mặc định</label>
+              <input type="text" id="editCgRelation" class="form-control">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Trạng thái đăng nhập</label>
+              <select id="editCgIsActive" class="form-control">
+                <option value="1">🟢 Hoạt động bình thường</option>
+                <option value="0">🔒 Khóa tài khoản</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeModal('editCaregiverModal')">Hủy</button>
+          <button type="submit" class="btn-primary">💾 Cập Nhật Tài Khoản</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: RESET CAREGIVER PASSWORD -->
+  <div class="modal-backdrop" id="resetCaregiverPasswordModal">
+    <div class="modal-card" style="max-width: 440px;">
+      <div class="modal-header">
+        <div class="modal-title"><span>🔑</span> Đặt Lại Mật Khẩu Người Nhà</div>
+        <button class="modal-close" onclick="closeModal('resetCaregiverPasswordModal')">&times;</button>
+      </div>
+      <form id="resetCaregiverPasswordForm" onsubmit="handleResetCaregiverPasswordSubmit(event)">
+        <input type="hidden" id="resetCgId">
+        <div class="modal-body">
+          <p style="font-size: 13.5px; color: var(--muted); margin-bottom: 14px;">
+            Đặt lại mật khẩu cho người nhà: <strong id="resetCgName" style="color: var(--navy);">--</strong>
+          </p>
+          <div class="form-group">
+            <label class="form-label">Mật khẩu mới <span style="color: var(--danger);">*</span></label>
+            <input type="password" id="resetCgNewPassword" class="form-control" placeholder="Nhập mật khẩu mới..." required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeModal('resetCaregiverPasswordModal')">Hủy</button>
+          <button type="submit" class="btn-primary">🔑 Lưu Mật Khẩu</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- MODAL: LINK CAREGIVER & PATIENT (PHÂN CÔNG CHĂM SÓC)           -->
+  <!-- ============================================================== -->
+  <div class="modal-backdrop" id="linkCaregiverModal">
+    <div class="modal-card" style="max-width: 740px;">
+      <div class="modal-header">
+        <div class="modal-title"><span>🔗</span> Phân Công Người Nhà Chăm Sóc Người Cao Tuổi</div>
+        <button class="modal-close" onclick="closeModal('linkCaregiverModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- New Link Form -->
+        <form id="linkPairForm" onsubmit="handleLinkCaregiverSubmit(event)" style="background: #F8FAFC; border: 1.5px solid var(--border); border-radius: 12px; padding: 18px; margin-bottom: 22px;">
+          <div style="font-size: 14px; font-weight: 800; color: var(--navy); margin-bottom: 12px;">
+            ➕ Thiết lập liên kết chăm sóc mới:
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label">Chọn Người nhà / Người chăm sóc <span style="color: var(--danger);">*</span></label>
+              <select id="linkCaregiverSelect" class="form-control" required>
+                <option value="">Đang tải danh sách người nhà...</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label">Chọn Người cao tuổi cần chăm sóc <span style="color: var(--danger);">*</span></label>
+              <select id="linkPatientSelect" class="form-control" required>
+                <option value="">Đang tải danh sách người già...</option>
+              </select>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 12px; align-items: end;">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label">Mối quan hệ gia đình</label>
+              <select id="linkRelationSelect" class="form-control">
+                <option value="Con trai">Con trai</option>
+                <option value="Con gái">Con gái</option>
+                <option value="Vợ/Chồng">Vợ / Chồng</option>
+                <option value="Cháu ruột">Cháu ruột</option>
+                <option value="Người giám hộ">Người giám hộ</option>
+                <option value="Người chăm sóc hỗ trợ">Người chăm sóc hỗ trợ</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label">Người liên hệ chính</label>
+              <select id="linkIsPrimarySelect" class="form-control">
+                <option value="1">✅ Là người chính</option>
+                <option value="0">Người phụ</option>
+              </select>
+            </div>
+            <div>
+              <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; padding: 10px 14px;">
+                <span>💾</span> Lưu Liên Kết
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <h4 style="font-size: 14px; font-weight: 800; color: var(--navy); margin-bottom: 10px;">
+          📋 Danh sách các cặp liên kết chăm sóc hiện có trong hệ thống:
+        </h4>
+        <div class="table-responsive" style="max-height: 280px; overflow-y: auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Người Nhà</th>
+                <th>Người Cao Tuổi</th>
+                <th>Quan Hệ</th>
+                <th>Vai Trò</th>
+                <th style="text-align: right;">Gỡ Bỏ</th>
+              </tr>
+            </thead>
+            <tbody id="linkPairsTableBody">
+              <tr>
+                <td colspan="5" style="text-align: center; color: var(--muted); padding: 16px;">
+                  Chưa có liên kết người nhà - người già nào.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-primary" onclick="closeModal('linkCaregiverModal')">Đóng</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- ============================================================== -->
+  <!-- JAVASCRIPT CONTROLLERS                                         -->
+  <!-- ============================================================== -->
+  <script>
+    let allDoctors = [];
+    let allPatients = [];
+    let allCaregivers = [];
+    let allPatientCaregivers = [];
+    let currentViewMode = localStorage.getItem("admin_view_mode") || "tabs";
+    let activeMainTab = localStorage.getItem("admin_tab") || "doctors";
+    let currentAuthToken = localStorage.getItem("auth_token") || "";
+
+    // API Call Wrapper
+    async function apiCall(endpoint, method = "GET", body = null) {
+      const headers = { "Content-Type": "application/json" };
+      if (currentAuthToken) {
+        headers["Authorization"] = `Bearer ${currentAuthToken}`;
+      }
+      try {
+        const opts = { method, headers };
+        if (body) opts.body = JSON.stringify(body);
+        const res = await fetch(endpoint, opts);
+        if (res.status === 401 || res.status === 403) {
+          if (endpoint.includes("/api/auth/me")) {
+            window.location.href = "/login";
+            return null;
+          }
+        }
+        return await res.json();
+      } catch (e) {
+        console.error("API error:", e);
+        showToast("Lỗi kết nối máy chủ: " + e.message, "danger");
+        return null;
+      }
+    }
+
+    function showToast(message, type = "primary") {
+      const container = document.getElementById("toastContainer");
+      const toast = document.createElement("div");
+      toast.className = "toast";
+      if (type === "danger") toast.style.borderLeftColor = "#DC2626";
+      else if (type === "success") toast.style.borderLeftColor = "#059669";
+      else if (type === "warning") toast.style.borderLeftColor = "#D97706";
+
+      const icon = type === "danger" ? "⚠️" : (type === "success" ? "✅" : "ℹ️");
+      toast.innerHTML = `<span>${icon}</span> <span>${message}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => toast.remove(), 4500);
+    }
+
+    function openModal(modalId) {
+      document.getElementById(modalId).classList.add("show");
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).classList.remove("show");
+    }
+
+    // VIEW MODE & TAB MANAGEMENT
+    function setViewMode(mode) {
+      currentViewMode = mode;
+      localStorage.setItem("admin_view_mode", mode);
+      const tabsBtn = document.getElementById("viewModeTabsBtn");
+      const dualBtn = document.getElementById("viewModeDualBtn");
+
+      if (mode === "dual") {
+        if (tabsBtn) {
+          tabsBtn.style.background = "transparent";
+          tabsBtn.style.color = "var(--muted)";
+          tabsBtn.style.boxShadow = "none";
+        }
+        if (dualBtn) {
+          dualBtn.style.background = "#FFF";
+          dualBtn.style.color = "var(--navy)";
+          dualBtn.style.boxShadow = "0 1px 2px rgba(0,0,0,0.06)";
+        }
+        document.getElementById("doctorsSection").style.display = "block";
+        document.getElementById("familySection").style.display = "block";
+        document.getElementById("tabBtnDoctors").classList.add("active");
+        document.getElementById("tabBtnFamily").classList.add("active");
+      } else {
+        if (dualBtn) {
+          dualBtn.style.background = "transparent";
+          dualBtn.style.color = "var(--muted)";
+          dualBtn.style.boxShadow = "none";
+        }
+        if (tabsBtn) {
+          tabsBtn.style.background = "#FFF";
+          tabsBtn.style.color = "var(--navy)";
+          tabsBtn.style.boxShadow = "0 1px 2px rgba(0,0,0,0.06)";
+        }
+        switchMainTab(activeMainTab);
+      }
+    }
+
+    function switchMainTab(tab) {
+      activeMainTab = tab;
+      localStorage.setItem("admin_tab", tab);
+      if (currentViewMode === "dual") {
+        currentViewMode = "tabs";
+        localStorage.setItem("admin_view_mode", "tabs");
+        const tabsBtn = document.getElementById("viewModeTabsBtn");
+        const dualBtn = document.getElementById("viewModeDualBtn");
+        if (dualBtn) {
+          dualBtn.style.background = "transparent";
+          dualBtn.style.color = "var(--muted)";
+          dualBtn.style.boxShadow = "none";
+        }
+        if (tabsBtn) {
+          tabsBtn.style.background = "#FFF";
+          tabsBtn.style.color = "var(--navy)";
+          tabsBtn.style.boxShadow = "0 1px 2px rgba(0,0,0,0.06)";
+        }
+      }
+      document.getElementById("tabBtnDoctors").classList.toggle("active", tab === "doctors");
+      document.getElementById("tabBtnFamily").classList.toggle("active", tab === "family");
+      document.getElementById("doctorsSection").style.display = tab === "doctors" ? "block" : "none";
+      document.getElementById("familySection").style.display = tab === "family" ? "block" : "none";
+    }
+
+    // SYNCHRONIZATION ACTION
+    async function handleSyncAllAccounts() {
+      const btn = document.getElementById("btnSyncAccounts");
+      const icon = document.getElementById("syncSpinIcon");
+      if (icon) icon.className = "spin";
+      if (btn) btn.disabled = true;
+
+      showToast("Đang tiến hành đồng bộ toàn bộ tài khoản trong cơ sở dữ liệu...", "primary");
+      try {
+        const res = await apiCall("/api/admin/sync-accounts", "POST");
+        if (res && res.status === "synced") {
+          showToast(res.message || "Đã đồng bộ tài khoản thành công!", "success");
+          await loadDashboard();
+        } else {
+          showToast("Hoàn tất đồng bộ dữ liệu hệ thống.", "success");
+          await loadDashboard();
+        }
+      } catch (err) {
+        showToast("Lỗi đồng bộ: " + err.message, "danger");
+      } finally {
+        if (icon) icon.className = "";
+        if (btn) btn.disabled = false;
+      }
+    }
+
+    // SERVER-SENT EVENTS (SSE) STREAM LISTENER
+    function initSSE() {
+      if (!currentAuthToken) return;
+      if (window._adminEventSource) {
+        try { window._adminEventSource.close(); } catch (_) {}
+      }
+      const streamUrl = `/api/stream?token=${encodeURIComponent(currentAuthToken)}`;
+      console.log("[Admin SSE] Connecting to stream:", streamUrl);
+      const es = new EventSource(streamUrl);
+      window._adminEventSource = es;
+
+      es.onopen = () => {
+        console.log("[Admin SSE] Connected to real-time events!");
+        updateConnectionBadge(true);
+      };
+
+      es.onmessage = (event) => {
+        try {
+          const data = JSON.parse(event.data);
+          handleStreamEvent(data);
+        } catch (e) {
+          console.debug("[Admin SSE] parse heartbeat/message:", event.data);
+        }
+      };
+
+      es.onerror = () => {
+        console.warn("[Admin SSE] Connection interrupted. Reconnecting automatically...");
+        updateConnectionBadge(false);
+      };
+    }
+
+    function updateConnectionBadge(isConnected) {
+      const badge = document.getElementById("sseStatusBadge");
+      if (!badge) return;
+      if (isConnected) {
+        badge.className = "badge badge-success";
+        badge.innerHTML = "● SSE Trực Tuyến";
+      } else {
+        badge.className = "badge badge-warning";
+        badge.innerHTML = "🟡 Đang kết nối lại...";
+      }
+    }
+
+    function handleStreamEvent(data) {
+      const type = data.event_type || data.type || "";
+      console.log("[Admin SSE] Received stream event:", type, data);
+
+      if (type === "caregiver.registered") {
+        const payload = data.payload || {};
+        const cgName = payload.full_name || payload.name || "Người nhà";
+        const cgEmail = payload.email || "";
+        showToast(`🔔 Tài khoản người nhà mới vừa đăng ký: ${cgName} (${cgEmail})`, "success");
+        loadDashboard();
+      } else if (type === "system.accounts_synced") {
+        showToast("🔄 Hệ thống vừa hoàn tất đồng bộ tài khoản!", "primary");
+        loadDashboard();
+      } else if (type === "doctor.created" || type === "doctor.updated" || type === "doctor.deleted") {
+        showToast("🔔 Dữ liệu Bác sĩ đã được cập nhật", "primary");
+        loadDashboard();
+      } else if (type === "patient.created" || type === "patient.updated" || type === "patient.deleted") {
+        showToast("🔔 Hồ sơ Người cao tuổi đã được cập nhật", "primary");
+        loadDashboard();
+      } else if (type === "caregiver.linked" || type === "caregiver.unlinked") {
+        showToast("🔔 Phân công chăm sóc đã được cập nhật", "primary");
+        loadDashboard();
+      } else if (type.startsWith("dose.") || type.startsWith("prescription.")) {
+        // Silently reload dashboard to keep real-time metrics updated
+        loadDashboard();
+      }
+    }
+
+    async function checkAuth() {
+      if (!currentAuthToken) {
+        window.location.href = "/login";
+        return;
+      }
+      const data = await apiCall("/api/auth/me");
+      if (!data || !data.user || data.user.role !== "admin") {
+        alert("Bạn cần đăng nhập với quyền Quản trị viên để truy cập trang này!");
+        window.location.href = "/login";
+        return;
+      }
+      document.getElementById("adminNameLbl").innerText = data.user.full_name || "Quản Trị Viên";
+      await loadDashboard();
+
+      // Apply initial view mode and tab
+      setViewMode(currentViewMode);
+
+      // Initialize real-time SSE stream
+      initSSE();
+
+      // Fallback periodic auto-reload every 8 seconds
+      if (!window._adminPollTimer) {
+        window._adminPollTimer = setInterval(loadDashboard, 8000);
+      }
+    }
+
+    async function loadDashboard() {
+      // 1. Load Doctors & Stats
+      const docRes = await apiCall("/api/admin/doctors");
+      if (docRes) {
+        allDoctors = docRes.doctors || [];
+        const stats = docRes.stats || {};
+        document.getElementById("valTotalDoctors").innerText = stats.total_doctors || allDoctors.length;
+        document.getElementById("subActiveDoctors").innerText = `${stats.active_doctors || 0} đang hoạt động`;
+        document.getElementById("badgeDocCount").innerText = allDoctors.length;
+
+        document.getElementById("valTotalPatients").innerText = stats.total_patients || 0;
+        document.getElementById("subActivePatients").innerText = `${stats.active_patients || stats.total_patients || 0} đang theo dõi`;
+
+        document.getElementById("valTotalCaregivers").innerText = stats.total_caregivers || 0;
+        document.getElementById("subActiveCaregivers").innerText = `${stats.active_caregivers || stats.total_caregivers || 0} đang kích hoạt`;
+
+        const careTeamsCount = stats.total_care_teams || 0;
+        const ptCaregiversCount = stats.total_patient_caregivers || 0;
+        document.getElementById("valTotalAssignments").innerText = careTeamsCount + ptCaregiversCount;
+        document.getElementById("subAssignmentDetail").innerText = `${careTeamsCount} Care Team • ${ptCaregiversCount} Gia đình`;
+      }
+
+      // 2. Load Patients
+      const patRes = await apiCall("/api/admin/patients");
+      if (patRes && patRes.patients) {
+        allPatients = patRes.patients;
+      }
+
+      // 3. Load Caregivers
+      const cgRes = await apiCall("/api/admin/caregivers");
+      if (cgRes && cgRes.caregivers) {
+        allCaregivers = cgRes.caregivers;
+      }
+
+      // 4. Load Patient-Caregivers links
+      const linkRes = await apiCall("/api/admin/patient-caregivers");
+      if (linkRes && linkRes.patient_caregivers) {
+        allPatientCaregivers = linkRes.patient_caregivers;
+      }
+
+      // Update counters
+      document.getElementById("badgeFamilyCount").innerText = allPatients.length + allCaregivers.length;
+
+      // Populate Selects for Modals
+      populateCareTeamPatientSelect();
+      populateCaregiverModalPatientSelect();
+      populateLinkCaregiverModalSelects();
+
+      // Render Both Tables
+      renderDoctorsTable();
+      renderFamilyTable();
+      renderLinkPairsTable();
+    }
+
+    function populateCareTeamPatientSelect() {
+      const sel = document.getElementById("careTeamPatientSelect");
+      if (allPatients.length === 0) {
+        sel.innerHTML = `<option value="">Chưa có người bệnh nào trong hệ thống</option>`;
+      } else {
+        sel.innerHTML = allPatients.map(p => `
+          <option value="${p.patient_id}">${p.full_name} (${p.patient_id})</option>
+        `).join("");
+      }
+    }
+
+    function populateCaregiverModalPatientSelect() {
+      const sel = document.getElementById("cgInitialPatientSelect");
+      let html = `<option value="">-- Chưa gán người già ngay (Có thể gán sau) --</option>`;
+      allPatients.forEach(p => {
+        html += `<option value="${p.patient_id}">${p.full_name} (${p.patient_id})</option>`;
+      });
+      sel.innerHTML = html;
+    }
+
+    function populateLinkCaregiverModalSelects() {
+      const cgSel = document.getElementById("linkCaregiverSelect");
+      const ptSel = document.getElementById("linkPatientSelect");
+
+      if (allCaregivers.length === 0) {
+        cgSel.innerHTML = `<option value="">Chưa có người nhà nào trong hệ thống</option>`;
+      } else {
+        cgSel.innerHTML = `<option value="">-- Chọn Người nhà --</option>` + allCaregivers.map(c => `
+          <option value="${c.caregiver_id}">${c.full_name} (${c.email || c.phone || c.caregiver_id})</option>
+        `).join("");
+      }
+
+      if (allPatients.length === 0) {
+        ptSel.innerHTML = `<option value="">Chưa có người già nào trong hệ thống</option>`;
+      } else {
+        ptSel.innerHTML = `<option value="">-- Chọn Người cao tuổi --</option>` + allPatients.map(p => `
+          <option value="${p.patient_id}">${p.full_name} (${p.patient_id})</option>
+        `).join("");
+      }
+    }
+
+    // ==============================================================
+    // TABLE 1: DOCTORS CONTROLLER & RENDER
+    // ==============================================================
+    function renderDoctorsTable() {
+      const tbody = document.getElementById("doctorsTableBody");
+      const q = (document.getElementById("searchInput").value || "").toLowerCase().trim();
+      const statusF = document.getElementById("statusFilter").value;
+
+      let filtered = allDoctors.filter(d => {
+        const matchQ = !q || (
+          (d.full_name && d.full_name.toLowerCase().includes(q)) ||
+          (d.email && d.email.toLowerCase().includes(q)) ||
+          (d.workplace && d.workplace.toLowerCase().includes(q)) ||
+          (d.specialty && d.specialty.toLowerCase().includes(q)) ||
+          (d.license_number && d.license_number.toLowerCase().includes(q))
+        );
+        if (!matchQ) return false;
+
+        if (statusF === "ACTIVE") return d.is_active === 1;
+        if (statusF === "LOCKED") return d.is_active === 0;
+        if (statusF === "SIMULATION") return d.is_simulation === 1;
+        if (statusF === "REAL") return d.is_simulation === 0;
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="8" style="text-align: center; color: var(--muted); padding: 48px;">
+              <div style="font-size: 36px; margin-bottom: 8px;">👨‍⚕️</div>
+              <div style="font-size: 16px; font-weight: 700; color: var(--navy);">Không tìm thấy bác sĩ nào.</div>
+              <div style="font-size: 13px; margin-top: 4px;">Bấm nút <strong>"Cấp Tài Khoản Bác Sĩ Mới"</strong> phía trên để tạo bác sĩ mới.</div>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      let html = "";
+      filtered.forEach(d => {
+        const initials = d.full_name ? d.full_name.split(" ").slice(-2).map(w => w[0]).join("") : "BS";
+        const simBadge = d.is_simulation
+          ? `<span class="badge badge-muted">🧪 Demo / Thử nghiệm</span>`
+          : `<span class="badge badge-primary">🩺 Bác sĩ thực tế</span>`;
+
+        const statusBadge = d.is_active === 1
+          ? `<span class="badge badge-success">🟢 Đang hoạt động</span>`
+          : `<span class="badge badge-danger">🔒 Đã khóa</span>`;
+
+        const careTeams = d.care_teams || [];
+        let patientBadges = "";
+        if (careTeams.length === 0) {
+          patientBadges = `<span style="color: var(--muted); font-size: 12px; font-style: italic;">Chưa phân công</span>`;
+        } else {
+          patientBadges = careTeams.map(t => `
+            <span class="badge badge-primary" style="margin: 2px 0;" title="${t.role_description}">
+              ${t.patient_name || t.patient_id}
+            </span>
+          `).join(" ");
+        }
+
+        html += `
+          <tr>
+            <td>
+              <div class="avatar-col">
+                <div class="avatar-circle">${initials}</div>
+                <div>
+                  <strong style="color: var(--navy); font-size: 14.5px;">${d.full_name}</strong>
+                  <div style="font-size: 12px; color: var(--muted); font-family: monospace;">Mã: ${d.clinician_id}</div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div><strong>${d.email}</strong></div>
+              <div style="font-size: 12px; color: var(--muted);">${d.phone || 'Chưa cập nhật SĐT'}</div>
+            </td>
+            <td>
+              <div><strong>${d.workplace || 'Chưa phân viện'}</strong></div>
+              <div style="font-size: 12px; color: var(--indigo); font-weight: 600;">${d.specialty || 'Đa khoa'}</div>
+            </td>
+            <td><code style="background: #F1F5F9; padding: 2px 6px; border-radius: 4px; font-size: 12px;">${d.license_number || '--'}</code></td>
+            <td>${simBadge}</td>
+            <td>
+              <div style="max-width: 200px;">${patientBadges}</div>
+            </td>
+            <td>${statusBadge}</td>
+            <td style="text-align: right;">
+              <div class="action-btn-group" style="justify-content: flex-end;">
+                <button class="btn-action" title="Quản lý Care Team" onclick="openCareTeamModal('${d.clinician_id}')">
+                  👥 Care Team
+                </button>
+                <button class="btn-action" title="Chỉnh sửa thông tin" onclick="openEditDoctorModal('${d.clinician_id}')">
+                  ✏️ Sửa
+                </button>
+                <button class="btn-action" title="Đổi mật khẩu" onclick="openResetPasswordModal('${d.clinician_id}', '${d.full_name}')">
+                  🔑 Đổi MK
+                </button>
+                <button class="btn-action" title="${d.is_active ? 'Khóa tài khoản' : 'Mở khóa tài khoản'}" onclick="handleToggleStatus('${d.clinician_id}', ${d.is_active})">
+                  ${d.is_active ? '🔒 Khóa' : '🔓 Mở'}
+                </button>
+                <button class="btn-action btn-action-danger" title="Xóa tài khoản" onclick="handleDeleteDoctor('${d.clinician_id}', '${d.full_name}')">
+                  🗑️ Xóa
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      });
+      tbody.innerHTML = html;
+    }
+
+    function handleSearch() { renderDoctorsTable(); }
+    function handleFilter() { renderDoctorsTable(); }
+
+    // DOCTOR ACTIONS
+    function openCreateDoctorModal() {
+      document.getElementById("createDoctorForm").reset();
+      document.getElementById("docWorkplace").value = "Bệnh viện Lão khoa Trung Ương";
+      document.getElementById("docSpecialty").value = "Lão khoa & Tim mạch";
+      openModal("createDoctorModal");
+    }
+
+    async function handleCreateDoctorSubmit(e) {
+      e.preventDefault();
+      const payload = {
+        full_name: document.getElementById("docFullName").value,
+        email: document.getElementById("docEmail").value,
+        password: document.getElementById("docPassword").value,
+        phone: document.getElementById("docPhone").value,
+        license_number: document.getElementById("docLicense").value,
+        workplace: document.getElementById("docWorkplace").value,
+        specialty: document.getElementById("docSpecialty").value,
+        is_simulation: parseInt(document.getElementById("docIsSim").value, 10),
+      };
+
+      const res = await apiCall("/api/admin/doctors", "POST", payload);
+      if (res && res.clinician_id) {
+        showToast("Đã cấp tài khoản Bác sĩ mới thành công!", "success");
+        closeModal("createDoctorModal");
+        loadDashboard();
+      } else {
+        alert(res?.error || "Không thể tạo tài khoản bác sĩ.");
+      }
+    }
+
+    function openEditDoctorModal(clinicianId) {
+      const doc = allDoctors.find(d => d.clinician_id === clinicianId);
+      if (!doc) return;
+      document.getElementById("editDocId").value = doc.clinician_id;
+      document.getElementById("editDocFullName").value = doc.full_name || "";
+      document.getElementById("editDocEmail").value = doc.email || "";
+      document.getElementById("editDocPhone").value = doc.phone || "";
+      document.getElementById("editDocWorkplace").value = doc.workplace || "";
+      document.getElementById("editDocSpecialty").value = doc.specialty || "";
+      document.getElementById("editDocLicense").value = doc.license_number || "";
+      document.getElementById("editDocIsSim").value = doc.is_simulation ? "1" : "0";
+      document.getElementById("editDocIsActive").value = doc.is_active ? "1" : "0";
+      openModal("editDoctorModal");
+    }
+
+    async function handleEditDoctorSubmit(e) {
+      e.preventDefault();
+      const docId = document.getElementById("editDocId").value;
+      const payload = {
+        full_name: document.getElementById("editDocFullName").value,
+        email: document.getElementById("editDocEmail").value,
+        phone: document.getElementById("editDocPhone").value,
+        workplace: document.getElementById("editDocWorkplace").value,
+        specialty: document.getElementById("editDocSpecialty").value,
+        license_number: document.getElementById("editDocLicense").value,
+        is_simulation: parseInt(document.getElementById("editDocIsSim").value, 10),
+        is_active: parseInt(document.getElementById("editDocIsActive").value, 10),
+      };
+
+      const res = await apiCall(`/api/admin/doctors/${docId}`, "POST", payload);
+      if (res && res.status === "updated") {
+        showToast("Đã cập nhật thông tin bác sĩ!", "success");
+        closeModal("editDoctorModal");
+        loadDashboard();
+      } else {
+        alert(res?.error || "Không thể cập nhật bác sĩ.");
+      }
+    }
+
+    function openResetPasswordModal(clinicianId, fullName) {
+      document.getElementById("resetDocId").value = clinicianId;
+      document.getElementById("resetDocName").innerText = fullName;
+      document.getElementById("resetNewPassword").value = "";
+      openModal("resetPasswordModal");
+    }
+
+    async function handleResetPasswordSubmit(e) {
+      e.preventDefault();
+      const docId = document.getElementById("resetDocId").value;
+      const newPw = document.getElementById("resetNewPassword").value;
+      const res = await apiCall(`/api/admin/doctors/${docId}/reset-password`, "POST", { new_password: newPw });
+      if (res && res.status === "password_reset") {
+        showToast("Đã đặt lại mật khẩu mới cho bác sĩ thành công!", "success");
+        closeModal("resetPasswordModal");
+      } else {
+        alert(res?.error || "Không thể đặt lại mật khẩu.");
+      }
+    }
+
+    async function handleToggleStatus(clinicianId, currentStatus) {
+      const actionName = currentStatus === 1 ? "KHÓA" : "MỞ KHÓA";
+      if (!confirm(`Bạn có chắc chắn muốn ${actionName} tài khoản bác sĩ này?`)) return;
+      const res = await apiCall(`/api/admin/doctors/${clinicianId}/toggle-status`, "POST", { is_active: currentStatus === 1 ? 0 : 1 });
+      if (res && res.status === "status_updated") {
+        showToast(`Đã ${actionName.toLowerCase()} tài khoản bác sĩ thành công!`, "success");
+        loadDashboard();
+      } else {
+        alert(res?.error || "Thao tác không thành công.");
+      }
+    }
+
+    async function handleDeleteDoctor(clinicianId, fullName) {
+      if (!confirm(`CẢNH BÁO: Bạn có chắc chắn muốn XÓA VĨNH VIỄN tài khoản của ${fullName} khỏi hệ thống?`)) return;
+      const res = await apiCall(`/api/admin/doctors/${clinicianId}`, "DELETE");
+      if (res && res.status === "deleted") {
+        showToast("Đã xóa tài khoản bác sĩ thành công!", "success");
+        loadDashboard();
+      } else {
+        alert(res?.error || "Không thể xóa bác sĩ.");
+      }
+    }
+
+    function openCareTeamModal(clinicianId) {
+      const doc = allDoctors.find(d => d.clinician_id === clinicianId);
+      if (!doc) return;
+      document.getElementById("careTeamDocId").value = doc.clinician_id;
+      document.getElementById("careTeamDocName").innerText = doc.full_name;
+      document.getElementById("careTeamDocSub").innerText = `${doc.workplace || 'Bệnh viện'} • ${doc.specialty || 'Chuyên khoa'}`;
+
+      renderCareTeamTable(doc);
+      openModal("careTeamModal");
+    }
+
+    function renderCareTeamTable(doc) {
+      const tbody = document.getElementById("careTeamTableBody");
+      const teams = doc.care_teams || [];
+      if (teams.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="4" style="text-align: center; color: var(--muted); padding: 18px;">
+              Bác sĩ hiện chưa được phân công phụ trách người bệnh nào.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+      let html = "";
+      teams.forEach(t => {
+        html += `
+          <tr>
+            <td><strong>${t.patient_name || t.patient_id}</strong></td>
+            <td><code>${t.patient_id}</code></td>
+            <td><span class="badge badge-primary">${t.role_description}</span></td>
+            <td style="text-align: right;">
+              <button class="btn-action btn-action-danger" onclick="handleRemoveCareTeam('${t.care_team_id}', '${doc.clinician_id}')">
+                Gỡ bỏ
+              </button>
+            </td>
+          </tr>
+        `;
+      });
+      tbody.innerHTML = html;
+    }
+
+    async function handleAddCareTeamSubmit(e) {
+      e.preventDefault();
+      const clinicianId = document.getElementById("careTeamDocId").value;
+      const patientId = document.getElementById("careTeamPatientSelect").value;
+      const roleDesc = document.getElementById("careTeamRoleDesc").value;
+
+      if (!patientId) {
+        alert("Vui lòng chọn người bệnh!");
+        return;
+      }
+
+      const res = await apiCall("/api/admin/care-team", "POST", {
+        clinician_id: clinicianId,
+        patient_id: patientId,
+        role_description: roleDesc
+      });
+
+      if (res && res.care_team_id) {
+        showToast("Đã phân công bác sĩ vào Care Team thành công!", "success");
+        await loadDashboard();
+        const updatedDoc = allDoctors.find(d => d.clinician_id === clinicianId);
+        if (updatedDoc) renderCareTeamTable(updatedDoc);
+      } else {
+        alert(res?.error || "Không thể phân công bác sĩ.");
+      }
+    }
+
+    async function handleRemoveCareTeam(careTeamId, clinicianId) {
+      if (!confirm("Bạn có chắc chắn muốn gỡ bác sĩ khỏi nhóm chăm sóc của người bệnh này?")) return;
+      const res = await apiCall(`/api/admin/care-team/${careTeamId}`, "DELETE");
+      if (res && res.status === "deleted") {
+        showToast("Đã gỡ phân công thành công!", "success");
+        await loadDashboard();
+        const updatedDoc = allDoctors.find(d => d.clinician_id === clinicianId);
+        if (updatedDoc) renderCareTeamTable(updatedDoc);
+      } else {
+        alert(res?.error || "Không thể gỡ phân công.");
+      }
+    }
+
+    // ==============================================================
+    // TABLE 2: CAREGIVERS & PATIENTS (NGƯỜI NHÀ & NGƯỜI GIÀ)
+    // ==============================================================
+    function renderFamilyTable() {
+      const tbody = document.getElementById("familyTableBody");
+      const q = (document.getElementById("searchFamilyInput").value || "").toLowerCase().trim();
+      const roleF = document.getElementById("roleFamilyFilter").value;
+      const statusF = document.getElementById("statusFamilyFilter").value;
+
+      // Merge patients and caregivers into a unified list
+      let rows = [];
+
+      // Add Patients
+      allPatients.forEach(p => {
+        rows.push({
+          itemType: "PATIENT",
+          id: p.patient_id,
+          userId: p.user_id,
+          name: p.full_name,
+          email: p.email || `${p.patient_id}@unifiedcare.local`,
+          phone: p.phone || "",
+          gender: p.gender || "Nam",
+          dob: p.date_of_birth || "",
+          notes: p.notes || "",
+          status: p.status || "ACTIVE",
+          isActive: p.status === "ACTIVE" ? 1 : 0,
+          caregivers: p.caregivers || [],
+          careTeams: p.care_teams || [],
+          raw: p
+        });
+      });
+
+      // Add Caregivers
+      allCaregivers.forEach(c => {
+        rows.push({
+          itemType: "CAREGIVER",
+          id: c.caregiver_id,
+          userId: c.user_id,
+          name: c.full_name,
+          email: c.email || "",
+          phone: c.phone || "",
+          relationshipDesc: c.relationship_desc || "Người thân",
+          status: c.is_active === 1 ? "ACTIVE" : "LOCKED",
+          isActive: c.is_active === 1 ? 1 : 0,
+          patients: c.patients || [],
+          raw: c
+        });
+      });
+
+      // Filter
+      let filtered = rows.filter(item => {
+        // Role filter
+        if (roleF === "PATIENT" && item.itemType !== "PATIENT") return false;
+        if (roleF === "CAREGIVER" && item.itemType !== "CAREGIVER") return false;
+
+        // Status filter
+        if (statusF === "ACTIVE" && item.isActive !== 1) return false;
+        if (statusF === "LOCKED" && item.isActive !== 0) return false;
+
+        // Search text
+        if (q) {
+          const match = (
+            (item.name && item.name.toLowerCase().includes(q)) ||
+            (item.email && item.email.toLowerCase().includes(q)) ||
+            (item.phone && item.phone.toLowerCase().includes(q)) ||
+            (item.id && item.id.toLowerCase().includes(q)) ||
+            (item.notes && item.notes.toLowerCase().includes(q)) ||
+            (item.relationshipDesc && item.relationshipDesc.toLowerCase().includes(q))
+          );
+          if (!match) return false;
+        }
+
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" style="text-align: center; color: var(--muted); padding: 48px;">
+              <div style="font-size: 36px; margin-bottom: 8px;">👨‍👩‍👧‍👦</div>
+              <div style="font-size: 16px; font-weight: 700; color: var(--navy);">Không tìm thấy người nhà hoặc người cao tuổi nào.</div>
+              <div style="font-size: 13px; margin-top: 4px;">Sử dụng các nút phía trên để thêm mới <strong>Hồ Sơ Người Già</strong> hoặc cấp tài khoản <strong>Người Nhà</strong>.</div>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      let html = "";
+      filtered.forEach(it => {
+        const isPatient = it.itemType === "PATIENT";
+        const roleBadge = isPatient
+          ? `<span class="badge badge-warning" style="font-size: 12px;">👴 Người cao tuổi</span>`
+          : `<span class="badge badge-emerald" style="font-size: 12px;">👨‍👩‍👧 Người nhà</span>`;
+
+        const avatarClass = isPatient ? "avatar-circle avatar-elderly" : "avatar-circle avatar-caregiver";
+        const avatarIcon = isPatient ? "👴" : "👨‍👩‍👧";
+
+        const statusBadge = it.isActive === 1
+          ? `<span class="badge badge-success">🟢 Hoạt động</span>`
+          : `<span class="badge badge-danger">🔒 Đã khóa</span>`;
+
+        // Details column
+        let detailsHtml = "";
+        if (isPatient) {
+          const birthYear = it.dob ? it.dob.substring(0, 4) : "";
+          const approxAge = birthYear ? (new Date().getFullYear() - parseInt(birthYear)) : "";
+          detailsHtml = `
+            <div><strong>${it.gender}</strong> • ${it.dob || 'Chưa có ngày sinh'} ${approxAge ? `(${approxAge} tuổi)` : ''}</div>
+            <div style="font-size: 12px; color: var(--muted); max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${it.notes || ''}">
+              ${it.notes ? `📝 ${it.notes}` : '<em>Chưa có ghi chú</em>'}
+            </div>
+          `;
+        } else {
+          detailsHtml = `
+            <div>Quan hệ mặc định: <strong>${it.relationshipDesc || 'Người thân'}</strong></div>
+            <div style="font-size: 12px; color: var(--muted);">Tài khoản đăng nhập ứng dụng Người nhà</div>
+          `;
+        }
+
+        // Family Links Column
+        let linksHtml = "";
+        if (isPatient) {
+          const cgs = it.caregivers || [];
+          if (cgs.length === 0) {
+            linksHtml = `<span style="color: var(--muted); font-size: 12px; font-style: italic;">Chưa có người nhà liên kết</span>`;
+          } else {
+            linksHtml = cgs.map(cg => `
+              <div style="margin: 3px 0;">
+                <span class="badge badge-emerald" title="SĐT: ${cg.caregiver_phone || 'N/A'}">
+                  ${cg.caregiver_name || cg.caregiver_id} (${cg.relationship_type})
+                </span>
+                ${cg.is_primary ? `<span class="badge badge-warning" style="font-size: 10px; padding: 2px 6px;">Chính</span>` : ''}
+              </div>
+            `).join("");
+          }
+        } else {
+          const pts = it.patients || [];
+          if (pts.length === 0) {
+            linksHtml = `<span style="color: var(--muted); font-size: 12px; font-style: italic;">Chưa gán người già</span>`;
+          } else {
+            linksHtml = pts.map(pt => `
+              <div style="margin: 3px 0;">
+                <span class="badge badge-warning">
+                  ${pt.patient_name || pt.patient_id} (${pt.relationship_type})
+                </span>
+                ${pt.is_primary ? `<span class="badge badge-primary" style="font-size: 10px; padding: 2px 6px;">Chính</span>` : ''}
+              </div>
+            `).join("");
+          }
+        }
+
+        // Doctor In Charge Column
+        let doctorHtml = "";
+        if (isPatient) {
+          const dList = it.careTeams || [];
+          if (dList.length === 0) {
+            doctorHtml = `<span style="color: var(--muted); font-size: 12px; font-style: italic;">Chưa phân công BS</span>`;
+          } else {
+            doctorHtml = dList.map(doc => `
+              <div>
+                <span class="badge badge-primary">${doc.doctor_name || doc.clinician_id}</span>
+                <div style="font-size: 11px; color: var(--muted);">${doc.specialty || ''}</div>
+              </div>
+            `).join("");
+          }
+        } else {
+          doctorHtml = `<span style="color: var(--muted); font-size: 12px;">Theo dõi theo Người già</span>`;
+        }
+
+        // Action Buttons
+        let actionsHtml = "";
+        if (isPatient) {
+          actionsHtml = `
+            <div class="action-btn-group" style="justify-content: flex-end;">
+              <button class="btn-action" title="Chỉnh sửa hồ sơ" onclick="openEditPatientModal('${it.id}')">
+                ✏️ Sửa
+              </button>
+              <button class="btn-action" title="Phân công người nhà chăm sóc" onclick="openLinkCaregiverModal('${it.id}', null)">
+                🔗 Gán người nhà
+              </button>
+              <button class="btn-action" title="${it.isActive ? 'Khóa hồ sơ' : 'Kích hoạt lại'}" onclick="handleTogglePatientStatus('${it.id}', '${it.status}')">
+                ${it.isActive ? '🔒 Khóa' : '🔓 Mở'}
+              </button>
+              <button class="btn-action btn-action-danger" title="Xóa hồ sơ" onclick="handleDeletePatient('${it.id}', '${it.name}')">
+                🗑️ Xóa
+              </button>
+            </div>
+          `;
+        } else {
+          actionsHtml = `
+            <div class="action-btn-group" style="justify-content: flex-end;">
+              <button class="btn-action" title="Chỉnh sửa tài khoản" onclick="openEditCaregiverModal('${it.id}')">
+                ✏️ Sửa
+              </button>
+              <button class="btn-action" title="Đổi mật khẩu" onclick="openResetCaregiverPasswordModal('${it.id}', '${it.name}')">
+                🔑 Đổi MK
+              </button>
+              <button class="btn-action" title="Gán người già phụ trách" onclick="openLinkCaregiverModal(null, '${it.id}')">
+                🔗 Gán cụ
+              </button>
+              <button class="btn-action" title="${it.isActive ? 'Khóa tài khoản' : 'Mở khóa tài khoản'}" onclick="handleToggleCaregiverStatus('${it.id}', ${it.isActive})">
+                ${it.isActive ? '🔒 Khóa' : '🔓 Mở'}
+              </button>
+              <button class="btn-action btn-action-danger" title="Xóa tài khoản" onclick="handleDeleteCaregiver('${it.id}', '${it.name}')">
+                🗑️ Xóa
+              </button>
+            </div>
+          `;
+        }
+
+        html += `
+          <tr>
+            <td>
+              <div class="avatar-col">
+                <div class="${avatarClass}">${avatarIcon}</div>
+                <div>
+                  <strong style="color: var(--navy); font-size: 14.5px;">${it.name}</strong>
+                  <div style="margin-top: 3px;">${roleBadge}</div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div style="font-family: monospace; font-weight: 700; color: var(--navy); font-size: 13px;">${it.id}</div>
+              <div style="font-size: 12.5px; color: var(--muted);">${it.email || '--'}</div>
+              <div style="font-size: 12px; color: var(--muted);">${it.phone || 'Chưa cập nhật SĐT'}</div>
+            </td>
+            <td>${detailsHtml}</td>
+            <td>${linksHtml}</td>
+            <td>${doctorHtml}</td>
+            <td>${statusBadge}</td>
+            <td style="text-align: right;">${actionsHtml}</td>
+          </tr>
+        `;
+      });
+
+      tbody.innerHTML = html;
+    }
+
+    function handleFamilySearch() { renderFamilyTable(); }
+    function handleFamilyFilter() { renderFamilyTable(); }
+
+    // ==============================================================
+    // PATIENTS ACTIONS (NGƯỜI GIÀ)
+    // ==============================================================
+    function openCreatePatientModal() {
+      document.getElementById("createPatientForm").reset();
+      document.getElementById("patDob").value = "1950-01-01";
+      openModal("createPatientModal");
+    }
+
+    async function handleCreatePatientSubmit(e) {
+      e.preventDefault();
+      const payload = {
+        full_name: document.getElementById("patFullName").value,
+        patient_id: document.getElementById("patId").value,
+        gender: document.getElementById("patGender").value,
+        date_of_birth: document.getElementById("patDob").value,
+        notes: document.getElementById("patNotes").value,
+      };
+
+      const res = await apiCall("/api/admin/patients", "POST", payload);
+      if (res && res.patient_id) {
+        showToast(`Đã tạo hồ sơ người già "${res.full_name}" thành công!`, "success");
+        closeModal("createPatientModal");
+        loadDashboard();
+      } else {
+        alert(res?.error || "Không thể tạo hồ sơ người bệnh.");
+      }
+    }
+
+    function openEditPatientModal(patientId) {
+      const p = allPatients.find(x => x.patient_id === patientId);
+      if (!p) return;
+      document.getElementById("editPatId").value = p.patient_id;
+      document.getElementById("editPatFullName").value = p.full_name || "";
+      document.getElementById("editPatGender").value = p.gender || "Nam";
+      document.getElementById("editPatDob").value = p.date_of_birth || "";
+      document.getElementById("editPatNotes").value = p.notes || "";
+      document.getElementById("editPatStatus").value = p.status || "ACTIVE";
+      openModal("editPatientModal");
+    }
+
+    async function handleEditPatientSubmit(e) {
+      e.preventDefault();
+      const pid = document.getElementById("editPatId").value;
+      const payload = {
+        full_name: document.getElementById("editPatFullName").value,
+        gender: document.getElementById("editPatGender").value,
+        date_of_birth: document.getElementById("editPatDob").value,
+        notes: document.getElementById("editPatNotes").value,
+        status: document.getElementById("editPatStatus").value,
+      };
+
+      const res = await apiCall(`/api/admin/patients/${pid}`, "POST", payload);
+      if (res && res.status === "updated") {
+        showToast("Đã cập nhật hồ sơ người cao tuổi thành công!", "success");
+        closeModal("editPatientModal");
+        loadDashboard();
+      } else {
+        alert(res?.error || "Không thể cập nhật hồ sơ người già.");
+      }
+    }
+
+    async function handleTogglePatientStatus(patientId, currentStatus) {
+      const isAct = currentStatus === "ACTIVE";
+      const actionName = isAct ? "TẠM KHÓA" : "KÍCH HOẠT LẠI";
+      if (!confirm(`Bạn có chắc muốn ${actionName} hồ sơ người già này?`)) return;
+      const res = await apiCall(`/api/admin/patients/${patientId}/toggle-status`, "POST", { status: isAct ? "INACTIVE" : "ACTIVE" });
+      if (res && res.status === "status_updated") {
+        showToast(`Đã ${actionName.toLowerCase()} hồ sơ thành công!`, "success");
+        loadDashboard();
+      } else {
+        alert(res?.error || "Thao tác không thành công.");
+      }
+    }
+
+    async function handleDeletePatient(patientId, fullName) {
+      if (!confirm(`CẢNH BÁO: Bạn có chắc chắn muốn XÓA VĨNH VIỄN hồ sơ của "${fullName}" (${patientId}) khỏi hệ thống?\nMọi đơn thuốc, lịch trình và dữ liệu liên quan sẽ bị xóa sạch.`)) return;
+      const res = await apiCall(`/api/admin/patients/${patientId}`, "DELETE");
+      if (res && res.status === "deleted") {
+        showToast("Đã xóa hồ sơ người già thành công!", "success");
+        loadDashboard();
+      } else {
+        alert(res?.error || "Không thể xóa hồ sơ người già.");
+      }
+    }
+
+    // ==============================================================
+    // CAREGIVERS ACTIONS (NGƯỜI NHÀ)
+    // ==============================================================
+    function openCreateCaregiverModal() {
+      document.getElementById("createCaregiverForm").reset();
+      populateCaregiverModalPatientSelect();
+      openModal("createCaregiverModal");
+    }
+
+    async function handleCreateCaregiverSubmit(e) {
+      e.preventDefault();
+      const payload = {
+        full_name: document.getElementById("cgFullName").value,
+        email: document.getElementById("cgEmail").value,
+        password: document.getElementById("cgPassword").value,
+        phone: document.getElementById("cgPhone").value,
+        relationship_desc: document.getElementById("cgRelation").value,
+        patient_id: document.getElementById("cgInitialPatientSelect").value || null,
+        relationship_type: document.getElementById("cgRelation").value,
+      };
+
+      const res = await apiCall("/api/admin/caregivers", "POST", payload);
+      if (res && res.caregiver_id) {
+        showToast("Đã cấp tài khoản Người nhà thành công!", "success");
+        closeModal("createCaregiverModal");
+        loadDashboard();
+      } else {
+        alert(res?.error || "Không thể cấp tài khoản người nhà.");
+      }
+    }
+
+    function openEditCaregiverModal(caregiverId) {
+      const c = allCaregivers.find(x => x.caregiver_id === caregiverId);
+      if (!c) return;
+      document.getElementById("editCgId").value = c.caregiver_id;
+      document.getElementById("editCgFullName").value = c.full_name || "";
+      document.getElementById("editCgEmail").value = c.email || "";
+      document.getElementById("editCgPhone").value = c.phone || "";
+      document.getElementById("editCgRelation").value = c.relationship_desc || "Người thân";
+      document.getElementById("editCgIsActive").value = c.is_active ? "1" : "0";
+      openModal("editCaregiverModal");
+    }
+
+    async function handleEditCaregiverSubmit(e) {
+      e.preventDefault();
+      const cId = document.getElementById("editCgId").value;
+      const payload = {
+        full_name: document.getElementById("editCgFullName").value,
+        email: document.getElementById("editCgEmail").value,
+        phone: document.getElementById("editCgPhone").value,
+        relationship_desc: document.getElementById("editCgRelation").value,
+        is_active: parseInt(document.getElementById("editCgIsActive").value, 10),
+      };
+
+      const res = await apiCall(`/api/admin/caregivers/${cId}`, "POST", payload);
+      if (res && res.status === "updated") {
+        showToast("Đã cập nhật tài khoản Người nhà thành công!", "success");
+        closeModal("editCaregiverModal");
+        loadDashboard();
+      } else {
+        alert(res?.error || "Không thể cập nhật người nhà.");
+      }
+    }
+
+    function openResetCaregiverPasswordModal(caregiverId, fullName) {
+      document.getElementById("resetCgId").value = caregiverId;
+      document.getElementById("resetCgName").innerText = fullName;
+      document.getElementById("resetCgNewPassword").value = "";
+      openModal("resetCaregiverPasswordModal");
+    }
+
+    async function handleResetCaregiverPasswordSubmit(e) {
+      e.preventDefault();
+      const cId = document.getElementById("resetCgId").value;
+      const newPw = document.getElementById("resetCgNewPassword").value;
+      const res = await apiCall(`/api/admin/caregivers/${cId}/reset-password`, "POST", { new_password: newPw });
+      if (res && res.status === "password_reset") {
+        showToast("Đã đặt lại mật khẩu Người nhà thành công!", "success");
+        closeModal("resetCaregiverPasswordModal");
+      } else {
+        alert(res?.error || "Không thể đặt lại mật khẩu người nhà.");
+      }
+    }
+
+    async function handleToggleCaregiverStatus(caregiverId, currentActive) {
+      const actionName = currentActive === 1 ? "KHÓA" : "MỞ KHÓA";
+      if (!confirm(`Bạn có chắc muốn ${actionName} tài khoản người nhà này?`)) return;
+      const res = await apiCall(`/api/admin/caregivers/${caregiverId}/toggle-status`, "POST", { is_active: currentActive === 1 ? 0 : 1 });
+      if (res && res.status === "status_updated") {
+        showToast(`Đã ${actionName.toLowerCase()} tài khoản người nhà thành công!`, "success");
+        loadDashboard();
+      } else {
+        alert(res?.error || "Thao tác không thành công.");
+      }
+    }
+
+    async function handleDeleteCaregiver(caregiverId, fullName) {
+      if (!confirm(`CẢNH BÁO: Bạn có chắc chắn muốn XÓA VĨNH VIỄN tài khoản người nhà "${fullName}" (${caregiverId}) khỏi hệ thống?`)) return;
+      const res = await apiCall(`/api/admin/caregivers/${caregiverId}`, "DELETE");
+      if (res && res.status === "deleted") {
+        showToast("Đã xóa tài khoản người nhà thành công!", "success");
+        loadDashboard();
+      } else {
+        alert(res?.error || "Không thể xóa người nhà.");
+      }
+    }
+
+    // ==============================================================
+    // LINKING CAREGIVER & PATIENT (PHÂN CÔNG CHĂM SÓC)
+    // ==============================================================
+    function openLinkCaregiverModal(preselectPatientId = null, preselectCaregiverId = null) {
+      document.getElementById("linkPairForm").reset();
+      populateLinkCaregiverModalSelects();
+
+      if (preselectPatientId) {
+        document.getElementById("linkPatientSelect").value = preselectPatientId;
+      }
+      if (preselectCaregiverId) {
+        document.getElementById("linkCaregiverSelect").value = preselectCaregiverId;
+      }
+
+      renderLinkPairsTable();
+      openModal("linkCaregiverModal");
+    }
+
+    function renderLinkPairsTable() {
+      const tbody = document.getElementById("linkPairsTableBody");
+      if (!allPatientCaregivers || allPatientCaregivers.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="5" style="text-align: center; color: var(--muted); padding: 16px;">
+              Chưa có liên kết người nhà - người già nào trong hệ thống.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      let html = "";
+      allPatientCaregivers.forEach(pair => {
+        html += `
+          <tr>
+            <td>
+              <strong>${pair.caregiver_name || pair.caregiver_id}</strong>
+              <div style="font-size: 11.5px; color: var(--muted);">${pair.caregiver_email || pair.caregiver_phone || ''}</div>
+            </td>
+            <td>
+              <strong>${pair.patient_name || pair.patient_id}</strong>
+              <div style="font-size: 11.5px; color: var(--muted); font-family: monospace;">${pair.patient_id}</div>
+            </td>
+            <td><span class="badge badge-emerald">${pair.relationship_type}</span></td>
+            <td>
+              ${pair.is_primary ? '<span class="badge badge-warning">Liên hệ chính</span>' : '<span class="badge badge-muted">Hỗ trợ</span>'}
+            </td>
+            <td style="text-align: right;">
+              <button class="btn-action btn-action-danger" onclick="handleUnlinkCaregiver('${pair.patient_caregiver_id}')">
+                Gỡ liên kết
+              </button>
+            </td>
+          </tr>
+        `;
+      });
+      tbody.innerHTML = html;
+    }
+
+    async function handleLinkCaregiverSubmit(e) {
+      e.preventDefault();
+      const patientId = document.getElementById("linkPatientSelect").value;
+      const caregiverId = document.getElementById("linkCaregiverSelect").value;
+      const relation = document.getElementById("linkRelationSelect").value;
+      const isPrimary = parseInt(document.getElementById("linkIsPrimarySelect").value, 10);
+
+      if (!patientId || !caregiverId) {
+        alert("Vui lòng chọn đầy đủ Người nhà và Người già!");
+        return;
+      }
+
+      const res = await apiCall("/api/admin/patient-caregivers", "POST", {
+        patient_id: patientId,
+        caregiver_id: caregiverId,
+        relationship_type: relation,
+        is_primary: isPrimary,
+        can_edit_schedule: 1,
+        can_view_health: 1
+      });
+
+      if (res && res.patient_caregiver_id) {
+        showToast("Đã phân công người nhà chăm sóc thành công!", "success");
+        await loadDashboard();
+        renderLinkPairsTable();
+      } else {
+        alert(res?.error || "Không thể phân công chăm sóc.");
+      }
+    }
+
+    async function handleUnlinkCaregiver(patientCaregiverId) {
+      if (!confirm("Bạn có chắc chắn muốn gỡ liên kết chăm sóc này?")) return;
+      const res = await apiCall(`/api/admin/patient-caregivers/${patientCaregiverId}`, "DELETE");
+      if (res && res.status === "unlinked") {
+        showToast("Đã gỡ liên kết chăm sóc thành công!", "success");
+        await loadDashboard();
+        renderLinkPairsTable();
+      } else {
+        alert(res?.error || "Không thể gỡ liên kết.");
+      }
+    }
+
+    function handleLogout() {
+      if (window._adminEventSource) {
+        try { window._adminEventSource.close(); } catch (_) {}
+      }
+      if (window._adminPollTimer) {
+        clearInterval(window._adminPollTimer);
+      }
+      localStorage.removeItem("auth_token");
+      window.location.href = "/login";
+    }
+
+    // Initialize on page load
+    document.addEventListener("DOMContentLoaded", () => {
+      checkAuth();
+    });
+  </script>
+</body>
+</html>

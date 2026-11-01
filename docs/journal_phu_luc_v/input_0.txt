@@ -1,0 +1,97 @@
+P2 [Heading 1] NHẬT KÝ NGHIÊN CỨU VÀ MINH CHỨNG DỮ LIỆU
+P4 [Heading 2] I - THÔNG TIN CHUNG
+P5 [Normal] Tên dự án dự thi: HỆ THỐNG ỨNG DỤNG TRÍ TUỆ NHÂN TẠO HỖ TRỢ CHĂM SÓC VÀ PHỤC HỒI CHỨC NĂNG CHO NGƯỜI CAO TUỔI TẠI NHÀ
+P6 [Normal] ...................................................................................................................................................................
+P7 [Normal] Lĩnh vực dự thi: Phần mềm hệ thống
+P8 [Normal] Họ và tên học sinh/nhóm trưởng: .............................................................................................................
+P9 [Normal] Họ và tên thành viên (nếu có): .................................................................................................................. 
+P10 [Normal] Họ và tên người hướng dẫn nghiên cứu 1: ................................................................................................ 
+P11 [Normal] Họ và tên người hướng dẫn nghiên cứu 2: ................................................................................................ 
+P12 [Normal] Cơ sở giáo dục phổ thông: ........................................................................................................................
+P13 [Normal] Đơn vị dự thi: .............................................................................................................................................
+P14 [Normal] Thời gian thực hiện: từ ngày …/…/…… đến ngày …/…/…… (điền theo nhật ký thực tế)
+P15 [Heading 2] II - NHẬT KÝ THỰC HIỆN
+P16 [Normal] * Lưu ý: Người hướng dẫn nghiên cứu có trách nhiệm xác nhận định kỳ, ít nhất 01 (một) lần mỗi tháng, vào nhật ký nghiên cứu để thể hiện việc hướng dẫn, giám sát quá trình thực hiện dự án.
+P17 [Normal] III - KÊ KHAI CÔNG VIỆC
+P18 [Normal] Vui lòng điền thông tin đầy đủ về người đảm nhận từng vai trò dưới đây. Nếu một người kiêm nhiệm nhiều vai trò, hãy điền đầy đủ thông tin ở vai trò đầu tiên, các vai trò sau chỉ cần ghi họ tên. Có thể đính kèm trang bổ sung nếu cần.
+P27 [Normal] IV - Dữ liệu NGHIÊN CỨU
+P28 [Normal] Minh chứng dữ liệu được đính kèm Nhật ký này: Có       Không 
+P29 [Normal] Học sinh có trách nhiệm lưu trữ dữ liệu gốc, tài liệu, hình ảnh, video liên quan đến quá trình thực hiện dự án, phải kê khai cụ thể dưới đây và xuất trình khi được yêu cầu:
+P30 [Normal] 1. .............................................................................................................................................................;
+P31 [Normal] 2. .............................................................................................................................................................;   
+P32 [Normal] 3. .............................................................................................................................................................;   
+P33 [Normal] …
+P34 [Normal] V - KÊ KHAI HỒ SƠ
+P35 [Normal] Đánh dấu X vào ô tương ứng:
+P36 [Normal]  1) Ý kiến bằng văn bản của ít nhất 01 (một) người có chuyên môn phù hợp không phải là người hướng dẫn nghiên cứu của dự án hoặc ý kiến bằng văn bản của chuyên gia hoặc tổ chức chuyên môn phù hợp nếu vượt quá năng lực chuyên môn của cơ sở giáo dục, hoàn thành trước khi học sinh tiến hành thí nghiệm, can thiệp hoặc thu thập dữ liệu có yếu tố rủi ro.
+P37 [Normal]  2) Dự án có thu thập dữ liệu, mẫu vật từ con người phải có sự đồng ý bằng văn bản của người tham gia nghiên cứu hoặc cha, mẹ, người giám hộ của người tham gia là người chưa thành niên (Phiếu IVd); 
+P38 [Normal]  3) Dự án có sử dụng vi sinh vật, hóa chất nguy hiểm, nguồn phóng xạ chỉ được thực hiện tại phòng thí nghiệm, cơ sở nghiên cứu đáp ứng điều kiện theo quy định của pháp luật chuyên ngành, dưới sự giám sát trực tiếp của người có chuyên môn phù hợp (Phiếu IVc)
+P39 [Normal]      4) Kê khai sử dụng công nghệ số, trí tuệ nhân tạo
+P40 [Normal]  a) Được phép sử dụng, không phải khai báo: tra cứu thông tin, tài liệu tham khảo; kiểm tra chính tả, ngữ pháp.
+P41 [Normal]  b) Được phép sử dụng nhưng phải khai báo theo quy định (bao gồm nhưng không giới hạn: hỗ trợ xử lý, phân tích dữ liệu, mô phỏng, lập trình; tạo lập hình ảnh, sơ đồ; biên soạn, biên dịch nội dung báo cáo, poster và các trường hợp sử dụng khác có ảnh hưởng đến nội dung, kết quả nghiên cứu hoặc sản phẩm trình bày của dự án).
+P42 [Normal] 	Nếu đánh dấu X ở b, PHẢI kê khai chi tiết ở Phụ lục VI.
+P43 [Normal] 					…………, ngày      tháng       năm 20…
+P44 [Normal] Xác nhận của người hướng dẫn nghiên cứu		              Học sinh/trưởng nhóm nghiên cứu
+P45 [Normal]               (Ký, ghi rõ họ tên)					             (Ký, ghi rõ họ tên)
+P50 [Normal] Xác nhận của cơ sở giáo dục phổ thông
+P51 [Normal] (Ký, ghi rõ họ tên và đóng dấu)
+TABLE 0 rows=10 cols=8
+R0: TT || Ngày || Nội dung || Địa điểm thực hiện || Người thực hiện || Minh chứng || Kết quả || Xác nhận của người hướng dẫn nghiên cứu
+R1: 1 || …/…/…… || Lên ý tưởng và đánh giá tính khả thi: Phân tích nhu cầu nhắc thuốc, phục hồi, theo dõi sức khỏe; xác định nhóm người dùng, thiết bị và phạm vi demo. || … (điền thực tế) || HS1/HS2 (phân công thực tế) || Hồ sơ hình thành ý tưởng và đánh giá tính khả thi || Chốt phạm vi nguyên mẫu và các luồng chăm sóc ưu tiên. || … (ký, ghi ngày)
+R2: 2 || …/…/…… || Thiết kế hệ thống và workflow: Tách giao diện, nghiệp vụ, AI, dữ liệu; thiết kế luồng hồ sơ → tác vụ → phản hồi → lưu → cập nhật web; kiểm soát quyền và ghi trùng. || … (điền thực tế) || HS1/HS2 (phân công thực tế) || Minh chứng kiến trúc và workflow hệ thống || Hình thành các luồng nghiệp vụ cơ bản. || … (ký, ghi ngày)
+R3: 3 || …/…/…… || Xây dựng cơ sở dữ liệu: Thiết kế quan hệ bác sĩ–người cao tuổi–người nhà; lưu thuốc, phiên tập, chỉ số, yêu cầu hỗ trợ; tích hợp SQLite. || … (điền thực tế) || HS1/HS2 (phân công thực tế) || Cơ sở dữ liệu và sơ đồ quan hệ || Tích hợp cơ sở dữ liệu dùng chung cho demo. || … (ký, ghi ngày)
+R4: 4 || …/…/…… || Ứng dụng người cao tuổi và xử lý hình ảnh: Tích hợp nhận diện khuôn mặt, biểu cảm và 3 bài tập; thử phát hiện ngã nhưng loại khỏi demo do chưa đạt yêu cầu. || … (điền thực tế) || HS1/HS2 (phân công thực tế) || Hồ sơ mô hình AI và dữ liệu; video nhận diện và phục hồi || Đã tích hợp nhận diện và bài tập; phát hiện ngã không đưa vào demo. || … (ký, ghi ngày)
+R5: 5 || …/…/…… || Trò chơi, âm nhạc và giọng nói: Xây dựng trò lật hình, nhớ chuỗi, phát nhạc; dùng faster-whisper và quy tắc phân luồng câu tiếng Việt; giữ nút dự phòng. || … (điền thực tế) || HS1/HS2 (phân công thực tế) || Video trò chơi; phát nhạc; log nhận dạng giọng nói || Tích hợp hoạt động trí nhớ, nhạc và điều khiển giọng nói. || … (ký, ghi ngày)
+R6: 6 || …/…/…… || Web dành cho người nhà: Xây dựng bảng tổng quan, nhập chỉ số từ thiết bị đo ngoài, trao đổi bác sĩ, theo dõi phục hồi, cảm xúc theo chu kỳ. || … (điền thực tế) || HS1/HS2 (phân công thực tế) || Minh chứng web người nhà; video chỉ số và trao đổi || Xây dựng chức năng theo dõi và trao đổi theo hồ sơ. || … (ký, ghi ngày)
+R7: 7 || …/…/…… || Web dành cho bác sĩ: Thiết kế theo dõi sức khỏe, đơn thuốc, lịch uống, kết quả phục hồi và lời khuyên; giới hạn truy cập theo hồ sơ phụ trách. || … (điền thực tế) || HS1/HS2 (phân công thực tế) || Minh chứng web bác sĩ; video kê đơn và lời khuyên || Xây dựng các chức năng quản lý và theo dõi. || … (ký, ghi ngày)
+R8: 8 || …/…/…… || Kiểm thử và xử lý lỗi: Thử đổi hồ sơ, xác nhận lặp, câu phủ định, bài tập gián đoạn, hoãn thuốc, mất kết nối; phân biệt kiểm thử mô phỏng và người dùng thực. || … (điền thực tế) || HS1/HS2 (phân công thực tế) || Báo cáo kiểm thử; log và bảng ca thử || Đã có kiểm thử; còn nội dung cần đo bổ sung theo kế hoạch. || … (ký, ghi ngày)
+R9: 9 || …/…/…… || Đóng gói và nghiệm thu demo: Rà soát app, web, backend, SQLite; chuẩn bị cấu hình, dữ liệu demo, hướng dẫn; đối chiếu ZIP, log và kiểm tra trên máy đích. || … (điền thực tế) || HS1/HS2 (phân công thực tế) || Bộ cài/ZIP, log máy đích, biên bản nghiệm thu (cần bổ sung) || Phạm vi gói demo đã xác định; trạng thái nghiệm thu cần đối chiếu minh chứng thực tế. || … (ký, ghi ngày)
+TABLE 1 rows=5 cols=3
+R0: 1. Tên học sinh 1/Trưởng nhóm: ………………………… || 1. Tên học sinh 1/Trưởng nhóm: ………………………… || 1. Tên học sinh 1/Trưởng nhóm: …………………………
+R1: Nội dung công việc || Chi tiết công việc || Minh chứng
+R2: Phân tích và thiết kế (xác nhận phân công) || Phân tích nhu cầu, sơ đồ hệ thống, luồng chăm sóc; ghi rõ phần thực tế do học sinh đảm nhiệm. || Sơ đồ, ghi chép, commit
+R3: Lập trình và tích hợp (xác nhận phân công) || Ghi cụ thể mô-đun thực hiện: app, AI, backend, web hoặc dữ liệu; đối chiếu lịch sử làm việc. || Mã nguồn, commit, ảnh/video
+R4: Kiểm thử và báo cáo (xác nhận phân công) || Lập ca thử, ghi lỗi, đối chiếu kết quả, hoàn thiện tài liệu và minh chứng. || Log, bảng kiểm thử, báo cáo
+TABLE 2 rows=5 cols=3
+R0: 2. Tên học sinh 2: ………………………… || 2. Tên học sinh 2: ………………………… || 2. Tên học sinh 2: …………………………
+R1: Nội dung công việc || Chi tiết công việc || Minh chứng
+R2: Phân tích và thiết kế (xác nhận phân công) || Phân tích nhu cầu, sơ đồ hệ thống, luồng chăm sóc; ghi rõ phần thực tế do học sinh đảm nhiệm. || Sơ đồ, ghi chép, commit
+R3: Lập trình và tích hợp (xác nhận phân công) || Ghi cụ thể mô-đun thực hiện: app, AI, backend, web hoặc dữ liệu; đối chiếu lịch sử làm việc. || Mã nguồn, commit, ảnh/video
+R4: Kiểm thử và báo cáo (xác nhận phân công) || Lập ca thử, ghi lỗi, đối chiếu kết quả, hoàn thiện tài liệu và minh chứng. || Log, bảng kiểm thử, báo cáo
+TABLE 3 rows=6 cols=4
+R0: 3. Người hướng dẫn nghiên cứu 1 || 3. Người hướng dẫn nghiên cứu 1 || 3. Người hướng dẫn nghiên cứu 1 || 3. Người hướng dẫn nghiên cứu 1
+R1: Họ và tên || Đơn vị || Email || Điện thoại
+R2:  ||  ||  || 
+R3: Mối quan hệ với học sinh || Chuyên môn được đào tạo || Những công việc đã làm để hỗ trợ học sinh || Thời gian hỗ trợ
+R4:  ||  ||  || 
+R5:  ||  ||  || 
+TABLE 4 rows=6 cols=4
+R0: 4. Người hướng dẫn nghiên cứu 2 (nếu có) || 4. Người hướng dẫn nghiên cứu 2 (nếu có) || 4. Người hướng dẫn nghiên cứu 2 (nếu có) || 4. Người hướng dẫn nghiên cứu 2 (nếu có)
+R1: Họ và tên || Đơn vị || Email || Điện thoại
+R2:  ||  ||  || 
+R3: Mối quan hệ với học sinh || Chuyên môn được đào tạo || Những công việc đã làm để hỗ trợ học sinh || Thời gian hỗ trợ
+R4:  ||  ||  || 
+R5:  ||  ||  || 
+TABLE 5 rows=6 cols=4
+R0: 5. Người giám sát nghiên cứu (nếu có, tại cơ quan nghiên cứu ngoài nhà trường) || 5. Người giám sát nghiên cứu (nếu có, tại cơ quan nghiên cứu ngoài nhà trường) || 5. Người giám sát nghiên cứu (nếu có, tại cơ quan nghiên cứu ngoài nhà trường) || 5. Người giám sát nghiên cứu (nếu có, tại cơ quan nghiên cứu ngoài nhà trường)
+R1: Họ và tên || Đơn vị || Email || Điện thoại
+R2:  ||  ||  || 
+R3: Mối quan hệ với học sinh || Chuyên môn được đào tạo || Những công việc đã làm để hỗ trợ học sinh || Thời gian hỗ trợ
+R4:  ||  ||  || 
+R5:  ||  ||  || 
+TABLE 6 rows=6 cols=4
+R0: 6. Người hỗ trợ nghiên cứu khác (là những người có đóng góp hỗ trợ nghiên cứu chưa liệt kê ở trên, liệt kê tất cả những người tham gia hỗ trợ. Thêm khung mới hoặc thêm trang bổ sung nếu cần) || 6. Người hỗ trợ nghiên cứu khác (là những người có đóng góp hỗ trợ nghiên cứu chưa liệt kê ở trên, liệt kê tất cả những người tham gia hỗ trợ. Thêm khung mới hoặc thêm trang bổ sung nếu cần) || 6. Người hỗ trợ nghiên cứu khác (là những người có đóng góp hỗ trợ nghiên cứu chưa liệt kê ở trên, liệt kê tất cả những người tham gia hỗ trợ. Thêm khung mới hoặc thêm trang bổ sung nếu cần) || 6. Người hỗ trợ nghiên cứu khác (là những người có đóng góp hỗ trợ nghiên cứu chưa liệt kê ở trên, liệt kê tất cả những người tham gia hỗ trợ. Thêm khung mới hoặc thêm trang bổ sung nếu cần)
+R1: Họ và tên || Đơn vị || Email || Điện thoại
+R2:  ||  ||  || 
+R3: Mối quan hệ với học sinh || Chuyên môn được đào tạo || Những công việc đã làm để hỗ trợ học sinh || Thời gian hỗ trợ
+R4:  ||  ||  || 
+R5:  ||  ||  || 
+TABLE 7 rows=4 cols=1
+R0: 7. Hỗ trợ có trả phí (đánh dấu X vào ô tương ứng)
+R1: Học sinh và/hoặc phụ huynh có phải trả chi phí cho sự hỗ trợ nào không? Có       Không 
+R2: Nếu câu trả lời là Có, vui lòng cung cấp thông tin chi tiết về các khoản phí và/hoặc tiền thù lao trả cho các cá nhân hoặc trả cho các đơn vị cung cấp dịch vụ hỗ trợ dự án nghiên cứu như: thuê phòng thí nghiệm, thuê người hướng dẫn, thuê dịch vụ chuẩn bị hồ sơ, tài liệu, dịch thuật v.v.) trong ô dưới đây:
+R3: Chi tiết các khoản phí và/hoặc thù lao đã chi trả:
+
+
+
+SECTION 21.59x27.94; margins 1.75,1.75,2.25,1.59

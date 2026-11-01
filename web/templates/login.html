@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng Nhập Cổng Quản Lý — Hệ Thống Chăm Sóc Người Cao Tuổi</title>
+  <style>
+    :root {
+      --primary: #1D5BB8;
+      --primary-hover: #154696;
+      --navy: #0F172A;
+      --border: #DFE8F3;
+      --bg-dark: #122852;
+      --bg-light: #F8FAFC;
+      --text: #1E293B;
+      --muted: #64748B;
+      --success: #16A34A;
+      --amber: #D97706;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    body {
+      background: radial-gradient(circle at 50% 20%, #1A3668 0%, #0D1C38 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px 16px;
+    }
+    .login-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 36px 32px;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+      position: relative;
+    }
+    .brand-section {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+    .brand-icon {
+      width: 52px;
+      height: 52px;
+      background: #1D5BB8;
+      color: #fff;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 12px rgba(29, 91, 184, 0.35);
+    }
+    .brand-title {
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.2px;
+    }
+    .brand-sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* Segmented Role Switcher (Giống hình FPT Cán bộ / Phụ huynh) */
+    .role-switcher-container {
+      margin-bottom: 8px;
+    }
+    .role-toggle {
+      display: flex;
+      background: #E8EEF5;
+      border-radius: 30px;
+      padding: 4px;
+      gap: 4px;
+    }
+    .role-toggle-btn {
+      flex: 1;
+      border: none;
+      background: transparent;
+      color: #475569;
+      font-size: 13.5px;
+      font-weight: 600;
+      padding: 10px 14px;
+      border-radius: 26px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .role-toggle-btn.active {
+      background: #FFFFFF;
+      color: #1D5BB8;
+      font-weight: 800;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    }
+    .role-caption {
+      font-size: 12.5px;
+      color: #64748B;
+      text-align: center;
+      margin-top: 8px;
+      margin-bottom: 20px;
+      min-height: 18px;
+      font-style: italic;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    input {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+      background: #FAFCFF;
+      color: var(--text);
+      transition: all 0.2s;
+    }
+    input:focus {
+      border-color: var(--primary);
+      background: #FFFFFF;
+      box-shadow: 0 0 0 3px rgba(29, 91, 184, 0.12);
+    }
+    .btn-submit {
+      width: 100%;
+      background: var(--primary);
+      color: #FFFFFF;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(29, 91, 184, 0.25);
+      transition: background 0.2s;
+      margin-top: 4px;
+    }
+    .btn-submit:hover {
+      background: var(--primary-hover);
+    }
+
+    /* Doctor Safety Notice */
+    .doctor-notice {
+      display: none;
+      background: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      color: #1E40AF;
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 12px;
+      line-height: 1.5;
+      margin-top: 18px;
+    }
+
+    /* Caregiver Notice */
+    .caregiver-notice {
+      display: block;
+      margin-top: 18px;
+      background: #F0FDF4;
+      border: 1px solid #86EFAC;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 12.5px;
+      color: #166534;
+      line-height: 1.5;
+      text-align: left;
+    }
+
+    /* Quick Accounts */
+    .quick-section {
+      margin-top: 22px;
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+    }
+    .quick-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #64748B;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
+    }
+    .btn-quick {
+      width: 100%;
+      background: #F8FAFC;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 9px 12px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--navy);
+      text-align: left;
+      cursor: pointer;
+      margin-bottom: 7px;
+      transition: all 0.15s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .btn-quick:hover {
+      background: #EEF2F6;
+      border-color: #94A3B8;
+    }
+    .btn-quick small {
+      color: #64748B;
+      font-weight: normal;
+    }
+
+    .alert-banner {
+      display: none;
+      background: #FEF2F2;
+      border: 1px solid #FECACA;
+      color: #B91C1C;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+  </style>
+  <link rel="stylesheet" href="/assets/portal-theme.css?v=20261024">
+</head>
+<body class="login-page">
+  <main class="login-shell">
+  <div class="login-card">
+    <div class="brand-section">
+      <div class="brand-icon">🏥</div>
+      <div class="brand-title">HỆ THỐNG TRỢ LÝ Y TẾ TỪ XA</div>
+      <div class="brand-sub">Theo dõi Sinh hiệu, Nhắc thuốc & Phục hồi chức năng</div>
+    </div>
+
+    <!-- Segmented Role Switcher (Hình FPT: Cán bộ & SV / Phụ huynh) -->
+    <div class="role-switcher-container">
+      <div class="role-toggle">
+        <button type="button" class="role-toggle-btn active" id="btnRoleCaregiver" onclick="setRole('caregiver')">
+          👨‍👩‍👧 Người nhà
+        </button>
+        <button type="button" class="role-toggle-btn" id="btnRoleClinician" onclick="setRole('clinician')">
+          👨‍⚕️ Bác sĩ
+        </button>
+        <button type="button" class="role-toggle-btn" id="btnRoleAdmin" onclick="setRole('admin')">
+          🛡️ Quản trị viên
+        </button>
+      </div>
+      <div class="role-caption" id="roleCaption">
+        Đăng nhập dành cho Người nhà & Người chăm sóc bệnh nhân
+      </div>
+    </div>
+
+    <div id="alertBox" class="alert-banner"></div>
+
+    <form onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label id="lblIdentifier" for="emailInput">Email hoặc Số điện thoại Người nhà</label>
+        <input type="text" id="emailInput" placeholder="Ví dụ: contact-a2e402b0@example.com" required autocomplete="username">
+      </div>
+      <div class="form-group">
+        <label for="passwordInput">Mật Khẩu</label>
+        <input type="password" id="passwordInput" placeholder="••••••••" autocomplete="current-password" required>
+        <small style="color: #64748B; font-size: 11.5px; display: block; margin-top: 4px;">Nhập mật khẩu riêng đã được cấp cho bạn.</small>
+      </div>
+      <button type="submit" id="btnSubmit" class="btn-submit">
+        Đăng Nhập Cổng Người Nhà
+      </button>
+    </form>
+
+    <details class="login-help">
+      <summary>Hướng dẫn đăng nhập</summary>
+    <!-- Khối thông báo tài khoản dành cho Người nhà -->
+    <div class="caregiver-notice" id="caregiverRegisterBox">
+      💡 <strong>Tài khoản Người nhà được đăng ký đồng thời:</strong> Khi thêm hồ sơ người cao tuổi trên <strong>Ứng dụng Người cao tuổi (Desktop App)</strong>, tài khoản Người nhà (Email & Mật khẩu) cũng được tạo trực tiếp tại đó và đồng bộ vào hệ thống. Người nhà dùng chính tài khoản đó để đăng nhập tại đây và theo dõi thông tin người thân.
+    </div>
+
+    <!-- Khối thông báo an toàn dành cho Bác sĩ -->
+    <div class="doctor-notice" id="clinicianNotice">
+      🔒 <strong>Phân định bảo mật y tế:</strong> Tài khoản Bác sĩ được Bệnh viện cấp riêng biệt với tên miền y tế (@laokhoa.example.com / @bachmai.vn). Bác sĩ không tự đăng ký tài khoản tự do để bảo đảm tuyệt đối tính an toàn y khoa và tránh sai lệch vai trò.
+    </div>
+
+    </details>
+  </div>
+  <aside class="login-visual" aria-hidden="true">
+    <div class="visual-brand">AI CARE / PHỤC HỒI & CHĂM SÓC</div>
+    <h2>Theo dõi Sinh hiệu,<br>Nhắc thuốc & Phục hồi chức năng</h2>
+    <p>Hệ thống Chăm Sóc Người Cao Tuổi & Phục Hồi Chức Năng</p>
+    <div class="preview-device"><div class="preview-screen">
+      <div class="preview-rail"><b>AI Care</b>Tổng quan<br>Người cao tuổi<br>Đơn thuốc<br>Chỉ số sức khỏe<br>Phục hồi chức năng</div>
+      <div class="preview-main"><h3>Tổng quan chăm sóc</h3>
+        <div class="preview-tiles"><span>Người cao tuổi</span><span>Đơn thuốc</span><span>Phục hồi</span></div>
+        <div class="preview-chart">Chỉ số sức khỏe
+          <svg viewBox="0 0 320 100" fill="none"><path d="M0 75 Q30 22 60 48 T120 40 T180 55 T240 25 T320 42" stroke="#6097AA" stroke-width="3"/><path d="M0 35 Q35 70 65 52 T130 72 T200 30 T265 55 T320 18" stroke="#D3C3E3" stroke-width="3"/></svg>
+        </div><div class="preview-lines"></div>
+      </div>
+    </div></div>
+  </aside>
+  </main>
+
+  <script>
+    let currentRole = "caregiver"; // "caregiver", "clinician", hoặc "admin"
+
+    function setRole(role) {
+      currentRole = role;
+      const btnCare = document.getElementById("btnRoleCaregiver");
+      const btnClin = document.getElementById("btnRoleClinician");
+      const btnAdmin = document.getElementById("btnRoleAdmin");
+      const caption = document.getElementById("roleCaption");
+      const lblIdent = document.getElementById("lblIdentifier");
+      const inputIdent = document.getElementById("emailInput");
+      const btnSub = document.getElementById("btnSubmit");
+      const regBox = document.getElementById("caregiverRegisterBox");
+      const docNotice = document.getElementById("clinicianNotice");
+      const alertBox = document.getElementById("alertBox");
+
+      alertBox.style.display = "none";
+      btnCare.classList.remove("active");
+      btnClin.classList.remove("active");
+      if (btnAdmin) btnAdmin.classList.remove("active");
+
+      if (role === "caregiver") {
+        btnCare.classList.add("active");
+        caption.innerText = "Đăng nhập dành cho Người nhà & Người chăm sóc bệnh nhân";
+        lblIdent.innerText = "Email hoặc Số điện thoại Người nhà";
+        inputIdent.placeholder = "Ví dụ: contact-a2e402b0@example.com";
+        btnSub.innerText = "Đăng Nhập Cổng Người Nhà";
+        regBox.style.display = "block";
+        docNotice.style.display = "none";
+      } else if (role === "clinician") {
+        btnClin.classList.add("active");
+        caption.innerText = "Đăng nhập dành cho Bác sĩ & Cán bộ y tế phụ trách ca trực";
+        lblIdent.innerText = "Email Bệnh viện hoặc Mã Bác sĩ được cấp";
+        inputIdent.placeholder = "Ví dụ: dr.an@laokhoa.example.com";
+        btnSub.innerText = "Đăng Nhập Cổng Bác Sĩ";
+        regBox.style.display = "none";
+        docNotice.style.display = "block";
+      } else if (role === "admin") {
+        if (btnAdmin) btnAdmin.classList.add("active");
+        caption.innerText = "Cổng Quản trị viên: Quản lý Bác sĩ, Phân công Care Team & Hồ sơ hệ thống";
+        lblIdent.innerText = "Tài khoản hoặc Email Quản trị viên";
+        inputIdent.placeholder = "admin@unifiedcare.local hoặc admin";
+        btnSub.innerText = "Đăng Nhập Cổng Quản Trị Viên";
+        regBox.style.display = "none";
+        docNotice.style.display = "none";
+      }
+
+    }
+
+    async function doLogin(identifier, password = "") {
+      const alertBox = document.getElementById("alertBox");
+      alertBox.style.display = "none";
+      const btn = document.getElementById("btnSubmit");
+      btn.disabled = true;
+      btn.innerText = "Đang kiểm tra thông tin...";
+
+      try {
+        const res = await fetch("/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: identifier.trim(),
+            password: password,
+            expected_role: currentRole
+          })
+        });
+        const data = await res.json();
+        if (res.ok && data.token) {
+          localStorage.setItem("auth_token", data.token);
+          if (data.user.role === "admin") {
+            window.location.href = "/admin";
+          } else if (data.user.role === "clinician") {
+            window.location.href = "/clinician";
+          } else {
+            window.location.href = "/caregiver";
+          }
+        } else {
+          alertBox.textContent = data.error || "Đăng nhập không thành công.";
+          alertBox.style.display = "block";
+          btn.disabled = false;
+          btn.innerText = currentRole === "admin" ? "Đăng Nhập Cổng Quản Trị Viên" : (currentRole === "caregiver" ? "Đăng Nhập Cổng Người Nhà" : "Đăng Nhập Cổng Bác Sĩ");
+        }
+      } catch (e) {
+        alertBox.textContent = "Không kết nối được máy chủ. Vui lòng thử lại.";
+        alertBox.style.display = "block";
+        btn.disabled = false;
+        btn.innerText = currentRole === "admin" ? "Đăng Nhập Cổng Quản Trị Viên" : (currentRole === "caregiver" ? "Đăng Nhập Cổng Người Nhà" : "Đăng Nhập Cổng Bác Sĩ");
+      }
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const val = document.getElementById("emailInput").value;
+      const pwd = document.getElementById("passwordInput").value;
+      doLogin(val, pwd);
+    }
+
+    // Initialize with Caregiver view or query param
+    document.addEventListener("DOMContentLoaded", () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const roleParam = urlParams.get("role");
+      if (roleParam && ["caregiver", "clinician", "admin"].includes(roleParam)) {
+        setRole(roleParam);
+      } else {
+        setRole("caregiver");
+      }
+
+      if (urlParams.get("msg") === "register_via_app") {
+        const alertBox = document.getElementById("alertBox");
+        alertBox.innerHTML = `<strong>💡 Lưu ý:</strong> Tài khoản Người nhà được cấp đồng thời khi đăng ký hồ sơ người cao tuổi trên <strong>Ứng dụng Người cao tuổi (Desktop App)</strong>. Vui lòng mở ứng dụng để đăng ký hoặc đăng nhập bằng tài khoản đã được cấp.`;
+        alertBox.style.display = "block";
+        alertBox.style.background = "#F0FDF4";
+        alertBox.style.borderColor = "#86EFAC";
+        alertBox.style.color = "#166534";
+      }
+    });
+  </script>
+</body>
+</html>

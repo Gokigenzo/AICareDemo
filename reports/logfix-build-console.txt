@@ -1,0 +1,145 @@
+QA_START PT
+QA PT python.exe D:\Code\AICareDemo_HP\AICareDemo\releases\logfix-20261101\PT\AICare\qa\security_
+QA PT python.exe -c
+QA PT python.exe -c
+QA PT python.exe -c
+QA PT python.exe -c
+QA PT python.exe -c
+QA PT python.exe -c
+QA PT AICare.exe 
+QA PT python.exe D:\Code\AICareDemo_HP\AICareDemo\releases\logfix-20261101\PT\AICare\app\portable
+{
+  "edition": "PT",
+  "passed": true,
+  "report": "D:\\Code\\AICareDemo_HP\\AICareDemo\\releases\\logfix-20261101\\PT\\AICare\\QA_REPORT.txt",
+  "checks": [
+    "security_regression",
+    "isolated_runtime",
+    "native_order_mediapipe,torch,cv2",
+    "native_order_torch,mediapipe,cv2",
+    "native_order_cv2,mediapipe,torch",
+    "direct_mediapipe_app_local_crt",
+    "zipformer_real_speech_and_no_whisper",
+    "launcher_self_test",
+    "qt_desktop_offscreen",
+    "http_auth_and_shutdown",
+    "tampered_model_manifest",
+    "app_local_crt_manifest",
+    "path_isolation",
+    "python_environment_isolation",
+    "limits",
+    "tested_utc",
+    "tested_os",
+    "qa_inputs"
+  ]
+}
+HASH PT 18085 files
+CRC_VERIFY PT
+{
+  "edition": "PT",
+  "file": "AI_FOR_EXAM_PT.zip",
+  "bytes": 581128867,
+  "files": 18086,
+  "sha256": "59ba628feb1ccec96a7852ded220c8573bca5fee39d998ccf2ead914a93765ef",
+  "crc": "passed",
+  "all_member_sha256": "passed",
+  "native_qa": "passed",
+  "clean_windows": "not tested; see QA_REPORT.txt"
+}
+QA_START HP
+QA HP python.exe D:\Code\AICareDemo_HP\AICareDemo\releases\logfix-20261101\HP\AICare\qa\security_
+QA HP python.exe -c
+QA HP python.exe -c
+QA HP python.exe -c
+QA HP python.exe -c
+QA HP python.exe -c
+QA HP python.exe -c
+QA HP AICare.exe 
+QA HP python.exe D:\Code\AICareDemo_HP\AICareDemo\releases\logfix-20261101\HP\AICare\app\portable
+{
+  "edition": "HP",
+  "passed": true,
+  "report": "D:\\Code\\AICareDemo_HP\\AICareDemo\\releases\\logfix-20261101\\HP\\AICare\\QA_REPORT.txt",
+  "checks": [
+    "security_regression",
+    "isolated_runtime",
+    "native_order_mediapipe,torch,cv2",
+    "native_order_torch,mediapipe,cv2",
+    "native_order_cv2,mediapipe,torch",
+    "direct_mediapipe_app_local_crt",
+    "zipformer_real_speech_and_no_whisper",
+    "launcher_self_test",
+    "qt_desktop_offscreen",
+    "http_auth_and_shutdown",
+    "tampered_model_manifest",
+    "app_local_crt_manifest",
+    "path_isolation",
+    "python_environment_isolation",
+    "limits",
+    "tested_utc",
+    "tested_os",
+    "qa_inputs"
+  ]
+}
+HASH HP 18084 files
+CRC_VERIFY HP
+{
+  "edition": "HP",
+  "file": "AI_FOR_EXAM_HP.zip",
+  "bytes": 581123105,
+  "files": 18085,
+  "sha256": "6e9daf90bc547960f99b23a2048a5261f9a0d548deb10f6243d0755daff9f2fc",
+  "crc": "passed",
+  "all_member_sha256": "passed",
+  "native_qa": "passed",
+  "clean_windows": "not tested; see QA_REPORT.txt"
+}
+QA_START V3
+QA V3 python.exe D:\Code\AICareDemo_HP\AICareDemo\releases\logfix-20261101\V3\AICare\qa\security_
+QA V3 python.exe -c
+QA V3 python.exe -c
+QA V3 python.exe -c
+QA V3 python.exe -c
+QA V3 python.exe -c
+QA V3 python.exe -c
+QA V3 AICare.exe 
+QA V3 python.exe D:\Code\AICareDemo_HP\AICareDemo\releases\logfix-20261101\V3\AICare\app\portable
+{
+  "edition": "V3",
+  "passed": true,
+  "report": "D:\\Code\\AICareDemo_HP\\AICareDemo\\releases\\logfix-20261101\\V3\\AICare\\QA_REPORT.txt",
+  "checks": [
+    "security_regression",
+    "isolated_runtime",
+    "native_order_mediapipe,torch,cv2",
+    "native_order_torch,mediapipe,cv2",
+    "native_order_cv2,mediapipe,torch",
+    "direct_mediapipe_app_local_crt",
+    "zipformer_real_speech_and_no_whisper",
+    "launcher_self_test",
+    "qt_desktop_offscreen",
+    "removed_sample_logins",
+    "http_auth_and_shutdown",
+    "tampered_model_manifest",
+    "app_local_crt_manifest",
+    "path_isolation",
+    "python_environment_isolation",
+    "limits",
+    "tested_utc",
+    "tested_os",
+    "qa_inputs"
+  ]
+}
+HASH V3 18086 files
+CRC_VERIFY V3
+{
+  "edition": "V3",
+  "file": "AI_FOR_EXAM_V3.zip",
+  "bytes": 581128206,
+  "files": 18087,
+  "sha256": "fec117829d620370aee85e733ea688ebe41a6901dd027212c9e4049aaafd9c99",
+  "crc": "passed",
+  "all_member_sha256": "passed",
+  "native_qa": "passed",
+  "clean_windows": "not tested; see QA_REPORT.txt"
+}

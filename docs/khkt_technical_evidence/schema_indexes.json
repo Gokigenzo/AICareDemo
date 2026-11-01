@@ -1,0 +1,202 @@
+[
+  {
+    "name": "idx_occurrences_state_grace",
+    "table": "dose_occurrences",
+    "columns": "state, grace_deadline_utc",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line": 422,
+    "ddl": "CREATE INDEX IF NOT EXISTS idx_occurrences_state_grace ON dose_occurrences(state, grace_deadline_utc);"
+  },
+  {
+    "name": "idx_occurrences_patient_sched",
+    "table": "dose_occurrences",
+    "columns": "patient_id, scheduled_at_utc",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line": 423,
+    "ddl": "CREATE INDEX IF NOT EXISTS idx_occurrences_patient_sched ON dose_occurrences(patient_id, scheduled_at_utc);"
+  },
+  {
+    "name": "idx_patient_caregivers_active",
+    "table": "patient_caregivers",
+    "columns": "patient_id, is_active, valid_to",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line": 424,
+    "ddl": "CREATE INDEX IF NOT EXISTS idx_patient_caregivers_active ON patient_caregivers(patient_id, is_active, valid_to);"
+  },
+  {
+    "name": "idx_care_team_clinician",
+    "table": "care_team",
+    "columns": "clinician_id, is_active, valid_to",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line": 425,
+    "ddl": "CREATE INDEX IF NOT EXISTS idx_care_team_clinician ON care_team(clinician_id, is_active, valid_to);"
+  },
+  {
+    "name": "idx_care_team_patient",
+    "table": "care_team",
+    "columns": "patient_id, is_active",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line": 426,
+    "ddl": "CREATE INDEX IF NOT EXISTS idx_care_team_patient ON care_team(patient_id, is_active);"
+  },
+  {
+    "name": "idx_prescriptions_patient_status",
+    "table": "prescriptions",
+    "columns": "patient_id, status",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line": 427,
+    "ddl": "CREATE INDEX IF NOT EXISTS idx_prescriptions_patient_status ON prescriptions(patient_id, status);"
+  },
+  {
+    "name": "idx_alerts_patient_status",
+    "table": "alerts",
+    "columns": "patient_id, status",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line": 428,
+    "ddl": "CREATE INDEX IF NOT EXISTS idx_alerts_patient_status ON alerts(patient_id, status);"
+  },
+  {
+    "name": "idx_events_occurrence",
+    "table": "dose_events",
+    "columns": "occurrence_id",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line": 429,
+    "ddl": "CREATE INDEX IF NOT EXISTS idx_events_occurrence ON dose_events(occurrence_id);"
+  },
+  {
+    "name": "idx_events_idempotency",
+    "table": "dose_events",
+    "columns": "idempotency_key",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line": 430,
+    "ddl": "CREATE INDEX IF NOT EXISTS idx_events_idempotency ON dose_events(idempotency_key);"
+  },
+  {
+    "name": "idx_obs_patient_type_time",
+    "table": "health_observations",
+    "columns": "patient_id, observation_type_id, status",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line": 431,
+    "ddl": "CREATE INDEX IF NOT EXISTS idx_obs_patient_type_time ON health_observations(patient_id, observation_type_id, status);"
+  },
+  {
+    "name": "idx_groups_patient_time",
+    "table": "measurement_groups",
+    "columns": "patient_id, measured_at DESC",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line": 432,
+    "ddl": "CREATE INDEX IF NOT EXISTS idx_groups_patient_time ON measurement_groups(patient_id, measured_at DESC);"
+  },
+  {
+    "name": "idx_reviews_patient",
+    "table": "clinician_reviews",
+    "columns": "patient_id, reviewed_at DESC",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line": 433,
+    "ddl": "CREATE INDEX IF NOT EXISTS idx_reviews_patient ON clinician_reviews(patient_id, reviewed_at DESC);"
+  },
+  {
+    "name": "idx_messages_patient",
+    "table": "clinical_messages",
+    "columns": "patient_id, created_at DESC",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "line": 434,
+    "ddl": "CREATE INDEX IF NOT EXISTS idx_messages_patient ON clinical_messages(patient_id, created_at DESC);"
+  },
+  {
+    "name": "idx_rehab_sessions_patient_date",
+    "table": "rehab_sessions",
+    "columns": "patient_id, local_date",
+    "source_path": "database/migrations/002_rehab_and_audit.sql",
+    "line": 187,
+    "ddl": "CREATE INDEX IF NOT EXISTS idx_rehab_sessions_patient_date ON rehab_sessions(patient_id, local_date);"
+  },
+  {
+    "name": "idx_rehab_events_session",
+    "table": "rehab_events",
+    "columns": "session_id",
+    "source_path": "database/migrations/002_rehab_and_audit.sql",
+    "line": 188,
+    "ddl": "CREATE INDEX IF NOT EXISTS idx_rehab_events_session ON rehab_events(session_id);"
+  },
+  {
+    "name": "idx_caregiver_reports_patient",
+    "table": "caregiver_reports",
+    "columns": "patient_id, status",
+    "source_path": "database/migrations/002_rehab_and_audit.sql",
+    "line": 189,
+    "ddl": "CREATE INDEX IF NOT EXISTS idx_caregiver_reports_patient ON caregiver_reports(patient_id, status);"
+  },
+  {
+    "name": "idx_recommendations_patient",
+    "table": "care_recommendations",
+    "columns": "patient_id, status",
+    "source_path": "database/migrations/002_rehab_and_audit.sql",
+    "line": 190,
+    "ddl": "CREATE INDEX IF NOT EXISTS idx_recommendations_patient ON care_recommendations(patient_id, status);"
+  },
+  {
+    "name": "idx_emergency_contacts_patient",
+    "table": "emergency_contacts",
+    "columns": "patient_id, is_active",
+    "source_path": "database/migrations/002_rehab_and_audit.sql",
+    "line": 191,
+    "ddl": "CREATE INDEX IF NOT EXISTS idx_emergency_contacts_patient ON emergency_contacts(patient_id, is_active);"
+  },
+  {
+    "name": "idx_audit_user_action",
+    "table": "audit_events",
+    "columns": "user_id, action, timestamp_utc DESC",
+    "source_path": "database/migrations/002_rehab_and_audit.sql",
+    "line": 192,
+    "ddl": "CREATE INDEX IF NOT EXISTS idx_audit_user_action ON audit_events(user_id, action, timestamp_utc DESC);"
+  },
+  {
+    "name": "idx_outbox_unprocessed",
+    "table": "outbox_events",
+    "columns": "processed_at, occurred_at",
+    "source_path": "database/migrations/003_outbox_and_sync.sql",
+    "line": 50,
+    "ddl": "CREATE INDEX IF NOT EXISTS idx_outbox_unprocessed ON outbox_events(processed_at, occurred_at);"
+  },
+  {
+    "name": "idx_outbox_patient_time",
+    "table": "outbox_events",
+    "columns": "patient_id, occurred_at DESC",
+    "source_path": "database/migrations/003_outbox_and_sync.sql",
+    "line": 51,
+    "ddl": "CREATE INDEX IF NOT EXISTS idx_outbox_patient_time ON outbox_events(patient_id, occurred_at DESC);"
+  },
+  {
+    "name": "idx_sync_inbox_patient",
+    "table": "sync_inbox",
+    "columns": "patient_id, received_at DESC",
+    "source_path": "database/migrations/003_outbox_and_sync.sql",
+    "line": 52,
+    "ddl": "CREATE INDEX IF NOT EXISTS idx_sync_inbox_patient ON sync_inbox(patient_id, received_at DESC);"
+  },
+  {
+    "name": "idx_meas_requests_patient_status",
+    "table": "measurement_requests",
+    "columns": "patient_id, status, due_at_utc",
+    "source_path": "database/migrations/004_flow_adjustments_and_measurement_requests.sql",
+    "line": 64,
+    "ddl": "CREATE INDEX IF NOT EXISTS idx_meas_requests_patient_status ON measurement_requests(patient_id, status, due_at_utc);"
+  },
+  {
+    "name": "idx_meas_requests_due",
+    "table": "measurement_requests",
+    "columns": "status, due_at_utc",
+    "source_path": "database/migrations/004_flow_adjustments_and_measurement_requests.sql",
+    "line": 65,
+    "ddl": "CREATE INDEX IF NOT EXISTS idx_meas_requests_due ON measurement_requests(status, due_at_utc);"
+  },
+  {
+    "name": "idx_exercise_plan_versions_plan",
+    "table": "exercise_plan_versions",
+    "columns": "plan_id, version DESC",
+    "source_path": "database/migrations/004_flow_adjustments_and_measurement_requests.sql",
+    "line": 66,
+    "ddl": "CREATE INDEX IF NOT EXISTS idx_exercise_plan_versions_plan ON exercise_plan_versions(plan_id, version DESC);"
+  }
+]

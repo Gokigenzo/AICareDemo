@@ -1,0 +1,32 @@
+# AI Rehabilitation & Safety Assistant — Audited Windows Dependencies
+# Platform: Windows 10/11 64-bit (Python 3.11 - 3.12)
+# CPU-first runtime dependencies (No CUDA required)
+# Runtime: Face, Emotion, Rehabilitation, Medication Reminders, PyQt5 UI, Email Service
+# Excluded: Obsolete voice/audio modules (vosk, sounddevice, pyttsx3), unused YOLO (ultralytics), build tools (pyinstaller)
+
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+PyQt5>=5.15.10
+opencv-contrib-python>=4.8.0.76
+numpy>=1.24.0,<2.0.0
+scipy>=1.10,<2.0
+mediapipe>=0.10.14,<0.10.21
+torch>=2.0.0
+torchvision>=0.15.0
+Pillow>=10.0.0
+python-dotenv>=1.0.0
+psutil>=5.9.0
+requests>=2.31.0
+filelock==4.0.12
+
+
+# IANA timezone database required by zoneinfo on Windows
+tzdata>=2024.1
+pydantic>=2.10.0
+
+# Local STT; Windows runtime still requires target-machine validation.
+sherpa-onnx==1.12.40
+av==18.1.0
+sounddevice==0.5.6
+pyttsx3>=2.90
+google-genai==2.29.0

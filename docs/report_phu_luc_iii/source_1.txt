@@ -1,0 +1,43 @@
+P0 [Normal] PHỤ LỤC III
+P1 [Normal] (Kèm theo Công văn số             /BGDĐT-GDPT ngày       tháng 10 năm 2026 của Bộ Giáo dục và Đào tạo)
+P3 [Normal] BÁO CÁO KẾT QUẢ THỰC HIỆN DỰ ÁN DỰ THI (IIIa) 
+P4 [Normal] I - ĐỐI VỚI DỰ ÁN KHOA HỌC
+P5 [Normal] 1. Câu hỏi nghiên cứu: 
+P6 [Normal] Thuyết minh về sự đóng góp của dự án vào lĩnh vực nghiên cứu.
+P7 [Normal] Xác định mục tiêu cụ thể và rõ ràng (đánh giá được bằng các phương pháp khoa học).
+P8 [Normal] 2. Thiết kế và phương pháp nghiên cứu
+P9 [Normal] Thiết kế kế hoạch nghiên cứu theo mục tiêu; trình bày phương pháp thu thập số liệu (khảo sát, điều tra, thực hành, thí nghiệm…), trong đó thể hiện rõ các tham số, thông số, biến số phù hợp với mục tiêu nghiên cứu.
+P10 [Normal] 3. Quá trình thực hiện: thu thập, phân tích và giải thích dữ liệu
+P11 [Normal] Trình bày về quá trình thực hiện phương pháp thu thập số liệu (khảo sát, điều tra, thực hành, thí nghiệm…) theo kế hoạch nghiên cứu; kết quả thu được (dữ liệu, số liệu thu được qua khảo sát, điều tra, thực hành, thí nghiệm…); xử lý số liệu (tổng hợp, phân tích, thống kê…), giải thích, nhận định, đánh giá, kết luận (theo mục tiêu nghiên cứu).
+P12 [Normal] 4. Kết quả, kết luận và khả năng ứng dụng
+P13 [Normal] Trình bày giá trị đóng góp của dự án đối với học tập, đời sống hoặc khoa học, kèm theo hướng phát triển (nếu có).)
+P14 [Normal] II - ĐỐI VỚI DỰ ÁN KỸ THUẬT
+P15 [Normal] 1. Vấn đề nghiên cứu hoặc cần giải quyết 
+P16 [Normal] Mô tả đòi hỏi của thực tế và xác định vấn đề cần giải quyết (lý giải được sự cấp thiết của vấn đề cần giải quyết); xác định các tiêu chí cho giải pháp giải quyết vấn đề.
+P17 [Normal] 2. Thiết kế và phương pháp nghiên cứu
+P18 [Normal] Trình bày về quá trình nghiên cứu để xác định giải pháp giải quyết vấn đề theo các tiêu chí đã xác định (thể hiện việc tìm tòi các giải pháp khác nhau để phân tích và lựa chọn giải pháp khả thi) từ đó thiết kế mô hình/nguyên mẫu (bản thiết kế của sản phẩm, thiết bị sẽ chế tạo; quy trình công nghệ) thể hiện giải pháp giải quyết vấn đề.
+P19 [Normal] 3. Thực hiện, chế tạo và kiểm tra
+P20 [Normal] Trình bày quá trình chế tạo (sản phẩm, thiết bị), thực hiện quy trình công nghệ và kiểm tra (trong nhiều điều kiện/thử nghiệm) chứng minh được sự khả thi, hiệu quả của giải pháp giải quyết vấn đề; việc hoàn thiện sản phẩm, thiết bị, quy trình công nghệ trong quá trình chế tạo và kiểm tra (thử nghiệm).
+P21 [Normal] 4. Kết quả, kết luận và khả năng ứng dụng
+P22 [Normal] Trình bày giá trị đóng góp của dự án đối với học tập, đời sống hoặc khoa học, kèm theo hướng phát triển (nếu có).)
+P23 [Normal] III - Các quy định khác
+P24 [Normal] 1. Không ghi tên cơ sở giáo dục phổ thông nơi học sinh dự thi đang học, đơn vị dự thi, tên học sinh hoặc chèn biểu trưng hay logo; 
+P25 [Normal] 2. Ảnh chụp không được có mặt người hoặc rõ mặt người. 
+P26 [Normal] 3. KHÔNG quá 15 trang kể cả bìa, phụ lục, tài liệu tham khảo, khổ A4, lề trái 3cm, lề phải 2cm, lề trên 2cm, lề dưới 2cm; cách dòng đơn (single), cách đoạn 3pts; kiểu chữ Times New Roman, cỡ chữ 13;
+P27 [Normal] 4. Không chèn link/mã QR: Nghiêm cấm tất cả các loại đường dẫn hoặc mã QR dẫn ra ngoài.
+P28 [Normal] 5. Trích dẫn đầy đủ: Tất cả các biểu đồ, đồ họa, đồ thị, ảnh chụp, do tự làm hay lấy từ nguồn khác đều phải có chú thích/nguồn rõ ràng ở dưới để người quan tâm có thể truy cập/tìm nguồn được. (Ví dụ: ảnh tự chụp phải ghi “Ảnh do học sinh tự chụp”. Các biểu đồ, đồ họa, đồ thị do phần mềm tạo ra cũng phải chú thích, ví dụ: “Đồ thị được tạo bởi phần mềm Microsoft Excel và do học sinh tự thực hiện). 
+P29 [Normal] --------------------------------------------------------
+P30 [Normal] BÁO CÁO TÓM TẮT KẾT QUẢ THỰC HIỆN DỰ ÁN DỰ THI (IIIb)
+P31 [Normal] (Không ghi tên cơ sở giáo dục phổ thông nơi học sinh dự thi đang học, đơn vị dự thi, tên học sinh hoặc chèn biểu trưng hay logo; Không quá 300 CHỮ)
+P32 [Normal] Tên dự án dự thi: ……………………………………………………………………………….
+P33 [Normal] ……………………………………………………………………………………………………
+P34 [Normal] Lĩnh vực dự thi: …………………………………………………………………………………
+P35 [Normal] Tóm tắt kết quả:
+P37 [Normal] (Bao gồm các nội dung sau đây:
+P38 [Normal] - Mục tiêu: Nêu rõ vấn đề thực tiễn cần giải quyết hoặc câu hỏi nghiên cứu mà học sinh đặt ra.
+P39 [Normal] - Phương pháp nghiên cứu: Tóm tắt cách thức tiến hành, quy trình thực nghiệm, vật liệu, mô hình hoặc công nghệ được sử dụng.
+P40 [Normal] - Quá trình thực hiện: Các bước khảo sát, thu thập dữ liệu hoặc chế tạo sản phẩm chính.
+P41 [Normal] - Kết quả chính: Các số liệu, phát hiện nổi bật hoặc tính năng của sản phẩm/mô hình đạt được.
+P42 [Normal] - Ý nghĩa/Kết luận: Khẳng định giá trị đóng góp của dự án đối với học tập, đời sống hoặc khoa học, kèm theo hướng phát triển (nếu có).)
+P44 [Normal] --------------------------------------------------------
+SECTION 21.01x29.69cm margins 2.00,1.00,2.00,1.00

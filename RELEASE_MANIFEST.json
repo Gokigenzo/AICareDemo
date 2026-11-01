@@ -1,0 +1,2070 @@
+{
+  "product_name": "AI Rehabilitation & Safety Assistant",
+  "version": "06",
+  "commit_sha": "035e4c476ea05656158970af94391b0a8c52f9b8",
+  "platform": "Windows 10/11 x64",
+  "python_runtime": "Python 3.12 (64-bit)",
+  "build_timestamp": "2026-10-12T19:30:43.731615+00:00",
+  "network_requirements": "Cần Internet trong lần chạy Setup.cmd đầu tiên; Hoạt động 100% Offline sau đó",
+  "validation_status": "WINDOWS_VERIFIED (Kiểm chứng trực tiếp trên Windows 11 x64: Camera, Micro, CSDL WAL, Web Server, PyQt5 Desktop và 569/571 ca kiểm thử đạt)",
+  "package_type": "Portable Distribution for Windows x64",
+  "total_files": 514,
+  "files": {
+    ".env.example": {
+      "size_bytes": 1533,
+      "sha256": "4f5b6dd5302bc6db0d4eee70a5cb95532bec2c6aedd81e9832a2423a72850984"
+    },
+    "CHECK_SYSTEM.py": {
+      "size_bytes": 11920,
+      "sha256": "8b88f64c53124b7116f071bf3f264ee7fdea57050dfc1c12f91d1dc67e814df0"
+    },
+    "config.py": {
+      "size_bytes": 8707,
+      "sha256": "c708566032edd5146cc9d7c107458fc08ad581ab2ddaf6bd5f5fadaf7f52a70a"
+    },
+    "Diagnostics.cmd": {
+      "size_bytes": 388,
+      "sha256": "b9501bf76a1de42dd9b022d02a0e5a1d2ead6895b4bee43f502dd23ae95932e2"
+    },
+    "main.py": {
+      "size_bytes": 4097,
+      "sha256": "8fbf6f6b21c46d836da4d36dcdd2d29af9b3a41f081a5f0d9bf15f71e6343531"
+    },
+    "README_WINDOWS_VI.md": {
+      "size_bytes": 6412,
+      "sha256": "5c3cc3119bd011121a1a7e1d3192e28dd2f441fb81e2a4925a8efce93ae309da"
+    },
+    "requirements-windows.txt": {
+      "size_bytes": 959,
+      "sha256": "90644d23fb79a0d69c3a0bd6f6095a5bd508fac4c82d210d35765a647c4893ac"
+    },
+    "requirements.txt": {
+      "size_bytes": 604,
+      "sha256": "cb8fe01567774fb78347b4f65469b166c4d50c2535a38588d90f47c3331485a7"
+    },
+    "Reset Demo.cmd": {
+      "size_bytes": 379,
+      "sha256": "ad97c80a0d9d08f9caebb9ca1c2685b4845e69455eb6ced5603e030b64ea9241"
+    },
+    "Setup.cmd": {
+      "size_bytes": 886,
+      "sha256": "10d8abcb3c3af91b307b9acded862f16b4878028f3d66e46e5b22c32b225e5b9"
+    },
+    "Start Demo.cmd": {
+      "size_bytes": 745,
+      "sha256": "d51b86a8b3dfed263542da742f42e5941e75e06efaa7ac3101a2c11cc7bb7185"
+    },
+    "Stop Demo.cmd": {
+      "size_bytes": 272,
+      "sha256": "6f0b82053c39efcffa321d365743e9a3ce052b966c59ed2e4d4e04fea88756c6"
+    },
+    "adapters\\emotion_adapter.py": {
+      "size_bytes": 18031,
+      "sha256": "3f8adc8cec3ae077e2c807bf54ae90817db1f86a0d2a5b7a041d32de22241d3f"
+    },
+    "adapters\\face_adapter.py": {
+      "size_bytes": 40793,
+      "sha256": "e557c39ba35f8039020ef41c548ece247043e99719b169f1e58ed002097f0faf"
+    },
+    "adapters\\fall_adapter.py": {
+      "size_bytes": 3687,
+      "sha256": "4cb773817d6c03e7d11742df4c396c405e17f68bddd0387fb28f842321f505e9"
+    },
+    "adapters\\rehabilitation_adapter.py": {
+      "size_bytes": 7923,
+      "sha256": "afa5a2acd4541c380eade71b58413f682523841a5b4f3f52f4d0f2d02f7e06c8"
+    },
+    "adapters\\__init__.py": {
+      "size_bytes": 749,
+      "sha256": "ac2fa7d7c902e0b2aa151a02e5a4dfedbf29ea4cca123a06746e61c722436ee9"
+    },
+    "app\\camera_manager.py": {
+      "size_bytes": 216,
+      "sha256": "c8191edabf44e46f3af82cd0329f7f57af7fb5750cb6cd7fd4e39247bd2074b9"
+    },
+    "app\\cognitive_games_widget.py": {
+      "size_bytes": 14191,
+      "sha256": "6c3f7ab3a6ea72a22dc1e9533cd85180eba293898fd45a4e82649f4037c5b02b"
+    },
+    "app\\dashboard.py": {
+      "size_bytes": 58165,
+      "sha256": "211d81db2dfda495196daa0ed4e1723bf28fffa83a11a04c18ba7be6ebb65828"
+    },
+    "app\\fall_video_worker.py": {
+      "size_bytes": 666,
+      "sha256": "ff11cca6159f3a88eb55fa8143259e3c2c5fdb070bb18f011d4240aa54c7af08"
+    },
+    "app\\launcher.py": {
+      "size_bytes": 4400,
+      "sha256": "2b3cdc82c1db57907edeb374b42f36762a22affad6b02208393dfb9d7640b9fc"
+    },
+    "app\\local_voice_widget.py": {
+      "size_bytes": 23424,
+      "sha256": "06e1d339be6548ecf258d08d3ac795414dcb6c50f89b40b4c8ddafd25616f8bd"
+    },
+    "app\\medication_panel.py": {
+      "size_bytes": 20091,
+      "sha256": "aec96143b2ba79bb3ba4cc29738b1c1789133528ea2be6d432ff31b7bae320e4"
+    },
+    "app\\registration_dialog.py": {
+      "size_bytes": 45378,
+      "sha256": "76a58cf21953482d73e633861a225fc70f382f02cd1fc8e1027d2b8f9e8360d2"
+    },
+    "app\\router.py": {
+      "size_bytes": 6198,
+      "sha256": "1fd1472e9458060eb5b59cb3eb325b4c45cc28e609138539cd11fcf955a42edd"
+    },
+    "app\\state.py": {
+      "size_bytes": 4183,
+      "sha256": "d405ecd51ec0984b759ccc88e10b7b0259b452e64894783d3a0313db5cc80a02"
+    },
+    "app\\theme.py": {
+      "size_bytes": 10887,
+      "sha256": "10a4e92397fd8a1424c55d478b99c004ba56e33d3f8c30484f53d3bd44d37216"
+    },
+    "app\\today_todo_widget.py": {
+      "size_bytes": 35546,
+      "sha256": "2dfd1d21e4f60add930f77a15c96b1d6459aa556ec50dfef249fca4f74be1090"
+    },
+    "app\\voice_button_widget.py": {
+      "size_bytes": 10480,
+      "sha256": "c426d76965727c9052f92e30527570f69403ee638b3eab0c558aeb8fc83435f5"
+    },
+    "app\\__init__.py": {
+      "size_bytes": 533,
+      "sha256": "666c7b1af8b955b7c9c8ea10d693bf9af7159c15efe047cf796a54db802ff272"
+    },
+    "config\\config_generator.py": {
+      "size_bytes": 3081,
+      "sha256": "a5cd2f98fc60f832d1abed8330cf2d80d411b2851a48fb3375403ddcbad4d28d"
+    },
+    "config\\demo.example.env": {
+      "size_bytes": 1400,
+      "sha256": "54425594e1d285682f82c13f240888209fcf8fea43737465df6f1805cc27dd51"
+    },
+    "core\\camera_manager.py": {
+      "size_bytes": 12268,
+      "sha256": "5d50841d1537ff7e4d799bacd097d4cc3076a78b52913e7fd97c4db58ce262e2"
+    },
+    "core\\drawing_utils.py": {
+      "size_bytes": 7668,
+      "sha256": "71616f40cac6bbbd79dc742cbeee60cc1d4348dffd29b9a53be737ed448339be"
+    },
+    "core\\fall_backends.py": {
+      "size_bytes": 13617,
+      "sha256": "a4e5fbfa2c33fb55de41f1d4c134c6d28e05d6fd75d2c1edd8981fc7a38831d2"
+    },
+    "core\\fall_evaluation.py": {
+      "size_bytes": 5824,
+      "sha256": "18e777260a091b0fd83eeb154318d83af3b9981b766c3ef62cf0fc49887d259e"
+    },
+    "core\\fall_evidence.py": {
+      "size_bytes": 3588,
+      "sha256": "b8e6e89dd72688979f1c23412a67e39af69c76babd1356faf038b049e4e320a0"
+    },
+    "core\\fall_pipeline.py": {
+      "size_bytes": 27531,
+      "sha256": "7abb931ae0c5da463563f5cdaf5e7a2ea2c560187b70d5bc2da31bc0166590b2"
+    },
+    "core\\frame_source.py": {
+      "size_bytes": 11470,
+      "sha256": "808cf584bcadd57de495589ecca5e9cf4f076e7d91548d9cd3550e18a93350ff"
+    },
+    "core\\__init__.py": {
+      "size_bytes": 168,
+      "sha256": "740884f7699be00687ff980373397934d7fb088b1c811aec3eaa842c88bc079a"
+    },
+    "database\\backup_restore.py": {
+      "size_bytes": 4276,
+      "sha256": "daa32cea6f2f51f788fc46e8008f8b8ea419537b8669515b40b488383ae32f25"
+    },
+    "database\\connection.py": {
+      "size_bytes": 5462,
+      "sha256": "a5200a0235a3f3951c7c6b302012ade0f745213519cb326e8429f2f57d15b23d"
+    },
+    "database\\importer.py": {
+      "size_bytes": 41279,
+      "sha256": "6932229fa06d71aee87fe6aac67add947b5752f3dce61ee9963550e2013bc0ff"
+    },
+    "database\\migrator.py": {
+      "size_bytes": 2087,
+      "sha256": "3e87f3b7e175f047166e9a3ae5483f83d364e1d43317c76799cacf29fb30c2e3"
+    },
+    "database\\outbox_helper.py": {
+      "size_bytes": 2045,
+      "sha256": "2d2ad2d69524ada1aa47e8c2fad7add927af2291865e69fe61102a2339c92ff9"
+    },
+    "database\\migrations\\001_initial_schema.sql": {
+      "size_bytes": 20812,
+      "sha256": "7c5e2dc49c140b3538002a1b9c86b1cc8ca63e12b540595d758f5fd6ee642823"
+    },
+    "database\\migrations\\002_rehab_and_audit.sql": {
+      "size_bytes": 9739,
+      "sha256": "6169ac4275ee557468d45ab7391057567b5987889994568268e7f8942c1ee6d1"
+    },
+    "database\\migrations\\003_outbox_and_sync.sql": {
+      "size_bytes": 3475,
+      "sha256": "774122387b50d08051f9ee4c56ca82fc9900c3966c9d9578c637995c1626ef88"
+    },
+    "database\\migrations\\004_flow_adjustments_and_measurement_requests.sql": {
+      "size_bytes": 3507,
+      "sha256": "624b166b31b1968713cd1289c99fdc83b900de8f6c83ceeb514d8016c6b65878"
+    },
+    "database\\migrations\\005_local_voice_requests.sql": {
+      "size_bytes": 1276,
+      "sha256": "3c31e6b406f19e1e79031e007f4b499268d98fcd22b89d489d1599bfabe1c039"
+    },
+    "database\\migrations\\006_seed_default_medications.sql": {
+      "size_bytes": 1126,
+      "sha256": "6f1a09fa6bdfecf39695e9fb7e4531fb1fd8851464d5d4abd4377274e9c10eb6"
+    },
+    "database\\migrations\\007_seed_core_actors.sql": {
+      "size_bytes": 5783,
+      "sha256": "3e4d4997a66e9d355e471b6d701b327057a087fbad445591158f57f8b1e7dce3"
+    },
+    "docs\\BAO_CAO_KY_THUAT_FALL_DETECTION.md": {
+      "size_bytes": 5060,
+      "sha256": "5457745a9e4adfafb03a744f0638917d44d240a29e217fefdfbbde9f3596452a"
+    },
+    "docs\\CODEBASE_AUDIT.md": {
+      "size_bytes": 12581,
+      "sha256": "fe0c013439175982664d423d9a6dbce76b76d652349555f7ed48ae51838bf6d4"
+    },
+    "docs\\codebase_inventory.json": {
+      "size_bytes": 90263,
+      "sha256": "8ad308265f5a5e5450219934e344c004968d4544c05b9327f3fe8eb3b2406de8"
+    },
+    "docs\\EXPERIMENT_PLAN.md": {
+      "size_bytes": 16523,
+      "sha256": "fee081db5671f7ea3ce04145020fd057b83270d13a10618a489ae5ef20027505"
+    },
+    "docs\\KNOWLEDGE_COMPLETION.md": {
+      "size_bytes": 3490,
+      "sha256": "1218899f418038e3b30faa329e6959b854a0dc351c94b95fb5ad9cbeaefde2cc"
+    },
+    "docs\\MODULE_AUDIT.md": {
+      "size_bytes": 20797,
+      "sha256": "5acd31a352093d649a2ff51eae5aaf74646bb92bd4eca798c85d651f3617f9b9"
+    },
+    "docs\\PHASE_1_RUN_REPORT.md": {
+      "size_bytes": 6460,
+      "sha256": "bf06a2695fc01aaadd0e5a2746e0642961aa7c5ec8aad690ccafa488ad3e0114"
+    },
+    "docs\\PORTABLE_RELEASE_PLAN.md": {
+      "size_bytes": 1359,
+      "sha256": "44bf3c9d6e3fb2ca4dc17f240b5d5683235f81c7641aa371c019e78d0dbb1a99"
+    },
+    "docs\\PORTABLE_WINDOWS_AUDIT.md": {
+      "size_bytes": 14111,
+      "sha256": "82e184c596048fa97d168ddd219ea1e11880dbecfc369c92dde0c1fd655d9fb1"
+    },
+    "docs\\PORTABLE_WINDOWS_REPORT.md": {
+      "size_bytes": 11999,
+      "sha256": "f953a9e7a5f8992035560c30f238e6f45a5d01cfdf7223d63ba1dd7a6a0124e4"
+    },
+    "docs\\PROJECT_KNOWLEDGE.md": {
+      "size_bytes": 10429,
+      "sha256": "8aba644eb728ff1fe909be2f0189e39a7a4896a967f87eab167ab5d5be1110cb"
+    },
+    "docs\\RESTRUCTURE_AUDIT.md": {
+      "size_bytes": 17095,
+      "sha256": "a40e7a9abb2d7d4eaa983296deab3feafda9385582fcd71f628ff6368e290a56"
+    },
+    "docs\\UPGRADE_PLAN.md": {
+      "size_bytes": 9681,
+      "sha256": "00d8eb8e75b3bc0b31e2cab07ad4fd4c69ace07aa39d21d505eb0eb0873d3b93"
+    },
+    "docs\\WINDOWS_PACKAGING_AUDIT.md": {
+      "size_bytes": 13431,
+      "sha256": "e002b9aabcfb9b45496923f3fd12560a941f2d553122ee90ea3ebf66c97fefeb"
+    },
+    "docs\\WINDOWS_SETUP_V3_REPORT.md": {
+      "size_bytes": 2528,
+      "sha256": "d60320264c8c83171151b7f38ce1cc37c9013edec5550ab0a314c6cc94e01b24"
+    },
+    "docs\\fall_detection\\BAO_CAO_TICH_HOP_HUMAN_FALL_DETECTION.md": {
+      "size_bytes": 10453,
+      "sha256": "5114ef9d0071a9330ad6a910e85a08ec06cef9b92e08d2e8f3ce9c27ab1f93be"
+    },
+    "docs\\fall_detection\\BAO_CAO_TRIEN_KHAI_POSE_TRACKING_V3.md": {
+      "size_bytes": 8222,
+      "sha256": "21e3041d6da6becf0c454e60e8b382b206f4c445966e134dfec5cd5541856125"
+    },
+    "docs\\fall_detection\\IMPLEMENTATION_NOTES.md": {
+      "size_bytes": 15696,
+      "sha256": "7888ec1e1af9557ca7932373e0a46cb4009d907090674ef7bac9c8e1c2ceed41"
+    },
+    "docs\\fall_detection\\KE_HOACH_CAI_THIEN_NHAN_DIEN_NGA.md": {
+      "size_bytes": 17756,
+      "sha256": "e63e21fb063f873f9f240262b32ac73955d52cadeb3104b559be7a5d9d41907b"
+    },
+    "docs\\fall_detection\\KE_HOACH_TICH_HOP_HUMAN_FALL_DETECTION.md": {
+      "size_bytes": 16093,
+      "sha256": "db8d9b7179b838605e6a5bc99cbbcbed22c3369031f13fd6c9f3ba0c66829284"
+    },
+    "docs\\fall_detection\\LEGACY_REPORT_UNVERIFIED.md": {
+      "size_bytes": 27624,
+      "sha256": "3fc1a54e8c58f2b31df89c3192b88eeb145fd171e77ea4d975fbcb0039930749"
+    },
+    "docs\\khkt_technical_evidence\\00_EXECUTIVE_SUMMARY.md": {
+      "size_bytes": 18733,
+      "sha256": "6ca8782ab86a870c7c08ed79efa98644d134e0038f27411f68e3c29f3b8959fe"
+    },
+    "docs\\khkt_technical_evidence\\01_CODEBASE_ARCHITECTURE.md": {
+      "size_bytes": 22014,
+      "sha256": "70c7367ada0ed451a606e81aa66e5956f69ef015f2f80ff6beff758c79cd0eb3"
+    },
+    "docs\\khkt_technical_evidence\\02_TECHNOLOGY_STACK.md": {
+      "size_bytes": 17173,
+      "sha256": "1ad6e62f0acfbc3a5d4786972ad6bcd87de75c92664e1eb167e8dfbd5c0ccd10"
+    },
+    "docs\\khkt_technical_evidence\\03_AI_MODULES.md": {
+      "size_bytes": 31312,
+      "sha256": "6327e558303f8e9d030dfa82cf9c367bbf45adaa5fc007b7581b8b858467065d"
+    },
+    "docs\\khkt_technical_evidence\\04_FUNCTIONAL_WORKFLOWS.md": {
+      "size_bytes": 28469,
+      "sha256": "e1fb431e8d91e0eee814514b1099627dd07ac0774a8c42906492816beb3ff678"
+    },
+    "docs\\khkt_technical_evidence\\05_DATABASE_AND_SYNC.md": {
+      "size_bytes": 90562,
+      "sha256": "5a78545dd928a007f00d9485719aa12ed312f06ca4cad29cd381a4d1a0e9a92f"
+    },
+    "docs\\khkt_technical_evidence\\06_TESTING_AND_EVIDENCE.md": {
+      "size_bytes": 24709,
+      "sha256": "70edb2c4eff8d64d5032063c4403eb6ce835488cb7ad090b7a602eb8a9de05b8"
+    },
+    "docs\\khkt_technical_evidence\\07_DEVELOPMENT_HISTORY.md": {
+      "size_bytes": 19623,
+      "sha256": "540b4d8db1bf61b8e95653ff6f88bc010f5529a90cca41d8841b303f48d61b60"
+    },
+    "docs\\khkt_technical_evidence\\08_KHKT_REPORT_MAPPING.md": {
+      "size_bytes": 28783,
+      "sha256": "10ded9a2576855d5fcddfd0791ff4a5661a0be06dd74ac65fcbe0e5ca3a1f784"
+    },
+    "docs\\khkt_technical_evidence\\09_MISSING_EVIDENCE_CHECKLIST.md": {
+      "size_bytes": 34777,
+      "sha256": "ed3ec49d4efb3cf64f966bbd45adf9d71cedd9391634c087619f97dc6404aeee"
+    },
+    "docs\\khkt_technical_evidence\\10_TECHNICAL_EVIDENCE_MASTER.md": {
+      "size_bytes": 318330,
+      "sha256": "29de546cd6a272c25afc93a432346ded1b660daa7a3d93e33713b2a649989ef9"
+    },
+    "docs\\khkt_technical_evidence\\audit_observations.json": {
+      "size_bytes": 969,
+      "sha256": "d1cb738ba3cde941e682c042e5932a4f754d5edc9545b4b98c5c80da8b3693b5"
+    },
+    "docs\\khkt_technical_evidence\\evidence_manifest.json": {
+      "size_bytes": 114602,
+      "sha256": "4b227e10de5ee6945f690f11e6fa5733d7ab277d8b21024292b72aafc30790c4"
+    },
+    "docs\\khkt_technical_evidence\\generate_evidence.py": {
+      "size_bytes": 140470,
+      "sha256": "9f8377ede23fc6234e5c1473ebe5ba23c8baa8e11d9445a7d63046c43be24fd4"
+    },
+    "docs\\khkt_technical_evidence\\schema_dictionary.json": {
+      "size_bytes": 105541,
+      "sha256": "940040eb231561497e845d3643c9ab250be05ebb197ab85192341861e77b7ef0"
+    },
+    "docs\\khkt_technical_evidence\\schema_indexes.json": {
+      "size_bytes": 8058,
+      "sha256": "c39f66312bd3f644d59e45681c83003d0078ebbf2f2226bbbe77daf356ea53f3"
+    },
+    "docs\\khkt_technical_evidence\\source_snapshot.json": {
+      "size_bytes": 43438,
+      "sha256": "881e862789638e0eaa0bc8a5be68e671547b548a973acc6fd7957ca1ae065d66"
+    },
+    "docs\\khkt_technical_evidence\\validate_evidence.py": {
+      "size_bytes": 8292,
+      "sha256": "17fdbf3d54d98bf7ee8ae44ccf804414f83c6adf7476916d124b510442bc2875"
+    },
+    "docs\\khkt_technical_evidence\\validation_report.json": {
+      "size_bytes": 1488,
+      "sha256": "24d1dc09d13fb3c36607d296097afb9e721264238dd50a85f03adfd25d7c7b19"
+    },
+    "docs\\local_rules\\HANDOFF.md": {
+      "size_bytes": 17829,
+      "sha256": "54f9e8db7a98c7b545dda11205c58aa414ada235da4482cb7c30dc9648f2d82f"
+    },
+    "docs\\local_rules\\VALIDATION.md": {
+      "size_bytes": 8143,
+      "sha256": "1699ed0ba14830410d005b7a7b47f2f9449582024d9d54814c51b2251e8e800f"
+    },
+    "docs\\medication_reminder\\acceptance_report.md": {
+      "size_bytes": 6841,
+      "sha256": "83e53bf9c5877abe07ebb8b98ae0b91abd8f38770befe20adc7a5dd20b4e018f"
+    },
+    "docs\\medication_reminder\\manual_windows_checks.md": {
+      "size_bytes": 2483,
+      "sha256": "f72353ce25378f08728ba6633b48444560d2857eab7f847eab764703700445ea"
+    },
+    "docs\\medication_reminder\\migration_inventory.md": {
+      "size_bytes": 6662,
+      "sha256": "13023db4797238901602fc014209ced5780c76bad8f81367f28e15671545f6cc"
+    },
+    "docs\\medication_reminder\\README.md": {
+      "size_bytes": 8625,
+      "sha256": "f9f709bf6317068f5e68ca5d23f5767f789612b526a1978e4860e0a68528f2b5"
+    },
+    "docs\\medication_reminder\\screenshots\\dashboard_medication.png": {
+      "size_bytes": 94380,
+      "sha256": "53e4d142218b3fb7f85abc873d0068890bbf8d215cfefd928d1c12ef63ef6d89"
+    },
+    "docs\\medication_reminder\\screenshots\\dashboard_rehabilitation.png": {
+      "size_bytes": 86631,
+      "sha256": "ee481e454866480de13f04d95470797e3530134a045898ded498d33cbd777a31"
+    },
+    "docs\\medication_reminder\\screenshots\\medication_sample.png": {
+      "size_bytes": 71794,
+      "sha256": "155da8e7284d2036cfe6eea5e9b1bd5225d5c05f8bdab491f0420b8dd524c9bc"
+    },
+    "docs\\screenshots\\after_dashboard_1366x768.png": {
+      "size_bytes": 71384,
+      "sha256": "a8f94fcfbd4abdd7e4c377bcac9abaca79b80bc990c804a3cfc6fef25de9bcc6"
+    },
+    "docs\\screenshots\\after_dashboard_1920x1080.png": {
+      "size_bytes": 89588,
+      "sha256": "7465d32f1d36e3b93784e298580b98a47bc2778da629476df41b5910ca397681"
+    },
+    "docs\\screenshots\\after_registration_dialog.png": {
+      "size_bytes": 57105,
+      "sha256": "9f176264127c7746401ed3c99f2e1e94d49e9a7ead7cdf2db7d01da41a119910"
+    },
+    "docs\\screenshots\\baseline_dashboard_1366x768.png": {
+      "size_bytes": 71779,
+      "sha256": "57a56c537a11bcbecdd43d3d58b1dcb8ff83cfeb8e3552a76c2e4def740a995e"
+    },
+    "docs\\screenshots\\baseline_dashboard_1920x1080.png": {
+      "size_bytes": 89573,
+      "sha256": "28f5ed4ee8f0416584073b7456b6c2bd851294b01ced80f451cd5282974fe5ae"
+    },
+    "docs\\screenshots\\baseline_registration_dialog.png": {
+      "size_bytes": 57057,
+      "sha256": "af752a38ac58f70e669d4b013c5043a9ca0ea78716e04d5309c634a14ed1ff8d"
+    },
+    "docs\\screenshots\\caregiver_portal.png": {
+      "size_bytes": 269518,
+      "sha256": "cf5ebf192002ae82efeb09f582989a8ea4eb8fcec34b1396a9500b5550dc7257"
+    },
+    "docs\\screenshots\\caregiver_portal_realtime.png": {
+      "size_bytes": 276291,
+      "sha256": "7da1779a948fa63d1541de4fd6aaec6878f31d514a8483f768ae8659f119715a"
+    },
+    "docs\\screenshots\\caregiver_portal_vitals_entry.png": {
+      "size_bytes": 187842,
+      "sha256": "070954db3904b4bf0fd59453fd0a44e96123cb06da64e6d1721c89ff6b3c2f6a"
+    },
+    "docs\\screenshots\\clinician_portal.png": {
+      "size_bytes": 360006,
+      "sha256": "92f25d7a85bccacfa1628138d08cd384f853de8b6c768ca8f2fd8152d2328280"
+    },
+    "docs\\screenshots\\clinician_portal_realtime.png": {
+      "size_bytes": 365908,
+      "sha256": "6f7cd2356099614c5be53d961fc137fda40b2f566ddb13dda934f887e997e9b4"
+    },
+    "docs\\screenshots\\dashboard_live_1366x768.png": {
+      "size_bytes": 89169,
+      "sha256": "470d5ad7de1811262ebf8c0d2931950e00fd993bbbe8517e25fbd87b267f46b4"
+    },
+    "docs\\screenshots\\dashboard_live_1920x1080.png": {
+      "size_bytes": 119912,
+      "sha256": "c962b4344bf18bb36924f558bd500d976fbdfb76f1b962fa9db51708f8a5c2b3"
+    },
+    "docs\\screenshots\\dashboard_safety_camera_unobservable.png": {
+      "size_bytes": 92400,
+      "sha256": "95cbb5789abba61196ce1d39c0878781b7abae3654f763036d372ff701a8d35b"
+    },
+    "docs\\screenshots\\dashboard_safety_fall_alert.png": {
+      "size_bytes": 94627,
+      "sha256": "166d3ae4bc0fec0e4cfba1c36fa6d0ca16d7005a49f9b0af35d49595ac9a9f37"
+    },
+    "docs\\screenshots\\dashboard_video_test_1366x768.png": {
+      "size_bytes": 97751,
+      "sha256": "7565747a9157cdee3f736bc5b1e8f79d63b13961863d8b231a67a3f11c32452e"
+    },
+    "docs\\screenshots\\dashboard_video_test_1920x1080.png": {
+      "size_bytes": 135035,
+      "sha256": "19196fee9486ead32a13c0dbc4e8430e361729657998649ae465cecd530ce78e"
+    },
+    "docs\\screenshots\\elder_today_todo.png": {
+      "size_bytes": 94444,
+      "sha256": "37c791c4b25937ebcb1db340db039f594cbb1137a52693464a7f1594e084cbad"
+    },
+    "docs\\screenshots\\elder_today_todo_bottom.png": {
+      "size_bytes": 96284,
+      "sha256": "97c59ea89369c449aa528e97db4ac56e1164896b7595cdc79d4f3997295476b9"
+    },
+    "docs\\screenshots\\login_portal.png": {
+      "size_bytes": 64409,
+      "sha256": "e67c4aa492df35ecec0ef16ca0e9b0b1dea9b285be34aa6a8a7089919cfddc4d"
+    },
+    "docs\\screenshots\\registration_dialog_inline_validation.png": {
+      "size_bytes": 47823,
+      "sha256": "28a80bd8f8b6c72493054781e57bf2ecb12f7b015da765c18a4c83931b8ec4a4"
+    },
+    "docs\\screenshots\\rehab_flow_6a.png": {
+      "size_bytes": 149183,
+      "sha256": "bac67f3071a427fdb7a65cd8104cdb5cc6ec5e7cd4da603d5e689e72b75207ee"
+    },
+    "docs\\screenshots_audit\\dashboard_nomodal_1366x768.png": {
+      "size_bytes": 11047,
+      "sha256": "6b61a54c533c61beb42df3fccd62e069fc28f6761cf69cf0e6822db9ddcde743"
+    },
+    "docs\\screenshots_audit\\dashboard_nomodal_1920x1080.png": {
+      "size_bytes": 18520,
+      "sha256": "544dcc3e890b4c77ee4810b944b37164b4e7970343493912cdfe7ede804ad6fd"
+    },
+    "docs\\voice-ai\\00_CURRENT_STATE.md": {
+      "size_bytes": 33155,
+      "sha256": "521112f1bbcd07b4cb705779f88661c6de22a0db4b00a3d6e0ab238a4dd19549"
+    },
+    "docs\\voice-ai\\01_INTEGRATION_MAP.md": {
+      "size_bytes": 20719,
+      "sha256": "f5c796eab4953f356f0fe3079ba588283b91e729263e3f55a572a856598dd17a"
+    },
+    "docs\\voice-ai\\02_GAP_ANALYSIS.md": {
+      "size_bytes": 18663,
+      "sha256": "4695d9cff8ee01eed994d8030af9793b2a642c4b1bc9b85794213fe841be8f3d"
+    },
+    "docs\\voice-ai\\03_ARCHITECTURE.md": {
+      "size_bytes": 11393,
+      "sha256": "28502f054ccb57082de3efe48ec7b1ef5982c16ef8b81432c2fb2b8cc2d10593"
+    },
+    "docs\\voice-ai\\04_API_CONTRACTS.md": {
+      "size_bytes": 10085,
+      "sha256": "ac0c93c75f7fe8d7abfc5cc76b76d873f55c69b4c60d5df7d428763c617effd8"
+    },
+    "docs\\voice-ai\\05_INTENT_TAXONOMY.md": {
+      "size_bytes": 7508,
+      "sha256": "7edcda9701ac6fd9d9fb9a83a4fc0d158e94576b39faf4393c33a5ae4f7eb86e"
+    },
+    "docs\\voice-ai\\06_TEST_DATASET.md": {
+      "size_bytes": 6972,
+      "sha256": "0bfe03076132357740d4986c87453488b9b52d38caf2b8fe67f2770e1c99a9f1"
+    },
+    "docs\\voice-ai\\07_BENCHMARK.md": {
+      "size_bytes": 5528,
+      "sha256": "04ed96174aabd94bedb8ad3f8200afa381b1be76a5964de7ea101b5b6eb86925"
+    },
+    "docs\\voice-ai\\08_ROLLOUT_AND_RUNBOOK.md": {
+      "size_bytes": 7232,
+      "sha256": "87dde0ab7f7b74704e4f0b04f2e629e0a61959db1edad3c9ab03b20847d0600b"
+    },
+    "docs\\voice-ai\\FASTER_WHISPER_INTEGRATION_REPORT.md": {
+      "size_bytes": 13961,
+      "sha256": "834a550e164faa6d595d944d113f2edf51e08d1fe410161d3dd1544877f68e87"
+    },
+    "docs\\voice-ai\\GEMINI_SEMANTIC_INTEGRATION.md": {
+      "size_bytes": 9385,
+      "sha256": "47e1b4b4595d40e1aca69f22cd2311023d5d8e9679d199f1d8a0495699ed4553"
+    },
+    "docs\\voice-ai\\GEMINI_TEXT_ROUTING_SETUP.md": {
+      "size_bytes": 11853,
+      "sha256": "c3098e3eb572b51c0024576da4aed1f4768445144a08a138b5fa24a0ae6e3cec"
+    },
+    "docs\\voice-ai\\INTENT_WORKFLOW_MAPPING.md": {
+      "size_bytes": 9955,
+      "sha256": "04bd03a5a381a5b1240bf43b918b36eeeb42f8bc559fc582a8eb2b41397bcecc"
+    },
+    "docs\\voice-ai\\LOCAL_STT_SETUP.md": {
+      "size_bytes": 8611,
+      "sha256": "ec5f2f132c0406775a43f45e92e79193d089d2460601779608872b237a40babd"
+    },
+    "docs\\voice-ai\\ROOT_CAUSE_ANALYSIS.md": {
+      "size_bytes": 10975,
+      "sha256": "24719415ce14ec230898842759fe1f8a309cae5d3d07c5151658cc76bb3be586"
+    },
+    "docs\\voice-ai\\SEMANTIC_TEST_REPORT.md": {
+      "size_bytes": 10364,
+      "sha256": "494310c4350471ebb381890a1121fe7ad7509b484b2bbc154293ebd86bfde4ce"
+    },
+    "docs\\voice-ai\\VAD_DEBUG_REPORT.md": {
+      "size_bytes": 12882,
+      "sha256": "0442577cecaba111ed3ad5590726c511387d1aed3c15b15bf9c91956c78cfb16"
+    },
+    "docs\\voice-ai\\VOICE_AI_FIX_REPORT.md": {
+      "size_bytes": 10668,
+      "sha256": "b4a92f10d4464d2b525c39121351cf2b3262f23aff0d6280f93f06ce906ebcb0"
+    },
+    "docs\\voice-ai\\gemini\\intent-v1.schema.json": {
+      "size_bytes": 1205,
+      "sha256": "886dc653322241c1aa94c8a5060ca55a8c2eae9b70d363a30a156e5cb68d5dd7"
+    },
+    "docs\\voice-ai\\gemini\\vi-router-v1.txt": {
+      "size_bytes": 1297,
+      "sha256": "3adb3ae078f13cfa0a28bc5eaea32096dceb6ad8101d3336724e7f9221f7ceef"
+    },
+    "models\\manifest.json": {
+      "size_bytes": 4018,
+      "sha256": "d3cb690304c20b14a03412bad03cd63fa81bc96a028214b791db0809d82a1715"
+    },
+    "modules\\cognitive_games\\demo_cli.py": {
+      "size_bytes": 8553,
+      "sha256": "ec599b8540fd09a715f14ece09adf4c92f20edd6b48709f14d94e5514de4e33f"
+    },
+    "modules\\cognitive_games\\main.py": {
+      "size_bytes": 437,
+      "sha256": "5a04f2ad26afdb50da4124571ad64d3131f57355d1c6e80444f6f5b900d14560"
+    },
+    "modules\\cognitive_games\\README.md": {
+      "size_bytes": 9629,
+      "sha256": "c54d51a33b855f5ed965e6b40883f95b010fe6eb77ff0892dcb876498b7e7f44"
+    },
+    "modules\\cognitive_games\\__init__.py": {
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "modules\\cognitive_games\\adapters\\care_team_repository.py": {
+      "size_bytes": 3208,
+      "sha256": "fe7cc22266ac62c4e14efefba7e0d2ce542522c071c19ba412de615e7d00faf2"
+    },
+    "modules\\cognitive_games\\adapters\\game_repository.py": {
+      "size_bytes": 12685,
+      "sha256": "2fc9afcf19eb6b39e04ed7974117a1268a988a6ba4db83e9860a58985834310c"
+    },
+    "modules\\cognitive_games\\adapters\\identity_adapter.py": {
+      "size_bytes": 2025,
+      "sha256": "21b4a40c8ce5c9b1e5b9a3a4c5cc01f515c39b858813ff7926f39d70e8907cae"
+    },
+    "modules\\cognitive_games\\adapters\\music_repository.py": {
+      "size_bytes": 4808,
+      "sha256": "c429f85444e50a3aea90b0d95b3a1f7331f556242dfc3b6d3c7277611a761e51"
+    },
+    "modules\\cognitive_games\\adapters\\__init__.py": {
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "modules\\cognitive_games\\assets\\asset_manifest.json": {
+      "size_bytes": 6731,
+      "sha256": "55a6470fecabb04a206c744f8b78f8ca5e8563f0106adc495d6830913ccf9a8d"
+    },
+    "modules\\cognitive_games\\assets\\generate_assets.py": {
+      "size_bytes": 10213,
+      "sha256": "e6784039c931a547809b50215009d368d64e877999a011e2de37df606fbd2688"
+    },
+    "modules\\cognitive_games\\assets\\audio\\trk-binaural-alpha-10hz.wav": {
+      "size_bytes": 1764044,
+      "sha256": "ace818d7a310c20da5e382e5573e02532b4987905d3d2a5c859397a683269894"
+    },
+    "modules\\cognitive_games\\assets\\audio\\trk-meditation-harmonics.wav": {
+      "size_bytes": 1764044,
+      "sha256": "0b78fd4fc8fb34493f870f4d15e47f299aa2a3a840fdc7a2e1f2c0084e51e2f8"
+    },
+    "modules\\cognitive_games\\assets\\audio\\trk-peaceful-stream.wav": {
+      "size_bytes": 1764044,
+      "sha256": "38b1c4e43a7a25d0c306ccc5121093ab49bf44da84dd398bf6e3350d7e767bd9"
+    },
+    "modules\\cognitive_games\\assets\\audio\\trk-relax-chimes.wav": {
+      "size_bytes": 1764044,
+      "sha256": "63d269c83914afd91bfa9204501cf172a1518deba358445bdc48a83416ea8a44"
+    },
+    "modules\\cognitive_games\\database\\cognitive_games.db": {
+      "size_bytes": 151552,
+      "sha256": "ce8da82c3e24ca65d3a935e3e03dd59ecb88d4f7286b68541fc52effec50d6dc"
+    },
+    "modules\\cognitive_games\\database\\connection.py": {
+      "size_bytes": 5379,
+      "sha256": "a6e0d2c1c4d7c66541791f0d3b5fc9f5643ae9fbed634ea963c7c847db18d4ff"
+    },
+    "modules\\cognitive_games\\database\\schema.sql": {
+      "size_bytes": 7149,
+      "sha256": "4c719dd5ba09a43fa106b528121be1c481dda5b71a5365ffeb9fce07ed9dfb6c"
+    },
+    "modules\\cognitive_games\\database\\seed_data.py": {
+      "size_bytes": 15112,
+      "sha256": "4080301f936497feef2052044a50db6e92d384ceb1b8c4af7347e915c8dad56c"
+    },
+    "modules\\cognitive_games\\database\\__init__.py": {
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "modules\\cognitive_games\\docs\\INTEGRATION_GUIDE.md": {
+      "size_bytes": 8764,
+      "sha256": "720fb15ec1c410c6775f696b5b9dd1d1248542e1a9bdf3d49f4171ae2fb341e7"
+    },
+    "modules\\cognitive_games\\domain\\contracts.py": {
+      "size_bytes": 3573,
+      "sha256": "6f1ae6dbbb6fbb46a0f94e6484e8143980576e20ee54414fb595384c1d78a6eb"
+    },
+    "modules\\cognitive_games\\domain\\models.py": {
+      "size_bytes": 4061,
+      "sha256": "c0cd80c715b43803c59388595e8d451eb32052941f169f82b6c0dd0237bb0dd9"
+    },
+    "modules\\cognitive_games\\domain\\__init__.py": {
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "modules\\cognitive_games\\services\\audio_service.py": {
+      "size_bytes": 7618,
+      "sha256": "8a3a51999c9016fd1e17079b974f65002d1f2a294806fe7f8f546f30b32014d7"
+    },
+    "modules\\cognitive_games\\services\\cognitive_service.py": {
+      "size_bytes": 19278,
+      "sha256": "4fc7f4265ba9aae125cc1d271970061e30a12af8e7afe55b5424c1043276c519"
+    },
+    "modules\\cognitive_games\\services\\game_engine.py": {
+      "size_bytes": 5466,
+      "sha256": "5fb2d30d7869130c8a6e3f3b7eac8cb5d06dddd0f57fc80074ef9621c52ef675"
+    },
+    "modules\\cognitive_games\\services\\__init__.py": {
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "modules\\cognitive_games\\tests\\run_all_tests.py": {
+      "size_bytes": 1576,
+      "sha256": "c964c2acaecfe8e9e30d00333e1e505979499a9bd41ffde712bcef226d4a9790"
+    },
+    "modules\\cognitive_games\\tests\\test_10_acceptance_criteria.py": {
+      "size_bytes": 16888,
+      "sha256": "bcf046f48cea303bf759d3b807206dd60785e24ee12c48df63afb7020e9cd957"
+    },
+    "modules\\cognitive_games\\tests\\test_database_and_seed.py": {
+      "size_bytes": 4644,
+      "sha256": "295c3a971c343118655122b0f9ab2f7a0ddb70c270cab9dbaf27e8f0f6c5c017"
+    },
+    "modules\\cognitive_games\\tests\\test_difficulty_switching_ui.py": {
+      "size_bytes": 5667,
+      "sha256": "7cff93ffdbad5db40b668a1c1c59cf3af20851977794fb6bc2b95cfa3206bd8c"
+    },
+    "modules\\cognitive_games\\tests\\test_game_engine.py": {
+      "size_bytes": 6026,
+      "sha256": "fe298f119f02796b236b1dc1b146fe999a4688f4d284fc0b2fb938aa76b0e171"
+    },
+    "modules\\cognitive_games\\tests\\test_permissions_and_identity.py": {
+      "size_bytes": 4260,
+      "sha256": "8300b00bf1a3919ee44e2a83e63c0f3664832f7c755f5992e73229152910642e"
+    },
+    "modules\\cognitive_games\\tests\\__init__.py": {
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "modules\\cognitive_games\\ui\\card_matching_widget.py": {
+      "size_bytes": 20912,
+      "sha256": "34c3cb947dce379300058c99ede3d36d9b396800d0eb8ac0d37eecd648f68768"
+    },
+    "modules\\cognitive_games\\ui\\main_app.py": {
+      "size_bytes": 18816,
+      "sha256": "0187d75836294ae12df3245a43026e75cd8824de9f577dd2a9dbf7982e1ea709"
+    },
+    "modules\\cognitive_games\\ui\\music_player_widget.py": {
+      "size_bytes": 18886,
+      "sha256": "36f024e6ba9eb3f45200b1b2feb51b93cfa23f8452474d5c7eb211d8ac8b32a4"
+    },
+    "modules\\cognitive_games\\ui\\progress_dashboard_widget.py": {
+      "size_bytes": 12508,
+      "sha256": "feece2f30cf3316910225949aed121c06ce35f2bc65f9a81bc72b146d6e9ac5a"
+    },
+    "modules\\cognitive_games\\ui\\sequence_recall_widget.py": {
+      "size_bytes": 34103,
+      "sha256": "f54d84a40f29d269764822e5bfa6df004dd22539e007edcc75bf515f25556841"
+    },
+    "modules\\cognitive_games\\ui\\__init__.py": {
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "modules\\emotion\\main.py": {
+      "size_bytes": 4654,
+      "sha256": "8e7cc821ef601469c2da75b7c667dbe718e92cca0b0f4dd246f65924de863f7e"
+    },
+    "modules\\emotion\\README.md": {
+      "size_bytes": 6300,
+      "sha256": "85dce6591fb4024cd4e46549db962292d88e4f4877225d3989c86a0d77dc1ceb"
+    },
+    "modules\\emotion\\requirements.txt": {
+      "size_bytes": 90,
+      "sha256": "892460311a2567184da46fae5cde756bcface6c4895dadd60c3b231973008d04"
+    },
+    "modules\\emotion\\run.sh": {
+      "size_bytes": 181,
+      "sha256": "468be91b77a3c8a8d9afd7cc58465979070db02c778fdb08ea4a25fdd59fe905"
+    },
+    "modules\\emotion\\models\\expression_net.pth": {
+      "size_bytes": 71785,
+      "sha256": "f3580ca70a3eafa819fb5941402fe85e50a403fb71697f38991f2d2387488b91"
+    },
+    "modules\\emotion\\models\\face_landmarker.task": {
+      "size_bytes": 3758596,
+      "sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff"
+    },
+    "modules\\emotion\\src\\baseline.py": {
+      "size_bytes": 2332,
+      "sha256": "6a55638db7651f8cd69ccb3308f3cac1c175a786cfd1d7532ca4e34e7ed014c6"
+    },
+    "modules\\emotion\\src\\collect_data.py": {
+      "size_bytes": 5788,
+      "sha256": "38b08abb4ee8795415695e62f98fe537b1791af7b492e777a243d133084fda15"
+    },
+    "modules\\emotion\\src\\config.py": {
+      "size_bytes": 1959,
+      "sha256": "4a18e9374395587031d2024241046950a53083a6f64adb9119bf5b52ed114af3"
+    },
+    "modules\\emotion\\src\\data.py": {
+      "size_bytes": 8291,
+      "sha256": "f51de991dd3a7fccff31803ed67cbd66e10616edec5cbcdc2187ea3f3f2e80a6"
+    },
+    "modules\\emotion\\src\\evaluate.py": {
+      "size_bytes": 7320,
+      "sha256": "01e95be9578cd35515a6b738d56ab1e93e7d2264632832b8fa15e83e9310107a"
+    },
+    "modules\\emotion\\src\\model.py": {
+      "size_bytes": 611,
+      "sha256": "d648088c205c102ef85da82d1601b3b55dca1fcd68cb2125d72e55caf2e7375e"
+    },
+    "modules\\emotion\\src\\train.py": {
+      "size_bytes": 8558,
+      "sha256": "7431a968cff034b22fc8248b0ffaa1e6bf9ec78d0982caf13e6bee3cb6824f70"
+    },
+    "modules\\emotion\\tests\\test_config.py": {
+      "size_bytes": 556,
+      "sha256": "a7967e1eb4bc9b24ce72b32c19f6de334b21f4a54bae56aca457f47197d048e5"
+    },
+    "modules\\emotion\\tests\\test_model.py": {
+      "size_bytes": 394,
+      "sha256": "e2fda1fbc3a3743eef50677cd8a70c3f7a25371babd4f705bf2c34d43f78e969"
+    },
+    "modules\\emotion\\tests\\test_model_loading.py": {
+      "size_bytes": 910,
+      "sha256": "b9f62307c8bb57d79240390d77f6c8b2a031dcdea3cb1d44115735d10bde79eb"
+    },
+    "modules\\emotion\\tests\\test_preprocess.py": {
+      "size_bytes": 1326,
+      "sha256": "f7a0ee54a9df0dfa9b5acec78e8c73939a64bb46ff74d0ca28137f020769f6fa"
+    },
+    "modules\\emotion\\tests\\test_session_splits.py": {
+      "size_bytes": 2495,
+      "sha256": "a97a093eb8cb68ac7aab8129a80fd7f1e70c4262a5d4ce7e73cbd1b38c7ab463"
+    },
+    "modules\\emotion\\utils\\preprocess.py": {
+      "size_bytes": 2729,
+      "sha256": "f9b4f4e2d2fa6aead70d557699424c8e90e0c19a3e85714bcd9a291f4b6e1312"
+    },
+    "modules\\face\\config.json": {
+      "size_bytes": 1015,
+      "sha256": "76a5f1f53f00d8b0ac1da23ecec6342953629a4a2730b0da18c8c7707cff3c0c"
+    },
+    "modules\\face\\LICENSE": {
+      "size_bytes": 1088,
+      "sha256": "77797704cb4c2d8d57ac418001fed3e45069aab9af28409dbcab5e6b6b51b8fa"
+    },
+    "modules\\face\\main.py": {
+      "size_bytes": 13274,
+      "sha256": "4308f3a18e0210cb8c0835e9af9a4628c7f844bbebb2d0b4685e3ae6e8a3c756"
+    },
+    "modules\\face\\open-cv.png": {
+      "size_bytes": 12764,
+      "sha256": "175d64a5a1df443c309b208a00c3397e0da393446ccaa15685fe22340ec067dd"
+    },
+    "modules\\face\\PROJECT_STRUCTURE.md": {
+      "size_bytes": 844,
+      "sha256": "07e71213d4e2edfcb33cf4d2b3229d2d2508ac96a8043c14e727050643b0eaa8"
+    },
+    "modules\\face\\README.md": {
+      "size_bytes": 6324,
+      "sha256": "0475dbe945234584f474d1adcc2c344176c83e5b3b4699127c131c80c562be68"
+    },
+    "modules\\face\\requirements.txt": {
+      "size_bytes": 46,
+      "sha256": "52ab242431152d262568d795d192bf6fe96626e6fdb3a08da33e1632d04fa04e"
+    },
+    "modules\\face\\face_recognition\\config.py": {
+      "size_bytes": 5433,
+      "sha256": "778a40d0f14c3b80fc9f7b2020ad13207e3168ad8b7671dbdc7f19d9627fdf22"
+    },
+    "modules\\face\\face_recognition\\database.py": {
+      "size_bytes": 17630,
+      "sha256": "8d75e118c25e98ba2935eed1045fbf3d183d2c1f0bb0ab9adeca3dfc42f66c1e"
+    },
+    "modules\\face\\face_recognition\\face_processor.py": {
+      "size_bytes": 15128,
+      "sha256": "b0d23473e02775fbcc97eb2f7f17a3b120535bc4092e5f90608acacbed557721"
+    },
+    "modules\\face\\face_recognition\\logging_config.py": {
+      "size_bytes": 8643,
+      "sha256": "31dcb8ee1095d9548c1f8955f5717a364e34d3944992406e0e3405f9ec459dac"
+    },
+    "modules\\face\\face_recognition\\media_handler.py": {
+      "size_bytes": 15891,
+      "sha256": "8103ce561cef10638c0750a9f93e2510bd4f5d98fe50c87e7cd7db5604e5e533"
+    },
+    "modules\\face\\face_recognition\\ui.py": {
+      "size_bytes": 23381,
+      "sha256": "53a09849726bb86f2107b01adb8a45039a26a290724f78ffbdf61dc2564c4afb"
+    },
+    "modules\\face\\face_recognition\\utils.py": {
+      "size_bytes": 5869,
+      "sha256": "2549211a098ab917a5b87b9d1e01449b4679295fea5aa6a82827aaa21a62b08d"
+    },
+    "modules\\face\\face_recognition\\__init__.py": {
+      "size_bytes": 664,
+      "sha256": "8b9afa9a56ecd01493830f0b39f03bc41d4c75fbea69e7be5d632c1e9d1c6992"
+    },
+    "modules\\face\\models\\age_deploy.prototxt": {
+      "size_bytes": 2481,
+      "sha256": "e5e443b19e5ca4b6dd213f7a0bfbf03cde25e649708a2fccb65b843966da0c13"
+    },
+    "modules\\face\\models\\age_net.caffemodel": {
+      "size_bytes": 45661480,
+      "sha256": "6dde5d07df5ca1d66ff39e525693f05ccfb9d2c437e188fdd1a10d42e57fabd6"
+    },
+    "modules\\face\\models\\gender_deploy.prototxt": {
+      "size_bytes": 2482,
+      "sha256": "91f2ec19a1fbca8ede5d4b9ef6e60be85b3a976aaf5b50fa9a96d3e4b61a90a2"
+    },
+    "modules\\face\\models\\gender_net.caffemodel": {
+      "size_bytes": 45649168,
+      "sha256": "ac7571b281ae078817764b645a20541bd6aa1babeac20a45e6d8de7d61ba0e50"
+    },
+    "modules\\face\\models\\opencv_face_detector.pbtxt": {
+      "size_bytes": 37272,
+      "sha256": "2a06b34611be76d072a219b87c8336d48543c2475b0655ba738d3378ee0b178d"
+    },
+    "modules\\face\\models\\opencv_face_detector_uint8.pb": {
+      "size_bytes": 2727750,
+      "sha256": "5c71d752ef2cbf2f457ac82fdd580fcb2522fd04c5efdaed18eb6d9e2843fbed"
+    },
+    "modules\\fall\\fall_detector.py": {
+      "size_bytes": 10814,
+      "sha256": "ae4b42b5ac8c88bbb03dcc0409cdbdbaa649e024cc5bc45932d0dbd542fcdd80"
+    },
+    "modules\\fall\\hfd_classifier.py": {
+      "size_bytes": 3849,
+      "sha256": "eadc8c902648a13ed12646f0cfc7b58d424b72bbc20b833b89d91c3b10ffae95"
+    },
+    "modules\\fall\\hfd_features.py": {
+      "size_bytes": 5459,
+      "sha256": "3f13267037f459da150f115fc4a4b9f2a5d96dfa5e7af0086c2fdf0ab057431d"
+    },
+    "modules\\fall\\hfd_manifest.json": {
+      "size_bytes": 2178,
+      "sha256": "b12eec282c4c5e20db54401c567304b770e628dfa04da8680f8e4c0405b96cd4"
+    },
+    "modules\\fall\\hfd_pose_backend.py": {
+      "size_bytes": 6097,
+      "sha256": "63cc6deb11dd4b06f115199f91a196c6fa697eb2e6397a64c1001e32fe481c5a"
+    },
+    "modules\\fall\\HumanFallDetection\\algorithms.py": {
+      "size_bytes": 23912,
+      "sha256": "60f98b55f74eb6b99ced9be7f63d7ab04f0966525c06e63eb26b74c83e09cb25"
+    },
+    "modules\\fall\\HumanFallDetection\\default_params.py": {
+      "size_bytes": 628,
+      "sha256": "1f4b740b3f529e0b1b11acbc1e730bccab85e92d3fa0a203a80c93281ca478fc"
+    },
+    "modules\\fall\\HumanFallDetection\\fall_detector.py": {
+      "size_bytes": 6828,
+      "sha256": "4dc5456564228f3f436e533445f5b88786327eff8c1970d4bf89e8da6d93387d"
+    },
+    "modules\\fall\\HumanFallDetection\\helpers.py": {
+      "size_bytes": 1956,
+      "sha256": "847211e8274aa612f0577676587ce3612613272ca8a25b38cda6ce3245ce74c1"
+    },
+    "modules\\fall\\HumanFallDetection\\LICENSE": {
+      "size_bytes": 1112,
+      "sha256": "b45bda9b05b4a02d7640d135264b4b369af0ac527300ac9b7f951795e9d3aaf8"
+    },
+    "modules\\fall\\HumanFallDetection\\process_data.py": {
+      "size_bytes": 999,
+      "sha256": "b6dce15d4e62b4d17b5db45a2f79c1a52c99af8b4f3022634269dd20564d73c1"
+    },
+    "modules\\fall\\HumanFallDetection\\README.md": {
+      "size_bytes": 2876,
+      "sha256": "2b8c14c53e812ba9f7c53ded7ef5a62b70720117fdb4dd805cf04c034883454c"
+    },
+    "modules\\fall\\HumanFallDetection\\requirements.txt": {
+      "size_bytes": 311,
+      "sha256": "d076a4c0ac300bd233e0c97d9b8127e89780b946c0f1bf4d74349ab378e513de"
+    },
+    "modules\\fall\\HumanFallDetection\\examples\\fall.gif": {
+      "size_bytes": 2252284,
+      "sha256": "fda08dc38ccb08ba1df361046357b567ac74c60085642a44632f89440f9c7003"
+    },
+    "modules\\fall\\HumanFallDetection\\model\\lstm_weights.sav": {
+      "size_bytes": 120954,
+      "sha256": "87bc1abd5828d8d2e0e91ef203a7f1b76df7c77c0d5fbd41bef765058221661b"
+    },
+    "modules\\fall\\HumanFallDetection\\model\\model.py": {
+      "size_bytes": 2092,
+      "sha256": "4fbcdd29d3b081546429cd7e00af738eee5ebbe13c194f5bbc1cb1bfffc049f3"
+    },
+    "modules\\fall\\HumanFallDetection\\model\\__init__.py": {
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "modules\\fall\\HumanFallDetection\\vis\\inv_pendulum.py": {
+      "size_bytes": 11997,
+      "sha256": "194d41d63135da54e456721d1580bc3aa880255d0859523356ccf992a74e83e9"
+    },
+    "modules\\fall\\HumanFallDetection\\vis\\processor.py": {
+      "size_bytes": 3663,
+      "sha256": "3c4fbad4e2cadea4561c2efe9ade544e7b543504cb5df8da0e348f85c9637c13"
+    },
+    "modules\\fall\\HumanFallDetection\\vis\\visual.py": {
+      "size_bytes": 5852,
+      "sha256": "224ff058a1d0a3b4a74b10d440b60fce02063f2168bb202c5fc3b8c81c500132"
+    },
+    "modules\\fall\\HumanFallDetection\\vis\\__init__.py": {
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "modules\\fall\\licenses\\HUMANFALLDETECTION-LICENSE.txt": {
+      "size_bytes": 1112,
+      "sha256": "b45bda9b05b4a02d7640d135264b4b369af0ac527300ac9b7f951795e9d3aaf8"
+    },
+    "modules\\fall\\licenses\\OPENPIFPAF-LICENSE.txt": {
+      "size_bytes": 647,
+      "sha256": "9d6d2a77719ea50eb77ee2e23333a8700513ba660c9dee99d29807dff21b1605"
+    },
+    "modules\\fall\\models\\hfd_lstm.sav": {
+      "size_bytes": 120954,
+      "sha256": "87bc1abd5828d8d2e0e91ef203a7f1b76df7c77c0d5fbd41bef765058221661b"
+    },
+    "modules\\fall\\models\\shufflenetv2k16-257x193.onnx": {
+      "size_bytes": 40906241,
+      "sha256": "837bd14b180a7ab25bb6fc8c42248e18917f427bafb818e50f7dfa8bc94c998d"
+    },
+    "modules\\fall\\models\\shufflenetv2k16-513x289.onnx": {
+      "size_bytes": 40944173,
+      "sha256": "ea7317fc0574326cdcf829a1c3fd61b180101de277b3c8901aaefcf136ddf24f"
+    },
+    "modules\\fall\\models\\shufflenetv2k16.pkl": {
+      "size_bytes": 41250083,
+      "sha256": "f90ed364912c3295c93e9e8c9054652ea9fdcc669accc73db65258c87237c7f5"
+    },
+    "modules\\health_monitoring\\demo_cli.py": {
+      "size_bytes": 23989,
+      "sha256": "0cfa6f6507ae6804b9ab62c34d8179e5e075bbb69c68b726822ab3d7469d6243"
+    },
+    "modules\\health_monitoring\\README.md": {
+      "size_bytes": 5578,
+      "sha256": "7b9d6b506bd57632c54e3dc5c535e3e7694ac36dc4030169076d300c5268a462"
+    },
+    "modules\\health_monitoring\\adapters\\care_team_repository.py": {
+      "size_bytes": 9251,
+      "sha256": "c38bb702ada79f91e1117b0af429919a81eee30e17e6ba26f9634555075b58b0"
+    },
+    "modules\\health_monitoring\\adapters\\identity_adapter.py": {
+      "size_bytes": 1877,
+      "sha256": "c67c83adb83161c3df30a57d06aaf7007dfe2ed1fb033b4d5173ad241085c33a"
+    },
+    "modules\\health_monitoring\\adapters\\observation_repository.py": {
+      "size_bytes": 26046,
+      "sha256": "9f6d865d6dacd10efd5bcb919f28f6f5785d7b0805269d7effa9edcbd206d09b"
+    },
+    "modules\\health_monitoring\\adapters\\patient_access_repository.py": {
+      "size_bytes": 3811,
+      "sha256": "e6b9e72b34e4097afcdacda090c600631a32c8616b285a91f22ec87ca108d9d1"
+    },
+    "modules\\health_monitoring\\database\\connection.py": {
+      "size_bytes": 2712,
+      "sha256": "58ec02163f5931bdcd1646444903c413e498c74d72072de00db741982715b1c1"
+    },
+    "modules\\health_monitoring\\database\\schema.sql": {
+      "size_bytes": 10244,
+      "sha256": "b26bb8fff0f055377bbe8057734b96881dd9df1ab8eebfae806c9eb4096d0ed9"
+    },
+    "modules\\health_monitoring\\database\\seed_data.py": {
+      "size_bytes": 25052,
+      "sha256": "8ba5e70eff17e5ce3b468e686adb70f961555f253748104730b3d413061df311"
+    },
+    "modules\\health_monitoring\\docs\\INTEGRATION_GUIDE.md": {
+      "size_bytes": 6497,
+      "sha256": "a21d258c040ec6528afb0bfda466a5097635de3571d3a231e2c9b3b7eb08c68e"
+    },
+    "modules\\health_monitoring\\domain\\contracts.py": {
+      "size_bytes": 3779,
+      "sha256": "c6ae13f62547bee72ed7749adbad061debc2fb5f786ec348225d557fe811e410"
+    },
+    "modules\\health_monitoring\\domain\\models.py": {
+      "size_bytes": 4926,
+      "sha256": "eef1cd83ed185b38bcb62d2ce25441975b4b8cb1771a3f388e3300d038802b56"
+    },
+    "modules\\health_monitoring\\services\\monitoring_service.py": {
+      "size_bytes": 22520,
+      "sha256": "0e210e1395ff6d5383ef0a28a45a75aec2534581e87be2a5b492eed2bb331eb5"
+    },
+    "modules\\health_monitoring\\tests\\run_all_tests.py": {
+      "size_bytes": 1464,
+      "sha256": "bbbb9b67a7ec7cec4d43fc84eb252683178c452903bcd95b9efd71bfc0aaea44"
+    },
+    "modules\\health_monitoring\\tests\\test_15_acceptance_criteria.py": {
+      "size_bytes": 21512,
+      "sha256": "877a7333e8325948d61410759ac988738e357b73d7217ac039b89df500c60ad4"
+    },
+    "modules\\health_monitoring\\tests\\test_database_and_seed.py": {
+      "size_bytes": 3774,
+      "sha256": "fb9cc7859451e778e4ee8c183c640ac0dac608f9a9795c0055047b75ca8c2a11"
+    },
+    "modules\\health_monitoring\\tests\\test_permissions_and_care_team.py": {
+      "size_bytes": 2988,
+      "sha256": "8e830f74f131c75847c9aaf89b496c0941216115e22c4d1a12d63126df966956"
+    },
+    "modules\\health_monitoring\\ui\\clinician_dashboard_ui.py": {
+      "size_bytes": 39243,
+      "sha256": "31020d4678c356a21de291ff887c071dc79953360d81607bd63258102acdf569"
+    },
+    "modules\\health_monitoring\\ui\\main_app.py": {
+      "size_bytes": 10974,
+      "sha256": "e808bbe9314afd8ef0625ee55618e02db25541d9736d11e2d7e4c357b272c8a4"
+    },
+    "modules\\health_monitoring\\ui\\patient_entry_ui.py": {
+      "size_bytes": 15525,
+      "sha256": "a4059f2a4c2c637a0a90be97bd25bc103e7a9388ddf3107c5da96e46c6ec48ae"
+    },
+    "modules\\medication_adherence\\demo_cli.py": {
+      "size_bytes": 9229,
+      "sha256": "e6ecfad95c8ed40c3f4065aa6d2f1388558788fc5ffc67f0a5408849cf40680f"
+    },
+    "modules\\medication_adherence\\README.md": {
+      "size_bytes": 4314,
+      "sha256": "3e095711b4862f8c651e60b141aa5382680438d2aa8438521f4305c8ae2d91af"
+    },
+    "modules\\medication_adherence\\adapters\\caregiver_repository.py": {
+      "size_bytes": 5974,
+      "sha256": "fe3fde0d98e8f105e5676d8efc6589cd0c44343f272340148ed5a6c8a13bb468"
+    },
+    "modules\\medication_adherence\\adapters\\identity_adapter.py": {
+      "size_bytes": 3581,
+      "sha256": "5352b662dffc6bb8b06fbd3ed80db90beda8d818bb8e9fd9c71458acb2f369c7"
+    },
+    "modules\\medication_adherence\\adapters\\medication_repository.py": {
+      "size_bytes": 25717,
+      "sha256": "eb4b0367114d6f63aadf186ce96eda9107a4a72e0e39d3e5df25d99f7ee08b8a"
+    },
+    "modules\\medication_adherence\\adapters\\notification_gateway.py": {
+      "size_bytes": 4373,
+      "sha256": "2c364003c1a9c4e717b65b67819b77538d78a26a8faaef606a62d86db9cd1d5f"
+    },
+    "modules\\medication_adherence\\adapters\\patient_repository.py": {
+      "size_bytes": 3005,
+      "sha256": "6f2e0668692ba150d28dd6c986851ebd6996bea8c18d4e266397711fb869a4ef"
+    },
+    "modules\\medication_adherence\\adapters\\__init__.py": {
+      "size_bytes": 54,
+      "sha256": "3cc6b9903b20ace1fe7dedbe97ed679987e9ef01c26de95f2cfa2f4dcf3944f9"
+    },
+    "modules\\medication_adherence\\database\\connection.py": {
+      "size_bytes": 2663,
+      "sha256": "617924bc26927bb3912af6fe56f5edf2422d71da460fbe699a24ad4fdd68703f"
+    },
+    "modules\\medication_adherence\\database\\schema.sql": {
+      "size_bytes": 10847,
+      "sha256": "1882447f9c13266303d035a53709a11c9d56c10256ab0cf676c38e3c0fa8ef3a"
+    },
+    "modules\\medication_adherence\\database\\seed_data.py": {
+      "size_bytes": 8773,
+      "sha256": "e1b6eb7a0eb9e0f30cf9166ffe9f33e08da87ad35db2471a65209030f625699d"
+    },
+    "modules\\medication_adherence\\database\\__init__.py": {
+      "size_bytes": 54,
+      "sha256": "c3a008d197e6c42e61a7d4609f8317d34d30a82db1d753b65ddd42965d846026"
+    },
+    "modules\\medication_adherence\\docs\\INTEGRATION_GUIDE.md": {
+      "size_bytes": 7119,
+      "sha256": "e087ee6ab8c6ff2068d85d6aeacaf4eab48f87a99b3acaf8ed0e8876eb96d618"
+    },
+    "modules\\medication_adherence\\domain\\contracts.py": {
+      "size_bytes": 5453,
+      "sha256": "b5b6a5a9648195246389588a9cbb94d91975bf270fafc15a73f70a04f0a4921d"
+    },
+    "modules\\medication_adherence\\domain\\models.py": {
+      "size_bytes": 7201,
+      "sha256": "8f4b2c28db3e3291f8f6db17020935fbfe90bf9bc7b68870e3a566547958b9fa"
+    },
+    "modules\\medication_adherence\\domain\\__init__.py": {
+      "size_bytes": 52,
+      "sha256": "4e51df9fd26d268bfebf4093157a65fc613f4d739c998309dc310639332977c0"
+    },
+    "modules\\medication_adherence\\services\\adherence_service.py": {
+      "size_bytes": 13284,
+      "sha256": "7fc35bb9aab5bc040f09d13459cf96f0c4532b235547ac4d0a91d0cb73043a97"
+    },
+    "modules\\medication_adherence\\services\\scheduler.py": {
+      "size_bytes": 13686,
+      "sha256": "639f008482974526db7fa313d658f8b561ab0d2129aa935f052f7b6a6b0cab9e"
+    },
+    "modules\\medication_adherence\\services\\__init__.py": {
+      "size_bytes": 54,
+      "sha256": "272fd6764059132d85026248bcec3bce5dd34616489f116f67371b7d8022e147"
+    },
+    "modules\\medication_adherence\\tests\\run_all_tests.py": {
+      "size_bytes": 971,
+      "sha256": "04f70f81ff3f939d56dce4df34dd7de9081908b5ccf9ff2aff1d77d79cee7d38"
+    },
+    "modules\\medication_adherence\\tests\\test_actions_and_idempotency.py": {
+      "size_bytes": 5091,
+      "sha256": "0a50a05145a80fc4113cd719dc8e6606cdf02103b16a235abbe432609305cb77"
+    },
+    "modules\\medication_adherence\\tests\\test_caregiver_filtering.py": {
+      "size_bytes": 2087,
+      "sha256": "654c4a37f7f967bf3db26bceb9f532d43fb45182a38740cfd11b83dd0833c6d8"
+    },
+    "modules\\medication_adherence\\tests\\test_database_and_seed.py": {
+      "size_bytes": 3120,
+      "sha256": "7f34c559baa3cb58ec14c70535b5b3972c9c056c048b139e38130c8c349ea692"
+    },
+    "modules\\medication_adherence\\tests\\test_end_to_end_acceptance.py": {
+      "size_bytes": 5197,
+      "sha256": "a7654c34a671c94afde575176db56e881f127a728a268ac9a3dbacd040daf0ec"
+    },
+    "modules\\medication_adherence\\tests\\test_patient_isolation.py": {
+      "size_bytes": 4282,
+      "sha256": "97b7a33c6d8c3a61e6684d026f44bd901bb246c174532d3546f12a3c6b820814"
+    },
+    "modules\\medication_adherence\\tests\\test_revision_immutability.py": {
+      "size_bytes": 3750,
+      "sha256": "08ded1bca8c46a9058da7ee60da83339d8bf6b4138e9fbb5dc33dcc6b36d8dca"
+    },
+    "modules\\medication_adherence\\tests\\test_scheduler_and_overdue.py": {
+      "size_bytes": 5009,
+      "sha256": "5e2fea9cbea996e7f7cc08882a0ac67e7eed3f42625a06c98a3a7454fb2df583"
+    },
+    "modules\\medication_adherence\\tests\\__init__.py": {
+      "size_bytes": 50,
+      "sha256": "e5b721a78a67bb1aacceb51d5f4a229b980c60d35c492c0d2cdf93c6cdf999d9"
+    },
+    "modules\\medication_adherence\\ui\\caregiver_ui.py": {
+      "size_bytes": 17494,
+      "sha256": "2b5352c80564dd7acf0153d3b2c4d0e0a7777a784895b6e3e339905912e012e3"
+    },
+    "modules\\medication_adherence\\ui\\elderly_ui.py": {
+      "size_bytes": 14911,
+      "sha256": "86bee68ccb228775d3075de5178d073dd0682bc763c563ae460288a56db28904"
+    },
+    "modules\\medication_adherence\\ui\\main_app.py": {
+      "size_bytes": 7851,
+      "sha256": "e707476856f840cf1e2b7e8b306a6f01d501e2c3e1dd44cade3a923028ff1572"
+    },
+    "modules\\medication_adherence\\ui\\__init__.py": {
+      "size_bytes": 48,
+      "sha256": "364ff9971838f6291488c8232cfc77ca979b135259096dfad8ca41bb780e6166"
+    },
+    "modules\\rehabilitation\\care.py": {
+      "size_bytes": 4713,
+      "sha256": "e4674bf6d97dcdc11a6bcd5ce2ecaec28e3baa83c9aa6c308e3c26d66770d5ea"
+    },
+    "modules\\rehabilitation\\README.md": {
+      "size_bytes": 2564,
+      "sha256": "2e6142f7e4b1b09a39c3476533851dfa26ffd4500dc1738493df176fe4a8f365"
+    },
+    "modules\\rehabilitation\\rehab_engine.py": {
+      "size_bytes": 36932,
+      "sha256": "1f9242eb7f72d94556bc8a429898d899578a23001df92fbc8b7beef35d59e8a2"
+    },
+    "modules\\rehabilitation\\rehab_runner.py": {
+      "size_bytes": 2056,
+      "sha256": "6515caedae42d1bda6fec833bdac43ce64ecdbdc1aed8b9783f13836579fe4e9"
+    },
+    "modules\\rehabilitation\\rehab_session_adapter.py": {
+      "size_bytes": 15449,
+      "sha256": "20f97eb175ee0546eee5991a5dd228f44565e9c63de64aa7a69cce864b17861a"
+    },
+    "modules\\rehabilitation\\requirements.txt": {
+      "size_bytes": 86,
+      "sha256": "e80c105801e11e552f7fd838136718a8b15390a85027ef94f4c1d5ea639876a3"
+    },
+    "modules\\rehabilitation\\models\\pose_landmarker_lite.task": {
+      "size_bytes": 5777746,
+      "sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
+    },
+    "packaging\\AI_Rehabilitation_Assistant.spec": {
+      "size_bytes": 5378,
+      "sha256": "59055cdbb47626c3ec8742f35143f716760ea24f3861bbf8a937ed2fd66885d1"
+    },
+    "packaging\\build_windows_debug.ps1": {
+      "size_bytes": 2418,
+      "sha256": "3aba8c5dd79d30f997bc30c311e63bc948189fa00d23964454e4bc3edfa3f7b6"
+    },
+    "packaging\\build_windows_release.ps1": {
+      "size_bytes": 2438,
+      "sha256": "b224abba17aa7a2ba380b87242dc3537786aeef5ab04a5623247d7b00a51731a"
+    },
+    "packaging\\gemini-backend.env.example": {
+      "size_bytes": 681,
+      "sha256": "c84095a339379a2a1d733b2b0d5af0e6a4cedd3892a839fe2558dda3340a2c32"
+    },
+    "packaging\\README.md": {
+      "size_bytes": 433,
+      "sha256": "a23ff03e85379e8af7769860d50568457a8fe0840df8bb3da5f8664ef4a95a83"
+    },
+    "packaging\\rthook_mediapipe_dll.py": {
+      "size_bytes": 1975,
+      "sha256": "7118823e0c5658e4e5805d61f4191f9230d3faeb732eb39ad8c61566d1ecbc2e"
+    },
+    "packaging\\windows_dependency_scan.py": {
+      "size_bytes": 1707,
+      "sha256": "0d72fdc993d0941e08557b00651cc1c131f071b1d2b541b7c365b30d7dd8c19e"
+    },
+    "packaging\\portable\\BUILD_PORTABLE.bat": {
+      "size_bytes": 1331,
+      "sha256": "2a39fafb59d3e884cfabe94412afb7260249a6faab18cf6e5d7d7484bd55dd51"
+    },
+    "packaging\\portable\\build_portable.py": {
+      "size_bytes": 4948,
+      "sha256": "b84ca244d2ad83d6deb52877a0571cbfd77660950c2abf216f35745a1914678f"
+    },
+    "packaging\\portable\\CHECK_SYSTEM.bat": {
+      "size_bytes": 584,
+      "sha256": "ef2537e3bf4f6736ead6424bcbb117f2fb37882fce76502c1ba434ba9a579e6b"
+    },
+    "packaging\\portable\\install_python.ps1": {
+      "size_bytes": 3488,
+      "sha256": "a8c24148bbfd02b971a5af8ab0f5c68dd7f4189b4690dffe4b5c24912bd6ba6d"
+    },
+    "packaging\\portable\\SETUP.bat": {
+      "size_bytes": 364,
+      "sha256": "d8c91b398ee88b98109f680d9a7bb3cbf262c592b656b1526a3cfdc78d190f53"
+    },
+    "packaging\\portable\\setup.ps1": {
+      "size_bytes": 7174,
+      "sha256": "088ea216e04029d8e4eae78b502720e1cbf2bd67214577836b5d886bd3baf45c"
+    },
+    "packaging\\portable\\START.bat": {
+      "size_bytes": 1241,
+      "sha256": "4848d2094894b9706fd7191e330b9dd45781866c9eef6cfbe3bc5d8d1f7c2fe4"
+    },
+    "packaging\\portable\\START_DEBUG.bat": {
+      "size_bytes": 1059,
+      "sha256": "3c1f84bc22fb4c1ccedf45eaa457aab8b07b4d602eef8fa85ab2bab59eb8a16c"
+    },
+    "packaging\\portable\\test_setup.ps1": {
+      "size_bytes": 3466,
+      "sha256": "dbb2450122f0b66d34e3eaa8fcd005da3bf6e1d88d3636012ab31192fe34f738"
+    },
+    "scripts\\benchmark_fall_backends.py": {
+      "size_bytes": 5454,
+      "sha256": "0dda6f65abee002e8bd07e6c3ab5e4f7777a4a259fd056efd5797c0476874c71"
+    },
+    "scripts\\benchmark_local_rules.py": {
+      "size_bytes": 2322,
+      "sha256": "3e0657bb85134c1d5d0735372e018f2c5574e3b760086e11c0473047f774f897"
+    },
+    "scripts\\benchmark_local_stt.py": {
+      "size_bytes": 3066,
+      "sha256": "7395d42dce75547d28e4ba02704acdb390a841227b47601f75e5b5f81bd20248"
+    },
+    "scripts\\benchmark_transcript_intent.py": {
+      "size_bytes": 5209,
+      "sha256": "2844a619f286c0b45e648d726e1a649ca261c312ee6a7860dfe5d6d380ba411c"
+    },
+    "scripts\\build_codebase_inventory.py": {
+      "size_bytes": 3249,
+      "sha256": "1b0231531cec746559c1649e7e252962580be976772f9160f76649b0780ae9bf"
+    },
+    "scripts\\build_release.py": {
+      "size_bytes": 10650,
+      "sha256": "8bbeaa5cc0599616ff211a42b34adc3426b0c57ea59aee7938dbe3539f7f107c"
+    },
+    "scripts\\capture_realtime_sync_screenshots.py": {
+      "size_bytes": 4973,
+      "sha256": "12ca10e97396ae97be41c9a98796e25fc44c8af4748dea4e32c2ad01cc1a23e5"
+    },
+    "scripts\\capture_ui_screenshot.py": {
+      "size_bytes": 2779,
+      "sha256": "c41a04923bac8c33bc932b26f5ed65147e1f7aeb1919afa9f9c04b1dfc245880"
+    },
+    "scripts\\capture_verification_screenshots.py": {
+      "size_bytes": 7269,
+      "sha256": "0175137a85c6e9d3a364b82e920e6b2734996b2257b0b5a72e365ca45590359d"
+    },
+    "scripts\\check_local_microphone.py": {
+      "size_bytes": 1123,
+      "sha256": "aa363c835e039490b00a8fa3f4fe45b750c74ce2869a906691292493b764b565"
+    },
+    "scripts\\clean_disk_space.ps1": {
+      "size_bytes": 5317,
+      "sha256": "3232abca55a4066c18334edfc55ad62285794e7866fbc6d7dfb1c32a5c5b75f1"
+    },
+    "scripts\\clean_test_accounts.py": {
+      "size_bytes": 4756,
+      "sha256": "840eec3b8e0e138b9655458a57dab5578942e9dcd89e670a891d1b57ad57efe9"
+    },
+    "scripts\\debug_style.py": {
+      "size_bytes": 928,
+      "sha256": "6132c87c632c70ababbb061873994ffee6658e51f3cf93bcfeaffdb36e5c8873"
+    },
+    "scripts\\diagnostics_windows.py": {
+      "size_bytes": 9148,
+      "sha256": "d48b87121dc9fa7e3b068633697a7ae519e417589c41883ab6c1ae484d41c13b"
+    },
+    "scripts\\download_models.py": {
+      "size_bytes": 5308,
+      "sha256": "0e7f06981bd4d468d62c3d0b7375e2311694ee25d59bdf8075ed13b4d98eba74"
+    },
+    "scripts\\evaluate_fall.py": {
+      "size_bytes": 7879,
+      "sha256": "988a2312365729870b37cd6be2a5ebd1a24599361bbfa27d49d44c95196513ff"
+    },
+    "scripts\\export_fall_pose_onnx.py": {
+      "size_bytes": 732,
+      "sha256": "e99de8e1f5886fa11a5ac31154348e5b37f619aecfbcc2e17b55b97f38ce1a89"
+    },
+    "scripts\\export_hfd_onnx.py": {
+      "size_bytes": 1056,
+      "sha256": "0f0174435247883a946623afcd99287be3725648ccba5579dcc3e44f0efb76ce"
+    },
+    "scripts\\finalize_fall_report.py": {
+      "size_bytes": 10255,
+      "sha256": "6d429722351a1056c5e0eab4d31553bf5ee54c84a0fde7ac14d34c7e78775858"
+    },
+    "scripts\\generate_portal_screenshots.py": {
+      "size_bytes": 55784,
+      "sha256": "6df4d31f9565727db9aa2e57cc9d2ff40f3b6dcb4c974e4297d48299be6dd10a"
+    },
+    "scripts\\hfd_pose_worker.py": {
+      "size_bytes": 5847,
+      "sha256": "3818fbf112ab168e35d403d5f400edfeea8ea614a32ccc12743c6acc73c891f0"
+    },
+    "scripts\\inspect_fall_events.py": {
+      "size_bytes": 502,
+      "sha256": "9aaee79f297b6c17da7dd642c941b10fc56232436e3b740d476049fcd36072a1"
+    },
+    "scripts\\inspect_fall_inputs.py": {
+      "size_bytes": 1332,
+      "sha256": "e8d3944f508fdae889bfc570691929b1bc54d54b830a174c4aef901f6d049818"
+    },
+    "scripts\\install_python.ps1": {
+      "size_bytes": 3488,
+      "sha256": "a8c24148bbfd02b971a5af8ab0f5c68dd7f4189b4690dffe4b5c24912bd6ba6d"
+    },
+    "scripts\\migrate_fall_labels.py": {
+      "size_bytes": 916,
+      "sha256": "daa1f83878cd8626d5ceb5c1e199762ae14224feb70bea996786a3be91c19a80"
+    },
+    "scripts\\prepare_fall_annotation.py": {
+      "size_bytes": 6263,
+      "sha256": "932c048cbcead87f52bc53f70df0733460ec6cb02b92f620a99b118a7b1f9d2c"
+    },
+    "scripts\\prepare_local_stt.py": {
+      "size_bytes": 1673,
+      "sha256": "b1c2023c4ed1df8889af81d03153dc5b55896d6622354479942d085270cbf70a"
+    },
+    "scripts\\probe_gemini_intent.py": {
+      "size_bytes": 3959,
+      "sha256": "0c7c05db5dc2119fc6ba24998ec959d2d6a21c56d503d837aeb475cf7f352f8c"
+    },
+    "scripts\\README.md": {
+      "size_bytes": 729,
+      "sha256": "21e18de1db8a1ebabf1e87a0a7e292f1d9c402d7ee825a8fc9f26874ae0dcca1"
+    },
+    "scripts\\reassess_fall_runs.py": {
+      "size_bytes": 2926,
+      "sha256": "ad34f4e54c546df64983d34f5a18926c07c063b9d2cf2f543a072235eeef370f"
+    },
+    "scripts\\replay_fall_observations.py": {
+      "size_bytes": 3229,
+      "sha256": "e003496e75f908690f986a42a9ffc337461879b68fdafaaefc94096dfa373712"
+    },
+    "scripts\\reset_demo.py": {
+      "size_bytes": 6407,
+      "sha256": "10c965a6f4dc63f51051ea7b79786f2a9a13f5e4c67e8ff08825ea556d54217c"
+    },
+    "scripts\\run_fall_checks.py": {
+      "size_bytes": 2686,
+      "sha256": "7b021b354886c7e645c773ca4e663dc3bff104dcb7d5840aca67103427f9bbed"
+    },
+    "scripts\\run_gemini_backend.py": {
+      "size_bytes": 2381,
+      "sha256": "2cca326c35d84c9d8cd3c641a36e8913d5f2aa9529189f291f8489b6ff7e277c"
+    },
+    "scripts\\setup_hfd.ps1": {
+      "size_bytes": 2246,
+      "sha256": "ff3579474e793f67da5834fb2f54f1e380e46e10b987239e0e97f18ca3aaf301"
+    },
+    "scripts\\setup_windows.ps1": {
+      "size_bytes": 11377,
+      "sha256": "5298e0d2076251502a1bbdfe5d34bb2c0e26cd6dfe03791c3cf754ce3170e508"
+    },
+    "scripts\\smoke_intent_http.py": {
+      "size_bytes": 4574,
+      "sha256": "8d498ccdb0d375c26fac76d09bbbae163dd07041e1877d1ddec6b5c2cb5ca05d"
+    },
+    "scripts\\smoke_local_rules_ui.py": {
+      "size_bytes": 4813,
+      "sha256": "3f71c300af1806d6e71b4803ab91af03cbf4396c71fe8504bdb5ecfedf7929e1"
+    },
+    "scripts\\smoke_local_voice_ui.py": {
+      "size_bytes": 3600,
+      "sha256": "3401187b5db6d611db2bbc0740f446c763c873a3ec936814797cd22d7c3997fd"
+    },
+    "scripts\\smoke_medication.py": {
+      "size_bytes": 3289,
+      "sha256": "490b6a830991ed662b2a0adc3358b08042c7789ca5ed9e12f9f0483a2edb30cc"
+    },
+    "scripts\\start_windows.ps1": {
+      "size_bytes": 9643,
+      "sha256": "5109560f079cdbb9db49cfa7732fa6ffc934242cbe7769b69c32ad7a4b0d5c45"
+    },
+    "scripts\\stop_windows.ps1": {
+      "size_bytes": 3733,
+      "sha256": "0c3c4dbb1b029b1a38e9e51853c2e46ed4d1ae4d464818249c875aa18208c704"
+    },
+    "scripts\\support_cached_fall_detections.py": {
+      "size_bytes": 2291,
+      "sha256": "fbfbf6605cd4d9099f4d1a4e97f0bc3a66e7a46f69abb3e98b0e80c87576996b"
+    },
+    "scripts\\sync_patient_care_team_and_caregivers.py": {
+      "size_bytes": 7564,
+      "sha256": "57d920136aa12851d2ec68f13497d5133888e1da12f50599cd7c3fe990be313f"
+    },
+    "scripts\\test_qss_parser.py": {
+      "size_bytes": 389,
+      "sha256": "add3d9a97aa94c662e9084e9cf26313274d0e21d877f4a1db74877a9591ec002"
+    },
+    "scripts\\verify_hfd_onnx.py": {
+      "size_bytes": 1835,
+      "sha256": "a7ef6e5eb4bd650b18f171df3e9043ac64ae68bea8e540d883aff8a643cf93a6"
+    },
+    "scripts\\verify_medication.py": {
+      "size_bytes": 902,
+      "sha256": "8340befefad4e0e3392dfe9b240f2fec3cc62a953354f12f3a2daa1564c957fc"
+    },
+    "scripts\\verify_medication_bundle.py": {
+      "size_bytes": 2029,
+      "sha256": "023539059a2f078e86ac845d2c4a9d6b51cecf9ece9628f0a304c6b00779d966"
+    },
+    "scripts\\verify_prescription_flow.py": {
+      "size_bytes": 9940,
+      "sha256": "f3362527b5216f3fb49cbf8acec196dc3cde05304aba3f543b42bab36fd989da"
+    },
+    "scripts\\verify_rehab_ui.py": {
+      "size_bytes": 7194,
+      "sha256": "dcdf68830537ce8749ba27216f25d567e58d868b6029fbab942a247a63def103"
+    },
+    "services\\elder_sync_client.py": {
+      "size_bytes": 29969,
+      "sha256": "bfa67d8731b5a8584ced66ff1d9e53579d5dd963d2ad53ad03334114c6d1021c"
+    },
+    "services\\email_service.py": {
+      "size_bytes": 8654,
+      "sha256": "d45006a70c9366d1279407f297ff8c84b197d3feff48103e1c996a20a0c64478"
+    },
+    "services\\fall_monitor.py": {
+      "size_bytes": 23534,
+      "sha256": "4bf26d870aadbc7c541f3a3a9b163c2b0e60c99334b8a5f3d778938d653dac89"
+    },
+    "services\\fall_test_runner.py": {
+      "size_bytes": 8848,
+      "sha256": "3435407be55d1c6c2dc7edd3f7b183dddbf965e8ccc7eaf329bc18e484e27aa8"
+    },
+    "services\\medication_migration.py": {
+      "size_bytes": 989,
+      "sha256": "d1dd26e9036ce47e79b48799201a732f1f4bad2c204e6f67fb28cc2caa90b20e"
+    },
+    "services\\medication_service.py": {
+      "size_bytes": 13670,
+      "sha256": "1ba027c460f5064194c45ae7cf150ab81a17a661f4b8fc7b281bbe80b8a483fc"
+    },
+    "services\\outbox_relay.py": {
+      "size_bytes": 13464,
+      "sha256": "c9918d23cfd312cb38d6a6a31f79f1b0f7979630f9218ce5523968baccb8f9ed"
+    },
+    "services\\patient_sync_service.py": {
+      "size_bytes": 15600,
+      "sha256": "6efc4c6960ee4847e23b2ebe941c3bbfcb8cc46e721851469dec7af2a8ea228d"
+    },
+    "services\\state_service.py": {
+      "size_bytes": 3854,
+      "sha256": "2edb0bb5be3e5c93f01c99a43ba701d5c425c36c879599ddcca2f9a644929c1d"
+    },
+    "services\\user_service.py": {
+      "size_bytes": 7854,
+      "sha256": "40ea798819b33c8e250c44ef6cd863f8cd33e1a7be00b714002b4e3087c1aa51"
+    },
+    "services\\__init__.py": {
+      "size_bytes": 289,
+      "sha256": "421872c546766889af51b4048c0dc40b6ca61412beb310f9d201361bb922f626"
+    },
+    "services\\local_rules\\desktop.py": {
+      "size_bytes": 20495,
+      "sha256": "6ebdad7f0e1035aa866746d0e81533e4795f46b3e13cc259ac1f97fbd628fc01"
+    },
+    "services\\local_rules\\dialogue.py": {
+      "size_bytes": 1090,
+      "sha256": "9fb726c154c9052809d2e928b888de1733361c1d6b7467f3c555d211e422254e"
+    },
+    "services\\local_rules\\engine.py": {
+      "size_bytes": 9464,
+      "sha256": "6ce304c0a68a3c6528d5ef8bf8d90bb9384dc9b27b665185ac3c452905d25e94"
+    },
+    "services\\local_rules\\requests.py": {
+      "size_bytes": 14524,
+      "sha256": "4caa5e8079710193d2fc96af0aae1d0e8fb3904e4dab72d1a1f084e098a220c3"
+    },
+    "services\\local_rules\\rules.json": {
+      "size_bytes": 6420,
+      "sha256": "49637ee77d3c356e68704e075608b3ae10202337bb818627a400da0f1bee484c"
+    },
+    "services\\local_rules\\__init__.py": {
+      "size_bytes": 76,
+      "sha256": "76c809336cf193cd28be54311246a10e2dd7d1b72dc95178b7c0045e3aa338f1"
+    },
+    "services\\local_voice\\config.py": {
+      "size_bytes": 1087,
+      "sha256": "385891136d10b739ffd06ff983483382cfbc48749f40f3d47ea6b806088f4776"
+    },
+    "services\\local_voice\\controller.py": {
+      "size_bytes": 6541,
+      "sha256": "37ff229d5144fc29d15837d3693c4a0ddb946c267b706dce8d3dfe2993465e85"
+    },
+    "services\\local_voice\\dispatcher.py": {
+      "size_bytes": 6517,
+      "sha256": "a28dee7acb2ef2ca82da2c22033cae7014573956c83acaabee6845af404a9af8"
+    },
+    "services\\local_voice\\engine.py": {
+      "size_bytes": 2344,
+      "sha256": "45b2a15ad54daa9576b4b13fa76ee6421f57c3860193b5d0a1372e120c5f4eb0"
+    },
+    "services\\local_voice\\intents.py": {
+      "size_bytes": 739,
+      "sha256": "9c14042b89563395beb9fee998fc0918aa5ac9b0f092d89bf0ec0bfc60f2df61"
+    },
+    "services\\local_voice\\recorder.py": {
+      "size_bytes": 2880,
+      "sha256": "0dc21d82f66aee9b033efb3e955aac8f94a276132a318a4222eb9706507acae5"
+    },
+    "services\\local_voice\\tts_runtime.py": {
+      "size_bytes": 649,
+      "sha256": "9687f739aaedad02472ab9f6403d96f9e4a9a6235699b73d06c166879d5ac14d"
+    },
+    "services\\local_voice\\worker.py": {
+      "size_bytes": 1952,
+      "sha256": "75a86a0a00cacd50364201086ad8fd73559abf90f50296f4f207927a23b1e946"
+    },
+    "services\\local_voice\\__init__.py": {
+      "size_bytes": 73,
+      "sha256": "2499b60d660346c62e5d6a23f6a74e7f54c4f18dc84666e05727447a7cba77c2"
+    },
+    "services\\transcript_intent\\backend.py": {
+      "size_bytes": 3141,
+      "sha256": "0db29930f2af05fe0251da073580a0b6a04c99c1d185fea629b4baf60dd045d4"
+    },
+    "services\\transcript_intent\\budget.py": {
+      "size_bytes": 3154,
+      "sha256": "bad65a168247fdc18f8ff62b593c26bd84244105afaa6a54b8afc35d5afb9257"
+    },
+    "services\\transcript_intent\\client.py": {
+      "size_bytes": 2699,
+      "sha256": "828c8b8ec6c756de3aea20be3e3b7a6b6c5f66fe4b843165243db390fd74e3b3"
+    },
+    "services\\transcript_intent\\config.py": {
+      "size_bytes": 2021,
+      "sha256": "e6ba5290ac24d44a7e4fbee8362ace152d500b2a7d2ffdf57d19c33972c3adaf"
+    },
+    "services\\transcript_intent\\context.py": {
+      "size_bytes": 1911,
+      "sha256": "ee10dea8c4da713ed0f93acc2e3720926ce0073320df1162ce18fe2a37a9f6ff"
+    },
+    "services\\transcript_intent\\coordinator.py": {
+      "size_bytes": 3785,
+      "sha256": "0b4ab59d1a0e2b13601534b01c4c30df6df96c2078604b2d990b5bc775f4d89b"
+    },
+    "services\\transcript_intent\\gemini_adapter.py": {
+      "size_bytes": 3617,
+      "sha256": "fe1ad5a5be2911915ad1714c70806b883321cabb3b5f30e04080925a9c88f8aa"
+    },
+    "services\\transcript_intent\\policy.py": {
+      "size_bytes": 3962,
+      "sha256": "12a0c62605b70d80888d21b2773ebf430743a1eaa5d47b66d83e0b37b93d1434"
+    },
+    "services\\transcript_intent\\prompts.py": {
+      "size_bytes": 1681,
+      "sha256": "abffaf3f1d7b37501df74ad06d717e580fe679191085bbb1e8000096e209ae13"
+    },
+    "services\\transcript_intent\\registry.py": {
+      "size_bytes": 2112,
+      "sha256": "8ff01e9d7f0910c11d7f3cc53b47e3df47c4924c5edc6db06c0141dc936d0026"
+    },
+    "services\\transcript_intent\\schema.py": {
+      "size_bytes": 1464,
+      "sha256": "d27280dddfbaa782a27d61cfa4b23191b9ddf82f6257b502cbcf88d504e15255"
+    },
+    "services\\transcript_intent\\service.py": {
+      "size_bytes": 5405,
+      "sha256": "f35c6333596507d2b5b06f3382097c87473fd3d26b9ff92ec108dc06cd135256"
+    },
+    "services\\transcript_intent\\synthetic_dataset.py": {
+      "size_bytes": 5004,
+      "sha256": "afbd0ad2851d49b83b8440d969c8746c0594ff5f55edb66fbd9cce87cdcc6038"
+    },
+    "services\\transcript_intent\\__init__.py": {
+      "size_bytes": 72,
+      "sha256": "89ee8f232d2972c96a96fe6ea77d8587e24cf97aa825947cd6a3d5c957702ad2"
+    },
+    "services\\voice_ai\\config.py": {
+      "size_bytes": 1882,
+      "sha256": "7d29788b5c0fd6fba32c44eb9d3a81e81c0dda9a956fca7c3ba09f668a9ffcc2"
+    },
+    "services\\voice_ai\\__init__.py": {
+      "size_bytes": 233,
+      "sha256": "60dfa8ebbf2604d7a5fbfc2cf28a95aa673b041257cbd201ca8fdab6303f061f"
+    },
+    "services\\voice_ai\\asr\\factory.py": {
+      "size_bytes": 688,
+      "sha256": "4bee268924c0662783222b29c9e11405d1f4692ec0f7b452773c6072c4fa9bd4"
+    },
+    "services\\voice_ai\\asr\\faster_whisper_provider.py": {
+      "size_bytes": 360,
+      "sha256": "67c47a0ee74e81a51631bcb374c5fa95aad0e81cc8fa7301b0e692aa985a7f0c"
+    },
+    "services\\voice_ai\\asr\\mock_provider.py": {
+      "size_bytes": 1622,
+      "sha256": "53127d1c1e9b5764cb65afb4ada89d1418dbf1b3b302dbe2c9372b81ad50a9e0"
+    },
+    "services\\voice_ai\\asr\\provider.py": {
+      "size_bytes": 1015,
+      "sha256": "4f34ec9999a3bf0d666145164c785e2982b487e20a3e5590b1b2eecaf421ee44"
+    },
+    "services\\voice_ai\\audio\\capture.py": {
+      "size_bytes": 15758,
+      "sha256": "af84a5491d082be23fc3223a806bf05dbaacc413e3a2a677a675e71cb321d78a"
+    },
+    "services\\voice_ai\\audio\\tts_player.py": {
+      "size_bytes": 4534,
+      "sha256": "4b8a99f6bb7bf0913eda9d3747b10f9389794bf12d46c7c4db33632c04e4082f"
+    },
+    "services\\voice_ai\\audio\\vad.py": {
+      "size_bytes": 1377,
+      "sha256": "a243d430b590cea68ffd11c30ccc0af6fdc0f621e50434a3e07eca2a17531c46"
+    },
+    "services\\voice_ai\\business_adapters\\assistance_adapter.py": {
+      "size_bytes": 5738,
+      "sha256": "ba90af8974b7ba0237754fcc7bab3bbcd5f5a471d74a92355c41e1e1a7634d0e"
+    },
+    "services\\voice_ai\\business_adapters\\health_adapter.py": {
+      "size_bytes": 4176,
+      "sha256": "9c351b25e34d0c1ebe3861148ef9dfb55b720e8fb5d20a4b64507d53837201ef"
+    },
+    "services\\voice_ai\\business_adapters\\media_games_adapter.py": {
+      "size_bytes": 2778,
+      "sha256": "f7dff6ddd2de9b5158abc9b4a1823b2c124e8f39cd6d0dd4bc0b874b4af8241d"
+    },
+    "services\\voice_ai\\business_adapters\\medication_adapter.py": {
+      "size_bytes": 12116,
+      "sha256": "ac45bdd28cdc49885139334b07590e4a9ff2b821e89721f5ea41af3f4e548105"
+    },
+    "services\\voice_ai\\business_adapters\\__init__.py": {
+      "size_bytes": 580,
+      "sha256": "648e40b7c54f2cfee04f30961bac93be41b8d97c6f495815344187245e401805"
+    },
+    "services\\voice_ai\\domain\\contracts.py": {
+      "size_bytes": 6075,
+      "sha256": "c3518d6845d181ab69ce7234cb50fce45e47128bbc8423ad7cb709b01e4359db"
+    },
+    "services\\voice_ai\\observability\\tracer.py": {
+      "size_bytes": 5096,
+      "sha256": "08b674c3ad65d61184acff8d9e48aaf920c7e2fde8d948ab3e39c64ab182c49d"
+    },
+    "services\\voice_ai\\observability\\__init__.py": {
+      "size_bytes": 329,
+      "sha256": "88b4c21af432059a9173c51e095b6260234a06c54115476015e88cd224a3dfac"
+    },
+    "services\\voice_ai\\orchestrator\\actions.py": {
+      "size_bytes": 3257,
+      "sha256": "a5c7444f0c62197b1d0e4db99ee4a28a95eccf8b350b4b9b134fc029ad3d6c2a"
+    },
+    "services\\voice_ai\\orchestrator\\context_resolver.py": {
+      "size_bytes": 2759,
+      "sha256": "f1b23a90e843cbad9a00ca5f519c038e96c02ae05122e42dadbf0e04c54eff94"
+    },
+    "services\\voice_ai\\orchestrator\\idempotency.py": {
+      "size_bytes": 2358,
+      "sha256": "3d8b97082df3ad4a829e3896659a5931fde87a1322d49f639d70ce0ecc0f02b0"
+    },
+    "services\\voice_ai\\orchestrator\\router.py": {
+      "size_bytes": 30274,
+      "sha256": "42f236c9c240d08e6ec4da17162d4a24d158552018c4588c6552bbcd32a2e3ab"
+    },
+    "services\\voice_ai\\orchestrator\\state_machine.py": {
+      "size_bytes": 6403,
+      "sha256": "3c347c93aa7da784ecada16f1a4d35c71b860f88e25a8a99ccc7a8c22708ca8a"
+    },
+    "services\\voice_ai\\realtime\\assistance_coordinator.py": {
+      "size_bytes": 11042,
+      "sha256": "a4b2b8190ada8498d2dd5bf775d7dc55b091b05fa84512a6d574b4604b5f54cc"
+    },
+    "services\\voice_ai\\safety\\assistance_rules.py": {
+      "size_bytes": 5555,
+      "sha256": "1a24ef255230e6f9d74890a724dabe4daa6dd1c68b26a1f81b50d4ed641e41e7"
+    },
+    "services\\voice_ai\\semantic\\factory.py": {
+      "size_bytes": 2903,
+      "sha256": "4692886bed42c93a1b97e8914d78ddf943d3957d90f01522f435e2d093017027"
+    },
+    "services\\voice_ai\\semantic\\gemini_provider.py": {
+      "size_bytes": 16550,
+      "sha256": "64fbc5b5be38ff9dfefe5919e7f089275ab33de9d394d4c65e2a4e17e2b4c8dc"
+    },
+    "services\\voice_ai\\semantic\\mock_provider.py": {
+      "size_bytes": 17663,
+      "sha256": "386092e158763b2bd6bf6c174bf73bb0e20c735ff44c29e30752a4ad1adc1512"
+    },
+    "services\\voice_ai\\semantic\\prompts.py": {
+      "size_bytes": 18846,
+      "sha256": "e74969c229ed0524ea7763a705b8e19b93a7d62bf09798712c5d95fdc6da1a55"
+    },
+    "services\\voice_ai\\semantic\\provider.py": {
+      "size_bytes": 1029,
+      "sha256": "5e755245955c8fdc158f9fde97709b276d0b91459cb8018d2547ea3609405230"
+    },
+    "services\\voice_ai\\semantic\\schemas.py": {
+      "size_bytes": 10755,
+      "sha256": "fe53339939963beef4f39bdd5692bbb316da52941225bcc30864d838424ac35f"
+    },
+    "services\\voice_ai\\stt\\client.py": {
+      "size_bytes": 5429,
+      "sha256": "ba28fe74851b1522f3b6ae1f328653c67f705047ae873ef1393995097bc0db08"
+    },
+    "services\\voice_ai\\stt\\contracts.py": {
+      "size_bytes": 2995,
+      "sha256": "3d4cd8d6e8c663a902b9a8dd4d2390bfbd332bd6d50c027504149bc6abdca7aa"
+    },
+    "services\\voice_ai\\stt\\controller.py": {
+      "size_bytes": 10908,
+      "sha256": "199034f14dd3a1938f0d4cf80ff67222a5c4787628f7044f406e5aedcb698e3b"
+    },
+    "services\\voice_ai\\stt\\gateway.py": {
+      "size_bytes": 7338,
+      "sha256": "63a072100491b5bac2eb86342eddde3b3ada37a693832cc3847bc93f6aba4c2a"
+    },
+    "services\\voice_ai\\stt\\provider_adapter.py": {
+      "size_bytes": 10549,
+      "sha256": "73b9f955f25f8787acf0206f917516e9c7cb60a80d7177134ff4ba53419b9d1a"
+    },
+    "services\\voice_ai\\stt\\__init__.py": {
+      "size_bytes": 996,
+      "sha256": "e874f91316aa73d84812a95f8c2cd80bca2a3d50a4186e47aa5c308f361caf1b"
+    },
+    "shared\\state.json": {
+      "size_bytes": 735,
+      "sha256": "4268d836daa629cc9ff883fb04e2963ac252d52cce566f2cf5f43c0e01c57c57"
+    },
+    "shared\\data\\patients.json": {
+      "size_bytes": 4,
+      "sha256": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f"
+    },
+    "shared\\results\\emotion.json": {
+      "size_bytes": 223,
+      "sha256": "8dc363bab2272cafdc17fcdf3c032a1f65a817e148f9a653c625cf48d1bfc798"
+    },
+    "shared\\results\\evaluation_benchmark.json": {
+      "size_bytes": 3001,
+      "sha256": "562b64a2a6d248caba4bde824d14c70a7a59ec23b166d059417b376db3f68b80"
+    },
+    "shared\\results\\face.json": {
+      "size_bytes": 203,
+      "sha256": "9715245f36aea3552b158f8352df9bf76bcc1f9f401f0695a1a3e6f663cfdbb0"
+    },
+    "shared\\results\\fall.json": {
+      "size_bytes": 687,
+      "sha256": "b6cc15285c06d686b1903e31c9fe22b0854a3dbf5ceec794dc16d3174e1be4ba"
+    },
+    "shared\\results\\rehabilitation.json": {
+      "size_bytes": 362,
+      "sha256": "1680ef3ac2801c1e30d436a96bda848864aa675b3ebeb9a9ef5eb4cce179ed18"
+    },
+    "tests\\conftest.py": {
+      "size_bytes": 1369,
+      "sha256": "416acac07b659e79b954920c3a9af438c97f0eb1bfb058ef0b597f925a701fe3"
+    },
+    "tests\\test_12_acceptance_scenarios.py": {
+      "size_bytes": 30865,
+      "sha256": "1ae87698ece8c020a91782738f50fd078927bccfbf4cab50a46f47069f4fabd1"
+    },
+    "tests\\test_admin_portal_api.py": {
+      "size_bytes": 31036,
+      "sha256": "5d009cbfa3d20a6e07b44a2d12ce24c53b8333beda51c97c9f8eb8a8bd6e2f2c"
+    },
+    "tests\\test_caregiver_clinician_health_sync.py": {
+      "size_bytes": 6141,
+      "sha256": "d47070c3a60582f2eb72ac7d0fe7d834d19241a5f3f4dc5874ead10848bf96eb"
+    },
+    "tests\\test_caregiver_desktop_registration_flow.py": {
+      "size_bytes": 7004,
+      "sha256": "76691d0ce46b9c5bdd87b86e2edf942a40bedd0a770eaa2d51e949a20832795b"
+    },
+    "tests\\test_caregiver_rehab_config_sync.py": {
+      "size_bytes": 8637,
+      "sha256": "5806b771eabf7eb1b7c688a23dd1b4c0ccb2bfb9c0006e6fe1b209105f6742cf"
+    },
+    "tests\\test_face_registration.py": {
+      "size_bytes": 3848,
+      "sha256": "367f8db4f4471ff7fb1d46609b9a6fdbde369619b3abfd4817ddcf363f51a111"
+    },
+    "tests\\test_flow_adjustments_acceptance.py": {
+      "size_bytes": 25989,
+      "sha256": "67817618044855674479a7d1d48ec0c4e3328a2a6dfd6fa8c508e87855227e20"
+    },
+    "tests\\test_launcher.py": {
+      "size_bytes": 1839,
+      "sha256": "268ffb9bffa6d632098f3c8b2411c2f1e344649666359592c3421cf9044f4e7d"
+    },
+    "tests\\test_medication.py": {
+      "size_bytes": 13051,
+      "sha256": "94ef80bd1cb8ea2d4bd7053e3f76147ef1ceac88313ee531a7752cb54ebe9b6d"
+    },
+    "tests\\test_medication_ui.py": {
+      "size_bytes": 4905,
+      "sha256": "ca2c7f2fc2b53de74e7725fc480c90364dfa595c8b7db2c1605ed2d3da8e9d29"
+    },
+    "tests\\test_prescription_cancel_sync.py": {
+      "size_bytes": 6019,
+      "sha256": "2ca4e625fb662423289fc177dc1765ea2abfbf049f198a96be10c8c61d9ae6bc"
+    },
+    "tests\\test_realtime_sync_12_scenarios.py": {
+      "size_bytes": 40104,
+      "sha256": "ce976b6df34cdd9b5f1710f4b8fa1bee844eeb4dba247154b084d2bd8845780b"
+    },
+    "tests\\test_rehab_assistant.py": {
+      "size_bytes": 11660,
+      "sha256": "5cef6918a17ac6acc4d321c28112016de21a5e5736e97de885347bbb450985cb"
+    },
+    "tests\\test_routine_and_games.py": {
+      "size_bytes": 9968,
+      "sha256": "8d566cadb3daefa5e772c632d53dee86add675de89c53b4b3791636a2831ee89"
+    },
+    "tests\\test_state.py": {
+      "size_bytes": 1821,
+      "sha256": "1effda845b9063fa9360e07d46e7b251941ee8544e80be09f5b358a6d76f03a4"
+    },
+    "tests\\test_vitals_entry.py": {
+      "size_bytes": 7252,
+      "sha256": "c4ddf82d8faf31b49b3b595ecf9f6ea16750b18160340e9406c4729d193a134e"
+    },
+    "tests\\local_rules\\conftest.py": {
+      "size_bytes": 88,
+      "sha256": "40decc8b9f0d87ee4ab119ee295171ef0bdbb616790c177a2e8ce5bba341d2db"
+    },
+    "tests\\local_rules\\golden.json": {
+      "size_bytes": 44051,
+      "sha256": "8381739ca95176b35d75d3c7f30fbcc5625012fb005eda4444327c8d310ffc43"
+    },
+    "tests\\local_rules\\test_dashboard.py": {
+      "size_bytes": 2509,
+      "sha256": "ff37f11ec296e7af4b54cb556925d772cf2963b5d71d81d9127e3f2f5b501bfa"
+    },
+    "tests\\local_rules\\test_desktop.py": {
+      "size_bytes": 12742,
+      "sha256": "ac8fd6b29af9cf603d215597fe82662801643ea4966060d7d9ad9306857e7f08"
+    },
+    "tests\\local_rules\\test_elder_doctor_caregiver_sync.py": {
+      "size_bytes": 9427,
+      "sha256": "536ef81d5824a4acc1f8288f30b7a21bf8c7e2ad8c267bf30834cb86a9a128c2"
+    },
+    "tests\\local_rules\\test_engine.py": {
+      "size_bytes": 2845,
+      "sha256": "9d36a8273a6cff53cb82f318828b74d495b458ae8c3711a52183534ec0b1aa2b"
+    },
+    "tests\\local_rules\\test_local_rules_medication.py": {
+      "size_bytes": 5739,
+      "sha256": "466067c23454ef2f55e720ec663ee051b5be1b4cd011841e8e3f542d71f9d56a"
+    },
+    "tests\\local_rules\\test_requests.py": {
+      "size_bytes": 9021,
+      "sha256": "3d5bb6051b36ad06e0e8e1b9f92e0e581e287cc445e7e2176f3a45aec0d27f22"
+    },
+    "tests\\transcript_intent\\test_contract_policy.py": {
+      "size_bytes": 8858,
+      "sha256": "c8e0545f5cfd4d562c14ca15467548c674ec3535495f81c7bb7f2b0d71197b3a"
+    },
+    "tests\\transcript_intent\\test_lifecycle_integration.py": {
+      "size_bytes": 21002,
+      "sha256": "1bcb07db67b92216683462b37bc007f2c4a552fa10170841c411ee4902d4c226"
+    },
+    "tests\\voice_ai\\test_audio_and_asr.py": {
+      "size_bytes": 7292,
+      "sha256": "08aeb1c847a1d63343dcadf237632e4bb8fef308f12faef89ac9eeb21d1b9ad6"
+    },
+    "tests\\voice_ai\\test_business_flows.py": {
+      "size_bytes": 15746,
+      "sha256": "8ff134a79220467a8eae73b30f535025b2ac07ac4fec5d6d154c7b92dcb26d2a"
+    },
+    "tests\\voice_ai\\test_contracts_and_schemas.py": {
+      "size_bytes": 9521,
+      "sha256": "a7d3e18402b3dd5f9cdf30506b2fe30fd778d9fedbe536e304b2826739436beb"
+    },
+    "tests\\voice_ai\\test_faster_whisper_real.py": {
+      "size_bytes": 1302,
+      "sha256": "a02226687cb635f0329a490780763b783808037268768101666e9a7e945e2d16"
+    },
+    "tests\\voice_ai\\test_fixtures.py": {
+      "size_bytes": 8199,
+      "sha256": "dd457f9a8a0ed2d355340aa3c75849cf646ce0c6ae926e189bcbd28ba930a247"
+    },
+    "tests\\voice_ai\\test_gemini_semantic_real.py": {
+      "size_bytes": 16197,
+      "sha256": "7a908a3efabae1e5683c20614cf9e25d1f2d2ec7d7f9cc4a017d50b425437064"
+    },
+    "tests\\voice_ai\\test_hardening_and_benchmark.py": {
+      "size_bytes": 6355,
+      "sha256": "f07c0aa5de91452a6ca69796b26524729ceeaa6924c8c4a419b5bca0bf7e8016"
+    },
+    "tests\\voice_ai\\test_local_voice.py": {
+      "size_bytes": 12118,
+      "sha256": "0656841563744157fce7c14c55f0779d82f6dbc8e82b35604d805b7df9c51f8b"
+    },
+    "tests\\voice_ai\\test_realtime_sync.py": {
+      "size_bytes": 10311,
+      "sha256": "10e72443ca296214819db01c2dae9bbcc954c2376d1c5a8070d53be445040491"
+    },
+    "tests\\voice_ai\\test_reliability_and_fixes.py": {
+      "size_bytes": 19471,
+      "sha256": "bcbf6ffca3d3983694c44d5c4f2ae628fc907885e8176709d8596801f1797b8c"
+    },
+    "tests\\voice_ai\\test_semantic_gemini.py": {
+      "size_bytes": 14864,
+      "sha256": "845f683c2dd93cf62a56a36e054df4b65302bec11612d93b51b31c6127b1451e"
+    },
+    "tests\\voice_ai\\test_stt_api_integration.py": {
+      "size_bytes": 18089,
+      "sha256": "99c08b09149cdb5e58f80821bcfbbf60bed3840570ba6a9b915cd7a8b7464877"
+    },
+    "tests\\voice_ai\\test_ui_mounting.py": {
+      "size_bytes": 5694,
+      "sha256": "19c0494af3688d086548c36ee08566c46c70df13fbd7856a628714d5fd937a34"
+    },
+    "tests\\voice_ai\\test_web_api_endpoints.py": {
+      "size_bytes": 14295,
+      "sha256": "35762254da602925cd20c401f4f7a01da52cebcb4be28fa09b61788b91ea3aa1"
+    },
+    "tests\\voice_ai\\test_workflow_orchestrator.py": {
+      "size_bytes": 8897,
+      "sha256": "5ced803c175bacbabd9552a20d9e1f7ed8cfa680cfebbee65ae30238b95f7c01"
+    },
+    "web\\api_router.py": {
+      "size_bytes": 225075,
+      "sha256": "fc12d8853ec5e5ebfe19ae76c9f65a747f959fcd28873be82d0f57e64e2c615e"
+    },
+    "web\\auth.py": {
+      "size_bytes": 29044,
+      "sha256": "791a326867abf4b73b496edb92c693f4cde91eb86c3dd59a78d26a95d3235820"
+    },
+    "web\\server.py": {
+      "size_bytes": 13700,
+      "sha256": "bc28e4f17072e3584ddfe70c615cad2a717c86b603bcf96891adc63701875591"
+    },
+    "web\\sse_hub.py": {
+      "size_bytes": 5274,
+      "sha256": "5e11080fd12152adce0ea647a2b8339463fa413e5b3de2606616c06c95904b09"
+    },
+    "web\\templates\\login.html": {
+      "size_bytes": 17114,
+      "sha256": "f7d93786f9b322b25efcff7ee46eae761796342fca8edb5dc0bf633c8e4dfe50"
+    },
+    "web\\templates\\portal_admin.html": {
+      "size_bytes": 104545,
+      "sha256": "de3d12623818b7ed7aae6fe8b3bb222df881d997992c19e4c93627b93d7ff17a"
+    },
+    "web\\templates\\portal_caregiver.html": {
+      "size_bytes": 123265,
+      "sha256": "cae42df561d82915312993c8ea9504333a4933f208992b4413cac02605b31139"
+    },
+    "web\\templates\\portal_clinician.html": {
+      "size_bytes": 107994,
+      "sha256": "3cc67a0cd3bfeddd02af05ed626de2f615e6f6f5e53cdb81cfc6a9e296f47235"
+    },
+    "web\\templates\\register.html": {
+      "size_bytes": 2879,
+      "sha256": "6dcb52a62cd659085cccc75357f1ae589fee9fb652dcb1bb425f71dd32504829"
+    }
+  }
+}

@@ -1,0 +1,3237 @@
+[
+  {
+    "claim_id": "C01",
+    "claim": "Desktop khởi động bằng QApplication, khóa single-instance, dashboard và migration/import dữ liệu.",
+    "evidence_type": "source_code",
+    "source_path": "main.py",
+    "symbol": "main",
+    "line_range": [
+      52,
+      106
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "PARTIALLY_IMPLEMENTED",
+    "confidence": "MEDIUM",
+    "limitations": "Có mã nguồn; chưa nghiệm thu toàn bộ trên thiết bị đích.",
+    "additional_evidence": [
+      {
+        "source_path": "app/dashboard.py",
+        "symbol": "DashboardWindow.__init__",
+        "line_range": [
+          122,
+          173
+        ],
+        "evidence_type": "source_code"
+      }
+    ]
+  },
+  {
+    "claim_id": "C02",
+    "claim": "Dashboard mount TodayTodo, camera/phục hồi, trò chơi và thanh micro; smoke offscreen đã kiểm tra lifecycle.",
+    "evidence_type": "source_code",
+    "source_path": "app/dashboard.py",
+    "symbol": "DashboardWindow._init_ui",
+    "line_range": [
+      175,
+      528
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "Camera/audio mocked, TTS tắt, SMTP bị chặn; không phải nghiệm thu phần cứng.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/dashboard-smoke.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          44
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "C03",
+    "claim": "Camera Manager sở hữu luồng QThread và callback xử lý ảnh, có ảnh mô phỏng khi không đọc được camera.",
+    "evidence_type": "source_code",
+    "source_path": "core/camera_manager.py",
+    "symbol": "CameraManager.run",
+    "line_range": [
+      193,
+      270
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "PARTIALLY_IMPLEMENTED",
+    "confidence": "MEDIUM",
+    "limitations": "Camera mất có thể tiếp tục ảnh mô phỏng; phải kiểm chứng không ghi completed sai khi mất phần cứng.",
+    "additional_evidence": [
+      {
+        "source_path": "app/dashboard.py",
+        "symbol": "DashboardWindow._process_video_frame",
+        "line_range": [
+          530,
+          570
+        ],
+        "evidence_type": "source_code"
+      }
+    ]
+  },
+  {
+    "claim_id": "C04",
+    "claim": "Nhận diện và chọn patient đồng bộ binding các widget; voice invalidates context khi đổi patient/tab/source.",
+    "evidence_type": "source_code",
+    "source_path": "app/dashboard.py",
+    "symbol": "DashboardWindow._do_update_dashboard_ui",
+    "line_range": [
+      967,
+      1083
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "PARTIALLY_IMPLEMENTED",
+    "confidence": "MEDIUM",
+    "limitations": "Unknown-face không xóa current_patient_id; voice có guard riêng, hành động tay cần kiểm tra đổi/người lạ.",
+    "additional_evidence": [
+      {
+        "source_path": "app/dashboard.py",
+        "symbol": "DashboardWindow._resolve_patient_id",
+        "line_range": [
+          936,
+          953
+        ],
+        "evidence_type": "source_code"
+      },
+      {
+        "source_path": "services/local_voice/dispatcher.py",
+        "symbol": "CommandDispatcher.snapshot",
+        "line_range": [
+          24,
+          45
+        ],
+        "evidence_type": "source_code"
+      }
+    ]
+  },
+  {
+    "claim_id": "C05",
+    "claim": "Đóng dashboard dừng timer, voice coordinator/controller và camera.",
+    "evidence_type": "source_code",
+    "source_path": "app/dashboard.py",
+    "symbol": "DashboardWindow.closeEvent",
+    "line_range": [
+      1107,
+      1118
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "Smoke lifecycle có camera/micro mocked; worker đang native inference bị terminate sau chờ hữu hạn.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/dashboard-smoke.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          44
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "C06",
+    "claim": "Face detection ưu tiên OpenCV DNN, fallback Haar; nhận diện bằng LBPH radius 1/neighbors 8/grid8x8.",
+    "evidence_type": "source_code",
+    "source_path": "adapters/face_adapter.py",
+    "symbol": "FaceAdapter.__init__",
+    "line_range": [
+      40,
+      81
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "PARTIALLY_IMPLEMENTED",
+    "confidence": "MEDIUM",
+    "limitations": "Có pipeline; chưa có FAR/FRR trên tập người độc lập; DNN detector không phải model nhận dạng identity.",
+    "additional_evidence": [
+      {
+        "source_path": "adapters/face_adapter.py",
+        "symbol": "FaceAdapter.detect_face",
+        "line_range": [
+          107,
+          146
+        ],
+        "evidence_type": "source_code"
+      }
+    ]
+  },
+  {
+    "claim_id": "C07",
+    "claim": "ROI khuôn mặt grayscale, CLAHE, bilateral và resize200x200; augmentation flip, sáng/tối, xoay±4°.",
+    "evidence_type": "source_code",
+    "source_path": "adapters/face_adapter.py",
+    "symbol": "FaceAdapter.extract_face_roi",
+    "line_range": [
+      171,
+      221
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "PARTIALLY_IMPLEMENTED",
+    "confidence": "MEDIUM",
+    "limitations": "Không có lớp background thực tế dù doc string nhắc; augmentation không tăng số người độc lập.",
+    "additional_evidence": [
+      {
+        "source_path": "adapters/face_adapter.py",
+        "symbol": "FaceAdapter.train_recognizer",
+        "line_range": [
+          223,
+          312
+        ],
+        "evidence_type": "source_code"
+      }
+    ]
+  },
+  {
+    "claim_id": "C08",
+    "claim": "LBPH distance<58 tạo raw match; history 15 và TTL2 giây làm mượt; confidence UI là heuristic.",
+    "evidence_type": "source_code",
+    "source_path": "adapters/face_adapter.py",
+    "symbol": "FaceAdapter.recognize_face",
+    "line_range": [
+      330,
+      463
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "PARTIALLY_IMPLEMENTED",
+    "confidence": "MEDIUM",
+    "limitations": "Distance và confidence không phải xác suất đúng hay độ chính xác đã đo; TTL có thể giữ danh tính cũ.",
+    "additional_evidence": []
+  },
+  {
+    "claim_id": "C09",
+    "claim": "Đăng ký lưu crop và hồ sơ JSON, sync sang unified DB và retrain LBPH.",
+    "evidence_type": "source_code",
+    "source_path": "adapters/face_adapter.py",
+    "symbol": "FaceAdapter.register_patient",
+    "line_range": [
+      614,
+      719
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "PARTIALLY_IMPLEMENTED",
+    "confidence": "MEDIUM",
+    "limitations": "Test registration tồn tại nhưng một số dùng đường dữ liệu mặc định; không chạy trong audit để tránh sửa hồ sơ.",
+    "additional_evidence": [
+      {
+        "source_path": "services/patient_sync_service.py",
+        "symbol": "sync_single_patient",
+        "line_range": [
+          44,
+          262
+        ],
+        "evidence_type": "source_code"
+      }
+    ]
+  },
+  {
+    "claim_id": "C10",
+    "claim": "Biểu cảm dashboard có3 lớp Neutral/Happy/Sad, landmark heuristic và ensemble 75%heuristic+25%MLP khi có model.",
+    "evidence_type": "source_code",
+    "source_path": "adapters/emotion_adapter.py",
+    "symbol": "EmotionAdapter.process_frame",
+    "line_range": [
+      213,
+      325
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "PARTIALLY_IMPLEMENTED",
+    "confidence": "MEDIUM",
+    "limitations": "Không chẩn đoán tâm lý; chưa có accuracy/macro-F1 holdout hợp lệ cho ensemble 3 lớp.",
+    "additional_evidence": [
+      {
+        "source_path": "adapters/emotion_adapter.py",
+        "symbol": "EmotionAdapter._compute_facs_probabilities",
+        "line_range": [
+          146,
+          211
+        ],
+        "evidence_type": "source_code"
+      }
+    ]
+  },
+  {
+    "claim_id": "C11",
+    "claim": "MLP độc lập nhận 63 tọa độ landmark, Linear63→128→64→5, ReLU và dropout0.25.",
+    "evidence_type": "source_code",
+    "source_path": "modules/emotion/src/model.py",
+    "symbol": "ExpressionNet",
+    "line_range": [
+      7,
+      21
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "PARTIALLY_IMPLEMENTED",
+    "confidence": "MEDIUM",
+    "limitations": "Check point tồn tại không chứng minh dữ liệu/huấn luyện; dashboard chỉ lấy3 logits đầu và softmax lại.",
+    "additional_evidence": [
+      {
+        "source_path": "modules/emotion/utils/preprocess.py",
+        "symbol": "module",
+        "line_range": [
+          1,
+          70
+        ],
+        "evidence_type": "source_code"
+      },
+      {
+        "source_path": "modules/emotion/src/config.py",
+        "symbol": "module",
+        "line_range": [
+          1,
+          69
+        ],
+        "evidence_type": "source_code"
+      }
+    ]
+  },
+  {
+    "claim_id": "C12",
+    "claim": "Training biểu cảm có split theo session, baseline logistic regression và evaluator classification metrics.",
+    "evidence_type": "source_code",
+    "source_path": "modules/emotion/src/data.py",
+    "symbol": "module",
+    "line_range": [
+      1,
+      190
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "PARTIALLY_IMPLEMENTED",
+    "confidence": "MEDIUM",
+    "limitations": "Không tìm thấy CSV/splits/results phục vụ tái lập ở vị trí config; số người/data set/provenance UNKNOWN.",
+    "additional_evidence": [
+      {
+        "source_path": "modules/emotion/src/train.py",
+        "symbol": "module",
+        "line_range": [
+          1,
+          223
+        ],
+        "evidence_type": "source_code"
+      },
+      {
+        "source_path": "modules/emotion/src/evaluate.py",
+        "symbol": "module",
+        "line_range": [
+          1,
+          189
+        ],
+        "evidence_type": "source_code"
+      },
+      {
+        "source_path": "modules/emotion/src/baseline.py",
+        "symbol": "module",
+        "line_range": [
+          1,
+          66
+        ],
+        "evidence_type": "source_code"
+      }
+    ]
+  },
+  {
+    "claim_id": "C13",
+    "claim": "Biểu cảm camera ghi JSON/state, web đọc emotion_inferences; chưa thấy writer unified DB trong đường camera.",
+    "evidence_type": "source_code",
+    "source_path": "adapters/emotion_adapter.py",
+    "symbol": "EmotionAdapter._persist_result",
+    "line_range": [
+      359,
+      374
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "PARTIALLY_IMPLEMENTED",
+    "confidence": "MEDIUM",
+    "limitations": "Schema và seed emotion_inferences không chứng minh camera→DB→web; tìm kiếm call sites tĩnh chưa thấy cầu nối.",
+    "additional_evidence": [
+      {
+        "source_path": "web/api_router.py",
+        "symbol": "ApiRouter._get_mood",
+        "line_range": [
+          1052,
+          1076
+        ],
+        "evidence_type": "source_code"
+      }
+    ]
+  },
+  {
+    "claim_id": "C14",
+    "claim": "Phục hồi dùng MediaPipe Pose/Tasks lite và góc2D từ tọa độ landmark chuẩn hóa.",
+    "evidence_type": "source_code",
+    "source_path": "modules/rehabilitation/rehab_engine.py",
+    "symbol": "calculate_angle",
+    "line_range": [
+      44,
+      57
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "PARTIALLY_IMPLEMENTED",
+    "confidence": "MEDIUM",
+    "limitations": "Không dùng 3D chuẩn lâm sàng; x/y chuẩn hóa chưa sửa tỷ lệ khung hình; chưa có sai số góc với thước chuẩn.",
+    "additional_evidence": [
+      {
+        "source_path": "modules/rehabilitation/rehab_engine.py",
+        "symbol": "RehabilitationEngine._init_pose",
+        "line_range": [
+          531,
+          583
+        ],
+        "evidence_type": "source_code"
+      }
+    ]
+  },
+  {
+    "claim_id": "C15",
+    "claim": "FSM nâng tay đếm khi nâng rồi hạ; ngưỡng 60/142/130/50°, chấm lỗi khuỷu/đối xứng/hold.",
+    "evidence_type": "source_code",
+    "source_path": "modules/rehabilitation/rehab_engine.py",
+    "symbol": "ArmRaiseTracker.process",
+    "line_range": [
+      143,
+      246
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "PARTIALLY_IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "Test landmark tổng hợp; không chứng minh count thực tế. Penalty một số lỗi tăng theo frame, ảnh hưởng FPS. Test hiện có chỉ đưa một trạng thái landmark và assert stage; chưa test toàn chu kỳ rồi đếm.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/local_stt/rehab-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "tests/test_rehab_assistant.py",
+        "symbol": "TestRehabilitationEngine.test_arm_raise_state_machine",
+        "line_range": [
+          201,
+          219
+        ],
+        "evidence_type": "test_source"
+      }
+    ]
+  },
+  {
+    "claim_id": "C16",
+    "claim": "FSM đứng-ngồi dùng góc gối 155/140/118/125° và dấu đã chạm đáy trước khi đếm.",
+    "evidence_type": "source_code",
+    "source_path": "modules/rehabilitation/rehab_engine.py",
+    "symbol": "SitToStandTracker.process",
+    "line_range": [
+      277,
+      396
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "PARTIALLY_IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "Test tổng hợp, thiếu góc camera/occlusion thực; ankle thiếu dùng surrogate có thể ảnh hưởng góc. Test hiện có chỉ đưa một trạng thái landmark và assert stage; chưa test toàn chu kỳ rồi đếm.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/local_stt/rehab-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "tests/test_rehab_assistant.py",
+        "symbol": "TestRehabilitationEngine.test_sit_to_stand_state_machine",
+        "line_range": [
+          221,
+          238
+        ],
+        "evidence_type": "test_source"
+      }
+    ]
+  },
+  {
+    "claim_id": "C17",
+    "claim": "Đi bộ tại chỗ đếm bước trái/phải xen kẽ khi chênh tọa độ gối vượt±0.065; reset stance ở0.035.",
+    "evidence_type": "source_code",
+    "source_path": "modules/rehabilitation/rehab_engine.py",
+    "symbol": "MarchingTracker.process",
+    "line_range": [
+      423,
+      488
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "Ngưỡng normalized image units; count ngay khi nhấc, không đo quãng đường hoặc năng lực đi lại.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/local_stt/rehab-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "tests/test_rehab_assistant.py",
+        "symbol": "TestRehabilitationEngine.test_marching_state_machine",
+        "line_range": [
+          240,
+          252
+        ],
+        "evidence_type": "test_source"
+      }
+    ]
+  },
+  {
+    "claim_id": "C18",
+    "claim": "RehabSessionAdapter khóa target snapshot, ghi event idempotent/outbox và completed khi count>=target.",
+    "evidence_type": "source_code",
+    "source_path": "modules/rehabilitation/rehab_session_adapter.py",
+    "symbol": "RehabSessionAdapter.record_verified_rep",
+    "line_range": [
+      196,
+      290
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "Test DB với rep giả; tag camera là metadata từ caller, không tự xác thực frame/score; race đa writer chưa chứng minh.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "modules/rehabilitation/rehab_session_adapter.py",
+        "symbol": "RehabSessionAdapter.get_or_create_daily_session",
+        "line_range": [
+          126,
+          194
+        ],
+        "evidence_type": "source_code"
+      },
+      {
+        "source_path": "tests/test_realtime_sync_12_scenarios.py",
+        "symbol": "TestRealtimeSync12Scenarios.test_scenario_03_camera_target_10_reps_auto_completion",
+        "line_range": [
+          187,
+          253
+        ],
+        "evidence_type": "test_source"
+      }
+    ]
+  },
+  {
+    "claim_id": "C19",
+    "claim": "Dashboard ghi DB theo tổng reps, gồm incorrect_reps; score<=0 được thay 90 và quality_threshold chưa là điều kiện completed.",
+    "evidence_type": "source_code",
+    "source_path": "app/dashboard.py",
+    "symbol": "DashboardWindow._do_update_dashboard_ui",
+    "line_range": [
+      967,
+      1083
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "PARTIALLY_IMPLEMENTED",
+    "confidence": "MEDIUM",
+    "limitations": "UI khen hoàn thành không chứng minh mọi lần đúng form. Chưa thấy chặn hardware_valid tại điểm record_verified_rep.",
+    "additional_evidence": []
+  },
+  {
+    "claim_id": "C20",
+    "claim": "Thuốc hiện hiển thị và thao tác qua TodayTodo/Elder Sync Client cùng unified DB.",
+    "evidence_type": "source_code",
+    "source_path": "app/today_todo_widget.py",
+    "symbol": "TodayTodoWidget._on_confirm_taken",
+    "line_range": [
+      505,
+      509
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "Tự khai báo self_reported_taken; không chứng minh đã nuốt thuốc. Test không phải xác nhận từ người dùng thật.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/intent-and-stt-tests.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          9
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "services/elder_sync_client.py",
+        "symbol": "ElderSyncClient.flush_offline_queue",
+        "line_range": [
+          144,
+          379
+        ],
+        "evidence_type": "source_code"
+      }
+    ]
+  },
+  {
+    "claim_id": "C21",
+    "claim": "Prescription create sinh occurrences hôm nay và3 ngày tiếp theo; relay chuyển quá hạn PENDING/REMINDING.",
+    "evidence_type": "source_code",
+    "source_path": "web/api_router.py",
+    "symbol": "ApiRouter._create_prescription",
+    "line_range": [
+      1384,
+      1535
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "PARTIALLY_IMPLEMENTED",
+    "confidence": "MEDIUM",
+    "limitations": "Chưa thấy tác vụ gia hạn occurrences dài ngày ở active dashboard/backend; UTC+7 hardcode ở create; SNOOZED không thuộc scan quá hạn.",
+    "additional_evidence": [
+      {
+        "source_path": "services/outbox_relay.py",
+        "symbol": "OutboxRelayService.scan_overdue_tasks",
+        "line_range": [
+          208,
+          331
+        ],
+        "evidence_type": "source_code"
+      }
+    ]
+  },
+  {
+    "claim_id": "C22",
+    "claim": "Snooze đổi state sangSNOOZED, help tạo cảnh báo; chưa xác minh nhắc lại timed trong active dashboard.",
+    "evidence_type": "source_code",
+    "source_path": "services/elder_sync_client.py",
+    "symbol": "ElderSyncClient.flush_offline_queue",
+    "line_range": [
+      144,
+      379
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "PARTIALLY_IMPLEMENTED",
+    "confidence": "MEDIUM",
+    "limitations": "Hộp thoại help tuyên bố gửi/nhận và dùng liên hệ hardcode; DB alert không chứng minh SMTP delivery hoặc người nhận xử lý.",
+    "additional_evidence": [
+      {
+        "source_path": "app/today_todo_widget.py",
+        "symbol": "TodayTodoWidget._on_help_requested",
+        "line_range": [
+          515,
+          525
+        ],
+        "evidence_type": "source_code"
+      }
+    ]
+  },
+  {
+    "claim_id": "C23",
+    "claim": "Medication Panel/Medication Service và scheduler standalone còn code/test nhưng không mount trong dashboard hiện tại.",
+    "evidence_type": "source_code",
+    "source_path": "app/dashboard.py",
+    "symbol": "DashboardWindow._init_ui",
+    "line_range": [
+      175,
+      528
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "DEPRECATED",
+    "confidence": "HIGH",
+    "limitations": "Deprecated theo active dashboard, standalone vẫn có thể chạy; kết quả scheduler cũ không chứng minh luồng thuốc unified.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/medication_migration/medication_tests.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          21
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "services/medication_service.py",
+        "symbol": "module",
+        "line_range": [
+          1,
+          262
+        ],
+        "evidence_type": "source_code"
+      },
+      {
+        "source_path": "modules/medication_adherence/services/scheduler.py",
+        "symbol": "module",
+        "line_range": [
+          1,
+          325
+        ],
+        "evidence_type": "source_code"
+      }
+    ]
+  },
+  {
+    "claim_id": "C24",
+    "claim": "Recorder explicit sounddevice Input Stream, mono/resample16kHz, stop/cancel/bound duration; không nghe nền.",
+    "evidence_type": "source_code",
+    "source_path": "services/local_voice/recorder.py",
+    "symbol": "AudioRecorder",
+    "line_range": [
+      8,
+      71
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "Stream48k→16k đã test bằng mock; physical mic chưa kiểm chứng trong artefact hiện có.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/intent-and-stt-tests.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          9
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "tests/voice_ai/test_local_voice.py",
+        "symbol": "test_recorder_hardware_sample_rate_resampling_bounded_and_close",
+        "line_range": [
+          208,
+          234
+        ],
+        "evidence_type": "test_source"
+      }
+    ]
+  },
+  {
+    "claim_id": "C25",
+    "claim": "Engine faster-whisper small multilingual local files only, CPU/int8, beam 1, languagevi, VAD và consume segments ngoài UI.",
+    "evidence_type": "source_code",
+    "source_path": "services/local_voice/engine.py",
+    "symbol": "LocalSttEngine",
+    "line_range": [
+      8,
+      44
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "Có inference file local; audio chuẩn/consent chưa xác minh; không có WER/CER hợp lệ; GPU chưa chạy thành công.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/local_stt/cpu-final.json",
+        "symbol": "module",
+        "line_range": [
+          1,
+          145
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "reports/local_stt/clean-smoke.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          3
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "services/local_voice/config.py",
+        "symbol": "VoiceConfig",
+        "line_range": [
+          7,
+          29
+        ],
+        "evidence_type": "source_code"
+      },
+      {
+        "source_path": "services/local_voice/worker.py",
+        "symbol": "run_worker",
+        "line_range": [
+          8,
+          49
+        ],
+        "evidence_type": "source_code"
+      }
+    ]
+  },
+  {
+    "claim_id": "C26",
+    "claim": "Controller spawn một persistent worker, token/context bỏ response cũ; shutdown chờ rồi terminate/kill hữu hạn.",
+    "evidence_type": "source_code",
+    "source_path": "services/local_voice/controller.py",
+    "symbol": "VoiceSessionController",
+    "line_range": [
+      9,
+      154
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "Native inference không bị ngắt mềm ngay khi cancel; chỉ bỏ kết quả/chờ acknowledgement; test không có mic vật lý.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/intent-and-stt-tests.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          9
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "reports/gemini_intent/dashboard-smoke.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          44
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "tests/voice_ai/test_local_voice.py",
+        "symbol": "test_cancel_and_context_change_discard_late_results_and_shutdown",
+        "line_range": [
+          70,
+          93
+        ],
+        "evidence_type": "test_source"
+      }
+    ]
+  },
+  {
+    "claim_id": "C27",
+    "claim": "Dispatcher sáu intent dùng handler nút bấm, xác nhận dose default No và kiểm tra lại context/command id.",
+    "evidence_type": "source_code",
+    "source_path": "services/local_voice/dispatcher.py",
+    "symbol": "CommandDispatcher.dispatch",
+    "line_range": [
+      47,
+      104
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "Không có intent hoàn thành phục hồi; không dùng transcript tự sửa DB; sample text/mock audio chưa là E2E thật.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/intent-and-stt-tests.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          9
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "services/transcript_intent/registry.py",
+        "symbol": "module",
+        "line_range": [
+          1,
+          53
+        ],
+        "evidence_type": "source_code"
+      },
+      {
+        "source_path": "tests/transcript_intent/test_lifecycle_integration.py",
+        "symbol": "test_proposed_medication_confirmation_same_db_and_web",
+        "line_range": [
+          193,
+          221
+        ],
+        "evidence_type": "test_source"
+      }
+    ]
+  },
+  {
+    "claim_id": "C28",
+    "claim": "Lớp hiểu text Gemini đã có code/backend/client/coordinator, nhưng cloud mặc định false và full acceptance chưa nghiệm thu.",
+    "evidence_type": "source_code",
+    "source_path": "services/transcript_intent/service.py",
+    "symbol": "GeminiIntentService",
+    "line_range": [
+      12,
+      100
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "PARTIALLY_IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "3 synthetic cases SDK thật; chưa 102 acceptance, mic→web, project/quota independent verify hoặc newest key smoke.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/limited-live-benchmark.json",
+        "symbol": "module",
+        "line_range": [
+          1,
+          60
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "services/transcript_intent/config.py",
+        "symbol": "BackendConfig",
+        "line_range": [
+          7,
+          42
+        ],
+        "evidence_type": "source_code"
+      }
+    ]
+  },
+  {
+    "claim_id": "C29",
+    "claim": "Privacy gate production chỉ 20 câu điều hướng trung tính; nội dung thuốc/phục hồi xử lý local, unknown không đoán.",
+    "evidence_type": "source_code",
+    "source_path": "services/transcript_intent/policy.py",
+    "symbol": "module",
+    "line_range": [
+      1,
+      76
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "Đảm bảo theo catalog đã review, không phải bộ khử nhạy cảm tổng quát; không cho tùy ý text sức khỏe vào free API.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/intent-and-stt-tests.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          9
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "services/transcript_intent/prompts.py",
+        "symbol": "module",
+        "line_range": [
+          1,
+          23
+        ],
+        "evidence_type": "source_code"
+      },
+      {
+        "source_path": "tests/transcript_intent/test_contract_policy.py",
+        "symbol": "test_privacy_default_deny_not_id_redaction",
+        "line_range": [
+          38,
+          39
+        ],
+        "evidence_type": "test_source"
+      }
+    ]
+  },
+  {
+    "claim_id": "C30",
+    "claim": "Schema Pydantic enum/extraforbid và semantic validator giới hạn intent/context/evidence/negation; không tin confidence.",
+    "evidence_type": "source_code",
+    "source_path": "services/transcript_intent/schema.py",
+    "symbol": "module",
+    "line_range": [
+      1,
+      44
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "Đúng trên các mock/tập tổng hợp đã kiểm tra; chưa đo unsafe routing quy mô người dùng thực.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/intent-and-stt-tests.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          9
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "services/transcript_intent/policy.py",
+        "symbol": "validate_proposal",
+        "line_range": [
+          61,
+          76
+        ],
+        "evidence_type": "source_code"
+      },
+      {
+        "source_path": "tests/transcript_intent/test_contract_policy.py",
+        "symbol": "test_schema_forbids_policy_confidence_tools_and_custom_snooze",
+        "line_range": [
+          52,
+          63
+        ],
+        "evidence_type": "test_source"
+      }
+    ]
+  },
+  {
+    "claim_id": "C31",
+    "claim": "OfficialSDK textgenerateContent, JSON schema, tools=[] và functioncalling disabled; total≤8s, transport≥10s.",
+    "evidence_type": "source_code",
+    "source_path": "services/transcript_intent/gemini_adapter.py",
+    "symbol": "GeminiIntentAdapter.generate",
+    "line_range": [
+      14,
+      64
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "Không cấp DB/SQL/email/grounding. Hạn total là client deadline; transport cancel/release thiết bị thật cần stress.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/limited-live-benchmark.json",
+        "symbol": "module",
+        "line_range": [
+          1,
+          60
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "reports/gemini_intent/intent-and-stt-tests.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          9
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "tests/transcript_intent/test_lifecycle_integration.py",
+        "symbol": "test_sdk_contract_and_no_implicit_tools",
+        "line_range": [
+          234,
+          251
+        ],
+        "evidence_type": "test_source"
+      }
+    ]
+  },
+  {
+    "claim_id": "C32",
+    "claim": "Quota file lock, reservation1200tokens, caps 1 RPM/2400 TPM/10 RPD reserve 2, retry bounded và circuit breaker.",
+    "evidence_type": "source_code",
+    "source_path": "services/transcript_intent/budget.py",
+    "symbol": "ProjectBudget",
+    "line_range": [
+      17,
+      75
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "Caps local, không phải quota provider được xác minh; file system shared không phải limiter nhiều host.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/intent-and-stt-tests.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          9
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "services/transcript_intent/service.py",
+        "symbol": "GeminiIntentService._cloud_locked",
+        "line_range": [
+          43,
+          82
+        ],
+        "evidence_type": "source_code"
+      },
+      {
+        "source_path": "tests/transcript_intent/test_contract_policy.py",
+        "symbol": "test_quota_shared_across_instances_and_circuit",
+        "line_range": [
+          107,
+          123
+        ],
+        "evidence_type": "test_source"
+      }
+    ]
+  },
+  {
+    "claim_id": "C33",
+    "claim": "HTTP text endpoint kiểm tra session/auth/patient/context version trước và sau classification.",
+    "evidence_type": "source_code",
+    "source_path": "services/transcript_intent/backend.py",
+    "symbol": "TranscriptIntentEndpoint.handle",
+    "line_range": [
+      18,
+      55
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "Loopback HTTP+Qt+DB giả, Gemini mock; không có mic/remoteprovider trong HTTPsmoke.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/http-smoke.json",
+        "symbol": "module",
+        "line_range": [
+          1,
+          10
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "reports/gemini_intent/intent-and-stt-tests.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          9
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "tests/transcript_intent/test_lifecycle_integration.py",
+        "symbol": "test_backend_rechecks_auth_and_version",
+        "line_range": [
+          143,
+          172
+        ],
+        "evidence_type": "test_source"
+      }
+    ]
+  },
+  {
+    "claim_id": "C34",
+    "claim": "TTS được suspend khi ghi; nhạc pause; child pyttsx3 local giữ entrypoint frozen riêng.",
+    "evidence_type": "source_code",
+    "source_path": "services/local_voice/controller.py",
+    "symbol": "VoiceSessionController.start",
+    "line_range": [
+      56,
+      73
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "Phối hợp đã test code/mocks; chưa nghe playbackloa thật; nhắc thuốc/coach active chưa nối toàn bộ TTS callbacks.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/intent-and-stt-tests.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          9
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "services/local_voice/tts_runtime.py",
+        "symbol": "speak",
+        "line_range": [
+          5,
+          19
+        ],
+        "evidence_type": "source_code"
+      },
+      {
+        "source_path": "app/local_voice_widget.py",
+        "symbol": "module",
+        "line_range": [
+          1,
+          110
+        ],
+        "evidence_type": "source_code"
+      },
+      {
+        "source_path": "tests/voice_ai/test_local_voice.py",
+        "symbol": "test_tts_cannot_restart_during_capture",
+        "line_range": [
+          194,
+          205
+        ],
+        "evidence_type": "test_source"
+      }
+    ]
+  },
+  {
+    "claim_id": "C35",
+    "claim": "API STT cũ không còn active: router 410 và factory compatibility disabled; không restore orchestrator cũ.",
+    "evidence_type": "source_code",
+    "source_path": "web/api_router.py",
+    "symbol": "ApiRouter.handle_request",
+    "line_range": [
+      65,
+      258
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "REMOVED",
+    "confidence": "HIGH",
+    "limitations": "REMOVED chỉ đường API STT active; file/provider/test legacy vẫn tồn tại, không nói mọi source STT đã xóa.",
+    "additional_evidence": [
+      {
+        "source_path": "services/voice_ai/asr/factory.py",
+        "symbol": "module",
+        "line_range": [
+          1,
+          14
+        ],
+        "evidence_type": "source_code"
+      },
+      {
+        "source_path": "archive/voice/README.md",
+        "symbol": "module",
+        "line_range": [
+          1,
+          96
+        ],
+        "evidence_type": "source_code"
+      },
+      {
+        "source_path": "tests/voice_ai/test_local_voice.py",
+        "symbol": "test_legacy_web_voice_disabled_even_when_local_flag_enabled",
+        "line_range": [
+          250,
+          257
+        ],
+        "evidence_type": "test_source"
+      }
+    ]
+  },
+  {
+    "claim_id": "C36",
+    "claim": "Các semantic/orchestrator/voicewidget cũ và Voskarchive không là tuyến nhận giọng active.",
+    "evidence_type": "source_code",
+    "source_path": "services/voice_ai/orchestrator/router.py",
+    "symbol": "module",
+    "line_range": [
+      1,
+      634
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "DEPRECATED",
+    "confidence": "HIGH",
+    "limitations": "TTS coordinator cũ còn được reuse; không quy toàn bộ services/voice_ai thành deadcode.",
+    "additional_evidence": [
+      {
+        "source_path": "app/voice_button_widget.py",
+        "symbol": "module",
+        "line_range": [
+          1,
+          266
+        ],
+        "evidence_type": "source_code"
+      },
+      {
+        "source_path": "app/local_voice_widget.py",
+        "symbol": "module",
+        "line_range": [
+          1,
+          110
+        ],
+        "evidence_type": "source_code"
+      }
+    ]
+  },
+  {
+    "claim_id": "C37",
+    "claim": "Theo dõi sức khỏe web ghi measurementgroups/observations, request completed và outbox cùng transaction.",
+    "evidence_type": "source_code",
+    "source_path": "web/api_router.py",
+    "symbol": "ApiRouter._add_observation",
+    "line_range": [
+      701,
+      822
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "Nhập tay từ người chăm sóc; không có đường sensor IoT đã nghiệm thu; unit/range validation cần đối chiếu backend/UI.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "C38",
+    "claim": "Web có recommendation/reports/review/emergencycontacts và các màn caregiver/clinician/admin.",
+    "evidence_type": "source_code",
+    "source_path": "web/api_router.py",
+    "symbol": "ApiRouter.handle_request",
+    "line_range": [
+      65,
+      258
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "PARTIALLY_IMPLEMENTED",
+    "confidence": "MEDIUM",
+    "limitations": "Sự có mặt endpoint/UI không chứng minh tất cả chức năng được browser nghiệm thu; emergencycontacts không tự gọi điện.",
+    "additional_evidence": [
+      {
+        "source_path": "web/templates/portal_caregiver.html",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2375
+        ],
+        "evidence_type": "source_code"
+      },
+      {
+        "source_path": "web/templates/portal_clinician.html",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2256
+        ],
+        "evidence_type": "source_code"
+      },
+      {
+        "source_path": "web/templates/portal_admin.html",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2385
+        ],
+        "evidence_type": "source_code"
+      }
+    ]
+  },
+  {
+    "claim_id": "C39",
+    "claim": "Trò chơi lật cặp/nhớ trình tự dùng rules seededrandom, service/repository; desktop ghi SQLite riêng.",
+    "evidence_type": "source_code",
+    "source_path": "app/cognitive_games_widget.py",
+    "symbol": "CognitiveGamesWidget.__init__",
+    "line_range": [
+      54,
+      80
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "PARTIALLY_IMPLEMENTED",
+    "confidence": "MEDIUM",
+    "limitations": "Import sang unified là bước import, chưa thấy live outbox từ gameplay; không có chứng cứ cải thiện nhận thức lâm sàng.",
+    "additional_evidence": [
+      {
+        "source_path": "modules/cognitive_games/services/game_engine.py",
+        "symbol": "GameEngine",
+        "line_range": [
+          14,
+          143
+        ],
+        "evidence_type": "source_code"
+      },
+      {
+        "source_path": "database/importer.py",
+        "symbol": "DataImporter._import_cognitive_games",
+        "line_range": [
+          472,
+          541
+        ],
+        "evidence_type": "source_code"
+      }
+    ]
+  },
+  {
+    "claim_id": "C40",
+    "claim": "Database runtime là SQLite/WAL/foreignkeys/bus y timeout; không có PostgreSQL driver runtime trong manager.",
+    "evidence_type": "source_code",
+    "source_path": "database/connection.py",
+    "symbol": "UnifiedDatabaseManager",
+    "line_range": [
+      51,
+      115
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "Các comment PostgreSQL/ANSI/3NF là định hướng, không là chứng minh tương thích hoặc chuẩn hóa hình thức.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "C41",
+    "claim": "4 migration định nghĩa schema, Migrator áp dụng theo version; importer gộp DB standalone/JSON.",
+    "evidence_type": "source_code",
+    "source_path": "database/migrator.py",
+    "symbol": "module",
+    "line_range": [
+      1,
+      62
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "Không mở DBproduction trong audit; seed không phải dữ liệu camera/micro/sensor thực; migration atomicity chưa fault inject.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "database/importer.py",
+        "symbol": "DataImporter.import_all",
+        "line_range": [
+          54,
+          88
+        ],
+        "evidence_type": "source_code"
+      }
+    ]
+  },
+  {
+    "claim_id": "C42",
+    "claim": "Outbox relay poll0.5s gửi tín hiệu SSE/auth, side effect email và markprocessed; UI web refetch dữ liệu.",
+    "evidence_type": "source_code",
+    "source_path": "services/outbox_relay.py",
+    "symbol": "OutboxRelayService.process_pending_events",
+    "line_range": [
+      86,
+      144
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "Test in-process queue; không phải 3 thiết bị qua Internet; processed≠client đã render hoặc SMTP đã tới mailbox.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "web/sse_hub.py",
+        "symbol": "SSEHub.dispatch_outbox_event",
+        "line_range": [
+          82,
+          128
+        ],
+        "evidence_type": "source_code"
+      }
+    ]
+  },
+  {
+    "claim_id": "C43",
+    "claim": "Elder Sync Client truy cập SQLite trực tiếp; offline JSON queue perpatient và sync inbox dedup; voice không replay.",
+    "evidence_type": "source_code",
+    "source_path": "services/elder_sync_client.py",
+    "symbol": "ElderSyncClient.enqueue_event",
+    "line_range": [
+      101,
+      142
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "is_online là flag, không đo mạng; không đồng bộ SQLite độc lập giữa nhiều máy.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/intent-and-stt-tests.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          9
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "services/elder_sync_client.py",
+        "symbol": "ElderSyncClient.flush_offline_queue",
+        "line_range": [
+          144,
+          379
+        ],
+        "evidence_type": "source_code"
+      },
+      {
+        "source_path": "tests/voice_ai/test_local_voice.py",
+        "symbol": "test_voice_version_conflict_offline_and_restart_never_replay",
+        "line_range": [
+          177,
+          191
+        ],
+        "evidence_type": "test_source"
+      }
+    ]
+  },
+  {
+    "claim_id": "C44",
+    "claim": "Auth phân quyền theo users active/patient active/careteam/consent và SSE recheck quyền; session RAM7 ngày.",
+    "evidence_type": "source_code",
+    "source_path": "web/auth.py",
+    "symbol": "AuthService.check_patient_access",
+    "line_range": [
+      428,
+      509
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "Có các guard đã test; không suy ra hệ thống bảo mật production. Restart mất token/session.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "reports/gemini_intent/http-smoke.json",
+        "symbol": "module",
+        "line_range": [
+          1,
+          10
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "web/auth.py",
+        "symbol": "AuthService.create_session",
+        "line_range": [
+          399,
+          412
+        ],
+        "evidence_type": "source_code"
+      },
+      {
+        "source_path": "tests/transcript_intent/test_lifecycle_integration.py",
+        "symbol": "test_real_auth_relationship_revocation",
+        "line_range": [
+          349,
+          369
+        ],
+        "evidence_type": "test_source"
+      }
+    ]
+  },
+  {
+    "claim_id": "C45",
+    "claim": "Auth còn lưu password dạng prefix+plaintext, bypass kiểudemo và hint lộ mật khẩu khi sai.",
+    "evidence_type": "source_code",
+    "source_path": "web/auth.py",
+    "symbol": "AuthService.authenticate_credentials",
+    "line_range": [
+      67,
+      200
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "PARTIALLY_IMPLEMENTED",
+    "confidence": "MEDIUM",
+    "limitations": "Rủi ro nghiêm trọng nhìn thấy từ code; không kiểm tra khai thác, không sao chép giá trị mật khẩu vào báo cáo.",
+    "additional_evidence": [
+      {
+        "source_path": "web/auth.py",
+        "symbol": "AuthService.register_caregiver",
+        "line_range": [
+          207,
+          335
+        ],
+        "evidence_type": "source_code"
+      }
+    ]
+  },
+  {
+    "claim_id": "C46",
+    "claim": "SSE dùng token query và server log message không redactURL; backup là dump SQL plaintext.",
+    "evidence_type": "source_code",
+    "source_path": "web/server.py",
+    "symbol": "HealthcareHttpHandler.log_message",
+    "line_range": [
+      39,
+      40
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "PARTIALLY_IMPLEMENTED",
+    "confidence": "MEDIUM",
+    "limitations": "Chưa xác minh log vận hành có token thật; mã cho phép nguy cơ. Không thấy retention/encryption tổng thể đã nghiệm thu.",
+    "additional_evidence": [
+      {
+        "source_path": "web/server.py",
+        "symbol": "HealthcareHttpHandler._handle_sse_stream",
+        "line_range": [
+          135,
+          183
+        ],
+        "evidence_type": "source_code"
+      },
+      {
+        "source_path": "database/backup_restore.py",
+        "symbol": "BackupRestoreService.create_sql_dump",
+        "line_range": [
+          21,
+          53
+        ],
+        "evidence_type": "source_code"
+      }
+    ]
+  },
+  {
+    "claim_id": "C47",
+    "claim": "PostgreSQL là định hướng trong tài liệu/schema comment, chưa là runtime backend.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "symbol": "module",
+    "line_range": [
+      1,
+      434
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "PLANNED",
+    "confidence": "MEDIUM",
+    "limitations": "Không suy đoán đã deploy Postgres/Supabase/Redis vì tên mục tiêu; runtime đã kiểm tra source chỉ sqlite 3.",
+    "additional_evidence": [
+      {
+        "source_path": "database/connection.py",
+        "symbol": "UnifiedDatabaseManager",
+        "line_range": [
+          51,
+          115
+        ],
+        "evidence_type": "source_code"
+      }
+    ]
+  },
+  {
+    "claim_id": "C48",
+    "claim": "Fall/HFD/ONNX/video còn retainedsource/artefacts nhưng không trong camera callbacks dashboard hiện tại.",
+    "evidence_type": "source_code",
+    "source_path": "app/dashboard.py",
+    "symbol": "DashboardWindow._process_video_frame",
+    "line_range": [
+      530,
+      570
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "DEPRECATED",
+    "confidence": "HIGH",
+    "limitations": "Deprecated theo dashboardactive; toolvideo riêng vẫn có. Không dùng metricfall cũ thay metric rehab hiện tại.",
+    "additional_evidence": [
+      {
+        "source_path": "core/fall_pipeline.py",
+        "symbol": "module",
+        "line_range": [
+          1,
+          542
+        ],
+        "evidence_type": "source_code"
+      },
+      {
+        "source_path": "modules/fall/hfd_classifier.py",
+        "symbol": "module",
+        "line_range": [
+          1,
+          85
+        ],
+        "evidence_type": "source_code"
+      }
+    ]
+  },
+  {
+    "claim_id": "C49",
+    "claim": "Runtime requirements chính+lock Linux/STT/backend SDK; đã có log cài sạchLinux và pipcheck.",
+    "evidence_type": "repository_artifact",
+    "source_path": "requirements.txt",
+    "symbol": "module",
+    "line_range": [
+      1,
+      26
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "Windows constraints/build/installer/model DLL mới chưa nghiệm thu; pin Linux không chứng minh Windows wheel.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/clean-pip-check.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "reports/gemini_intent/clean-full-install.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          186
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "requirements-linux.lock",
+        "symbol": "module",
+        "line_range": [
+          1,
+          64
+        ],
+        "evidence_type": "source_code"
+      },
+      {
+        "source_path": "requirements-gemini-backend.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          4
+        ],
+        "evidence_type": "source_code"
+      }
+    ]
+  },
+  {
+    "claim_id": "C50",
+    "claim": "Spec excludes Gemini SDK/provider/backend env khỏi EXE; chưa build binary kiểm chứng ranh giới này.",
+    "evidence_type": "repository_artifact",
+    "source_path": "AI_Rehab_Safety_Assistant.spec",
+    "symbol": "module",
+    "line_range": [
+      1,
+      143
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "PARTIALLY_IMPLEMENTED",
+    "confidence": "MEDIUM",
+    "limitations": "Reviewsource recipe thôi, không chứng minh binary không secret. Không đọc .envprivate hoặc tải/cài package trong audit.",
+    "additional_evidence": []
+  },
+  {
+    "claim_id": "C51",
+    "claim": "STT CPU 12 lượt: cold 727 ms, p50=4642 ms, p95=6015.95ms, RSS 1830600704 bytes; camera/GPU thất bại.",
+    "evidence_type": "repository_artifact",
+    "source_path": "reports/local_stt/cpu-final.json",
+    "symbol": "module",
+    "line_range": [
+      1,
+      145
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "Đo script engine/audio 873–1170 ms, không phải full app/micđồngthời, thiếu groundtruth; p95 này là số cũ, chưa chạy lại.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/local_stt/cpu-final.json",
+        "symbol": "module",
+        "line_range": [
+          1,
+          145
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "reports/local_stt/gpu-camera.json",
+        "symbol": "module",
+        "line_range": [
+          1,
+          7
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "C52",
+    "claim": "Offline policy 150 cases:104 correct; acceptance 72/102; 0 unexpected sensitive routes trong tập tổng hợp.",
+    "evidence_type": "repository_artifact",
+    "source_path": "reports/gemini_intent/offline-benchmark.json",
+    "symbol": "module",
+    "line_range": [
+      1,
+      1385
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "Cloudtắt; 69.33%toàn tập, 70.59%acceptance là policy coverage không là Geminiaccuracy hoặc STT WER.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/offline-benchmark.json",
+        "symbol": "module",
+        "line_range": [
+          1,
+          1385
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "C53",
+    "claim": "3 synthetic API cases đạt schema/intent, latency 1633/1138/1562 ms; full acceptance=false/quota_verified=false.",
+    "evidence_type": "repository_artifact",
+    "source_path": "reports/gemini_intent/limited-live-benchmark.json",
+    "symbol": "module",
+    "line_range": [
+      1,
+      60
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "n3 và một smoke1746ms riêng; không đủ chứng minh accuracy95% hay latency ổn định. Audit không gọi API.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/limited-live-benchmark.json",
+        "symbol": "module",
+        "line_range": [
+          1,
+          60
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "C54",
+    "claim": "3 nhóm test log hiện có 107+41+13 passed; không có bằng chứng toàn repo pass và không chạy lại trong audit.",
+    "evidence_type": "repository_artifact",
+    "source_path": "reports/gemini_intent/REPORT.md",
+    "symbol": "module",
+    "line_range": [
+      1,
+      75
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "Tổng 161 thuộc 3 nhóm được ghi; 85/17/6/16 ở report khác có overlap. Một số baseline native audio timeout/DB fail còn ghi.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/intent-and-stt-tests.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          9
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "reports/gemini_intent/legacy-regression-isolated.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          8
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      },
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "C55",
+    "claim": "Face FAR/FRR, emotion holdout F1, rehab clinical angle error, STT WER và nghiệm thu mic/camera/multi host chưa có bằngchứng phù hợp.",
+    "evidence_type": "repository_artifact",
+    "source_path": "reports/local_stt/REPORT.md",
+    "symbol": "module",
+    "line_range": [
+      1,
+      58
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "UNKNOWN",
+    "confidence": "MEDIUM",
+    "limitations": "Không có số đo hợp lệ trong các artefact đã đối chiếu; không khẳng định không tồn tại ngoài repo.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/REPORT.md",
+        "symbol": "module",
+        "line_range": [
+          1,
+          75
+        ],
+        "evidence_type": "source_code"
+      }
+    ]
+  },
+  {
+    "claim_id": "C56",
+    "claim": "Route public quick-accounts trả password đã bóc prefix/plaintext cùng thông tin tài khoản.",
+    "evidence_type": "source_code",
+    "source_path": "web/api_router.py",
+    "symbol": "ApiRouter._get_quick_accounts",
+    "line_range": [
+      298,
+      371
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "PARTIALLY_IMPLEMENTED",
+    "confidence": "MEDIUM",
+    "limitations": "Phát hiện source, không gọi route hay trích dữ liệu thật. Rủi ro privacy/auth production cần ưu tiên xử lý.",
+    "additional_evidence": [
+      {
+        "source_path": "web/api_router.py",
+        "symbol": "ApiRouter.handle_request",
+        "line_range": [
+          65,
+          258
+        ],
+        "evidence_type": "source_code"
+      }
+    ]
+  },
+  {
+    "claim_id": "C57",
+    "claim": "Web chart có dải tham chiếu sức khỏe hardcode; chưa có chứng cứ validation/personalization lâm sàng.",
+    "evidence_type": "repository_artifact",
+    "source_path": "web/templates/portal_clinician.html",
+    "symbol": "module",
+    "line_range": [
+      1,
+      2256
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "PARTIALLY_IMPLEMENTED",
+    "confidence": "MEDIUM",
+    "limitations": "Chỉ mô tả source UI; không công nhận các dải này là khuyến nghị y tế đúng cho mọi người.",
+    "additional_evidence": []
+  },
+  {
+    "claim_id": "C58",
+    "claim": "Rehab-event API nhận quyền view, tăng count từ body; chưa so session.patient_id với patient URL hay xác thực nguồn camera.",
+    "evidence_type": "source_code",
+    "source_path": "web/api_router.py",
+    "symbol": "ApiRouter._handle_rehab_event",
+    "line_range": [
+      1128,
+      1224
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "PARTIALLY_IMPLEMENTED",
+    "confidence": "MEDIUM",
+    "limitations": "Rủi ro theo source, chưa gọi endpoint/thử khai thác. Không dùng tag camera_ai như at test at io n; cần auth/write/ownership tests.",
+    "additional_evidence": [
+      {
+        "source_path": "web/api_router.py",
+        "symbol": "ApiRouter.handle_request",
+        "line_range": [
+          65,
+          258
+        ],
+        "evidence_type": "source_code"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_schema_migrations",
+    "claim": "DDL khai báo bảngschema_migrations, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "symbol": "CREATE TABLE schema_migrations",
+    "line_range": [
+      7,
+      10
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_users",
+    "claim": "DDL khai báo bảng users, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "symbol": "CREATE TABLE users",
+    "line_range": [
+      13,
+      22
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_patients",
+    "claim": "DDL khai báo bảngpatients, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "symbol": "CREATE TABLE patients",
+    "line_range": [
+      25,
+      35
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_legacy_patient_map",
+    "claim": "DDL khai báo bảnglegacy_patient_map, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "symbol": "CREATE TABLE legacy_patient_map",
+    "line_range": [
+      38,
+      43
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_caregivers",
+    "claim": "DDL khai báo bảngcaregivers, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "symbol": "CREATE TABLE caregivers",
+    "line_range": [
+      46,
+      53
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_clinicians",
+    "claim": "DDL khai báo bảngclinicians, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "symbol": "CREATE TABLE clinicians",
+    "line_range": [
+      56,
+      65
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_patient_caregivers",
+    "claim": "DDL khai báo bảngpatient_caregivers, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "symbol": "CREATE TABLE patient_caregivers",
+    "line_range": [
+      68,
+      84
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_care_team",
+    "claim": "DDL khai báo bảngcare_team, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "symbol": "CREATE TABLE care_team",
+    "line_range": [
+      87,
+      99
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_medications",
+    "claim": "DDL khai báo bảngmedications, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "symbol": "CREATE TABLE medications",
+    "line_range": [
+      102,
+      111
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_prescriptions",
+    "claim": "DDL khai báo bảng prescriptions, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "symbol": "CREATE TABLE prescriptions",
+    "line_range": [
+      114,
+      130
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_prescription_items",
+    "claim": "DDL khai báo bảngprescription_items, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "symbol": "CREATE TABLE prescription_items",
+    "line_range": [
+      133,
+      147
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_medication_schedules",
+    "claim": "DDL khai báo bảngmedication_schedules, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "symbol": "CREATE TABLE medication_schedules",
+    "line_range": [
+      150,
+      165
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_dose_occurrences",
+    "claim": "DDL khai báo bảngdose_occurrences, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "symbol": "CREATE TABLE dose_occurrences",
+    "line_range": [
+      168,
+      190
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_dose_events",
+    "claim": "DDL khai báo bảngdose_events, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "symbol": "CREATE TABLE dose_events",
+    "line_range": [
+      193,
+      206
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_alerts",
+    "claim": "DDL khai báo bảngalerts, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "symbol": "CREATE TABLE alerts",
+    "line_range": [
+      209,
+      222
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_notification_deliveries",
+    "claim": "DDL khai báo bảngnotification_deliveries, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "symbol": "CREATE TABLE notification_deliveries",
+    "line_range": [
+      225,
+      239
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_observation_types",
+    "claim": "DDL khai báo bảngobservation_types, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "symbol": "CREATE TABLE observation_types",
+    "line_range": [
+      242,
+      250
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_measurement_groups",
+    "claim": "DDL khai báo bảngmeasurement_groups, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "symbol": "CREATE TABLE measurement_groups",
+    "line_range": [
+      253,
+      266
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_health_observations",
+    "claim": "DDL khai báo bảnghealth_observations, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "symbol": "CREATE TABLE health_observations",
+    "line_range": [
+      269,
+      284
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_symptom_entries",
+    "claim": "DDL khai báo bảngsymptom_entries, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "symbol": "CREATE TABLE symptom_entries",
+    "line_range": [
+      287,
+      297
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_clinician_reviews",
+    "claim": "DDL khai báo bảngclinician_reviews, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "symbol": "CREATE TABLE clinician_reviews",
+    "line_range": [
+      300,
+      311
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_clinical_messages",
+    "claim": "DDL khai báo bảngclinical_messages, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "symbol": "CREATE TABLE clinical_messages",
+    "line_range": [
+      314,
+      328
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_message_receipts",
+    "claim": "DDL khai báo bảngmessage_receipts, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "symbol": "CREATE TABLE message_receipts",
+    "line_range": [
+      331,
+      339
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_monitoring_plans",
+    "claim": "DDL khai báo bảngmonitoring_plans, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "symbol": "CREATE TABLE monitoring_plans",
+    "line_range": [
+      342,
+      355
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_patient_thresholds",
+    "claim": "DDL khai báo bảngpatient_thresholds, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "symbol": "CREATE TABLE patient_thresholds",
+    "line_range": [
+      357,
+      368
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_game_types",
+    "claim": "DDL khai báo bảnggame_types, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "symbol": "CREATE TABLE game_types",
+    "line_range": [
+      371,
+      378
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_content_packs",
+    "claim": "DDL khai báo bảngcontent_packs, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "symbol": "CREATE TABLE content_packs",
+    "line_range": [
+      380,
+      389
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_game_sessions",
+    "claim": "DDL khai báo bảnggame_sessions, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "symbol": "CREATE TABLE game_sessions",
+    "line_range": [
+      391,
+      406
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_game_results",
+    "claim": "DDL khai báo bảnggame_results, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/001_initial_schema.sql",
+    "symbol": "CREATE TABLE game_results",
+    "line_range": [
+      408,
+      417
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_mood_checkins",
+    "claim": "DDL khai báo bảngmood_checkins, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/002_rehab_and_audit.sql",
+    "symbol": "CREATE TABLE mood_checkins",
+    "line_range": [
+      8,
+      16
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_emotion_inferences",
+    "claim": "DDL khai báo bảngemotion_inferences, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/002_rehab_and_audit.sql",
+    "symbol": "CREATE TABLE emotion_inferences",
+    "line_range": [
+      19,
+      29
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_rehab_plans",
+    "claim": "DDL khai báo bảngrehab_plans, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/002_rehab_and_audit.sql",
+    "symbol": "CREATE TABLE rehab_plans",
+    "line_range": [
+      32,
+      45
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_rehab_sessions",
+    "claim": "DDL khai báo bảngrehab_sessions, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/002_rehab_and_audit.sql",
+    "symbol": "CREATE TABLE rehab_sessions",
+    "line_range": [
+      48,
+      67
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_rehab_events",
+    "claim": "DDL khai báo bảngrehab_events, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/002_rehab_and_audit.sql",
+    "symbol": "CREATE TABLE rehab_events",
+    "line_range": [
+      70,
+      82
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_caregiver_reports",
+    "claim": "DDL khai báo bảngcaregiver_reports, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/002_rehab_and_audit.sql",
+    "symbol": "CREATE TABLE caregiver_reports",
+    "line_range": [
+      85,
+      97
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_report_messages",
+    "claim": "DDL khai báo bảngreport_messages, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/002_rehab_and_audit.sql",
+    "symbol": "CREATE TABLE report_messages",
+    "line_range": [
+      100,
+      109
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_care_recommendations",
+    "claim": "DDL khai báo bảngcare_recommendations, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/002_rehab_and_audit.sql",
+    "symbol": "CREATE TABLE care_recommendations",
+    "line_range": [
+      112,
+      127
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_recommendation_receipts",
+    "claim": "DDL khai báo bảngrecommendation_receipts, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/002_rehab_and_audit.sql",
+    "symbol": "CREATE TABLE recommendation_receipts",
+    "line_range": [
+      130,
+      138
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_emergency_contacts",
+    "claim": "DDL khai báo bảngemergency_contacts, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/002_rehab_and_audit.sql",
+    "symbol": "CREATE TABLE emergency_contacts",
+    "line_range": [
+      141,
+      154
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_emergency_contact_events",
+    "claim": "DDL khai báo bảngemergency_contact_events, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/002_rehab_and_audit.sql",
+    "symbol": "CREATE TABLE emergency_contact_events",
+    "line_range": [
+      157,
+      169
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_audit_events",
+    "claim": "DDL khai báo bảngaudit_events, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/002_rehab_and_audit.sql",
+    "symbol": "CREATE TABLE audit_events",
+    "line_range": [
+      172,
+      182
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_outbox_events",
+    "claim": "DDL khai báo bảngoutbox_events, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/003_outbox_and_sync.sql",
+    "symbol": "CREATE TABLE outbox_events",
+    "line_range": [
+      8,
+      23
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_sync_inbox",
+    "claim": "DDL khai báo bảngsync_inbox, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/003_outbox_and_sync.sql",
+    "symbol": "CREATE TABLE sync_inbox",
+    "line_range": [
+      26,
+      35
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_device_sessions",
+    "claim": "DDL khai báo bảngdevice_sessions, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/003_outbox_and_sync.sql",
+    "symbol": "CREATE TABLE device_sessions",
+    "line_range": [
+      38,
+      45
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_measurement_requests",
+    "claim": "DDL khai báo bảngmeasurement_requests, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/004_flow_adjustments_and_measurement_requests.sql",
+    "symbol": "CREATE TABLE measurement_requests",
+    "line_range": [
+      11,
+      27
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_exercise_plan_versions",
+    "claim": "DDL khai báo bảngexercise_plan_versions, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/004_flow_adjustments_and_measurement_requests.sql",
+    "symbol": "CREATE TABLE exercise_plan_versions",
+    "line_range": [
+      30,
+      48
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "DB_measurement_request_logs",
+    "claim": "DDL khai báo bảngmeasurement_request_logs, columns/PK/FK/constraints như từ điển schema.",
+    "evidence_type": "repository_artifact",
+    "source_path": "database/migrations/004_flow_adjustments_and_measurement_requests.sql",
+    "symbol": "CREATE TABLE measurement_request_logs",
+    "line_range": [
+      51,
+      59
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "IMPLEMENTED",
+    "confidence": "HIGH",
+    "limitations": "DDL đã test migration; không truy vấnproductionrows. ERD thể hiện khóa ngoại, không chứng minh live writer/3NF/multi DB sync.",
+    "additional_evidence": [
+      {
+        "source_path": "reports/gemini_intent/realtime-regression.txt",
+        "symbol": "module",
+        "line_range": [
+          1,
+          2
+        ],
+        "evidence_type": "existing_test_or_runtime_artifact"
+      }
+    ]
+  },
+  {
+    "claim_id": "C59",
+    "claim": "Stat xác nhận check point expression_net.pth 71785 bytes và Whispermodel.bin483546902 bytes; CSV/results thiếu ở path config.",
+    "evidence_type": "repository_artifact",
+    "source_path": "docs/khkt_technical_evidence/audit_observations.json",
+    "symbol": "module",
+    "line_range": [
+      1,
+      33
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "PARTIALLY_IMPLEMENTED",
+    "confidence": "MEDIUM",
+    "limitations": "Chỉ stat, không load check point; kích thước/tồn tại không chứng minh model quality/provenance hoặc nghiệm thu.",
+    "additional_evidence": []
+  },
+  {
+    "claim_id": "C60",
+    "claim": "Gitlog trong snapshot chỉ có 2 commit ngày 30/09/2026; lịch sử thay đổi worktree sau đó chưa được commit đầy đủ.",
+    "evidence_type": "repository_artifact",
+    "source_path": "docs/khkt_technical_evidence/audit_observations.json",
+    "symbol": "module",
+    "line_range": [
+      1,
+      33
+    ],
+    "verification_method": "Đọc tĩnh mã/artefact có sẵn; không chạy lại ứng dụng trong lượt audit.",
+    "implementation_status": "UNKNOWN",
+    "confidence": "MEDIUM",
+    "limitations": "Gitcommand đã đọc trong audit; không dựng author/date từng file hoặc coi commit message là feature validation.",
+    "additional_evidence": []
+  }
+]

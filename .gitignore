@@ -1,0 +1,68 @@
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.local.env
+
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Release packages and build output (keep packaging source)
+/releases/
+/runtime/
+/build/
+/dist/
+*.zip
+*.zip.partial
+*.zip.sha256
+
+# User data and generated state
+/data/
+/shared/state.json
+/shared/data/
+/shared/results/
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+*.sqlite3-shm
+*.sqlite3-wal
+*.log
+registered_faces/
+unknown_faces/
+backups/
+
+# Downloaded model weights; retain manifests and source configuration
+*.pt
+*.pth
+*.onnx
+*.tflite
+*.task
+*.caffemodel
+*.pkl
+*.pb
+*.bin
+*.safetensors
+
+# Local tooling
+.idea/
+.vscode/
+.codex/
+.agents/
+Thumbs.db
+Desktop.ini
+
+# Documentation exports/screenshots remain local; publish reviewed source text only.
+/docs/**/*.docx
+/docs/**/*.pdf
+/docs/**/*.png
+/docs/**/*.jpg
+/docs/**/*.jpeg
+/docs/report_phu_luc_iii/media

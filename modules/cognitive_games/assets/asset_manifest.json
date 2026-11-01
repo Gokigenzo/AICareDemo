@@ -1,0 +1,252 @@
+{
+  "module": "cognitive_games",
+  "version": "1.0.0",
+  "content_packs": [
+    {
+      "pack_id": "pack-household",
+      "title": "Đồ Dùng Thân Thuộc",
+      "theme": "household",
+      "license": "CC0-1.0 (Public Domain)",
+      "items": [
+        {
+          "id": "it-clock",
+          "name": "Đồng hồ",
+          "icon": "⏰"
+        },
+        {
+          "id": "it-teacup",
+          "name": "Tách trà",
+          "icon": "🍵"
+        },
+        {
+          "id": "it-fan",
+          "name": "Chiếc quạt",
+          "icon": "🪭"
+        },
+        {
+          "id": "it-lamp",
+          "name": "Đèn bàn",
+          "icon": "💡"
+        },
+        {
+          "id": "it-book",
+          "name": "Quyển sách",
+          "icon": "📖"
+        },
+        {
+          "id": "it-hat",
+          "name": "Chiếc nón",
+          "icon": "👒"
+        },
+        {
+          "id": "it-kettle",
+          "name": "Ấm nước",
+          "icon": "🫖"
+        },
+        {
+          "id": "it-glasses",
+          "name": "Kính lão",
+          "icon": "👓"
+        },
+        {
+          "id": "it-chair",
+          "name": "Ghế tựa",
+          "icon": "🪑"
+        },
+        {
+          "id": "it-bed",
+          "name": "Chiếc giường",
+          "icon": "🛏"
+        },
+        {
+          "id": "it-umbrella",
+          "name": "Chiếc ô",
+          "icon": "☂️"
+        },
+        {
+          "id": "it-mirror",
+          "name": "Chiếc gương",
+          "icon": "🪞"
+        }
+      ]
+    },
+    {
+      "pack_id": "pack-nature",
+      "title": "Hoa Cỏ Thanh Bình",
+      "theme": "nature",
+      "license": "CC0-1.0 (Public Domain)",
+      "items": [
+        {
+          "id": "it-lotus",
+          "name": "Hoa sen",
+          "icon": "🪷"
+        },
+        {
+          "id": "it-peach",
+          "name": "Hoa đào",
+          "icon": "🌸"
+        },
+        {
+          "id": "it-sunflower",
+          "name": "Hoa hướng dương",
+          "icon": "🌻"
+        },
+        {
+          "id": "it-leaf",
+          "name": "Lá xanh",
+          "icon": "🍃"
+        },
+        {
+          "id": "it-rice",
+          "name": "Bông lúa",
+          "icon": "🌾"
+        },
+        {
+          "id": "it-bamboo",
+          "name": "Cây tre",
+          "icon": "🎋"
+        },
+        {
+          "id": "it-tree",
+          "name": "Cây xanh",
+          "icon": "🌳"
+        },
+        {
+          "id": "it-sun",
+          "name": "Mặt trời",
+          "icon": "☀️"
+        },
+        {
+          "id": "it-cloud",
+          "name": "Đám mây",
+          "icon": "☁️"
+        },
+        {
+          "id": "it-rainbow",
+          "name": "Cầu vồng",
+          "icon": "🌈"
+        },
+        {
+          "id": "it-star",
+          "name": "Ngôi sao",
+          "icon": "⭐"
+        },
+        {
+          "id": "it-hibiscus",
+          "name": "Hoa đỏ",
+          "icon": "🌺"
+        }
+      ]
+    },
+    {
+      "pack_id": "pack-fruits",
+      "title": "Trái Cây Làng Quê",
+      "theme": "fruits",
+      "license": "CC0-1.0 (Public Domain)",
+      "items": [
+        {
+          "id": "it-banana",
+          "name": "Quả chuối",
+          "icon": "🍌"
+        },
+        {
+          "id": "it-apple",
+          "name": "Quả táo",
+          "icon": "🍎"
+        },
+        {
+          "id": "it-orange",
+          "name": "Quả cam",
+          "icon": "🍊"
+        },
+        {
+          "id": "it-watermelon",
+          "name": "Dưa hấu",
+          "icon": "🍉"
+        },
+        {
+          "id": "it-grapes",
+          "name": "Chùm nho",
+          "icon": "🍇"
+        },
+        {
+          "id": "it-mango",
+          "name": "Quả xoài",
+          "icon": "🥭"
+        },
+        {
+          "id": "it-coconut",
+          "name": "Quả dừa",
+          "icon": "🥥"
+        },
+        {
+          "id": "it-corn",
+          "name": "Bắp ngô",
+          "icon": "🌽"
+        },
+        {
+          "id": "it-strawberry",
+          "name": "Quả dâu",
+          "icon": "🍓"
+        },
+        {
+          "id": "it-pineapple",
+          "name": "Quả dứa",
+          "icon": "🍍"
+        },
+        {
+          "id": "it-peach-fruit",
+          "name": "Quả đào",
+          "icon": "🍑"
+        },
+        {
+          "id": "it-cherry",
+          "name": "Anh đào",
+          "icon": "🍒"
+        }
+      ]
+    }
+  ],
+  "audio_tracks": [
+    {
+      "track_id": "trk-relax-chimes",
+      "title": "Tiếng Chuông Gió Thanh Tịnh",
+      "artist_attribution": "AI Cognitive Sound Lab",
+      "asset_uri": "/mnt/shared/Code/AI_Rehabilitation_Safety_Assistant/modules/cognitive_games/assets/audio/trk-relax-chimes.wav",
+      "license": "CC0-1.0 (Public Domain - Mathematically Synthesized)",
+      "audio_mode": "ordinary",
+      "duration_seconds": 10,
+      "description": "Giai điệu chuông gió êm dịu, âm lượng nhẹ nhàng giúp thư thái tinh thần."
+    },
+    {
+      "track_id": "trk-peaceful-stream",
+      "title": "Suối Reo Rừng Chiều",
+      "artist_attribution": "AI Cognitive Sound Lab",
+      "asset_uri": "/mnt/shared/Code/AI_Rehabilitation_Safety_Assistant/modules/cognitive_games/assets/audio/trk-peaceful-stream.wav",
+      "license": "CC0-1.0 (Public Domain - Mathematically Synthesized)",
+      "audio_mode": "ordinary",
+      "duration_seconds": 10,
+      "description": "Hòa âm tần số 432 Hz tự nhiên, êm tai và dễ chịu."
+    },
+    {
+      "track_id": "trk-meditation-harmonics",
+      "title": "Giai Điệu Bình An",
+      "artist_attribution": "AI Cognitive Sound Lab",
+      "asset_uri": "/mnt/shared/Code/AI_Rehabilitation_Safety_Assistant/modules/cognitive_games/assets/audio/trk-meditation-harmonics.wav",
+      "license": "CC0-1.0 (Public Domain - Mathematically Synthesized)",
+      "audio_mode": "ordinary",
+      "duration_seconds": 10,
+      "description": "Hợp âm trưởng ấm áp xua tan căng thẳng sau giờ sinh hoạt."
+    },
+    {
+      "track_id": "trk-binaural-alpha-10hz",
+      "title": "Âm Thanh Thử Nghiệm 10Hz (Stereo Alpha Beat)",
+      "artist_attribution": "AI Cognitive Sound Lab",
+      "asset_uri": "/mnt/shared/Code/AI_Rehabilitation_Safety_Assistant/modules/cognitive_games/assets/audio/trk-binaural-alpha-10hz.wav",
+      "license": "CC0-1.0 (Public Domain - Mathematically Synthesized)",
+      "audio_mode": "binaural_trial",
+      "duration_seconds": 10,
+      "description": "Thử nghiệm âm thanh nhịp hai tai 10 Hz (Alpha). Yêu cầu tai nghe stereo. Tắt mặc định. Không dùng làm chẩn đoán y tế."
+    }
+  ]
+}
